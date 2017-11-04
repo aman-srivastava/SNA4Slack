@@ -1,0 +1,4 @@
+gunicorn
+cassandra-driver
+Flask
+flask_cassandra
