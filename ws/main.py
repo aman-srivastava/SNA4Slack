@@ -31,6 +31,30 @@ JOURNAL_URL = "/atlas-ws/journal"
 #GET
 @app.route(SNA_URL+"/node/<node_id>", methods=['GET'])
 def get_metrics(node_id):
+    """Returns list of Journal articles by user
+    Implemented in flask for python 2.7
+    ---
+    parameters:
+      - name: node_id
+        in: path
+        type: string
+        required: true
+        default: ishan2610
+        description: Enter node id
+    operationId: get_metrics
+    consumes:
+      - string
+    produces:
+      - application/json
+    
+    deprecated: false
+    externalDocs:
+      description: Project repository
+      url: https://github.com/aman-srivastava/SNA4Slack
+    responses:
+      200:
+        description: SNA Metrics of a user
+    """
     Utils.get_Connection_SNA4Slack()
     sync_table(SNASlackMetrics)
     instances = SNASlackMetrics.objects.filter(node_name=node_id)
@@ -53,6 +77,73 @@ def get_metrics(node_id):
             }
         output.append(temp)
     return json.dumps(output)
+
+
+#POST
+@app.route(SNA_URL+'/node-post/', methods=['POST'])
+def post_nodes():
+    """Saves Journal object for a user
+    Implemented in flask for python 2.7
+    ---
+    parameters:
+      - name: SNASlackMetrics
+        in: body
+        type: application/json
+        required: true
+        default: ishan2610
+        description: SNASlackMetrics object
+    operationId: post_nodes
+    consumes:
+      - application/json
+    produces:
+      - application/json
+    
+    deprecated: false
+    externalDocs:
+      description: Project repository
+      url: https://github.com/aman-srivastava/SNA4Slack
+    responses:
+      201:
+        description: POST node data obtained by parsing slack archives
+        schema:
+          $ref: '#/definitions/SNASlackMetrics'
+        examples:
+            [
+                {
+                    "distances": "{'@abhimanyu': 0, '@aman': 2, '@sanchit': 2, '@nikhil': 2, '@shuchir': 1}",
+                    "weight": "None",
+                    "node_name": "@ishan",
+                    "centrality_metrices": "{'betweenness': 31, 'closeness': 22, 'harmony': 71, 'eigenvector': 10}",
+                    "mentions": "{'@abhimanyu': 4, '@aman': 31, '@sanchit': 12, '@nikhil': 65, '@shuchir': 2}"
+                }
+            ]
+
+    """
+    if not request.json:
+        abort(400)
+
+    Utils.get_Connection_SNA4Slack()
+    sync_table(SNASlackMetrics)
+    
+    print request.json['mentions']
+
+    obj_node_name = request.json['node_name']
+    obj_node_weight = int(request.json['weight'])
+    obj_node_mentions = dict(request.json['mentions'])
+    obj_node_distances = dict(request.json['distances'])
+    obj_node_centrality_metrices = dict(request.json['centrality_metrices'])
+    obj_node_team_name = request.json['team_name']
+
+    node_object = SNASlackMetrics(id = uuid.uuid1(), 
+                                    node_name = obj_node_name,
+                                    weight = obj_node_weight,
+                                    mentions = obj_node_mentions,
+                                    distances = obj_node_distances,
+                                    centrality_metrices = obj_node_centrality_metrices,
+                                    team_name =obj_node_team_name)
+    node_object.save()
+    return "Success!"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
