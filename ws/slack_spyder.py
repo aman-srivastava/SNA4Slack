@@ -1,6 +1,7 @@
 #!/bin/python
 # -*- coding: utf-8 -*-
 import json
+import csv
 import uuid
 from time import sleep
 from random import randint
@@ -61,6 +62,7 @@ class SlackSpider():
 			archiveObj.messageSender = msg_sender
 			archiveObj.messageBody = msg_body
 			archiveObj.messageTime = msg_time
+
 			return archiveObj
 		else:
 			return None
@@ -74,16 +76,32 @@ class SlackSpider():
 		else:
 			return False, False
 
+	
 
 if __name__ == "__main__":
 	# Run spider
+	csv_file = open("csvOutput.csv","wb")
+	wr = csv.writer(csv_file)
+	
 	slackSpider = SlackSpider()
 	slackSpider.start_driver()
-
-	items_list+= slackSpider.parse("https://kubernetes.slackarchive.io/kubernetes-users/")
+	
+	wr.writerow(["if","Team Name","Channel Name", "Sender", "Message", "Time"])
+	
+	for i in range(1, 101):
+		print str(i)
+		items_list=slackSpider.parse("https://kubernetes.slackarchive.io/kubernetes-users/page-"+str(i))
+		for cdr in items_list:
+			wr.writerow(list(cdr))
 
 	slackSpider.close_driver()
 	# Export the touched data
-	jsonOut = open("jsonOutput.json","w+")
-	jsonOut.write(json.dumps(items_list))
-	jsonOut.close()
+	csv_file.close()
+
+	
+
+	'''with open("csvOutput.csv","wb") as csv_file:
+		wr = csv.writer(csv_file)
+		wr.writerow(["if","Team Name","Channel Name", "Sender", "Message", "Time"])
+		for cdr in items_list:
+			wr.writerow(list(cdr))'''
