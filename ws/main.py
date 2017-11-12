@@ -8,8 +8,10 @@ from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
 from datetime import datetime
 from flasgger import Swagger
-from objects.sna4slack_metrics import SNASlackMetrics
 from utils import Utils
+from objects.sna4slack_metrics import SNASlackMetrics
+from objects.slack_archive import *
+from slack_spyder import SlackSpider
 
 app = Flask(__name__)
 app.config['SWAGGER'] = {
@@ -143,6 +145,54 @@ def post_nodes():
                                     team_name =obj_node_team_name)
     node_object.save()
     return "Success!"
+
+
+@app.route(SNA_URL+"/crawl/<team_Name>", methods=['GET'])
+def putArchiveData(team_Name):
+    """Initializes crawler to get team data and save in database 
+    Implemented in flask for python 2.7
+    ---
+    parameters:
+      - name: team_Name
+        in: path
+        type: string
+        required: true
+        default: kubernetes
+        description: Enter team name
+    operationId: putArchiveData
+    consumes:
+      - string
+    produces:
+      - string
+    
+    deprecated: false
+    externalDocs:
+      description: Project repository
+      url: https://github.com/aman-srivastava/SNA4Slack
+    responses:
+      200:
+        description: Parse Slack archive and save data to database
+    """
+    slackSpider = SlackSpider()
+    slackSpider.start_driver()
+    
+    for i in range(1, 2):
+        items_list  = slackSpider.parse("https://kubernetes.slackarchive.io/kubernetes-users/page-"+str(i))
+    slackSpider.close_driver()
+
+    Utils.get_Connection_SNA4Slack()
+    sync_table(SlackArchive)
+    
+    for i in range(0,len(items_list)):
+        node_object = SlackArchive( id = uuid.uuid1(),
+                                    teamName = "kubernetes",
+                                    channelName = "kubernetes-users",
+                                    messageSender = items_list[i].messageSender.rstrip().lstrip(),
+                                    messageBody = items_list[i].messageBody.rstrip().lstrip(),
+                                    messageTime = datetime.strptime(items_list[i].messageTime, "%b %d, %Y %I:%M")
+                               )
+        node_object.save()
+    return "Success"
 
 
 if __name__ == '__main__':
