@@ -12,6 +12,9 @@ from objects.slack_archive import *
 class SlackSpider():
 	def __init__(self):
 		self.all_items = []
+		self.channelList = []
+		self.pageSize = 0
+		self.urlsToHit = []
 
 	# Open headless chromedriver
 	def start_driver(self):
@@ -75,33 +78,51 @@ class SlackSpider():
 			return self.all_items
 		else:
 			return False, False
+		pass
 
+	def getChannelList(self):
+		for channelName in self.driver.find_elements_by_xpath('//ul[@class="channels-list"]//li//a'):
+			self.channelList.append(channelName.text)
+		pass
+
+	def getPageSize(self, url_Template):
+		for page in self.driver.find_elements_by_xpath('//ul[@class="pagination pagination-vertical"]//li[@class="page-item active"]'):
+			self.pageSize = int(page.text)
+			print self.pageSize
+		pass
+
+	def buildTarget(self, teamName):
+		url_Template = "https://{0}.slackarchive.io/".format(teamName)
+		self.get_page(url_Template)
+		self.getChannelList()
+		for channel in self.channelList:
+			channelName = channel[1:].strip()
+			urlA = url_Template + channelName +"/"
+			self.get_page(urlA)
+			self.getPageSize(urlA)
+			for i in range(1, self.pageSize + 1):
+				self.urlsToHit.append(urlA+"page-"+str(i))
+		pass
 	
 
 if __name__ == "__main__":
 	# Run spider
-	csv_file = open("csvOutput.csv","wb")
-	wr = csv.writer(csv_file)
 	
 	slackSpider = SlackSpider()
 	slackSpider.start_driver()
+	slackSpider.buildTarget("holistictarot")
+		
+	csv_file = open("holistictarot.csv","wb")
+	wr = csv.writer(csv_file)
 	
-	wr.writerow(["if","Team Name","Channel Name", "Sender", "Message", "Time"])
 	
-	for i in range(1, 101):
-		print str(i)
-		items_list=slackSpider.parse("https://kubernetes.slackarchive.io/kubernetes-users/page-"+str(i))
+	wr.writerow(["id","Team Name","Channel Name", "Sender", "Message", "Time"])
+	
+	for url in slackSpider.urlsToHit:
+		items_list = slackSpider.parse(url)
 		for cdr in items_list:
 			wr.writerow(list(cdr))
 
-	slackSpider.close_driver()
 	# Export the touched data
 	csv_file.close()
-
-	
-
-	'''with open("csvOutput.csv","wb") as csv_file:
-		wr = csv.writer(csv_file)
-		wr.writerow(["if","Team Name","Channel Name", "Sender", "Message", "Time"])
-		for cdr in items_list:
-			wr.writerow(list(cdr))'''
+	slackSpider.close_driver()

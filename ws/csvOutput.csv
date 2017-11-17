@@ -1,0 +1,81 @@
+id,Team Name,Channel Name,Sender,Message,Time
+,kubernetes,kubernetes-users,Unknown,"""yes""","Oct 26, 2017 14:00"
+,kubernetes,kubernetes-users,nitinmidha,"""Ok, good luck""","Oct 26, 2017 14:00"
+,kubernetes,kubernetes-users,business,"""Thank you!""","Oct 26, 2017 14:00"
+,kubernetes,kubernetes-users,smerrill,"""Are you terminating SSL at your ELB in HTTP mode or at your nginx Ingress controller with your ELB in TCP mode? It must be the latter, because ELBs don't supporting proxying WebSocket connections.""","Oct 26, 2017 14:01"
+,kubernetes,kubernetes-users,wesmorgan,"""this is in dev in minikube, so no SSL""","Oct 26, 2017 14:02"
+,kubernetes,kubernetes-users,smerrill,"""Oh - are you using the nginx Inc. ingress controller?""","Oct 26, 2017 14:16"
+,kubernetes,kubernetes-users,kdockery,"""@U7QQ92DPF I may be wrong here, but I don't think the components run independently when using minikube. I think they're all part of the /usr/local/bin/localkube process that you'll find running on the minkube vm. You may have better luck with minikube specific questions in minikube.""","Oct 26, 2017 14:17"
+,kubernetes,kubernetes-users,Unknown,"""would someone mind helping me figure out why this yaml is wrong? It’s telling me I’m passing accessModes a string instead of an array: https://pastebin.com/uQ1XKLZM""","Oct 26, 2017 14:17"
+,kubernetes,kubernetes-users,kdockery,"""@U7LULHTJL I think it's expecting another space before the -""","Oct 26, 2017 14:19"
+,kubernetes,kubernetes-users,Unknown,"""huh. okay, I’ll give that a shot. I’d have thought the online validator would have picked that up. thanks!""","Oct 26, 2017 14:20"
+,kubernetes,kubernetes-users,wesmorgan,"""yes""","Oct 26, 2017 14:20"
+,kubernetes,kubernetes-users,Unknown,"""unfortunately that doesn’t seem to be the issue. Tried it with one, two and four extra spaces and got the same result""","Oct 26, 2017 14:21"
+,kubernetes,kubernetes-users,smerrill,"""The contrib one. I think it's miles better. (And at least in my experience I haven't had to change any config for WebSockets to work.)""","Oct 26, 2017 14:21"
+,kubernetes,kubernetes-users,kdockery,"""Oh, try lining up the - with the a in accessModes""","Oct 26, 2017 14:23"
+,kubernetes,kubernetes-users,Unknown,"""okay, will do""","Oct 26, 2017 14:24"
+,kubernetes,kubernetes-users,kdockery,"""Weird, it worked on my cluster 🤔""","Oct 26, 2017 14:24"
+,kubernetes,kubernetes-users,Unknown,"""maybe it’s something above that’s throwing off the interpreter""","Oct 26, 2017 14:25"
+,kubernetes,kubernetes-users,kdockery,"""I'm using your exact manifest (I just changed the namespace to default)""","Oct 26, 2017 14:25"
+,kubernetes,kubernetes-users,Unknown,"""wow""","Oct 26, 2017 14:25"
+,kubernetes,kubernetes-users,kdockery,"""kris-mbp:virtualbox-cluster kris$ cat pv-test.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: jenkins-home-pvc
+  namespace: default
+  labels:
+    purpose: jenkins-home
+    type: amazonEBS
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  selector:
+    matchLabels:
+      purpose: jenkins-home
+kris-mbp:virtualbox-cluster kris$ kubectl --kubeconfig=./config apply -f pv-test.yaml
+persistentvolumeclaim ""jenkins-home-pvc"" created""","Oct 26, 2017 14:26"
+,kubernetes,kubernetes-users,wesmorgan,"""oh... interesting. thanks, I'll check it out.""","Oct 26, 2017 14:26"
+,kubernetes,kubernetes-users,Unknown,"""huh""","Oct 26, 2017 14:26"
+,kubernetes,kubernetes-users,kdockery,"""Ha weird""","Oct 26, 2017 14:27"
+,kubernetes,kubernetes-users,wesmorgan,"""oh, no, I was already using this. via helm install stable/nginx-ingress""","Oct 26, 2017 14:27"
+,kubernetes,kubernetes-users,Unknown,"""if I had to guess, I’d say an rbac issue?""","Oct 26, 2017 14:27"
+,kubernetes,kubernetes-users,kdockery,"""Oh, it worked in default for you, but it won't work in jenkins?""","Oct 26, 2017 14:27"
+,kubernetes,kubernetes-users,Unknown,"""hmm, now I’m not sure how to proceed with this tutorial now that I can only make it work in default""","Oct 26, 2017 14:28"
+,kubernetes,kubernetes-users,kdockery,""":party_parrot:""","Oct 26, 2017 14:28"
+,kubernetes,kubernetes-users,Unknown,"""awww yeah""","Oct 26, 2017 14:28"
+,kubernetes,kubernetes-users,wesmorgan,"""but! I now realize that I was looking at docs for the nginxinc one and didn't even realize they were 2 different things. so thank you!""","Oct 26, 2017 14:34"
+,kubernetes,kubernetes-users,Unknown,"""Hi @Channel I am trying to create a persistent Volume from a none default storageclass that can be shared between agents. I tried to modify kind: PersistentVolume apiVersion: v1 metadata: name: task-pv-volume-test labels: type: local spec: storageClassName: slow capacity: storage: 10Gi accessModes: - ReadWriteOnce hostPath: path: ""/tmp/data""""","Oct 26, 2017 14:45"
+,kubernetes,kubernetes-users,kdockery,"""@U7Q1KJCG0 Does your manifest have the kind: PersistentVolume line uncommented, and without any dashes in front of it?""","Oct 26, 2017 14:53"
+,kubernetes,kubernetes-users,hmdelnegro,"""does anyone here has implemeted kubernetes federation already ?""","Oct 26, 2017 14:56"
+,kubernetes,kubernetes-users,acosta.dimitri,"""Hi there I need some help""","Oct 26, 2017 14:58"
+,kubernetes,kubernetes-users,hmdelnegro,"""expose this with a service using NodePort / LoadBalancer.... or Ingress otherwise""","Oct 26, 2017 15:01"
+,kubernetes,kubernetes-users,hmdelnegro,"""In case the clusters cant see to each other""","Oct 26, 2017 15:02"
+,kubernetes,kubernetes-users,acosta.dimitri,"""But in my other cluster I don’t know how to look at it""","Oct 26, 2017 15:03"
+,kubernetes,kubernetes-users,hmdelnegro,"""ok you are exposing nginx to port 80 in the worker node IP address""","Oct 26, 2017 15:03"
+,kubernetes,kubernetes-users,mauilion,"""nodeport won't be 80 though""","Oct 26, 2017 15:04"
+,kubernetes,kubernetes-users,hmdelnegro,"""higher than 30000 actualkly""","Oct 26, 2017 15:05"
+,kubernetes,kubernetes-users,mauilion,"""kubectl get svc nginx-svc -n test""","Oct 26, 2017 15:05"
+,kubernetes,kubernetes-users,hmdelnegro,"""Guys, I need some recommendations on how to get HA in multiple AZ.... I am about to choose Federation, but I need someone with more experience on this...""","Oct 26, 2017 15:07"
+,kubernetes,kubernetes-users,Unknown,"""so I’ve been trying to learn k8s using kubernetes the hard way - used the original docs with GCP and that worked fine - now I’m trying with Ubuntu 16 LTS on Azure using Docker""","Oct 26, 2017 15:07"
+,kubernetes,kubernetes-users,hmdelnegro,"""did you deployed the networking addon ?""","Oct 26, 2017 15:08"
+,kubernetes,kubernetes-users,Unknown,"""E1026 22:03:50.476883       1 reflector.go:199] k8s.io/dns/vendor/k8s.io/client-go/tools/cache/reflector.go:94: Failed to list *v1.Service: Get https://10.210.0.1:443/api/v1/services?resourceVersion=0: dial tcp 10.210.0.1:443: i/o timeout
+E1026 22:03:50.476932       1 reflector.go:199] k8s.io/dns/vendor/k8s.io/client-go/tools/cache/reflector.go:94: Failed to list *v1.Endpoints: Get https://10.210.0.1:443/api/v1/endpoints?resourceVersion=0: dial tcp 10.210.0.1:443: i/o timeout""","Oct 26, 2017 15:08"
+,kubernetes,kubernetes-users,hmdelnegro,"""Waves or Flannel for example""","Oct 26, 2017 15:08"
+,kubernetes,kubernetes-users,Unknown,"""following kubernetes the hard way approach""","Oct 26, 2017 15:08"
+,kubernetes,kubernetes-users,acosta.dimitri,"""thanks @mauilion and @hmdelnegro""","Oct 26, 2017 15:09"
+,kubernetes,kubernetes-users,hmdelnegro,"""dns issues are usually related to networking....""","Oct 26, 2017 15:09"
+,kubernetes,kubernetes-users,Unknown,"""$ kubectl logs kube-dns-7797cb8758-cx2rs -n kube-system sidecar
+ERROR: logging before flag.Parse: I1026 21:33:17.409869       1 main.go:48] Version v1.14.3-4-gee838f6
+ERROR: logging before flag.Parse: I1026 21:33:17.409967       1 server.go:45] Starting server (options {DnsMasqPort:53 DnsMasqAddr:127.0.0.1 DnsMasqPollIntervalMs:5000 Probes:[{Label:kubedns Server:127.0.0.1:10053 Name:kubernetes.default.svc.cluster.local. Interval:5s Type:1} {Label:dnsmasq Server:127.0.0.1:53 Name:kubernetes.default.svc.cluster.local. Interval:5s Type:1}] PrometheusAddr:0.0.0.0 PrometheusPort:10054 PrometheusPath:/metrics PrometheusNamespace:kubedns})
+ERROR: logging before flag.Parse: I1026 21:33:17.410003       1 dnsprobe.go:75] Starting dnsProbe {Label:kubedns Server:127.0.0.1:10053 Name:kubernetes.default.svc.cluster.local. Interval:5s Type:1}
+ERROR: logging before flag.Parse: I1026 21:33:17.410080       1 dnsprobe.go:75] Starting dnsProbe {Label:dnsmasq Server:127.0.0.1:53 Name:kubernetes.default.svc.cluster.local. Interval:5s Type:1}
+ERROR: logging before flag.Parse: W1026 21:48:02.659312       1 server.go:64] Error getting metrics from dnsmasq: read udp 127.0.0.1:33876->127.0.0.1:53: read: connection refused
+ERROR: logging before flag.Parse: W1026 21:48:07.659838       1 server.go:64] Error getting metrics from dnsmasq: read udp 127.0.0.1:57985->127.0.0.1:53: read: connection refused""","Oct 26, 2017 15:09"
+,kubernetes,kubernetes-users,hmdelnegro,"""try running waves... k8s page has some example...""","Oct 26, 2017 15:09"
+,kubernetes,kubernetes-users,acosta.dimitri,"""I did what you told me but it seems it didn’t work either""","Oct 26, 2017 15:10"
+,kubernetes,kubernetes-users,Unknown,"""understand - but I also want to figure out why this is broken when the GCP version works fine without any issue""","Oct 26, 2017 15:10"
+,kubernetes,kubernetes-users,hmdelnegro,"""Its installation probably includes these plugins...""","Oct 26, 2017 15:11"
