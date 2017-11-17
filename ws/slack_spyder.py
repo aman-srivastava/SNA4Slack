@@ -15,6 +15,8 @@ class SlackSpider():
 		self.channelList = []
 		self.pageSize = 0
 		self.urlsToHit = []
+		self.TeamName = ''
+		self.ChannelName = ''
 
 	# Open headless chromedriver
 	def start_driver(self):
@@ -60,8 +62,8 @@ class SlackSpider():
 
 		if msg_sender and msg_time and msg_body:
 			archiveObj = SlackArchive()
-			archiveObj.teamName = "kubernetes"
-			archiveObj.channelName = "kubernetes-users" 
+			archiveObj.teamName = self.TeamName
+			archiveObj.channelName = self.ChannelName 
 			archiveObj.messageSender = msg_sender
 			archiveObj.messageBody = msg_body
 			archiveObj.messageTime = msg_time
@@ -70,8 +72,8 @@ class SlackSpider():
 		else:
 			return None
 
-	def parse(self, url_to_crawl):
-		self.get_page(url_to_crawl)
+	def parse(self, url):
+		self.get_page(url)
 		self.grab_list_items()
 		
 		if self.all_items:
@@ -88,7 +90,6 @@ class SlackSpider():
 	def getPageSize(self, url_Template):
 		for page in self.driver.find_elements_by_xpath('//ul[@class="pagination pagination-vertical"]//li[@class="page-item active"]'):
 			self.pageSize = int(page.text)
-			print self.pageSize
 		pass
 
 	def buildTarget(self, teamName):
@@ -101,28 +102,36 @@ class SlackSpider():
 			self.get_page(urlA)
 			self.getPageSize(urlA)
 			for i in range(1, self.pageSize + 1):
-				self.urlsToHit.append(urlA+"page-"+str(i))
+				urlObject = []
+				urlObject.append(teamName)
+				urlObject.append(channelName)
+				urlObject.append(urlA+"page-"+str(i))
+				self.urlsToHit.append(urlObject)
 		pass
 	
+	def runSpider(self, teamName):
+		self.buildTarget(teamName)
+		file = '{0}.csv'.format(teamName)
+		csv_file = open(file,"wb")
+		wr = csv.writer(csv_file)
+		
+		wr.writerow(["id","Team Name","Channel Name", "Sender", "Message", "Time"])
+		
+		for url in self.urlsToHit:
+			self.TeamName = url[0]
+			self.ChannelName = url[1]
+			
+			for cdr in self.parse(url[2]):
+				wr.writerow(list(cdr))
+		# Export the touched data
+		csv_file.close()
+	pass
+
 
 if __name__ == "__main__":
 	# Run spider
 	
 	slackSpider = SlackSpider()
 	slackSpider.start_driver()
-	slackSpider.buildTarget("holistictarot")
-		
-	csv_file = open("holistictarot.csv","wb")
-	wr = csv.writer(csv_file)
-	
-	
-	wr.writerow(["id","Team Name","Channel Name", "Sender", "Message", "Time"])
-	
-	for url in slackSpider.urlsToHit:
-		items_list = slackSpider.parse(url)
-		for cdr in items_list:
-			wr.writerow(list(cdr))
-
-	# Export the touched data
-	csv_file.close()
+	slackSpider.RunSpider("openaddresses")
 	slackSpider.close_driver()

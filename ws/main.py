@@ -23,11 +23,6 @@ swagger = Swagger(app)
 #URL DEFINITIONS
 #----------------
 SNA_URL = "/sna4slack-ws/metrics"
-JOURNAL_URL = "/atlas-ws/journal"
-
-
-#PRODUCTIVITY ENDPOINTS
-#-----------------------
 
 
 #GET
@@ -79,6 +74,7 @@ def get_metrics(node_id):
             }
         output.append(temp)
     return json.dumps(output)
+
 
 
 #POST
@@ -147,6 +143,12 @@ def post_nodes():
     return "Success!"
 
 
+
+
+
+
+
+#Get
 @app.route(SNA_URL+"/crawl/<team_Name>", methods=['GET'])
 def putArchiveData(team_Name):
     """Initializes crawler to get team data and save in database 
