@@ -4,9 +4,11 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from networkx.readwrite import json_graph
 
+import sys
 import re
 import csv
 import json
+import logging
 
 SENDER_COLUMN = "Sender"
 MESSAGE_COLUMN = "Message"
@@ -14,6 +16,10 @@ EDGE_WEIGHT_LABEL = "weight"
 CLOSENESS_CENTRALITY = "closeness_centrality"
 DEGREE_CENTRALITY = "degree_centrality"
 BETWEENNESS_CENTRALITY = "betweenness_centrality"
+
+# Initializing logger
+logging.basicConfig(filename='../logs/graph_generator_logs.log',
+                    level=logging.DEBUG)
 
 
 class GraphGenerator(object):
@@ -23,7 +29,21 @@ class GraphGenerator(object):
         else:
             self.graph = nx.Graph()
         self.csv_path = csv_path
+        self.verify_csv()
         self.build_graph()
+
+    def verify_csv(self):
+        try:
+            with open(self.csv_path) as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    assert SENDER_COLUMN in row.keys()
+                    assert MESSAGE_COLUMN in row.keys()
+        except Exception as e:
+            error_msg = self.__class__.__name__ + ": Invalid csv :"
+            print str(e), error_msg
+            logging.error(error_msg + str(e))
+            sys.exit(0)
 
     def build_graph(self):
         self.build_user_nodes()
@@ -64,18 +84,22 @@ class GraphGenerator(object):
 
     def compute_closeness_centrality(self):
         cc = nx.algorithms.centrality.closeness_centrality(self.graph)
-        print cc
         nx.set_node_attributes(self.graph, cc, CLOSENESS_CENTRALITY)
+
+        logging.debug(
+            self.__class__.__name__ + ": Closeness centrality computed.")
 
     def compute_betweenness_centrality(self):
         bc = nx.algorithms.centrality.betweenness_centrality(self.graph)
-        print bc
         nx.set_node_attributes(self.graph, bc, BETWEENNESS_CENTRALITY)
+        logging.debug(
+            self.__class__.__name__ + ": Betweeness centrality computed.")
 
     def compute_degree_centrality(self):
         dc = nx.degree_centrality(self.graph)
-        print dc
         nx.set_node_attributes(self.graph, dc, DEGREE_CENTRALITY)
+        logging.debug(
+            self.__class__.__name__ + ": Degree centrality computed.")
 
     def json(self):
         return json.dumps(json_graph.node_link_data(self.graph))
