@@ -96,6 +96,13 @@ class GraphGenerator(object):
             self.__class__.__name__ + ": Betweeness centrality computed.")
 
     def compute_degree_centrality(self):
+        # NetworkX throws ZeroDivisionError if there is only one node
+        if len(self.graph.nodes) == 1:
+            node_name = self.graph.nodes.keys()[0]
+            nx.set_node_attributes(self.graph, {node_name: 0},
+                                   DEGREE_CENTRALITY)
+            return
+
         dc = nx.degree_centrality(self.graph)
         nx.set_node_attributes(self.graph, dc, DEGREE_CENTRALITY)
         logging.debug(
@@ -106,12 +113,11 @@ class GraphGenerator(object):
 
 
 if __name__ == "__main__":
-    graph_gen = GraphGenerator("../resources/star_graph.csv",
+    graph_gen = GraphGenerator("../resources/single_node.csv",
                                directed=False)
     graph_gen.compute_closeness_centrality()
     graph_gen.compute_betweenness_centrality()
     graph_gen.compute_degree_centrality()
     graph_gen.print_graph()
-
     print graph_gen.json()
     graph_gen.draw_graph()
