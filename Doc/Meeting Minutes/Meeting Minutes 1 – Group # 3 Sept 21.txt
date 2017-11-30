@@ -1,0 +1,61 @@
+Meeting Minutes 1   – Group # 3
+Project: SNA4Slack ASU
+SER 517: Software Factory I
+21st  September 2017
+
+________________________________________
+Group # 3
+Name	ASURITE ID
+Abhimanyu Dogra	adogra4
+Aman Srivastava	asriva26
+Ishan Dikshit	idikshit
+Nikhil Tibrewal	ntibrewa
+Sanchit Narang	snarang2
+Shuchir Inamdar	sinamda2
+
+________________________________________
+Attendees
+Sponsor – Prof. Filippo Lanubile
+Co-sponsor – Prof. Fabio Calefato
+ETeam members – Abhimanyu Dogra, Aman Srivastava, Nikhil Tibrewal, Sanchit Narang, Shuchir Inamdar
+
+________________________________________
+Meeting Duration
+Meeting start time: 10:40 AM MST Sept. 21, 2017
+Meeting end time: 11:30 AM MST Sept. 21, 2017
+
+________________________________________
+Topics Covered
+1.  Introduction – Sponsors and the team with presentation
+2.  Software development methodology
+3.  First iteration requirements
+4.  Communication frequency and method  
+5.  Brief overview of technical requirements
+
+________________________________________
+Overall Requirements
+1.  Software development process will be Agile.
+2.  Sprint cycle should be convenient for both parties. A 3-week cycle was agreed upon for initial development phase.
+3.  Meetings should be scheduled for Friday mornings (Arizona time zone).
+4.  All issues must be coordinated via Github.
+5.  There is no constraint regarding the Github repository being public or private.
+6.  Unit testing framework is important and the technology stack selected by the team must have one.
+7.  All commits on Github must have a reference to the issue that is being addressed.
+8.  Select and use a Continuous Integration tool.
+9.  All intermediate text communications should be limited to Slack platform.
+
+________________________________________
+First Iteration Requirements and Deliverables
+1.  Setup development environment.
+2.  Finalize development technology stack.
+3.  Select unit testing framework.
+4.  Setup Github repository and boards
+.________________________________________
+Next meeting
+Friday, 13th October (3-week cycle)
+
+________________________________________
+Note
+The meeting was originally scheduled at 9:00 AM MST as per the sponsor’s availability, However, Prof. Filippo Lanubile and Co-sponsor - Prof. Fabio Calefato could not join the call till 10:30 AM MST. Ishan Dixit, had a class to attend at 10:30 AM, due to which he was absent during the meeting. This was conveyed to the sponsors during our meeting.
+
+

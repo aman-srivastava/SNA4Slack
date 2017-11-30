@@ -1,0 +1,74 @@
+Meeting Minutes 2   – Group # 3
+Project: SNA4SlackASU
+SER 517: Software Factory I
+13th  October 2017
+
+________________________________________
+Group # 3
+Name	ASURITE ID
+Abhimanyu Dogra	adogra4
+Aman Srivastava	asriva26
+Ishan Dikshit	idikshit
+Nikhil Tibrewal	ntibrewa
+Sanchit Narang	snarang2
+Shuchir Inamdar	sinamda2
+
+________________________________________
+Attendees
+Co-sponsor – Prof. Fabio Calefato
+Team members – Abhimanyu Dogra, Aman Srivastava, Nikhil Tibrewal, Sanchit Narang, Shuchir Inamdar, Ishan Dikshit
+
+________________________________________
+Meeting Duration
+Meeting start time: 10:30 AM MST Oct. 13, 2017
+Meeting end time : 11:30 AM MST Oct. 13, 2017
+________________________________________
+Topics Covered
+1.	Team progress since last iteration
+2.	Explained and justified the choice of project board and issue tracking system
+3.	Explained and justified the choice of the technology stack
+4.	Data acquisition method choice, progress and data model
+5.	Data storage architecture and technology choice
+6.	Requirements for 2nd iteration 
+7.	Preparation material for 3rd meeting with the sponsor
+________________________________________
+Resources and important links
+1.	Waffle: Kanban board for Issue tracking with Github and Slack integration 
+	https://waffle.io/aman-srivastava/SNA4Slack
+2.	Github repository 
+https://github.com/aman-srivastava/SNA4Slack/
+3.	MEAN: Development technology stack
+	http://mean.io/
+4.	Social Network Analysis concepts
+http://www.di.uniba.it/~reti/collab/SNA.pdf
+5.	Slack conversations data source
+https://slackarchive.io/
+6.	Data storage choices
+MongoDB: https://www.mongodb.com/
+Cassandra: http://cassandra.apache.org/
+7.	QUnit: Testing framework for JavaScript
+	https://qunitjs.com
+      8.   PyUnit: Python Unit Testing Framework
+	http://pyunit.sourceforge.net
+
+________________________________________
+Next Steps/Action items for 2nd iteration 
+1.	Study Social Network Analysis concepts from the provided powerpoint presentation.
+2.	Setup the backend environment on developer machines.
+3.	Setup data storage environment on chosen cloud platform.
+4.	Complete the programming of the python scraper for Data Acquisition.
+5.	Set up an initial wireframe for the front end.
+6.	Make the scraper detection proof.
+
+________________________________________
+Requirements discussed
+1.	The web scraper should avoid detection and mimic a real user using a browser.
+2.	All technology choices should be linked in meeting minutes with proper description.
+3.	The developers must understand basic social network analysis concepts before 3rd meeting.
+4.	Developers must ensure that data acquisition process isn’t too greedy and doesn’t exceed cloud storage limits.
+
+________________________________________
+Next meeting
+Friday, 3rd November 2017 (3-week cycle)
+
+

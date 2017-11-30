@@ -1,0 +1,76 @@
+Meeting Minutes 3 – Group # 3
+Project: SNA4SlackASU
+SER 517: Software Factory I
+3rd November 2017
+
+________________________________________
+Group # 3
+Name	ASURITE ID
+Abhimanyu Dogra	adogra4
+Aman Srivastava	asriva26
+Ishan Dikshit	idikshit
+Nikhil Tibrewal	ntibrewa
+Sanchit Narang	snarang2
+Shuchir Inamdar	sinamda2
+
+________________________________________
+Attendees
+Co-sponsor – Prof. Fabio Calefato
+Team members – Aman Srivastava, Nikhil Tibrewal, Sanchit Narang, Shuchir Inamdar, Ishan Dikshit
+
+________________________________________
+Meeting Duration
+Meeting start time: 10:30 AM MST Nov. 3, 2017
+Meeting end time : 11:10 AM MST Nov. 3, 2017
+________________________________________
+Topics Covered
+1.	Requirements and deliverables for 3rd iteration. 
+2.	Preparation for 4th meeting with the sponsor.
+3.	Team progress since last iteration.
+4.	Usage of either Gephi(Java framework) or NetworkX(Python Framework).
+5.	Bypassing bot detection while acquiring data.
+6.	Cassandra cluster, front end and web services to be deployed on the gcloud.
+7.	Cloud structure prototype.
+8.	Sample front end built using wireframe.
+
+________________________________________
+Resources and important links
+1.	Social Network Analysis concepts
+http://www.di.uniba.it/~reti/collab/SNA.pdf
+2.	Waffle: Kanban board for Issue tracking with Github and Slack integration 
+	https://waffle.io/aman-srivastava/SNA4Slack
+3.	Github repository 
+https://github.com/aman-srivastava/SNA4Slack/
+4.	Slack conversations data source
+https://slackarchive.io/
+5.	Data storage 
+Cassandra: http://cassandra.apache.org/
+6.	QUnit: Testing framework for JavaScript
+	https://qunitjs.com
+7.	PyUnit: Python Unit Testing Framework
+	http://pyunit.sourceforge.net
+8.	Wireframe
+	https://en.wikipedia.org/wiki/Wireframe
+
+________________________________________
+Next Steps/Action items for 3rd iteration 
+1.	Setting up the development environment.
+2.	Apply improvements of the cloud database platform.
+3.	Integrate the crawler with cloud, save and use the data in graph database form.
+4.	Continue studying Social Network Analysis concepts from the provided powerpoint presentation and online resources.
+5.	Enhance the initial wireframe fitting in Social Network Analysis metrics. 
+
+________________________________________
+Requirements and progress discussed 
+1.	Overview of the architectural design of the project.
+2.	Crawler acquires data without being detected as a bot using chrome drivers and selenium python library. Using Python version 2.7.
+3.	Usage of apache-spark cluster computing framework in case the acquired data size crosses a couple of hundreds of GBs.
+4.	Team is free to pick Gephi or NetworkX as long as it works. Can take a decision after creating a smallest prototype and see whose integration is successful and easier.
+5.	Web services built on cassandra cluster, and successfully made rest api call. Presented it to the sponsor through localhost connecting to the google cloud. I simple user metric was shown and the pos presented the json data in hierarchical structure.
+6.	Presented the front end design created using wireframe which the sponsor identified as good and professional. Will continue building upon this base to have the final visualizations.
+________________________________________
+Next meeting
+Friday, 24th November 2017 (3-week cycle)
+
+
+
