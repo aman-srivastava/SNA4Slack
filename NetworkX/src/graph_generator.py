@@ -9,6 +9,7 @@ import re
 import csv
 import json
 import logging
+import timeit
 
 SENDER_COLUMN = "Sender"
 MESSAGE_COLUMN = "Message"
@@ -111,8 +112,7 @@ class GraphGenerator(object):
     def json(self):
         return json.dumps(json_graph.node_link_data(self.graph))
 
-
-if __name__ == "__main__":
+def run():
     graph_gen = GraphGenerator("../resources/single_node.csv",
                                directed=False)
     graph_gen.compute_closeness_centrality()
@@ -120,4 +120,6 @@ if __name__ == "__main__":
     graph_gen.compute_degree_centrality()
     graph_gen.print_graph()
     print graph_gen.json()
-    graph_gen.draw_graph()
+
+if __name__ == "__main__":
+    print timeit.timeit("run()", setup="from __main__ import run", number=10)
