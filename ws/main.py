@@ -144,10 +144,6 @@ def post_nodes():
 
 
 
-
-
-
-
 #Get
 @app.route(SNA_URL+"/crawl/<team_Name>", methods=['GET'])
 def putArchiveData(team_Name):
@@ -177,9 +173,7 @@ def putArchiveData(team_Name):
     """
     slackSpider = SlackSpider()
     slackSpider.start_driver()
-    
-    for i in range(1, 2):
-        items_list  = slackSpider.parse("https://kubernetes.slackarchive.io/kubernetes-users/page-"+str(i))
+    items_list  = slackSpider.runSpider(team_Name, 0)
     slackSpider.close_driver()
 
     Utils.get_Connection_SNA4Slack()

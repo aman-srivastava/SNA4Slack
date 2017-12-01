@@ -17,6 +17,7 @@ class SlackSpider():
 		self.urlsToHit = []
 		self.TeamName = ''
 		self.ChannelName = ''
+		self.returnList=[]
 
 	# Open headless chromedriver
 	def start_driver(self):
@@ -109,29 +110,45 @@ class SlackSpider():
 				self.urlsToHit.append(urlObject)
 		pass
 	
-	def runSpider(self, teamName):
+	def runSpider(self, teamName, writeToFileFlag):
 		self.buildTarget(teamName)
 		file = '{0}.csv'.format(teamName)
-		csv_file = open(file,"wb")
-		wr = csv.writer(csv_file)
 		
-		wr.writerow(["id","Team Name","Channel Name", "Sender", "Message", "Time"])
+		if writeToFileFlag == 1:
+			csv_file = open(file,"wb")
+			wr = csv.writer(csv_file)
+			wr.writerow(["id","Team Name","Channel Name", "Sender", "Message", "Time"])
 		
 		for url in self.urlsToHit:
 			self.TeamName = url[0]
 			self.ChannelName = url[1]
+			print url[0]
+			print url[1]
+			print url[2]
 			
 			for cdr in self.parse(url[2]):
-				wr.writerow(list(cdr))
+				if(writeToFileFlag == 1):
+					wr.writerow(list(cdr))
+				else:
+					print cdr
+					self.returnList.append(cdr)
+
 		# Export the touched data
-		csv_file.close()
+		if (writeToFileFlag == 1):
+			csv_file.close()
+		else:
+			print self.returnList
+			return self.returnList
 	pass
 
 
 if __name__ == "__main__":
 	# Run spider
-	
-	slackSpider = SlackSpider()
-	slackSpider.start_driver()
-	slackSpider.RunSpider("openaddresses")
-	slackSpider.close_driver()
+	if len(sys.argv[0]) > 0:
+		writeToFileFlag = 1
+		slackSpider = SlackSpider()
+		slackSpider.start_driver()
+		slackSpider.runSpider(sys.argv[0], writeToFileFlag)
+		slackSpider.close_driver()
+	else:
+		print 'Pass team name as parameter!'
