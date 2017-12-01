@@ -3,3 +3,6 @@
 .idea/modules.xml
 .idea/SNA4Slack.iml
 .idea/workspace.xml
+.idea/
+.node_modules/
+.angular-src/node_modules/
