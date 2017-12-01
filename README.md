@@ -4,13 +4,18 @@ Social Network Analysis and Visualization for Slack Teams
 # Slack-Spyder Installation (Crawler)
 * Clone the repository
 ```
-git clone https://github.com/aman-srivastava/SNA4Slack.git```
+git clone https://github.com/aman-srivastava/SNA4Slack.git
+```
 * Go to crawler directory
 ```
-cd Crawlers```
+cd Crawlers
+```
 * Run the crawler
-```python slack_spyder.py```
-* Check the scraper output at ```Crawler\<teamname>.csv```
+```
+python slack_spyder.py
+```
+* Check the scraper output at ```Crawler\<teamname>.csv
+```
 
 
 
