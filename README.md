@@ -16,17 +16,25 @@ The SNA4SLack graph analysis is done using NetworkX library on the backend. The 
 * Navigate to /NetworkX/tests
 * Run `pytest` in terminal
 
-## Web Services installation
+# Web Services installation
 * Clone the repository
-```git clone https://github.com/aman-srivastava/SNA4Slack.git```
+```
+git clone https://github.com/aman-srivastava/SNA4Slack.git
+```
 
 * Go to ws directory
-```cd ws```
+```
+cd ws
+```
 
 * Install python dependencies: This will install Flask and Cassandra DB Engine
-```pip install requirements.txt```
+```
+pip install requirements.txt
+```
 
 * Start the server
-```python main.py```
+```
+python main.py
+```
 
 * Check the server at localhost:5000
