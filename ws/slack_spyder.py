@@ -130,14 +130,12 @@ class SlackSpider():
 				if(writeToFileFlag == 1):
 					wr.writerow(list(cdr))
 				else:
-					print cdr
 					self.returnList.append(cdr)
 
 		# Export the touched data
 		if (writeToFileFlag == 1):
 			csv_file.close()
 		else:
-			print self.returnList
 			return self.returnList
 	pass
 
