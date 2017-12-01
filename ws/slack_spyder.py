@@ -43,8 +43,9 @@ class SlackSpider():
 	def grab_list_items(self):
 		print('grabbing list of items...')
 		
-		for div in self.driver.find_elements_by_xpath('//ul[@class="messages"]//li[@class="msg-type-"]'):
+		for div in self.driver.find_elements_by_xpath('//ul[@class="messages"]//li'):
 			data = self.process_elements(div)
+			
 			if data:
 				self.all_items.append(data)
 			else:
@@ -76,7 +77,6 @@ class SlackSpider():
 	def parse(self, url):
 		self.get_page(url)
 		self.grab_list_items()
-		
 		if self.all_items:
 			return self.all_items
 		else:
@@ -119,12 +119,10 @@ class SlackSpider():
 			wr = csv.writer(csv_file)
 			wr.writerow(["id","Team Name","Channel Name", "Sender", "Message", "Time"])
 		
+
 		for url in self.urlsToHit:
 			self.TeamName = url[0]
 			self.ChannelName = url[1]
-			print url[0]
-			print url[1]
-			print url[2]
 			
 			for cdr in self.parse(url[2]):
 				if(writeToFileFlag == 1):

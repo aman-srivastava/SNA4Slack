@@ -179,13 +179,13 @@ def putArchiveData(team_Name):
     Utils.get_Connection_SNA4Slack()
     sync_table(SlackArchive)
     
-    for i in range(0,len(items_list)):
+    for i in items_list:
         node_object = SlackArchive( id = uuid.uuid1(),
-                                    teamName = "kubernetes",
-                                    channelName = "kubernetes-users",
-                                    messageSender = items_list[i].messageSender.rstrip().lstrip(),
-                                    messageBody = items_list[i].messageBody.rstrip().lstrip(),
-                                    messageTime = datetime.strptime(items_list[i].messageTime, "%b %d, %Y %I:%M")
+                                    teamName = i.teamName,
+                                    channelName = i.channelName,
+                                    messageSender = i.messageSender.rstrip().lstrip(),
+                                    messageBody = i.messageBody.rstrip().lstrip(),
+                                    messageTime = datetime.strptime(i.messageTime, "%b %d, %Y %I:%M")
                                )
         node_object.save()
     return "Success"
