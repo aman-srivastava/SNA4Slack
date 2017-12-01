@@ -1,7 +1,17 @@
 # SNA4Slack
 Social Network Analysis and Visualization for Slack Teams
 
-# Slack Channel Integration
+# Slack-Spyder Installation (Crawler)
+* Clone the repository
+```
+git clone https://github.com/aman-srivastava/SNA4Slack.git```
+* Go to crawler directory
+```
+cd Crawlers```
+* Run the crawler
+```python slack_spyder.py```
+* Check the scraper output at ```Crawler\<teamname>.csv```
+
 
 
 # Graph Analyser
@@ -21,20 +31,16 @@ The SNA4SLack graph analysis is done using NetworkX library on the backend. The 
 ```
 git clone https://github.com/aman-srivastava/SNA4Slack.git
 ```
-
 * Go to ws directory
 ```
 cd ws
 ```
-
 * Install python dependencies: This will install Flask and Cassandra DB Engine
 ```
 pip install requirements.txt
 ```
-
 * Start the server
 ```
 python main.py
 ```
-
-* Check the server at localhost:5000
+* Check the server at ```http://localhost:5000```
