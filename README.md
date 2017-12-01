@@ -14,8 +14,7 @@ cd Crawlers
 ```
 python slack_spyder.py
 ```
-* Check the scraper output at ```Crawler\<teamname>.csv
-```
+* Check the scraper output at :Crawler\<teamname>.csv
 
 
 
