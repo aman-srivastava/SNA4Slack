@@ -1,22 +1,18 @@
-<div class="jumbotron text-center">
-  <h1>SNA4Slack</h1>
-  <p class="lead">Social Network Analysis and Visualization for Slack Teams</p>
-  <div>
-    <a class="btn btn-primary" [routerLink]="['/register']">Register</a> <a class="btn btn-default" [routerLink]="['/login']">Login</a>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <img class="center-block" [src]="LOGO" width="60%" alt="SNA4Slack Logo" id="logo">
+    </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-md-4">
-    <h3>Express Backend</h3>
-    <p>A rock solid Node.js/Express server using Mongoose to organize models and query the database</p>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+      <p class="lead" style="text-align: center;">Social Network Analysis and Visualization for Slack Teams</p>
+    </div>
   </div>
-  <div class="col-md-4">
-    <h3>Angular-CLI</h3>
-    <p>Angular-CLI to generate components, services and more. Local dev server and easy compilation</p>
-  </div>
-  <div class="col-md-4">
-    <h3>JWT Tokens</h3>
-    <p>Full featured authentication using JSON web tokens. Login and store user data</p>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+      <a class="btn btn-default" [routerLink]="['/login']"> Login </a>
+      <a class="btn btn-primary" [routerLink]="['/register']">Register</a>
+    </div>
   </div>
 </div>
