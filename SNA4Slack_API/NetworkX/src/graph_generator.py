@@ -113,13 +113,14 @@ class GraphGenerator(object):
         return json.dumps(json_graph.node_link_data(self.graph))
 
 def run():
-    graph_gen = GraphGenerator("../resources/single_node.csv",
+    graph_gen = GraphGenerator("../resources/kubernetes_test_data.csv",
                                directed=False)
     graph_gen.compute_closeness_centrality()
     graph_gen.compute_betweenness_centrality()
     graph_gen.compute_degree_centrality()
     graph_gen.print_graph()
-    print graph_gen.json()
+    with open('data.json', 'w') as outfile:
+        json.dump(graph_gen.json(), outfile)
 
 if __name__ == "__main__":
     print timeit.timeit("run()", setup="from __main__ import run", number=10)
