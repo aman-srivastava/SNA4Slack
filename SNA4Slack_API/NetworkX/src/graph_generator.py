@@ -1,18 +1,22 @@
 #!/usr/bin/env python
-
 import networkx as nx
 import matplotlib.pyplot as plt
 from networkx.readwrite import json_graph
-
 import sys
 import re
-import csv
 import json
 import logging
 import timeit
+from utils import Utils
+from cassandra.auth import PlainTextAuthProvider
+from cassandra.cluster import Cluster
+from cassandra.cqlengine.management import sync_table
+from cassandra.cqlengine.models import Model
+from cassandra.cqlengine import columns, connection
+from objects.slack_archive import SlackArchive
 
-SENDER_COLUMN = "Sender"
-MESSAGE_COLUMN = "Message"
+SENDER_COLUMN = "messageSender"
+MESSAGE_COLUMN = "messageBody"
 EDGE_WEIGHT_LABEL = "weight"
 CLOSENESS_CENTRALITY = "closeness_centrality"
 DEGREE_CENTRALITY = "degree_centrality"
@@ -22,56 +26,42 @@ BETWEENNESS_CENTRALITY = "betweenness_centrality"
 logging.basicConfig(filename='../logs/graph_generator_logs.log',
                     level=logging.DEBUG)
 
-
 class GraphGenerator(object):
-    def __init__(self, csv_path, directed=True):
+    def __init__(self, team_name, directed=True):
         if directed:
             self.graph = nx.DiGraph()
         else:
             self.graph = nx.Graph()
-        self.csv_path = csv_path
-        self.verify_csv()
+        self.team_name = team_name
         self.build_graph()
-
-    def verify_csv(self):
-        try:
-            with open(self.csv_path) as csvfile:
-                reader = csv.DictReader(csvfile)
-                for row in reader:
-                    assert SENDER_COLUMN in row.keys()
-                    assert MESSAGE_COLUMN in row.keys()
-        except Exception as e:
-            error_msg = self.__class__.__name__ + ": Invalid csv :"
-            print str(e), error_msg
-            logging.error(error_msg + str(e))
-            sys.exit(0)
 
     def build_graph(self):
         self.build_user_nodes()
         self.build_reference_edges()
 
     def build_user_nodes(self):
-        with open(self.csv_path) as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                self.graph.add_node(row[SENDER_COLUMN])
+        Utils.get_Connection_SNA4Slack()
+        sync_table(SlackArchive)
+        instances = SlackArchive.objects.filter(teamName = self.team_name)
+        for row in instances:
+            self.graph.add_node(row[SENDER_COLUMN])
 
     def build_reference_edges(self):
+        Utils.get_Connection_SNA4Slack()
+        sync_table(SlackArchive)
+        instances = SlackArchive.objects.filter(teamName = self.team_name)
         pattern = re.compile("@([a-zA-Z0-9]+)")
-
-        with open(self.csv_path) as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                match_list = pattern.findall(row[MESSAGE_COLUMN])
-                if match_list:
-                    for elem in match_list:
-                        if self.graph.has_node(elem):
-                            if self.graph.has_edge(row[SENDER_COLUMN], elem):
-                                self.graph[row[SENDER_COLUMN]][elem][
-                                    EDGE_WEIGHT_LABEL] += 1
-                            else:
-                                self.graph.add_edge(row[SENDER_COLUMN], elem,
-                                                    weight=1)
+        for row in instances:
+            match_list = pattern.findall(row[MESSAGE_COLUMN])
+            if match_list:
+                for elem in match_list:
+                    if self.graph.has_node(elem):
+                        if self.graph.has_edge(row[SENDER_COLUMN], elem):
+                            self.graph[row[SENDER_COLUMN]][elem][
+                                EDGE_WEIGHT_LABEL] += 1
+                        else:
+                            self.graph.add_edge(row[SENDER_COLUMN], elem,
+                                                weight=1)
 
     def print_graph(self):
         print self.graph.nodes
@@ -112,15 +102,22 @@ class GraphGenerator(object):
     def json(self):
         return json.dumps(json_graph.node_link_data(self.graph))
 
+'''
 def run():
-    graph_gen = GraphGenerator("../resources/kubernetes_test_data.csv",
+    graph_gen = GraphGenerator("flatartagency",
                                directed=False)
+    print 'Graph done'
     graph_gen.compute_closeness_centrality()
+    print 'Compute closeness'
     graph_gen.compute_betweenness_centrality()
+    print 'Compute betweenness'
     graph_gen.compute_degree_centrality()
+    print 'Compute centrality'
+    
     graph_gen.print_graph()
     with open('data.json', 'w') as outfile:
-        json.dump(graph_gen.json(), outfile)
+        json.dumps(graph_gen.json(), outfile)
 
 if __name__ == "__main__":
     print timeit.timeit("run()", setup="from __main__ import run", number=10)
+'''

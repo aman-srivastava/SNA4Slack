@@ -1,5 +1,6 @@
 import uuid
 import json
+import logging
 from flask import Flask, jsonify, abort, request
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
@@ -12,6 +13,7 @@ from utils import Utils
 from objects.sna4slack_metrics import SNASlackMetrics
 from objects.slack_archive import *
 from slack_spyder import SlackSpider
+from NetworkX.src.graph_generator import GraphGenerator
 
 app = Flask(__name__)
 app.config['SWAGGER'] = {
@@ -20,10 +22,12 @@ app.config['SWAGGER'] = {
 }
 swagger = Swagger(app)
 
+logging.basicConfig(filename='../logs/crawler.log',
+                    level=logging.DEBUG)
+
 #URL DEFINITIONS
 #----------------
 SNA_URL = "/sna4slack-ws/metrics"
-
 
 #GET
 @app.route(SNA_URL+"/node/<node_id>", methods=['GET'])
@@ -55,7 +59,6 @@ def get_metrics(node_id):
     Utils.get_Connection_SNA4Slack()
     sync_table(SNASlackMetrics)
     instances = SNASlackMetrics.objects.filter(node_name=node_id)
-    print instances
     node_name = columns.Text()
     weight = columns.Integer()
     mentions = columns.Map(columns.Text(), columns.Integer())
@@ -145,7 +148,7 @@ def post_nodes():
 
 
 #Get
-@app.route(SNA_URL+"/crawl/<team_Name>", methods=['GET'])
+@app.route(SNA_URL+"/crawl/<team_Name>", methods=['POST'])
 def putArchiveData(team_Name):
     """Initializes crawler to get team data and save in database 
     Implemented in flask for python 2.7
@@ -180,16 +183,58 @@ def putArchiveData(team_Name):
     sync_table(SlackArchive)
     
     for i in items_list:
-        node_object = SlackArchive( id = uuid.uuid1(),
-                                    teamName = i.teamName,
-                                    channelName = i.channelName,
-                                    messageSender = i.messageSender.rstrip().lstrip(),
-                                    messageBody = i.messageBody.rstrip().lstrip(),
-                                    messageTime = datetime.strptime(i.messageTime, "%b %d, %Y %I:%M")
-                               )
-        node_object.save()
+        try:
+            node_object = SlackArchive( id = uuid.uuid1(),
+                                        teamName = i.teamName,
+                                        channelName = i.channelName,
+                                        messageSender = i.messageSender.rstrip().lstrip(),
+                                        messageBody = i.messageBody.rstrip().lstrip(),
+                                        messageTime = datetime.strptime(i.messageTime, "%b %d, %Y %I:%M")
+                                   )
+            node_object.save()
+        except:
+            continue
     return "Success"
 
+
+#Get
+@app.route(SNA_URL+"/graphGen/<team_Name>/<directed>", methods=['GET'])
+def generateGraph(team_Name, directed):
+    """Initializes crawler to get team data and save in database 
+    Implemented in flask for python 2.7
+    ---
+    parameters:
+      - name: team_Name
+        in: path
+        type: string
+        required: true
+        default: kubernetes
+        description: Enter team name
+      - name: directed
+        in: path
+        type: boolean
+        required: true
+        default: True
+        description: Choose directed/undirected graph
+    operationId: generateGraph
+    consumes:
+      - string
+    produces:
+      - string
+    
+    deprecated: false
+    externalDocs:
+      description: Project repository
+      url: https://github.com/aman-srivastava/SNA4Slack
+    responses:
+      200:
+        description: Parse Slack archive and save data to database
+    """
+    graph_gen = GraphGenerator(team_Name, directed)
+    graph_gen.compute_closeness_centrality()
+    graph_gen.compute_betweenness_centrality()
+    graph_gen.compute_degree_centrality()
+    return json.dumps(graph_gen.json())
 
 if __name__ == '__main__':
     app.run(debug=True)

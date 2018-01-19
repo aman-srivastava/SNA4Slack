@@ -3,6 +3,7 @@
 import json
 import csv
 import uuid
+import sys
 from time import sleep
 from random import randint
 from selenium import webdriver
@@ -118,17 +119,22 @@ class SlackSpider():
 			csv_file = open(file,"wb")
 			wr = csv.writer(csv_file)
 			wr.writerow(["id","Team Name","Channel Name", "Sender", "Message", "Time"])
-		
-
+			
 		for url in self.urlsToHit:
 			self.TeamName = url[0]
 			self.ChannelName = url[1]
 			
 			for cdr in self.parse(url[2]):
 				if(writeToFileFlag == 1):
-					wr.writerow(list(cdr))
+					try:
+						wr.writerow(list(cdr))
+					except:
+						print "error"
 				else:
-					self.returnList.append(cdr)
+					try:
+						self.returnList.append(cdr)
+					except:
+						print "error"
 
 		# Export the touched data
 		if (writeToFileFlag == 1):
@@ -144,7 +150,7 @@ if __name__ == "__main__":
 		writeToFileFlag = 1
 		slackSpider = SlackSpider()
 		slackSpider.start_driver()
-		slackSpider.runSpider(sys.argv[0], writeToFileFlag)
+		slackSpider.runSpider(sys.argv[1], writeToFileFlag)
 		slackSpider.close_driver()
 	else:
 		print 'Pass team name as parameter!'
