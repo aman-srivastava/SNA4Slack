@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-textdirection="LTR" class="loading">
+  
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="SNA4Slack - Social Network Analysis & Visualizationfor Slack Teams">
+    <meta name="keywords" content="sna4slack, network, analysis">
+    <meta name="author" content="Aman Srivastava">
+    <title>SNA4Slack | Home</title>
+    <link rel="apple-touch-icon" sizes="60x60" href="../../../app-assets/images/ico/apple-icon-60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../../app-assets/images/ico/apple-icon-76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../../../app-assets/images/ico/apple-icon-120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../../../app-assets/images/ico/apple-icon-152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="https://pixinvent.com/bootstrap-admin-template/robust/app-assets/images/ico/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="../../../app-assets/images/ico/favicon-32.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!-- BEGIN VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.min.css">
+    <!-- font icons-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/fonts/icomoon.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/fonts/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/sliders/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/extensions/pace.css">
+    <!-- END VENDOR CSS-->
+    <!-- BEGIN ROBUST CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/app.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <!-- END ROBUST CSS-->
+    <!-- BEGIN Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-overlay-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/search.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/ui/jqueryui.min.css">
+    <!-- END Page Level CSS-->
+    <!-- BEGIN Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <!-- END Custom CSS-->
+  </head>
+  <body data-open="click" data-menu="vertical-menu" data-col="1-column" class="vertical-layout vertical-menu 1-column bg-full-screen-image fixed-navbar">
+
+    <!-- navbar-fixed-top-->
+    
+    <div id="fullscreen-search" class="fullscreen-search bg-indigo bg-lighten-4">
+      <form class="fullscreen-search-form">
+        <input type="search" placeholder="Search..." class="fullscreen-search-input">
+      </form>
+      <div class="fullscreen-search-content">
+        <div class="fullscreen-search-options">
+          <div class="row">
+            <div class="col-sm-12">
+              <fieldset>
+                <label class="custom-control custom-checkbox display-inline">
+                  <input type="checkbox" class="custom-control-input"><span class="custom-control-indicator"></span><span class="custom-control-description m-0">All</span>
+                </label>
+                <label class="custom-control custom-checkbox display-inline">
+                  <input type="checkbox" class="custom-control-input"><span class="custom-control-indicator"></span><span class="custom-control-description m-0">Teams</span>
+                </label>
+                <label class="custom-control custom-checkbox display-inline">
+                  <input type="checkbox" class="custom-control-input"><span class="custom-control-indicator"></span><span class="custom-control-description m-0">Channels</span>
+                </label>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div><span class="fullscreen-search-close"></span>
+    </div>
+    <div class="fullscreen-search-overlay"></div>
+
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="app-content content container-fluid">
+      <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body"><div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <div class="px-2 py-3 row mb-0 mt-3 box-shadow-3" style="border: solid white 1px;background-color:rgba(0,0,0,0.2);">
+        <img class="img-fluid mx-auto d-block pb-3 pt-4 width-65-per" src="../../../app-assets/images/logo/robust-logo-dark-big.png" alt="Robust Search">
+		<fieldset class="form-group">
+			<select class="ac-combobox" id="teamNames">
+				<option value="">Select one...</option>
+			</select>
+		</fieldset>
+        <div class="row py-2">
+            <div class="col-xs-12 text-xs-center">
+                <a href="#" class="btn btn-primary btn-md fullscreen-search-btn"><i class="icon-ios-search-strong"></i> Advanced Search</a>
+                <a href="navbar-hide-on-scroll-top.html" class="btn btn-warning  btn-md"><i class="icon-smile"></i>  I'm Feeling Lucky</a>
+
+            </div>
+        </div>
+		<hr style="border-top: 1px solid #eee;">
+        <div class="row py-1">
+            <div class="text-xs-center">
+                <a href="https://sna4slack-asu.slack.com/" target="_blank" class="btn btn-social-icon mr-1 mb-1 btn-outline-facebook"><span class="icon-slack"></span></a>
+                <a href="https://waffle.io/aman-srivastava/SNA4Slack" target="_blank" class="btn btn-social-icon mr-1 mb-1 btn-outline-instagram"><span class="icon-document"></span></a>
+                <a href="https://sway.com/FMHnrhMih9tsSB2F" target="_blank" class="btn btn-social-icon mr-1 mb-1 btn-outline-linkedin"><span class="icon-users font-medium-4"></span></a>
+                <a href="https://github.com/aman-srivastava/SNA4Slack" target="_blank" class="btn btn-social-icon mr-1 mb-1 btn-outline-github"><span class="icon-github font-medium-4"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+
+
+    <footer class="footer navbar-fixed-bottom footer-dark navbar-border">
+      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2018 <a href="#" target="_blank" class="text-bold-800 grey darken-2">SNA4Slack</a>. All Rights Reserved. </span><a href="https://sway.com/FMHnrhMih9tsSB2F" target="_blank"><span class="float-md-right d-xs-block d-md-inline-block">Meet the Team</span></a></p>
+    </footer>
+
+    <!-- BEGIN VENDOR JS-->
+    <!-- build:js app-assets/js/vendors.min.js-->
+    <script src="../../../app-assets/js/core/libraries/jquery.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/ui/tether.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/js/core/libraries/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/ui/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/ui/unison.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/ui/blockUI.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/ui/jquery.matchHeight-min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/ui/jquery-sliding-menu.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/sliders/slick/slick.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/ui/screenfull.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/extensions/pace.min.js" type="text/javascript"></script>
+    <!-- /build-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="../../../app-assets/js/core/libraries/jquery_ui/jquery-ui.min.js" type="text/javascript"></script>
+    <!-- BEGIN PAGE VENDOR JS-->
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN ROBUST JS-->
+    <!-- build:js app-assets/js/app.min.js-->
+    <script src="../../../app-assets/js/core/app-menu.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/js/core/app.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/js/scripts/ui/fullscreenSearch.min.js" type="text/javascript"></script>
+    <!-- /build-->
+    <!-- END ROBUST JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../../app-assets/js/scripts/ui/jquery-ui/autocomplete.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL JS-->
+    <!-- BEGIN Custom CSS-->
+	<script src="../../../assets/js/getTeamNames.js" type="text/javascript"></script>
+    <!-- END Custom CSS-->  
+</body>
+
+<!-- Mirrored from pixinvent.com/bootstrap-admin-template/robust/html/ltr/vertical-menu-template/search-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jan 2018 06:54:38 GMT -->
+</html>

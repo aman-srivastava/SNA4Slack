@@ -1,0 +1,6 @@
+/*!
+ * robust-admin-theme (http://demo.pixinvent.com/robust-admin)
+ * Copyright 2017 PIXINVENT
+ * Licensed under the Themeforest Standard Licenses
+ */
+$(window).on("load",function(){require.config({paths:{echarts:"../../../app-assets/vendors/js/charts/echarts"}}),require(["echarts","echarts/chart/funnel","echarts/chart/gauge"],function(ec){var myChart=ec.init(document.getElementById("funnel-plot"));chartOptions={tooltip:{trigger:"item",formatter:"{a} <br/>{b} : {c}%"},legend:{data:["Work","Eat","Commute","Watch TV","Sleep"]},color:["#99B898","#FECEA8","#FF847C","#E84A5F","#2A363B"],calculable:!0,series:[{name:"Funnel plot",type:"funnel",data:[{value:60,name:"Work"},{value:40,name:"Eat"},{value:20,name:"Commute"},{value:80,name:"Watch TV"},{value:100,name:"Sleep"}]}]},myChart.setOption(chartOptions),$(function(){function resize(){setTimeout(function(){myChart.resize()},200)}$(window).on("resize",resize),$(".menu-toggle").on("click",resize)})})});

@@ -1,0 +1,6 @@
+/*!
+ * robust-admin-theme (http://demo.pixinvent.com/robust-admin)
+ * Copyright 2017 PIXINVENT
+ * Licensed under the Themeforest Standard Licenses
+ */
+$(document).ready(function(){$(".dataex-colvis-basic").DataTable({dom:'C<"clear">lfrtip'}),$(".dataex-colvis-custom").DataTable({dom:'C<"clear">lfrtip',colVis:{buttonText:"Change columns"}}),$(".dataex-colvis-exclude").DataTable({dom:'C<"clear">lfrtip',colVis:{exclude:[0]}}),$(".dataex-colvis-mouseover").DataTable({dom:'C<"clear">lfrtip',colVis:{activate:"mouseover"}}),$(".dataex-colvis-restore").DataTable({dom:'C<"clear">lfrtip',columnDefs:[{visible:!1,targets:2}],colVis:{restore:"Restore",showAll:"Show all",showNone:"Show none"}})});

@@ -1,0 +1,6 @@
+/*!
+ * robust-admin-theme (http://demo.pixinvent.com/robust-admin)
+ * Copyright 2017 PIXINVENT
+ * Licensed under the Themeforest Standard Licenses
+ */
+$(window).on("load",function(){require.config({paths:{echarts:"../../../app-assets/vendors/js/charts/echarts"}}),require(["echarts","echarts/chart/funnel","echarts/chart/gauge"],function(ec){var myChart=ec.init(document.getElementById("right-align-funnel"));chartOptions={tooltip:{trigger:"item",formatter:"{a} <br/>{b}: {c}%"},legend:{orient:"vertical",x:"left",y:75,data:["Work","Eat","Commute","Watch TV","Sleep"]},color:["#99B898","#FECEA8","#FF847C","#E84A5F","#2A363B"],calculable:!0,series:[{name:"Funnel",type:"funnel",funnelAlign:"right",x:"25%",x2:"25%",y:"17.5%",width:"50%",height:"80%",itemStyle:{normal:{label:{position:"left"}}},data:[{value:60,name:"Work"},{value:30,name:"Eat"},{value:10,name:"Commute"},{value:80,name:"Watch TV"},{value:100,name:"Sleep"}]}]},myChart.setOption(chartOptions),$(function(){function resize(){setTimeout(function(){myChart.resize()},200)}$(window).on("resize",resize),$(".menu-toggle").on("click",resize)})})});
