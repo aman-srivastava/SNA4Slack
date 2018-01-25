@@ -142,3 +142,14 @@ def run():
 if __name__ == "__main__":
     # print timeit.timeit("run()", setup="from __main__ import run", number=10)
     run()
+
+'''
+Initial Code and functionality review comments:
+Looks good to me. 
+Graph generation is working as designed displaying the connected users 
+through different teams in which they are common.
+Closeness, betweenness and degree centralities are calculated accurately
+and exceptions are handled efficiently. 
+Corner cases like single node scenarios are taken care with an appropriate message.
+More to follow.
+'''
