@@ -89,7 +89,7 @@ $( document ).ready(function() {
 			.attr("cy", function(d) { return d.y; });
 	  }
 
-		// A slider (using only d3 and HTML5) that removes nodes below the input threshold.
+		// A slider that removes nodes below the input threshold.
 		var slider = d3.select('#controls').append('p').text('Edge Weight Threshold: ');
 
 		slider.append('label')
