@@ -13,7 +13,7 @@ from utils import Utils
 from objects.sna4slack_metrics import SNASlackMetrics
 from objects.slack_archive import *
 from slack_spyder import SlackSpider
-from NetworkX.src.graph_generator import GraphGenerator
+from NetworkX.src.mention_graph import MentionGraph
 
 app = Flask(__name__)
 app.config['SWAGGER'] = {
@@ -230,7 +230,7 @@ def generateGraph(team_Name, directed):
       200:
         description: Parse Slack archive and save data to database
     """
-    graph_gen = GraphGenerator(team_Name, directed)
+    graph_gen = MentionGraph(team_Name, directed)
     graph_gen.compute_closeness_centrality()
     graph_gen.compute_betweenness_centrality()
     graph_gen.compute_degree_centrality()

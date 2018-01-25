@@ -7,13 +7,15 @@ import re
 import json
 import logging
 import timeit
-from utils import Utils
+import csv
+
+from SNA4Slack.SNA4Slack_API.utils import Utils
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
 from cassandra.cqlengine.management import sync_table
 from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
-from objects.slack_archive import SlackArchive
+from SNA4Slack.SNA4Slack_API.objects.slack_archive import SlackArchive
 
 SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
@@ -26,13 +28,14 @@ BETWEENNESS_CENTRALITY = "betweenness_centrality"
 logging.basicConfig(filename='../logs/graph_generator_logs.log',
                     level=logging.DEBUG)
 
-class GraphGenerator(object):
-    def __init__(self, team_name, directed=True):
+
+class SubscriptionGraph(object):
+    def __init__(self, team_names, directed=True):
         if directed:
             self.graph = nx.DiGraph()
         else:
             self.graph = nx.Graph()
-        self.team_name = team_name
+        self.team_names = team_names
         self.build_graph()
 
     def build_graph(self):
@@ -40,28 +43,40 @@ class GraphGenerator(object):
         self.build_reference_edges()
 
     def build_user_nodes(self):
-        Utils.get_Connection_SNA4Slack()
-        sync_table(SlackArchive)
-        instances = SlackArchive.objects.filter(teamName = self.team_name)
-        for row in instances:
-            self.graph.add_node(row[SENDER_COLUMN])
+        # Utils.get_Connection_SNA4Slack()
+        # sync_table(SlackArchive)
+
+        for team_name in self.team_names:
+
+            ## TODO hardcoded for filesystem testing
+
+            with open("../resources/" + team_name + ".csv") as csvfile:
+                instances = csv.DictReader(csvfile)
+
+                # instances = SlackArchive.objects.filter(teamName=team_name)
+
+                for row in instances:
+                    self.graph.add_node(row[SENDER_COLUMN])
 
     def build_reference_edges(self):
-        Utils.get_Connection_SNA4Slack()
-        sync_table(SlackArchive)
-        instances = SlackArchive.objects.filter(teamName = self.team_name)
-        pattern = re.compile("@([a-zA-Z0-9]+)")
-        for row in instances:
-            match_list = pattern.findall(row[MESSAGE_COLUMN])
-            if match_list:
-                for elem in match_list:
-                    if self.graph.has_node(elem):
-                        if self.graph.has_edge(row[SENDER_COLUMN], elem):
-                            self.graph[row[SENDER_COLUMN]][elem][
-                                EDGE_WEIGHT_LABEL] += 1
-                        else:
-                            self.graph.add_edge(row[SENDER_COLUMN], elem,
-                                                weight=1)
+        # Utils.get_Connection_SNA4Slack()
+        # sync_table(SlackArchive)
+
+        for team_name in self.team_names:
+            with open("../resources/" + team_name + ".csv") as csvfile:
+                instances = csv.DictReader(csvfile)
+                # instances = SlackArchive.objects.filter(teamName=team_name)
+                team_members_traversed = set()
+                for row in instances:
+                    if row[SENDER_COLUMN] not in team_members_traversed:
+                        for user in team_members_traversed:
+                            if self.graph.has_edge(row[SENDER_COLUMN], user):
+                                self.graph[row[SENDER_COLUMN]][user][
+                                    EDGE_WEIGHT_LABEL] += 1
+                            else:
+                                self.graph.add_edge(row[SENDER_COLUMN], user,
+                                                    weight=1)
+                    team_members_traversed.add(row[SENDER_COLUMN])
 
     def print_graph(self):
         print self.graph.nodes
@@ -102,9 +117,11 @@ class GraphGenerator(object):
     def json(self):
         return json.dumps(json_graph.node_link_data(self.graph))
 
-'''
+
 def run():
-    graph_gen = GraphGenerator("flatartagency",
+
+    teams = ["team1", "team2", "team3"]
+    graph_gen = SubscriptionGraph(teams,
                                directed=False)
     print 'Graph done'
     graph_gen.compute_closeness_centrality()
@@ -113,11 +130,15 @@ def run():
     print 'Compute betweenness'
     graph_gen.compute_degree_centrality()
     print 'Compute centrality'
-    
+
     graph_gen.print_graph()
+    print graph_gen.json()
     with open('data.json', 'w') as outfile:
-        json.dumps(graph_gen.json(), outfile)
+        # json.dumps(graph_gen.json(), outfile)
+        outfile.write(graph_gen.json())
+    graph_gen.draw_graph()
+
 
 if __name__ == "__main__":
-    print timeit.timeit("run()", setup="from __main__ import run", number=10)
-'''
+    # print timeit.timeit("run()", setup="from __main__ import run", number=10)
+    run()

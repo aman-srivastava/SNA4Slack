@@ -1,1 +1,1 @@
-import graph_generator
+import mention_graph
