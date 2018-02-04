@@ -8,13 +8,13 @@ import json
 import logging
 import timeit
 
-from SNA4Slack.SNA4Slack_API.utils import Utils
+from utils import Utils
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
 from cassandra.cqlengine.management import sync_table
 from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
-from SNA4Slack.SNA4Slack_API.objects.slack_archive import SlackArchive
+from objects.slack_archive import SlackArchive
 
 SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
@@ -24,8 +24,7 @@ DEGREE_CENTRALITY = "degree_centrality"
 BETWEENNESS_CENTRALITY = "betweenness_centrality"
 
 # Initializing logger
-logging.basicConfig(filename='../logs/graph_generator_logs.log',
-                    level=logging.DEBUG)
+# logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
 
 
 class MentionGraph(object):

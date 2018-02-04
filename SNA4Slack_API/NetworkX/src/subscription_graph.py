@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import networkx as nx
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from networkx.readwrite import json_graph
 import sys
 import re
@@ -9,13 +9,13 @@ import logging
 import timeit
 import csv
 
-from SNA4Slack.SNA4Slack_API.utils import Utils
+from utils import Utils
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
 from cassandra.cqlengine.management import sync_table
 from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
-from SNA4Slack.SNA4Slack_API.objects.slack_archive import SlackArchive
+from objects.slack_archive import SlackArchive
 
 SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
@@ -26,8 +26,7 @@ DEGREE_CENTRALITY = "degree_centrality"
 BETWEENNESS_CENTRALITY = "betweenness_centrality"
 
 # Initializing logger
-logging.basicConfig(filename='../logs/graph_generator_logs.log',
-                    level=logging.DEBUG)
+#logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
 
 
 class SubscriptionGraph(object):
@@ -79,7 +78,7 @@ class SubscriptionGraph(object):
 
     def draw_graph(self):
         nx.draw(self.graph, with_labels=True)  # default spring_layout
-        plt.show()
+        #plt.show()
 
     def compute_closeness_centrality(self):
         cc = nx.algorithms.centrality.closeness_centrality(self.graph)
