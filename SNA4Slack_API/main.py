@@ -12,8 +12,8 @@ from flasgger import Swagger
 from utils import Utils
 from objects.sna4slack_metrics import SNASlackMetrics
 from objects.slack_archive import *
-from SlackCrawler.src.slack_spyder import SlackSpider
-from NetworkX.src.graph_generator import GraphGenerator
+from slack_spyder import SlackSpider
+from NetworkX.src.mention_graph import MentionGraph
 
 app = Flask(__name__)
 app.config['SWAGGER'] = {
@@ -22,7 +22,8 @@ app.config['SWAGGER'] = {
 }
 swagger = Swagger(app)
 
-#logging.basicConfig(filename='logs/crawler.log', level=logging.DEBUG)
+logging.basicConfig(filename='../logs/crawler.log',
+                    level=logging.DEBUG)
 
 #URL DEFINITIONS
 #----------------
@@ -177,7 +178,7 @@ def putArchiveData(team_Name):
     slackSpider.start_driver()
     items_list  = slackSpider.runSpider(team_Name, 0)
     slackSpider.close_driver()
-    '''
+
     Utils.get_Connection_SNA4Slack()
     sync_table(SlackArchive)
     
@@ -188,19 +189,17 @@ def putArchiveData(team_Name):
                                         channelName = i.channelName,
                                         messageSender = i.messageSender.rstrip().lstrip(),
                                         messageBody = i.messageBody.rstrip().lstrip(),
-                                        messageAvatar = i.messageAvatar.rstrip().lstrip(),
                                         messageTime = datetime.strptime(i.messageTime, "%b %d, %Y %I:%M")
                                    )
             node_object.save()
         except:
             continue
-    '''
     return "Success"
 
 
 #Get
-@app.route(SNA_URL+"/graphGen/<team_Name>/<channel>/<directed>", methods=['GET'])
-def generateGraph(team_Name, channel, directed):
+@app.route(SNA_URL+"/graphGen/<team_Name>/<directed>", methods=['GET'])
+def generateGraph(team_Name, directed):
     """Initializes crawler to get team data and save in database 
     Implemented in flask for python 2.7
     ---
@@ -209,14 +208,8 @@ def generateGraph(team_Name, channel, directed):
         in: path
         type: string
         required: true
-        default: flatartagency
+        default: kubernetes
         description: Enter team name
-      - name: channel
-        in: path
-        type: string
-        required: false
-        default: 
-        description: Narrow down graph nodes to a channel within team
       - name: directed
         in: path
         type: boolean
@@ -237,7 +230,7 @@ def generateGraph(team_Name, channel, directed):
       200:
         description: Parse Slack archive and save data to database
     """
-    graph_gen = GraphGenerator(team_Name, channel, directed)
+    graph_gen = MentionGraph(team_Name, directed)
     graph_gen.compute_closeness_centrality()
     graph_gen.compute_betweenness_centrality()
     graph_gen.compute_degree_centrality()

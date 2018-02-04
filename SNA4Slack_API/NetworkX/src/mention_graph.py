@@ -7,13 +7,14 @@ import re
 import json
 import logging
 import timeit
-from utils import Utils
+
+from SNA4Slack.SNA4Slack_API.utils import Utils
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
 from cassandra.cqlengine.management import sync_table
 from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
-from objects.slack_archive import SlackArchive
+from SNA4Slack.SNA4Slack_API.objects.slack_archive import SlackArchive
 
 SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
@@ -23,16 +24,16 @@ DEGREE_CENTRALITY = "degree_centrality"
 BETWEENNESS_CENTRALITY = "betweenness_centrality"
 
 # Initializing logger
-#logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
+logging.basicConfig(filename='../logs/graph_generator_logs.log',
+                    level=logging.DEBUG)
 
-class GraphGenerator(object):
-    def __init__(self, team_name, channel, directed=True):
+class MentionGraph(object):
+    def __init__(self, team_name, directed=True):
         if directed:
             self.graph = nx.DiGraph()
         else:
             self.graph = nx.Graph()
         self.team_name = team_name
-        self.channel = channel
         self.build_graph()
 
     def build_graph(self):
@@ -99,13 +100,20 @@ class GraphGenerator(object):
         logging.debug(
             self.__class__.__name__ + ": Degree centrality computed.")
 
+    def compute_density(self):
+        d = nx.density(self.graph)
+        self.graph.graph["density"] = d
+        # nx.set_node_attributes(self.graph, d, "DENSITY")
+        logging.debug(
+        self._class.name_ + ": Density computed.")
+            
     def json(self):
         return json.dumps(json_graph.node_link_data(self.graph))
 
-'''
+
 def run():
-    graph_gen = GraphGenerator("flatartagency",
-                               directed=False)
+    graph_gen = MentionGraph("flatartagency",
+                             directed=False)
     print 'Graph done'
     graph_gen.compute_closeness_centrality()
     print 'Compute closeness'
@@ -113,11 +121,16 @@ def run():
     print 'Compute betweenness'
     graph_gen.compute_degree_centrality()
     print 'Compute centrality'
+    graph_gen.compute_density()
+    print 'Compute density'
     
     graph_gen.print_graph()
+    print graph_gen.json()
     with open('data.json', 'w') as outfile:
-        json.dumps(graph_gen.json(), outfile)
+        # json.dumps(graph_gen.json(), outfile)
+        outfile.write(graph_gen.json())
+    # graph_gen.draw_graph()
 
 if __name__ == "__main__":
-    print timeit.timeit("run()", setup="from __main__ import run", number=10)
-'''
+    # print timeit.timeit("run()", setup="from __main__ import run", number=10)
+    run()

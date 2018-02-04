@@ -2,9 +2,3 @@ gunicorn
 cassandra-driver
 Flask
 flask_cassandra
-flasgger
-flask_restful
-selenium
-matplotlib
-networkx
-pyvirtualdisplay
