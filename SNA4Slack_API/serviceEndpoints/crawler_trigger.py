@@ -1,6 +1,5 @@
 import uuid
 import json
-import dateutil.parser
 from datetime import datetime
 
 from flask_restful import Resource, request

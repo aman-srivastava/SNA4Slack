@@ -5,3 +5,6 @@ flask_cassandra
 flasgger
 flask_restful
 selenium
+pyvirtualdisplay
+networkx
+matplotlib
