@@ -19,6 +19,7 @@ from SNA4Slack.SNA4Slack_API.objects.slack_archive import SlackArchive
 
 SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
+CHANNEL_NAME = "channelName"
 EDGE_WEIGHT_LABEL = "weight"
 CLOSENESS_CENTRALITY = "closeness_centrality"
 DEGREE_CENTRALITY = "degree_centrality"
@@ -30,12 +31,12 @@ logging.basicConfig(filename='../logs/graph_generator_logs.log',
 
 
 class SubscriptionGraph(object):
-    def __init__(self, team_names, directed=True):
+    def __init__(self, team_name, directed=True):
         if directed:
             self.graph = nx.DiGraph()
         else:
             self.graph = nx.Graph()
-        self.team_names = team_names
+        self.team_name = team_name
         self.build_graph()
 
     def build_graph(self):
@@ -43,40 +44,32 @@ class SubscriptionGraph(object):
         self.build_reference_edges()
 
     def build_user_nodes(self):
-        # Utils.get_Connection_SNA4Slack()
-        # sync_table(SlackArchive)
-
-        for team_name in self.team_names:
-
-            ## TODO hardcoded for filesystem testing
-
-            with open("../resources/" + team_name + ".csv") as csvfile:
-                instances = csv.DictReader(csvfile)
-
-                # instances = SlackArchive.objects.filter(teamName=team_name)
-
-                for row in instances:
-                    self.graph.add_node(row[SENDER_COLUMN])
+        Utils.get_Connection_SNA4Slack()
+        sync_table(SlackArchive)
+        # instances = csv.DictReader(csvfile)
+        instances = SlackArchive.objects.filter(teamName=self.team_name)
+        for row in instances:
+            self.graph.add_node(row[SENDER_COLUMN])
 
     def build_reference_edges(self):
-        # Utils.get_Connection_SNA4Slack()
-        # sync_table(SlackArchive)
+        Utils.get_Connection_SNA4Slack()
+        sync_table(SlackArchive)
+        instances = SlackArchive.objects.filter(teamName=self.team_name)
+        channel_record = {}
+        for row in instances:
+            print "%% ,", row[SENDER_COLUMN]
+            if row[CHANNEL_NAME] in channel_record.keys():
+                for user in channel_record[row[CHANNEL_NAME]]:
+                    if self.graph.has_edge(row[SENDER_COLUMN], user):
+                        self.graph[row[SENDER_COLUMN]][user][
+                            EDGE_WEIGHT_LABEL] += 1
+                    else:
+                        self.graph.add_edge(row[SENDER_COLUMN], user,
+                                            weight=1)
+            else:
+                channel_record[row[CHANNEL_NAME]] = set()
+            channel_record[row[CHANNEL_NAME]].add(row[SENDER_COLUMN])
 
-        for team_name in self.team_names:
-            with open("../resources/" + team_name + ".csv") as csvfile:
-                instances = csv.DictReader(csvfile)
-                # instances = SlackArchive.objects.filter(teamName=team_name)
-                team_members_traversed = set()
-                for row in instances:
-                    if row[SENDER_COLUMN] not in team_members_traversed:
-                        for user in team_members_traversed:
-                            if self.graph.has_edge(row[SENDER_COLUMN], user):
-                                self.graph[row[SENDER_COLUMN]][user][
-                                    EDGE_WEIGHT_LABEL] += 1
-                            else:
-                                self.graph.add_edge(row[SENDER_COLUMN], user,
-                                                    weight=1)
-                    team_members_traversed.add(row[SENDER_COLUMN])
 
     def print_graph(self):
         print self.graph.nodes
@@ -118,18 +111,23 @@ class SubscriptionGraph(object):
         d = nx.density(self.graph)
         self.graph.graph["density"] = d
         # nx.set_node_attributes(self.graph, d, "DENSITY")
+        logging.debug(self.__class__.__name__ + ": Density computed.")
+
+    def compute_avg_connectivity(self):
+        anc = nx.average_node_connectivity(self.graph)
+        self.graph.graph["average_node_connectivity"] = anc
+        # nx.set_node_attributes(self.graph, d, "DENSITY")
         logging.debug(
-        self._class.name_ + ": Density computed.")
-	
-	def json(self):
+            self.__class__.__name__ + ": Connectivity computed.")
+
+    def json(self):
         return json.dumps(json_graph.node_link_data(self.graph))
 
 
 def run():
-
-    teams = ["team1", "team2", "team3"]
-    graph_gen = SubscriptionGraph(teams,
-                               directed=False)
+    team = "subscriptionTest"
+    graph_gen = SubscriptionGraph(team,
+                                  directed=False)
     print 'Graph done'
     graph_gen.compute_closeness_centrality()
     print 'Compute closeness'
@@ -137,8 +135,10 @@ def run():
     print 'Compute betweenness'
     graph_gen.compute_degree_centrality()
     print 'Compute centrality'
-	graph_gen.compute_density()
+    graph_gen.compute_density()
     print 'Compute density'
+    graph_gen.compute_avg_connectivity()
+    print 'Compute connectivity'
 
     graph_gen.print_graph()
     print graph_gen.json()

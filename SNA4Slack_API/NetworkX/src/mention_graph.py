@@ -27,6 +27,7 @@ BETWEENNESS_CENTRALITY = "betweenness_centrality"
 logging.basicConfig(filename='../logs/graph_generator_logs.log',
                     level=logging.DEBUG)
 
+
 class MentionGraph(object):
     def __init__(self, team_name, directed=True):
         if directed:
@@ -43,14 +44,14 @@ class MentionGraph(object):
     def build_user_nodes(self):
         Utils.get_Connection_SNA4Slack()
         sync_table(SlackArchive)
-        instances = SlackArchive.objects.filter(teamName = self.team_name)
+        instances = SlackArchive.objects.filter(teamName=self.team_name)
         for row in instances:
             self.graph.add_node(row[SENDER_COLUMN])
 
     def build_reference_edges(self):
         Utils.get_Connection_SNA4Slack()
         sync_table(SlackArchive)
-        instances = SlackArchive.objects.filter(teamName = self.team_name)
+        instances = SlackArchive.objects.filter(teamName=self.team_name)
         pattern = re.compile("@([a-zA-Z0-9]+)")
         for row in instances:
             match_list = pattern.findall(row[MESSAGE_COLUMN])
@@ -104,15 +105,21 @@ class MentionGraph(object):
         d = nx.density(self.graph)
         self.graph.graph["density"] = d
         # nx.set_node_attributes(self.graph, d, "DENSITY")
+        logging.debug(self.__class__.__name__ + ": Density computed.")
+
+    def compute_avg_connectivity(self):
+        anc = nx.average_node_connectivity(self.graph)
+        self.graph.graph["average_node_connectivity"] = anc
+        # nx.set_node_attributes(self.graph, d, "DENSITY")
         logging.debug(
-        self._class.name_ + ": Density computed.")
-            
+            self.__class__.__name__ + ": Connectivity computed.")
+
     def json(self):
         return json.dumps(json_graph.node_link_data(self.graph))
 
 
 def run():
-    graph_gen = MentionGraph("flatartagency",
+    graph_gen = MentionGraph("openaddresses",
                              directed=False)
     print 'Graph done'
     graph_gen.compute_closeness_centrality()
@@ -123,13 +130,16 @@ def run():
     print 'Compute centrality'
     graph_gen.compute_density()
     print 'Compute density'
-    
+    graph_gen.compute_avg_connectivity()
+    print 'Compute connectivity'
+
     graph_gen.print_graph()
     print graph_gen.json()
     with open('data.json', 'w') as outfile:
         # json.dumps(graph_gen.json(), outfile)
         outfile.write(graph_gen.json())
     # graph_gen.draw_graph()
+
 
 if __name__ == "__main__":
     # print timeit.timeit("run()", setup="from __main__ import run", number=10)
