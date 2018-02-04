@@ -11,6 +11,7 @@ from pyvirtualdisplay import Display
 from objects.slack_archive import *
 import datetime
 
+from objects.slack_archive import *
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
 from cassandra.cqlengine.management import sync_table
@@ -45,7 +46,7 @@ class DataPrep():
                                                messageSender=str(row[0]),
                                                senderAvatar='https://buffercommunity.slack.com/archives/-general/p1458841440001473',
                                                messageBody=str(row[1]),
-                                               messageTime=datetime.datetime.strptime(
+                                               messageTime=datetime.strptime(
                         'Oct 25, 2017 05:41', "%b %d, %Y %I:%M"))
                     print str(node_object)
                     node_object.save()
@@ -54,4 +55,4 @@ class DataPrep():
 if __name__ == '__main__':
     dataPrep = DataPrep()
     dataPrep.LoadTextData(
-        '/home/shuchir/SER517/slack/SNA4Slack/SNA4Slack_API/NetworkX/resources/subscriptionTest.csv')
+        '~/SNA4Slack/SNA4Slack_API/NetworkX/resources/padgett_florentine_business.csv')
