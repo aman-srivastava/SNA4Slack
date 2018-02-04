@@ -106,7 +106,7 @@ class MentionGraph(object):
         self.graph.graph["density"] = d
         # nx.set_node_attributes(self.graph, d, "DENSITY")
         logging.debug(self.__class__.__name__ + ": Density computed.")
-
+    
     def compute_avg_connectivity(self):
         anc = nx.average_node_connectivity(self.graph)
         self.graph.graph["average_node_connectivity"] = anc
@@ -114,6 +114,11 @@ class MentionGraph(object):
         logging.debug(
             self.__class__.__name__ + ": Connectivity computed.")
 
+    def compute_avg_clustering(self):
+        ac = nx.average_clustering(self.graph)
+        self.graph.graph["average_clustering"] = ac
+        logging.debug(self.__class__.__name__ + ": Clustering computed.")
+            
     def json(self):
         return json.dumps(json_graph.node_link_data(self.graph))
 
@@ -132,6 +137,8 @@ def run():
     print 'Compute density'
     graph_gen.compute_avg_connectivity()
     print 'Compute connectivity'
+    graph_gen.compute_avg_clustering()
+    print 'Compute clustering'
 
     graph_gen.print_graph()
     print graph_gen.json()
