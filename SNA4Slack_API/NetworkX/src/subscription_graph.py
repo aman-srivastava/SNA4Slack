@@ -114,7 +114,14 @@ class SubscriptionGraph(object):
         logging.debug(
             self.__class__.__name__ + ": Degree centrality computed.")
 
-    def json(self):
+    def compute_density(self):
+        d = nx.density(self.graph)
+        self.graph.graph["density"] = d
+        # nx.set_node_attributes(self.graph, d, "DENSITY")
+        logging.debug(
+        self._class.name_ + ": Density computed.")
+	
+	def json(self):
         return json.dumps(json_graph.node_link_data(self.graph))
 
 
@@ -130,6 +137,8 @@ def run():
     print 'Compute betweenness'
     graph_gen.compute_degree_centrality()
     print 'Compute centrality'
+	graph_gen.compute_density()
+    print 'Compute density'
 
     graph_gen.print_graph()
     print graph_gen.json()
