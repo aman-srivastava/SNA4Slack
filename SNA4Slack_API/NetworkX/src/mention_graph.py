@@ -8,13 +8,13 @@ import json
 import logging
 import timeit
 
-from utils import Utils
+from SNA4Slack.SNA4Slack_API.utils import Utils
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
 from cassandra.cqlengine.management import sync_table
 from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
-from objects.slack_archive import SlackArchive
+from SNA4Slack.SNA4Slack_API.objects.slack_archive import SlackArchive
 
 SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
@@ -22,9 +22,13 @@ EDGE_WEIGHT_LABEL = "weight"
 CLOSENESS_CENTRALITY = "closeness_centrality"
 DEGREE_CENTRALITY = "degree_centrality"
 BETWEENNESS_CENTRALITY = "betweenness_centrality"
+GRAPH_DENSITY = "density"
+AVERAGE_CLUSTERING = "average_clustering"
+AVERAGE_CONNECTIVITY = "average_node_connectivity"
 
 # Initializing logger
-# logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
+logging.basicConfig(filename='../logs/graph_generator_logs.log',
+                    level=logging.DEBUG)
 
 
 class MentionGraph(object):
@@ -101,23 +105,21 @@ class MentionGraph(object):
             self.__class__.__name__ + ": Degree centrality computed.")
 
     def compute_density(self):
-        d = nx.density(self.graph)
-        self.graph.graph["density"] = d
-        # nx.set_node_attributes(self.graph, d, "DENSITY")
+        den = nx.density(self.graph)
+        self.graph.graph[GRAPH_DENSITY] = den
         logging.debug(self.__class__.__name__ + ": Density computed.")
-    
+
     def compute_avg_connectivity(self):
         anc = nx.average_node_connectivity(self.graph)
-        self.graph.graph["average_node_connectivity"] = anc
-        # nx.set_node_attributes(self.graph, d, "DENSITY")
+        self.graph.graph[AVERAGE_CONNECTIVITY] = anc
         logging.debug(
             self.__class__.__name__ + ": Connectivity computed.")
 
     def compute_avg_clustering(self):
         ac = nx.average_clustering(self.graph)
-        self.graph.graph["average_clustering"] = ac
+        self.graph.graph[AVERAGE_CLUSTERING] = ac
         logging.debug(self.__class__.__name__ + ": Clustering computed.")
-            
+
     def json(self):
         return json.dumps(json_graph.node_link_data(self.graph))
 

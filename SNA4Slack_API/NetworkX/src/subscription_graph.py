@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import networkx as nx
-#import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from networkx.readwrite import json_graph
 import sys
 import re
@@ -9,13 +9,13 @@ import logging
 import timeit
 import csv
 
-from utils import Utils
+from SNA4Slack.SNA4Slack_API.utils import Utils
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
 from cassandra.cqlengine.management import sync_table
 from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
-from objects.slack_archive import SlackArchive
+from SNA4Slack.SNA4Slack_API.objects.slack_archive import SlackArchive
 
 SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
@@ -24,9 +24,13 @@ EDGE_WEIGHT_LABEL = "weight"
 CLOSENESS_CENTRALITY = "closeness_centrality"
 DEGREE_CENTRALITY = "degree_centrality"
 BETWEENNESS_CENTRALITY = "betweenness_centrality"
+GRAPH_DENSITY = "density"
+AVERAGE_CLUSTERING = "average_clustering"
+AVERAGE_CONNECTIVITY = "average_node_connectivity"
 
 # Initializing logger
-#logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
+logging.basicConfig(filename='../logs/graph_generator_logs.log',
+                    level=logging.DEBUG)
 
 
 class SubscriptionGraph(object):
@@ -56,7 +60,6 @@ class SubscriptionGraph(object):
         instances = SlackArchive.objects.filter(teamName=self.team_name)
         channel_record = {}
         for row in instances:
-            print "%% ,", row[SENDER_COLUMN]
             if row[CHANNEL_NAME] in channel_record.keys():
                 for user in channel_record[row[CHANNEL_NAME]]:
                     if self.graph.has_edge(row[SENDER_COLUMN], user):
@@ -69,7 +72,6 @@ class SubscriptionGraph(object):
                 channel_record[row[CHANNEL_NAME]] = set()
             channel_record[row[CHANNEL_NAME]].add(row[SENDER_COLUMN])
 
-
     def print_graph(self):
         print self.graph.nodes
         for ed in self.graph.edges:
@@ -78,7 +80,7 @@ class SubscriptionGraph(object):
 
     def draw_graph(self):
         nx.draw(self.graph, with_labels=True)  # default spring_layout
-        #plt.show()
+        # plt.show()
 
     def compute_closeness_centrality(self):
         cc = nx.algorithms.centrality.closeness_centrality(self.graph)
@@ -107,21 +109,20 @@ class SubscriptionGraph(object):
             self.__class__.__name__ + ": Degree centrality computed.")
 
     def compute_density(self):
-        d = nx.density(self.graph)
-        self.graph.graph["density"] = d
-        # nx.set_node_attributes(self.graph, d, "DENSITY")
+        den = nx.density(self.graph)
+        self.graph.graph[GRAPH_DENSITY] = den
         logging.debug(self.__class__.__name__ + ": Density computed.")
 
     def compute_avg_connectivity(self):
         anc = nx.average_node_connectivity(self.graph)
-        self.graph.graph["average_node_connectivity"] = anc
+        self.graph.graph[AVERAGE_CONNECTIVITY] = anc
         # nx.set_node_attributes(self.graph, d, "DENSITY")
         logging.debug(
             self.__class__.__name__ + ": Connectivity computed.")
-            
+
     def compute_avg_clustering(self):
         ac = nx.average_clustering(self.graph)
-        self.graph.graph["average_clustering"] = ac
+        self.graph.graph[AVERAGE_CLUSTERING] = ac
         logging.debug(self.__class__.__name__ + ": Clustering computed.")
 
     def json(self):
