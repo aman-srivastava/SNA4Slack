@@ -1,5 +1,5 @@
 TEST_DATA = {
-    "filename": "../resources/padgett_florentine_business.csv",
+    "filename": "padgett_florentine_business",
     "node_count": 16,
     "edge_count": 42,
     "degree_centrality": {
@@ -35,7 +35,7 @@ TEST_DATA = {
         'PUCCI': 0.0,
         'CASTELLAN': 0.04761904761904762,
         'PAZZI': 0.0,
-        'RIDOLFI': 0.27936507936507937,
+        'RIDOLFI': 0.2793650793650793,
         'MEDICI': 0.4142857142857143
     },
     "closeness_centrality": {

@@ -3,12 +3,12 @@ import sys
 
 sys.path.append('../src')
 
-from graph_generator import GraphGenerator
+from mention_graph import MentionGraph
 from padgett_florentine_business_data import TEST_DATA
 
 
 class TestClass(object):
-    graph_builder = GraphGenerator(TEST_DATA["filename"])
+    graph_builder = MentionGraph(TEST_DATA["filename"])
 
     def test_node_count(self):
         assert len(self.graph_builder.graph.nodes) == TEST_DATA["node_count"]
@@ -19,19 +19,21 @@ class TestClass(object):
     def test_degree_centrality(self):
         self.graph_builder.compute_degree_centrality()
         for node in TEST_DATA["degree_centrality"].keys():
-            assert self.graph_builder.graph.nodes[node]["degree_centrality"] == \
-                   TEST_DATA["degree_centrality"][node]
+            assert round(
+                self.graph_builder.graph.nodes[node]["degree_centrality"],
+                5) == \
+                   round(TEST_DATA["degree_centrality"][node], 5)
 
     def test_betweeness_centrality(self):
         self.graph_builder.compute_betweenness_centrality()
         for node in TEST_DATA["betweenness_centrality"].keys():
-            assert self.graph_builder.graph.nodes[node][
-                       "betweenness_centrality"] == \
-                   TEST_DATA["betweenness_centrality"][node]
+            assert round(self.graph_builder.graph.nodes[node][
+                             "betweenness_centrality"], 5) == \
+                   round(TEST_DATA["betweenness_centrality"][node], 5)
 
     def test_closeness_centrality(self):
         self.graph_builder.compute_closeness_centrality()
         for node in TEST_DATA["closeness_centrality"].keys():
-            assert self.graph_builder.graph.nodes[node][
-                       "closeness_centrality"] == \
-                   TEST_DATA["closeness_centrality"][node]
+            assert round(self.graph_builder.graph.nodes[node][
+                             "closeness_centrality"], 5) == \
+                   round(TEST_DATA["closeness_centrality"][node], 5)
