@@ -57,5 +57,6 @@ TEST_DATA = {
         'MEDICI': 0.5226666666666667
     },
     "average_clustering": 0.20416666666666666,
-    "average_connectivity": 1.4916666666666667
+    "average_connectivity": 1.4916666666666667,
+    "density":0.175
 }

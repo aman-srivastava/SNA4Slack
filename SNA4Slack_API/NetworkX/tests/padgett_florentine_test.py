@@ -49,6 +49,12 @@ class TestClass(object):
         assert round(self.graph_builder.graph.graph[
                          "average_connectivity"], 5) == \
                round(TEST_DATA["average_connectivity"], 5)
+            
+    def test_density(self):
+        self.graph_builder.compute_density()
+        assert round(self.graph_builder.graph.graph[
+                         "density"], 5) == \
+               round(TEST_DATA["density"], 5)
 
 
 t = TestClass()
