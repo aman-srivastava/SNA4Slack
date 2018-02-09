@@ -6,7 +6,7 @@ import uuid
 import sys
 from time import sleep
 from random import randint
-import datetime
+from datetime import datetime
 from selenium import webdriver
 from pyvirtualdisplay import Display
 from objects.slack_archive import *
@@ -153,18 +153,16 @@ class SlackSpider():
                     except:
                         print "error"
                 else:
-                    try:
-                        node_object = SlackArchive(id=uuid.uuid1(),
-                                                   teamName=cdr.teamName,
-                                                   channelName=cdr.channelName,
-                                                   messageSender=cdr.messageSender.rstrip().lstrip(),
-                                                   senderAvatar=cdr.senderAvatar.rstrip().lstrip(),
-                                                   messageBody=cdr.messageBody.rstrip().lstrip(),
-                                                   messageTime=datetime.datetime.strptime(
-                                                       cdr.messageTime, "%b %d, %Y %I:%M")
-                                                   )
-                    except:
-                        print "error"
+                    node_object = SlackArchive(id=uuid.uuid1(),
+                                               teamName=cdr.teamName,
+                                               channelName=cdr.channelName,
+                                               messageSender=cdr.messageSender.rstrip().lstrip(),
+                                               senderAvatar=cdr.senderAvatar.rstrip().lstrip(),
+                                               messageBody=cdr.messageBody.rstrip().lstrip(),
+                                               messageTime=datetime.strptime(
+                                                   cdr.messageTime, "%b %d, %Y %H:%M")
+                                               )
+                    node_object.save()
         # Export the touched data
         if (writeToFileFlag == 1):
             csv_file.close()

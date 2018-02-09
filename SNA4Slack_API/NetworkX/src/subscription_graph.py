@@ -9,13 +9,13 @@ import logging
 import timeit
 import csv
 
-from SNA4Slack.SNA4Slack_API.utils import Utils
+from utils import Utils
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
 from cassandra.cqlengine.management import sync_table
 from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
-from SNA4Slack.SNA4Slack_API.objects.slack_archive import SlackArchive
+from objects.slack_archive import SlackArchive
 
 SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
@@ -29,8 +29,7 @@ AVERAGE_CLUSTERING = "average_clustering"
 AVERAGE_CONNECTIVITY = "average_node_connectivity"
 
 # Initializing logger
-logging.basicConfig(filename='../logs/graph_generator_logs.log',
-                    level=logging.DEBUG)
+# logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
 
 
 class SubscriptionGraph(object):
@@ -129,35 +128,30 @@ class SubscriptionGraph(object):
         return json.dumps(json_graph.node_link_data(self.graph))
 
 
-def run():
-    team = "subscriptionTest"
-    graph_gen = SubscriptionGraph(team,
-                                  directed=False)
-    print 'Graph done'
-    graph_gen.compute_closeness_centrality()
-    print 'Compute closeness'
-    graph_gen.compute_betweenness_centrality()
-    print 'Compute betweenness'
-    graph_gen.compute_degree_centrality()
-    print 'Compute centrality'
-    graph_gen.compute_density()
-    print 'Compute density'
-    graph_gen.compute_avg_connectivity()
-    print 'Compute connectivity'
-    graph_gen.compute_avg_clustering()
-    print 'Compute clustering'
+    def run(self):
+        team = "subscriptionTest"
+        graph_gen = SubscriptionGraph(team,
+                                      directed=False)
+        print 'Graph done'
+        graph_gen.compute_closeness_centrality()
+        print 'Compute closeness'
+        graph_gen.compute_betweenness_centrality()
+        print 'Compute betweenness'
+        graph_gen.compute_degree_centrality()
+        print 'Compute centrality'
+        graph_gen.compute_density()
+        print 'Compute density'
+        graph_gen.compute_avg_connectivity()
+        print 'Compute connectivity'
+        graph_gen.compute_avg_clustering()
+        print 'Compute clustering'
 
-    graph_gen.print_graph()
-    print graph_gen.json()
-    with open('data.json', 'w') as outfile:
-        # json.dumps(graph_gen.json(), outfile)
-        outfile.write(graph_gen.json())
-    graph_gen.draw_graph()
-
-
-if __name__ == "__main__":
-    # print timeit.timeit("run()", setup="from __main__ import run", number=10)
-    run()
+        graph_gen.print_graph()
+        print graph_gen.json()
+        with open('data.json', 'w') as outfile:
+            # json.dumps(graph_gen.json(), outfile)
+            outfile.write(graph_gen.json())
+        graph_gen.draw_graph()
 
 '''
 Initial Code and functionality review comments:

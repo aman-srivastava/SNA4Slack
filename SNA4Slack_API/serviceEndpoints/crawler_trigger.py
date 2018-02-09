@@ -5,12 +5,6 @@ from datetime import datetime
 from flask_restful import Resource, request
 from flask import Flask, request, jsonify, _request_ctx_stack
 
-from cassandra.auth import PlainTextAuthProvider
-from cassandra.cluster import Cluster
-from cassandra.cqlengine.management import sync_table
-from cassandra.cqlengine.models import Model
-from cassandra.cqlengine import columns, connection
-
 from utils import Utils
 from objects.slack_archive import SlackArchive
 from SlackCrawler.slack_spyder import SlackSpider
