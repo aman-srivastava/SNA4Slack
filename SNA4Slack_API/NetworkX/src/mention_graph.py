@@ -24,7 +24,7 @@ DEGREE_CENTRALITY = "degree_centrality"
 BETWEENNESS_CENTRALITY = "betweenness_centrality"
 GRAPH_DENSITY = "density"
 AVERAGE_CLUSTERING = "average_clustering"
-AVERAGE_CONNECTIVITY = "average_node_connectivity"
+AVERAGE_CONNECTIVITY = "average_connectivity"
 
 # Initializing logger
 logging.basicConfig(filename='../logs/graph_generator_logs.log',

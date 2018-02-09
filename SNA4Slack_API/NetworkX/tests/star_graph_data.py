@@ -1,5 +1,5 @@
 TEST_DATA = {
-    "filename": "../resources/star_graph.csv",
+    "filename": "star_graph",
     "node_count": 6,
     "edge_count": 5,
     "degree_centrality": {
@@ -25,5 +25,7 @@ TEST_DATA = {
         '5': 0.5555555555555556,
         '4': 0.5555555555555556,
         '6': 1.0
-    }
+    },
+    "average_clustering": 0.0,
+    "average_connectivity": 1.0
 }

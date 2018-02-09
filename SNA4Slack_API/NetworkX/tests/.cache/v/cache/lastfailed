@@ -1,7 +1,6 @@
 {
   "performance_test.py": true, 
   "single_node_test.py": true, 
-  "start_graph_test.py::TestClass": true, 
   "unconnected_triplet_test.py": true, 
   "unconnected_triplet_test.py::TestClass": true
 }
