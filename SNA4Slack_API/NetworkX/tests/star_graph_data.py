@@ -27,5 +27,6 @@ TEST_DATA = {
         '6': 1.0
     },
     "average_clustering": 0.0,
-    "average_connectivity": 1.0
+    "average_connectivity": 1.0,
+    "density":0.333333333
 }
