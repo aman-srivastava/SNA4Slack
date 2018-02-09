@@ -8,7 +8,7 @@ from padgett_florentine_business_data import TEST_DATA
 
 
 class TestClass(object):
-    graph_builder = MentionGraph(TEST_DATA["filename"])
+    graph_builder = MentionGraph(TEST_DATA["filename"], False)
 
     def test_node_count(self):
         assert len(self.graph_builder.graph.nodes) == TEST_DATA["node_count"]
@@ -37,6 +37,18 @@ class TestClass(object):
             assert round(self.graph_builder.graph.nodes[node][
                              "closeness_centrality"], 5) == \
                    round(TEST_DATA["closeness_centrality"][node], 5)
+
+    def test_average_clustering(self):
+        self.graph_builder.compute_avg_clustering()
+        assert round(self.graph_builder.graph.graph[
+                         "average_clustering"], 5) == \
+               round(TEST_DATA["average_clustering"], 5)
+
+    def test_average_connectivity(self):
+        self.graph_builder.compute_avg_connectivity()
+        assert round(self.graph_builder.graph.graph[
+                         "average_connectivity"], 5) == \
+               round(TEST_DATA["average_connectivity"], 5)
 
 
 t = TestClass()

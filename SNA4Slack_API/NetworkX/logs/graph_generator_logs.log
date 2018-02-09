@@ -12577,3 +12577,434 @@ DEBUG:cassandra.connection:Sending options message heartbeat on idle connection 
 DEBUG:cassandra.connection:Received options response on connection (225988448) from 104.197.118.112
 DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (227177472) 104.197.118.112
 DEBUG:cassandra.connection:Received options response on connection (227177472) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228689288) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228689288) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (230553752) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228722952) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (230553752) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228722952) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (225988448) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (225988448) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (227177472) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (227177472) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228689288) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228689288) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (230553752) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228722952) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (230553752) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228722952) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (225988448) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (225988448) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (227177472) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (227177472) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228689288) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228689288) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (230553752) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228722952) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228722952) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (230553752) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (225988448) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (225988448) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (227177472) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (227177472) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228689288) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228689288) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (230553752) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228722952) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (230553752) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228722952) from 104.197.118.112
+WARNING:cassandra.cluster:Cluster.__init__ called with contact_points specified, but no load_balancing_policy. In the next major version, this will raise an error; please specify a load-balancing policy. (contact_points = ['104.197.118.112'], lbp = None)
+DEBUG:cassandra.cluster:Connecting to cluster, contact points: ['104.197.118.112']; protocol version: 4
+DEBUG:cassandra.io.asyncorereactor:Validated loop dispatch with <class 'cassandra.io.asyncorereactor._BusyWaitDispatcher'>
+DEBUG:cassandra.pool:Host 104.197.118.112 is now marked up
+DEBUG:cassandra.cluster:[control connection] Opening new connection to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Starting asyncore event loop
+DEBUG:cassandra.connection:Not sending options message for new connection(200734592) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(200734592L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(200734592L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (200734592) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(200734592L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(200734592L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.cluster:[control connection] Established new connection <AsyncoreConnection(200734592L) 104.197.118.112:9042>, registering watchers and refreshing schema and topology
+DEBUG:cassandra.cluster:[control connection] Refreshing node list and token map using preloaded results
+INFO:cassandra.policies:Using datacenter 'datacenter1' for DCAwareRoundRobinPolicy (via host '104.197.118.112'); if incorrect, please specify a local_dc to the constructor, or limit contact points to local cluster nodes
+DEBUG:cassandra.cluster:[control connection] Finished fetching ring info
+DEBUG:cassandra.cluster:[control connection] Rebuilding token map due to topology changes
+DEBUG:cassandra.cluster:Control connection created
+DEBUG:cassandra.pool:Initializing connection for host 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(201507784) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(201507784L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(201507784L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (201507784) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(201507784L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(201507784L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.pool:Finished initializing connection for host 104.197.118.112
+DEBUG:cassandra.cluster:Added pool for host 104.197.118.112 to session
+WARNING:cassandra.cluster:Cluster.__init__ called with contact_points specified, but no load_balancing_policy. In the next major version, this will raise an error; please specify a load-balancing policy. (contact_points = ['104.197.118.112'], lbp = None)
+DEBUG:cassandra.cluster:Connecting to cluster, contact points: ['104.197.118.112']; protocol version: 3
+DEBUG:cassandra.pool:Host 104.197.118.112 is now marked up
+DEBUG:cassandra.cluster:[control connection] Opening new connection to 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(201477256) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(201477256L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(201477256L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (201477256) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(201477256L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(201477256L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.cluster:[control connection] Established new connection <AsyncoreConnection(201477256L) 104.197.118.112:9042>, registering watchers and refreshing schema and topology
+DEBUG:cassandra.cluster:[control connection] Refreshing node list and token map using preloaded results
+INFO:cassandra.policies:Using datacenter 'datacenter1' for DCAwareRoundRobinPolicy (via host '104.197.118.112'); if incorrect, please specify a local_dc to the constructor, or limit contact points to local cluster nodes
+DEBUG:cassandra.cluster:[control connection] Finished fetching ring info
+DEBUG:cassandra.cluster:[control connection] Rebuilding token map due to topology changes
+DEBUG:cassandra.cluster:Control connection created
+DEBUG:cassandra.pool:Initializing connection for host 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(201738224) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(201738224L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(201738224L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (201738224) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(201738224L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(201738224L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.pool:Finished initializing connection for host 104.197.118.112
+DEBUG:cassandra.cluster:Added pool for host 104.197.118.112 to session
+DEBUG:cassandra.cqlengine.connection:[Connection: default] connection initialized with internally created session
+DEBUG:cassandra.cqlengine.connection:Connection 'default' has been set as default.
+DEBUG:cassandra.io.asyncorereactor:Closing connection (201507784) to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closed socket to 104.197.118.112
+WARNING:cassandra.cqlengine.management:CQLENG_ALLOW_SCHEMA_MANAGEMENT environment variable is not set. Future versions of this package will require this variable to enable management functions.
+DEBUG:cassandra.cqlengine.management:[Connection: DEFAULT_CONNECTION, Keyspace: sna4slack_metrics] sync_table checking existing table sna4slack_metrics.slack_archive
+DEBUG:cassandra.cqlengine.management:[Connection: DEFAULT_CONNECTION, Keyspace: sna4slack_metrics] Checking <class 'cassandra.cqlengine.models.SlackArchive'> for option differences
+DEBUG:cassandra.cqlengine.connection:[Connection: DEFAULT_CONNECTION] SELECT "id", "channelName", "messageSender", "messageBody", "senderAvatar", "messageTime" FROM sna4slack_metrics.slack_archive WHERE "teamName" = %(0)s LIMIT 10000
+WARNING:cassandra.cluster:Cluster.__init__ called with contact_points specified, but no load_balancing_policy. In the next major version, this will raise an error; please specify a load-balancing policy. (contact_points = ['104.197.118.112'], lbp = None)
+DEBUG:cassandra.cluster:Connecting to cluster, contact points: ['104.197.118.112']; protocol version: 4
+DEBUG:cassandra.pool:Host 104.197.118.112 is now marked up
+DEBUG:cassandra.cluster:[control connection] Opening new connection to 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(203313224) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(203313224L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(203313224L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (203313224) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(203313224L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(203313224L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.cluster:[control connection] Established new connection <AsyncoreConnection(203313224L) 104.197.118.112:9042>, registering watchers and refreshing schema and topology
+DEBUG:cassandra.cluster:[control connection] Refreshing node list and token map using preloaded results
+INFO:cassandra.policies:Using datacenter 'datacenter1' for DCAwareRoundRobinPolicy (via host '104.197.118.112'); if incorrect, please specify a local_dc to the constructor, or limit contact points to local cluster nodes
+DEBUG:cassandra.cluster:[control connection] Finished fetching ring info
+DEBUG:cassandra.cluster:[control connection] Rebuilding token map due to topology changes
+DEBUG:cassandra.cluster:Control connection created
+DEBUG:cassandra.pool:Initializing connection for host 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(202890488) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(202890488L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(202890488L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (202890488) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(202890488L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(202890488L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.pool:Finished initializing connection for host 104.197.118.112
+DEBUG:cassandra.cluster:Added pool for host 104.197.118.112 to session
+WARNING:cassandra.cqlengine.connection:Registering connection 'default' when it already exists.
+WARNING:cassandra.cluster:Cluster.__init__ called with contact_points specified, but no load_balancing_policy. In the next major version, this will raise an error; please specify a load-balancing policy. (contact_points = ['104.197.118.112'], lbp = None)
+DEBUG:cassandra.cluster:Connecting to cluster, contact points: ['104.197.118.112']; protocol version: 3
+DEBUG:cassandra.pool:Host 104.197.118.112 is now marked up
+DEBUG:cassandra.cluster:[control connection] Opening new connection to 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(204521600) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(204521600L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(204521600L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (204521600) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(204521600L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(204521600L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.cluster:[control connection] Established new connection <AsyncoreConnection(204521600L) 104.197.118.112:9042>, registering watchers and refreshing schema and topology
+DEBUG:cassandra.cluster:[control connection] Refreshing node list and token map using preloaded results
+INFO:cassandra.policies:Using datacenter 'datacenter1' for DCAwareRoundRobinPolicy (via host '104.197.118.112'); if incorrect, please specify a local_dc to the constructor, or limit contact points to local cluster nodes
+DEBUG:cassandra.cluster:[control connection] Finished fetching ring info
+DEBUG:cassandra.cluster:[control connection] Rebuilding token map due to topology changes
+DEBUG:cassandra.cluster:Control connection created
+DEBUG:cassandra.pool:Initializing connection for host 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(204613168) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(204613168L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(204613168L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (204613168) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(204613168L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(204613168L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.pool:Finished initializing connection for host 104.197.118.112
+DEBUG:cassandra.cluster:Added pool for host 104.197.118.112 to session
+DEBUG:cassandra.cqlengine.connection:[Connection: default] connection initialized with internally created session
+DEBUG:cassandra.cqlengine.connection:Connection 'default' has been set as default.
+DEBUG:cassandra.io.asyncorereactor:Closing connection (201738224) to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closed socket to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closing connection (202890488) to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closed socket to 104.197.118.112
+WARNING:cassandra.cqlengine.management:CQLENG_ALLOW_SCHEMA_MANAGEMENT environment variable is not set. Future versions of this package will require this variable to enable management functions.
+DEBUG:cassandra.cqlengine.management:[Connection: DEFAULT_CONNECTION, Keyspace: sna4slack_metrics] sync_table checking existing table sna4slack_metrics.slack_archive
+DEBUG:cassandra.cqlengine.management:[Connection: DEFAULT_CONNECTION, Keyspace: sna4slack_metrics] Checking <class 'cassandra.cqlengine.models.SlackArchive'> for option differences
+DEBUG:cassandra.cqlengine.connection:[Connection: DEFAULT_CONNECTION] SELECT "id", "channelName", "messageSender", "messageBody", "senderAvatar", "messageTime" FROM sna4slack_metrics.slack_archive WHERE "teamName" = %(0)s LIMIT 10000
+DEBUG:root:MentionGraph: Closeness centrality computed.
+DEBUG:root:MentionGraph: Betweeness centrality computed.
+DEBUG:root:MentionGraph: Degree centrality computed.
+DEBUG:root:MentionGraph: Density computed.
+DEBUG:root:MentionGraph: Connectivity computed.
+DEBUG:root:MentionGraph: Clustering computed.
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (225988448) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (225988448) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (227177472) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (227177472) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228689288) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228689288) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (230553752) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228722952) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (230553752) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228722952) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (225988448) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (225988448) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (227177472) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (227177472) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228689288) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228689288) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (230553752) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228722952) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (230553752) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228722952) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (200734592) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (200734592) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (201477256) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (201477256) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (203313224) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (203313224) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (204613168) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (204521600) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (204613168) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (204521600) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (225988448) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (225988448) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (227177472) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (227177472) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228689288) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228689288) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (230553752) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228722952) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (230553752) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228722952) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (200734592) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (200734592) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (201477256) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (201477256) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (203313224) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (203313224) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (204613168) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (204521600) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (204521600) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (204613168) from 104.197.118.112
+WARNING:cassandra.cluster:Cluster.__init__ called with contact_points specified, but no load_balancing_policy. In the next major version, this will raise an error; please specify a load-balancing policy. (contact_points = ['104.197.118.112'], lbp = None)
+DEBUG:cassandra.cluster:Connecting to cluster, contact points: ['104.197.118.112']; protocol version: 4
+DEBUG:cassandra.io.asyncorereactor:Validated loop dispatch with <class 'cassandra.io.asyncorereactor._BusyWaitDispatcher'>
+DEBUG:cassandra.pool:Host 104.197.118.112 is now marked up
+DEBUG:cassandra.cluster:[control connection] Opening new connection to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Starting asyncore event loop
+DEBUG:cassandra.connection:Not sending options message for new connection(184410296) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(184410296L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(184410296L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (184410296) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(184410296L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(184410296L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.cluster:[control connection] Established new connection <AsyncoreConnection(184410296L) 104.197.118.112:9042>, registering watchers and refreshing schema and topology
+DEBUG:cassandra.cluster:[control connection] Refreshing node list and token map using preloaded results
+INFO:cassandra.policies:Using datacenter 'datacenter1' for DCAwareRoundRobinPolicy (via host '104.197.118.112'); if incorrect, please specify a local_dc to the constructor, or limit contact points to local cluster nodes
+DEBUG:cassandra.cluster:[control connection] Finished fetching ring info
+DEBUG:cassandra.cluster:[control connection] Rebuilding token map due to topology changes
+DEBUG:cassandra.cluster:Control connection created
+DEBUG:cassandra.pool:Initializing connection for host 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(185007184) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(185007184L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(185007184L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (225988448) 104.197.118.112
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (185007184) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(185007184L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Received options response on connection (225988448) from 104.197.118.112
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(185007184L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.pool:Finished initializing connection for host 104.197.118.112
+DEBUG:cassandra.cluster:Added pool for host 104.197.118.112 to session
+WARNING:cassandra.cluster:Cluster.__init__ called with contact_points specified, but no load_balancing_policy. In the next major version, this will raise an error; please specify a load-balancing policy. (contact_points = ['104.197.118.112'], lbp = None)
+DEBUG:cassandra.cluster:Connecting to cluster, contact points: ['104.197.118.112']; protocol version: 3
+DEBUG:cassandra.pool:Host 104.197.118.112 is now marked up
+DEBUG:cassandra.cluster:[control connection] Opening new connection to 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(184865008) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(184865008L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(184865008L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (184865008) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(184865008L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(184865008L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.cluster:[control connection] Established new connection <AsyncoreConnection(184865008L) 104.197.118.112:9042>, registering watchers and refreshing schema and topology
+DEBUG:cassandra.cluster:[control connection] Refreshing node list and token map using preloaded results
+INFO:cassandra.policies:Using datacenter 'datacenter1' for DCAwareRoundRobinPolicy (via host '104.197.118.112'); if incorrect, please specify a local_dc to the constructor, or limit contact points to local cluster nodes
+DEBUG:cassandra.cluster:[control connection] Finished fetching ring info
+DEBUG:cassandra.cluster:[control connection] Rebuilding token map due to topology changes
+DEBUG:cassandra.cluster:Control connection created
+DEBUG:cassandra.pool:Initializing connection for host 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(185050672) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(185050672L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(185050672L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (227177472) 104.197.118.112
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (185050672) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(185050672L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Received options response on connection (227177472) from 104.197.118.112
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(185050672L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.pool:Finished initializing connection for host 104.197.118.112
+DEBUG:cassandra.cluster:Added pool for host 104.197.118.112 to session
+DEBUG:cassandra.cqlengine.connection:[Connection: default] connection initialized with internally created session
+DEBUG:cassandra.cqlengine.connection:Connection 'default' has been set as default.
+DEBUG:cassandra.io.asyncorereactor:Closing connection (185007184) to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closed socket to 104.197.118.112
+WARNING:cassandra.cqlengine.management:CQLENG_ALLOW_SCHEMA_MANAGEMENT environment variable is not set. Future versions of this package will require this variable to enable management functions.
+DEBUG:cassandra.cqlengine.management:[Connection: DEFAULT_CONNECTION, Keyspace: sna4slack_metrics] sync_table checking existing table sna4slack_metrics.slack_archive
+DEBUG:cassandra.cqlengine.management:[Connection: DEFAULT_CONNECTION, Keyspace: sna4slack_metrics] Checking <class 'cassandra.cqlengine.models.SlackArchive'> for option differences
+DEBUG:cassandra.cqlengine.connection:[Connection: DEFAULT_CONNECTION] SELECT "id", "channelName", "messageSender", "messageBody", "senderAvatar", "messageTime" FROM sna4slack_metrics.slack_archive WHERE "teamName" = %(0)s LIMIT 10000
+WARNING:cassandra.cluster:Cluster.__init__ called with contact_points specified, but no load_balancing_policy. In the next major version, this will raise an error; please specify a load-balancing policy. (contact_points = ['104.197.118.112'], lbp = None)
+DEBUG:cassandra.cluster:Connecting to cluster, contact points: ['104.197.118.112']; protocol version: 4
+DEBUG:cassandra.pool:Host 104.197.118.112 is now marked up
+DEBUG:cassandra.cluster:[control connection] Opening new connection to 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(225279504) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(225279504L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(225279504L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (225279504) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(225279504L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(225279504L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.cluster:[control connection] Established new connection <AsyncoreConnection(225279504L) 104.197.118.112:9042>, registering watchers and refreshing schema and topology
+DEBUG:cassandra.cluster:[control connection] Refreshing node list and token map using preloaded results
+INFO:cassandra.policies:Using datacenter 'datacenter1' for DCAwareRoundRobinPolicy (via host '104.197.118.112'); if incorrect, please specify a local_dc to the constructor, or limit contact points to local cluster nodes
+DEBUG:cassandra.cluster:[control connection] Finished fetching ring info
+DEBUG:cassandra.cluster:[control connection] Rebuilding token map due to topology changes
+DEBUG:cassandra.cluster:Control connection created
+DEBUG:cassandra.pool:Initializing connection for host 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(225494240) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(225494240L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(225494240L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (225494240) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(225494240L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228689288) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228689288) from 104.197.118.112
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(225494240L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.pool:Finished initializing connection for host 104.197.118.112
+DEBUG:cassandra.cluster:Added pool for host 104.197.118.112 to session
+WARNING:cassandra.cqlengine.connection:Registering connection 'default' when it already exists.
+WARNING:cassandra.cluster:Cluster.__init__ called with contact_points specified, but no load_balancing_policy. In the next major version, this will raise an error; please specify a load-balancing policy. (contact_points = ['104.197.118.112'], lbp = None)
+DEBUG:cassandra.cluster:Connecting to cluster, contact points: ['104.197.118.112']; protocol version: 3
+DEBUG:cassandra.pool:Host 104.197.118.112 is now marked up
+DEBUG:cassandra.cluster:[control connection] Opening new connection to 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(225863104) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(225863104L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(225863104L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (225863104) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(225863104L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(225863104L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.cluster:[control connection] Established new connection <AsyncoreConnection(225863104L) 104.197.118.112:9042>, registering watchers and refreshing schema and topology
+DEBUG:cassandra.cluster:[control connection] Refreshing node list and token map using preloaded results
+INFO:cassandra.policies:Using datacenter 'datacenter1' for DCAwareRoundRobinPolicy (via host '104.197.118.112'); if incorrect, please specify a local_dc to the constructor, or limit contact points to local cluster nodes
+DEBUG:cassandra.cluster:[control connection] Finished fetching ring info
+DEBUG:cassandra.cluster:[control connection] Rebuilding token map due to topology changes
+DEBUG:cassandra.cluster:Control connection created
+DEBUG:cassandra.pool:Initializing connection for host 104.197.118.112
+DEBUG:cassandra.connection:Not sending options message for new connection(225920000) to 104.197.118.112 because compression is disabled and a cql version was not specified
+DEBUG:cassandra.connection:Sending StartupMessage on <AsyncoreConnection(225920000L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sent StartupMessage on <AsyncoreConnection(225920000L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Got AuthenticateMessage on new connection (225920000) from 104.197.118.112: org.apache.cassandra.auth.PasswordAuthenticator
+DEBUG:cassandra.connection:Sending SASL-based auth response on <AsyncoreConnection(225920000L) 104.197.118.112:9042>
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (230553752) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228722952) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (230553752) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228722952) from 104.197.118.112
+DEBUG:cassandra.connection:Connection <AsyncoreConnection(225920000L) 104.197.118.112:9042> successfully authenticated
+DEBUG:cassandra.pool:Finished initializing connection for host 104.197.118.112
+DEBUG:cassandra.cluster:Added pool for host 104.197.118.112 to session
+DEBUG:cassandra.cqlengine.connection:[Connection: default] connection initialized with internally created session
+DEBUG:cassandra.cqlengine.connection:Connection 'default' has been set as default.
+DEBUG:cassandra.io.asyncorereactor:Closing connection (185050672) to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closed socket to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closing connection (225494240) to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closed socket to 104.197.118.112
+WARNING:cassandra.cqlengine.management:CQLENG_ALLOW_SCHEMA_MANAGEMENT environment variable is not set. Future versions of this package will require this variable to enable management functions.
+DEBUG:cassandra.cqlengine.management:[Connection: DEFAULT_CONNECTION, Keyspace: sna4slack_metrics] sync_table checking existing table sna4slack_metrics.slack_archive
+DEBUG:cassandra.cqlengine.management:[Connection: DEFAULT_CONNECTION, Keyspace: sna4slack_metrics] Checking <class 'cassandra.cqlengine.models.SlackArchive'> for option differences
+DEBUG:cassandra.cqlengine.connection:[Connection: DEFAULT_CONNECTION] SELECT "id", "channelName", "messageSender", "messageBody", "senderAvatar", "messageTime" FROM sna4slack_metrics.slack_archive WHERE "teamName" = %(0)s LIMIT 10000
+DEBUG:root:MentionGraph: Degree centrality computed.
+DEBUG:root:MentionGraph: Betweeness centrality computed.
+DEBUG:root:MentionGraph: Closeness centrality computed.
+DEBUG:root:MentionGraph: Clustering computed.
+DEBUG:root:MentionGraph: Connectivity computed.
+DEBUG:cassandra.io.asyncorereactor:Waiting for event loop thread to join...
+DEBUG:cassandra.io.asyncorereactor:Asyncore event loop ended
+DEBUG:cassandra.io.asyncorereactor:Event loop thread was joined
+DEBUG:cassandra.io.asyncorereactor:Closing connection (184410296) to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closed socket to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closing connection (225920000) to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closed socket to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closing connection (184865008) to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closed socket to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closing connection (225279504) to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closed socket to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closing connection (225863104) to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Closed socket to 104.197.118.112
+DEBUG:cassandra.io.asyncorereactor:Dispatchers were closed
+DEBUG:cassandra.cluster:Shutting down Cluster Scheduler
+DEBUG:cassandra.cluster:Shutting down control connection
+DEBUG:cassandra.cluster:Shutting down Cluster Scheduler
+DEBUG:cassandra.cluster:Shutting down control connection
+DEBUG:cassandra.cluster:Shutting down Cluster Scheduler
+DEBUG:cassandra.cluster:Shutting down control connection
+DEBUG:cassandra.cluster:Shutting down Cluster Scheduler
+DEBUG:cassandra.cluster:Shutting down control connection
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (200734592) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (200734592) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (201477256) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (201477256) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (203313224) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (203313224) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (204613168) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (204521600) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (204613168) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (204521600) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (225988448) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (225988448) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (227177472) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (227177472) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228689288) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228689288) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (230553752) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228722952) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (230553752) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228722952) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (200734592) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (200734592) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (201477256) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (201477256) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (203313224) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (203313224) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (204613168) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (204521600) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (204521600) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (204613168) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (225988448) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (225988448) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (227177472) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (227177472) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228689288) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228689288) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (230553752) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228722952) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (230553752) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228722952) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (200734592) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (200734592) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (201477256) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (201477256) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (203313224) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (203313224) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (204613168) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (204521600) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (204613168) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (204521600) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (225988448) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (225988448) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (227177472) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (227177472) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228689288) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228689288) from 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (230553752) 104.197.118.112
+DEBUG:cassandra.connection:Sending options message heartbeat on idle connection (228722952) 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (228722952) from 104.197.118.112
+DEBUG:cassandra.connection:Received options response on connection (230553752) from 104.197.118.112

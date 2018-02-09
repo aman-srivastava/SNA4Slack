@@ -1,4 +1,6 @@
 {
+  "padgett_florentine_test.py::TestClass::()::test_degree_centrality": true, 
+  "padgett_florentine_test.py::TestClass::()::test_edge_count": true, 
   "performance_test.py": true, 
   "single_node_test.py": true, 
   "unconnected_triplet_test.py": true, 

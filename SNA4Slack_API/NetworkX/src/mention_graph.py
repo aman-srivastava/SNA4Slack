@@ -128,7 +128,7 @@ class MentionGraph(object):
 
 
 def run():
-    graph_gen = MentionGraph("star_graph",
+    graph_gen = MentionGraph("padgett_florentine_business",
                              directed=False)
     print 'Graph done'
     graph_gen.compute_closeness_centrality()

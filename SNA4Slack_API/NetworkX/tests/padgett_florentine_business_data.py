@@ -1,7 +1,7 @@
 TEST_DATA = {
     "filename": "padgett_florentine_business",
     "node_count": 16,
-    "edge_count": 42,
+    "edge_count": 21,
     "degree_centrality": {
         'GINORI': 0.13333333333333333,
         'LAMBERTES': 0.13333333333333333,
@@ -55,5 +55,7 @@ TEST_DATA = {
         'PAZZI': 0.26666666666666666,
         'RIDOLFI': 0.5444444444444445,
         'MEDICI': 0.5226666666666667
-    }
+    },
+    "average_clustering": 0.20416666666666666,
+    "average_connectivity": 1.4916666666666667
 }
