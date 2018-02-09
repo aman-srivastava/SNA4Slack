@@ -40,7 +40,6 @@ class CrawlerTrigger(Resource):
         team_Name = request.headers.get('team_Name')
         slackSpider = SlackSpider()
         slackSpider.start_driver()
-        items_list = slackSpider.runSpider(team_Name, 0)
+        slackSpider.runSpider(team_Name)
         slackSpider.close_driver()
-
         return "Success"

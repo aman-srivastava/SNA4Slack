@@ -1,7 +1,6 @@
 #!/bin/python
 # -*- coding: utf-8 -*-
 import json
-import csv
 import uuid
 import sys
 from time import sleep
@@ -28,7 +27,6 @@ class SlackSpider():
         self.urlsToHit = []
         self.TeamName = ''
         self.ChannelName = ''
-        self.returnList = []
 
     # Open headless chromedriver
     def start_driver(self):
@@ -72,10 +70,10 @@ class SlackSpider():
                 './/*[@class="msg-user"]').text
             msg_time = div.find_element_by_xpath(
                 './/*[@class="msg-time"]').text
-            msg_body = div.find_element_by_xpath(
-                './/*[@class="msg-body"]').text
             msg_sender_avatar = div.find_element_by_xpath(
                 './/*[@class="msg-thumb"]').get_attribute('src')
+            msg_body = div.find_element_by_xpath(
+                './/*[@class="msg-body"]').text
         except Exception:
             pass
 
@@ -83,10 +81,10 @@ class SlackSpider():
             archiveObj = SlackArchive()
             archiveObj.teamName = self.TeamName
             archiveObj.channelName = self.ChannelName
-            archiveObj.messageSender = msg_sender
             archiveObj.messageBody = msg_body
             archiveObj.senderAvatar = msg_sender_avatar
             archiveObj.messageTime = msg_time
+            archiveObj.messageSender = msg_sender
 
             return archiveObj
         else:
@@ -128,56 +126,36 @@ class SlackSpider():
                 self.urlsToHit.append(urlObject)
         pass
 
-    def runSpider(self, teamName, writeToFileFlag):
+    def runSpider(self, teamName):
         self.buildTarget(teamName)
-        file = '{0}.csv'.format(teamName)
-
-        if writeToFileFlag == 1:
-            csv_file = open(file, "wb")
-            wr = csv.writer(csv_file)
-            wr.writerow(["id", "Team Name", "Channel Name",
-                         "Sender", "Sender Avatar", "Message", "Time"])
-
-        else:
-            Utils.get_Connection_SNA4Slack()
-            sync_table(SlackArchive)
         count = 0
+        returnList = []
+        Utils.get_Connection_SNA4Slack()
+        sync_table(SlackArchive)
         for url in self.urlsToHit:
             self.TeamName = url[0]
             self.ChannelName = url[1]
 
             for cdr in self.parse(url[2]):
-                if(writeToFileFlag == 1):
-                    try:
-                        wr.writerow(list(cdr))
-                    except:
-                        print "error"
-                else:
-                    node_object = SlackArchive(id=uuid.uuid1(),
-                                               teamName=cdr.teamName,
-                                               channelName=cdr.channelName,
-                                               messageSender=cdr.messageSender.rstrip().lstrip(),
-                                               senderAvatar=cdr.senderAvatar.rstrip().lstrip(),
-                                               messageBody=cdr.messageBody.rstrip().lstrip(),
-                                               messageTime=datetime.strptime(
-                                                   cdr.messageTime, "%b %d, %Y %H:%M")
-                                               )
-                    node_object.save()
-        # Export the touched data
-        if (writeToFileFlag == 1):
-            csv_file.close()
-        else:
-            return self.returnList
+                node_object = SlackArchive(id=uuid.uuid1(),
+                                           teamName=cdr.teamName,
+                                           channelName=cdr.channelName,
+                                           messageSender=cdr.messageSender.rstrip().lstrip(),
+                                           messageBody=cdr.messageBody.rstrip().lstrip(),
+                                           senderAvatar=cdr.senderAvatar.rstrip().lstrip(),
+                                           messageTime=datetime.strptime(
+                                               cdr.messageTime, "%b %d, %Y %H:%M")
+                                           )
+                node_object.save()
     pass
 
 
 if __name__ == "__main__":
     # Run spider
     if len(sys.argv[0]) > 0:
-        writeToFileFlag = 1
         slackSpider = SlackSpider()
         slackSpider.start_driver()
-        slackSpider.runSpider(sys.argv[1], writeToFileFlag)
+        slackSpider.runSpider(sys.argv[1])
         slackSpider.close_driver()
     else:
         print 'Pass team name as parameter!'
