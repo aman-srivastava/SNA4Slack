@@ -7,4 +7,3 @@ flask_restful
 selenium
 pyvirtualdisplay
 networkx
-matplotlib
