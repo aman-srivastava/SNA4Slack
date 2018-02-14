@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import networkx as nx
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from networkx.readwrite import json_graph
 import sys
 import re
