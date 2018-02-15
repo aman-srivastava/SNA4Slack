@@ -44,13 +44,23 @@ $( document ).ready(function() {
 		  .attr('class', 'node')
 		  // On click, toggle ego networks for the selected node.
 		  .on('click', function(d, i) {
-			  if (toggle == 0) {
+			  var neighbours = 0;
+			  if (toggle == 0) {document.getElementById("userName").innerHTML = d.id;
+					   
 				  // Ternary operator restyles links and nodes if they are adjacent.
 				  d3.selectAll('.link').style('stroke-opacity', function (l) {
 					  return l.target == d || l.source == d ? 1 : 0.1;
 				  });
 				  d3.selectAll('.node').style('opacity', function (n) {
-					  return neighboring(d, n) ? 1 : 0.1;
+					  if (neighboring(d, n)){
+						neighbours++;
+						return 1;
+					  }
+					  else{
+						  return 0.1;
+					  }
+					  document.getElementById("neighbours").innerHTML = neighbours;
+					  //return neighboring(d, n) ? 1 : 0.1;
 				  });
 				  d3.select(this).style('opacity', 1);
 				  toggle = 1;
@@ -68,7 +78,9 @@ $( document ).ready(function() {
 			  .on("end", dragended));
 
 	  node.append("title")
-		  .text(function(d) { return "Slack_Username: '"+d.id+"'\nCloseness_Centrality: '"+d.closeness+"'\nBetweenness_Centrality: '"+d.betweenness+"'\nDegree_Centrality: '"+d.degree+"'"; });
+		  .text(function(d) {return "Slack_Username: '"+d.id+"'\nCloseness_Centrality: '"+d.closeness+"'\nBetweenness_Centrality: '"+d.betweenness+"'\nDegree_Centrality: '"+d.degree+"'"; });
+		link.append("title")
+		  .text(function(d) {return "Edge Weight: "+d.weight+""; });
 
 	  simulation
 		  .nodes(graph.nodes)
@@ -89,7 +101,7 @@ $( document ).ready(function() {
 			.attr("cy", function(d) { return d.y; });
 	  }
 
-		// A slider that removes nodes below the input threshold.
+		// A slider (using only d3 and HTML5) that removes nodes below the input threshold.
 		var slider = d3.select('#controls').append('p').text('Edge Weight Threshold: ');
 
 		slider.append('label')
