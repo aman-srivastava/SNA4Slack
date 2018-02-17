@@ -201,7 +201,13 @@
 						</div>
 						<div class="card-body collapse in">
 							<div class="card-block">
+								<p class="card-text">Hover your mouse over nodes and edges to get a quick summary. Click on nodes to get detailed information.</p>
 								<div style="text-align:center;"><br/>
+									<header style="z-index:1;position:absolute;background-color:rgba(255,255,255,0.9);border: solid black 2px;">
+									  <h1 id="userName">Username</h1>
+									  <h2 id="neighbours">Neighbours: </h2>
+									  <h3 id="userInfo">Other Info</h3>
+									</header>
 									<svg id="centrality-svg" width="960" height="600" style="border: solid black 2px;background-color:rgba(0,0,0,0.4);"></svg>
 								</div>
 								<div id="controls" style="text-align:center;">
