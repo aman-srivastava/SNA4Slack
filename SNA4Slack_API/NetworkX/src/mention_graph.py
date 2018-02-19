@@ -8,6 +8,8 @@ import json
 import logging
 import timeit
 
+sys.path.append('../../')
+
 from utils import Utils
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
@@ -126,26 +128,28 @@ class MentionGraph(object):
         return json.dumps(json_graph.node_link_data(self.graph))
 
 
-    def run(self):
-        graph_gen = MentionGraph("padgett_florentine_business",
-                                 directed=False)
-        print 'Graph done'
-        graph_gen.compute_closeness_centrality()
-        print 'Compute closeness'
-        graph_gen.compute_betweenness_centrality()
-        print 'Compute betweenness'
-        graph_gen.compute_degree_centrality()
-        print 'Compute centrality'
-        graph_gen.compute_density()
-        print 'Compute density'
-        graph_gen.compute_avg_connectivity()
-        print 'Compute connectivity'
-        graph_gen.compute_avg_clustering()
-        print 'Compute clustering'
+def run():
+    graph_gen = MentionGraph("padgett_florentine_business",
+                             directed=False)
+    print 'Graph done'
+    graph_gen.compute_closeness_centrality()
+    print 'Compute closeness'
+    graph_gen.compute_betweenness_centrality()
+    print 'Compute betweenness'
+    graph_gen.compute_degree_centrality()
+    print 'Compute centrality'
+    graph_gen.compute_density()
+    print 'Compute density'
+    graph_gen.compute_avg_connectivity()
+    print 'Compute connectivity'
+    graph_gen.compute_avg_clustering()
+    print 'Compute clustering'
 
-        graph_gen.print_graph()
-        print graph_gen.json()
-        with open('data.json', 'w') as outfile:
-            # json.dumps(graph_gen.json(), outfile)
-            outfile.write(graph_gen.json())
-        graph_gen.draw_graph()
+    graph_gen.print_graph()
+    print graph_gen.json()
+    with open('data.json', 'w') as outfile:
+        # json.dumps(graph_gen.json(), outfile)
+        outfile.write(graph_gen.json())
+    graph_gen.draw_graph()
+
+
