@@ -35,3 +35,9 @@ class TestClass(object):
             assert self.graph_builder.graph.nodes[node][
                        "closeness_centrality"] == \
                    TEST_DATA["closeness_centrality"][node]
+
+    def test_average_clustering(self):
+        self.graph_builder.compute_avg_clustering()
+        assert round(self.graph_builder.graph.graph[
+                         "average_clustering"], 5) == \
+               round(TEST_DATA["average_clustering"], 5)
