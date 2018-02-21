@@ -36,3 +36,13 @@ df1['Sender'].value_counts()[1]
 df1['Sender'].value_counts().index[2]
 #3rd highest message count
 df1['Sender'].value_counts()[2]
+
+#Number of messages on each date
+df1['Date'].value_counts()
+
+#Date with maximum message count - Most active date
+df1['Date'].value_counts().argmax()
+
+#Number of messages on most active date
+df1['Date'].value_counts().max()
+
