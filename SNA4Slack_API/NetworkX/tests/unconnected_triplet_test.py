@@ -28,6 +28,11 @@ class TestClass(object):
             assert self.graph_builder.graph.nodes[node][
                        "betweenness_centrality"] == \
                    TEST_DATA["betweenness_centrality"][node]
+    
+    def test_for_density(self):
+        self.graph_builder.compute_density()
+         assert round(self.graph_builder.graph.graph["density"], 5) == \
+                round(TEST_DATA["density"], 5)
 
     def test_closeness_centrality(self):
         self.graph_builder.compute_closeness_centrality()
