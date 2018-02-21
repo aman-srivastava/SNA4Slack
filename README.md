@@ -16,8 +16,6 @@ python slack_spyder.py
 ```
 * Check the scraper output at :Crawler\<teamname>.csv
 
-
-
 # Graph Analyser
 The SNA4SLack graph analysis is done using NetworkX library on the backend. The python source code is located in /NetworkX folder.
 
@@ -48,3 +46,4 @@ pip install requirements.txt
 python main.py
 ```
 * Check the server at ```http://localhost:5000```
+* Current server hosted on cloud at ```http://sna4slack-dot-sna4slack-asu.appspot.com/apidocs/#/default```
