@@ -174,6 +174,11 @@ $( document ).ready(function() {
 	
 });
 
+document.getElementById("GraphDescription").innerHTML = "Hover your mouse over nodes and edges to get a quick summary. Click on nodes to get detailed information.";
+document.getElementById("userName").innerHTML = "Username"
+document.getElementById("neighbours").innerHTML = "-Neighbours-"
+document.getElementById("userInfo").innerHTML = "Other Info"
+
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
