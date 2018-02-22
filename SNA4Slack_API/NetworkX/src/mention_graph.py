@@ -77,7 +77,7 @@ class MentionGraph(object):
 
     def draw_graph(self):
         nx.draw(self.graph, with_labels=True)  # default spring_layout
-        plt.show()
+        # plt.show()
 
     def compute_closeness_centrality(self):
         cc = nx.algorithms.centrality.closeness_centrality(self.graph)

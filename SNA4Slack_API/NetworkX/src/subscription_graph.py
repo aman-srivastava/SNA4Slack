@@ -154,14 +154,3 @@ def run():
         # json.dumps(graph_gen.json(), outfile)
         outfile.write(graph_gen.json())
     graph_gen.draw_graph()
-
-'''
-Initial Code and functionality review comments:
-Looks good to me. 
-Graph generation is working as designed displaying the connected users 
-through different teams in which they are common.
-Closeness, betweenness and degree centralities are calculated accurately
-and exceptions are handled efficiently. 
-Corner cases like single node scenarios are taken care with an appropriate message.
-More to follow.
-'''

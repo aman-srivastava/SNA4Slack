@@ -46,3 +46,4 @@ class TestClass(object):
         assert round(self.graph_builder.graph.graph[
                          "average_clustering"], 5) == \
                round(TEST_DATA["average_clustering"], 5)
+
