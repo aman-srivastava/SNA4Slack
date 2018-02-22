@@ -1,5 +1,8 @@
+console.log("Fetching Data from MongoDB Mlab Server...");
 $( document ).ready(function() {
 	d3.json("https://api.mlab.com/api/1/databases/sna4slack/collections/graphs?apiKey=dPpfbNvB6jRs-hvv-Veb1uVkXnX06Maa", function(error, graph) {
+	console.log("Data from MongoDB: ", typeof graph);
+	console.log("Data Fetch Successful!");
 	graph=graph[0];
 	  if (error) throw error;
 
@@ -167,7 +170,7 @@ $( document ).ready(function() {
 
 	});
 	document.getElementById("centrality-svg").style.width = "100%";
-	
+
 	
 });
 
