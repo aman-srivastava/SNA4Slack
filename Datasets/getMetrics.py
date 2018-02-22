@@ -46,3 +46,12 @@ df1['Date'].value_counts().argmax()
 #Number of messages on most active date
 df1['Date'].value_counts().max()
 
+#Split Time to Hour and Minutes
+df1['Hour'] = df1.Time.str[:2]
+df1['Minute'] = df1.Time.str[3:5]
+
+#Message count for each hour in the channel.
+df1['Hour'].value_counts()
+
+#Most active hour for most active date in the channel.
+df1[df1['Date'] == df1['Date'].value_counts().argmax()]['Hour'].value_counts().argmax()
