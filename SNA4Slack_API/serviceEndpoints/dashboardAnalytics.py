@@ -67,7 +67,7 @@ class DashboardTrigger(Resource):
 
         rows = session.execute(
             'SELECT "teamName","channelName","messageSender", COUNT(*) as "msgCount" \
-             FROM sna4slack_metrics.slack_archive_test \
+             FROM sna4slack_metrics.slack_archive \
              WHERE "teamName" = {0} \
              GROUP BY "teamName", "channelName","messageSender";'.format(team_name))
 
