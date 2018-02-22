@@ -46,4 +46,5 @@ pip install requirements.txt
 python main.py
 ```
 * Check the server at ```http://localhost:5000```
-* Current server hosted on cloud at ```http://sna4slack-dot-sna4slack-asu.appspot.com/apidocs/#/default```
+* Current server hosted on cloud at: http://sna4slack-dot-sna4slack-asu.appspot.com/apidocs/#/default
+* Sandbox server hosted on cloud at: https://sna4slack-sandbox-dot-sna4slack-asu.appspot.com
