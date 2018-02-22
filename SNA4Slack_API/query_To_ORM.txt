@@ -1,0 +1,96 @@
+select "teamName","channelName","messageSender", count(*) from slack_archive_test group by "teamName", "channelName","messageSender";
+
+Sample output for analytics:
+
+[
+  {
+    "channelName": "general",
+    "messageCount": "20",
+    "teamName": "openaddresses",
+    "messageSender": "aaron"
+  },
+  {
+    "channelName": "general",
+    "messageCount": "7",
+    "teamName": "openaddresses",
+    "messageSender": "ajturner"
+  },
+  {
+    "channelName": "general",
+    "messageCount": "12",
+    "teamName": "openaddresses",
+    "messageSender": "courtney"
+  },
+  {
+    "channelName": "general",
+    "messageCount": "15",
+    "teamName": "openaddresses",
+    "messageSender": "dianashk"
+  },
+  {
+    "channelName": "general",
+    "messageCount": "341",
+    "teamName": "openaddresses",
+    "messageSender": "iandees"
+  },
+  {
+    "channelName": "general",
+    "messageCount": "123",
+    "teamName": "openaddresses",
+    "messageSender": "migurski"
+  },
+  {
+    "channelName": "general",
+    "messageCount": "31",
+    "teamName": "openaddresses",
+    "messageSender": "riordan"
+  },
+  {
+    "channelName": "general",
+    "messageCount": "117",
+    "teamName": "openaddresses",
+    "messageSender": "slibby"
+  },
+  {
+    "channelName": "general",
+    "messageCount": "20",
+    "teamName": "openaddresses",
+    "messageSender": "stephen"
+  },
+  {
+    "channelName": "general",
+    "messageCount": "108",
+    "teamName": "openaddresses",
+    "messageSender": "tom"
+  },
+  {
+    "channelName": "general",
+    "messageCount": "358",
+    "teamName": "openaddresses",
+    "messageSender": "waldo"
+  },
+  {
+    "channelName": "parcels",
+    "messageCount": "4",
+    "teamName": "openaddresses",
+    "messageSender": "iandees"
+  },
+  {
+    "channelName": "random",
+    "messageCount": "20",
+    "teamName": "openaddresses",
+    "messageSender": "iandees"
+  },
+  {
+    "channelName": "random",
+    "messageCount": "2",
+    "teamName": "openaddresses",
+    "messageSender": "slibby"
+  },
+  {
+    "channelName": "random",
+    "messageCount": "17",
+    "teamName": "openaddresses",
+    "messageSender": "waldo"
+  }
+]

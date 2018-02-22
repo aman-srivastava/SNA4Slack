@@ -6,6 +6,7 @@ from flask_restful import Api, Resource, reqparse, fields, marshal
 from  serviceEndpoints.crawler_trigger import CrawlerTrigger
 from  serviceEndpoints.subscriptionGraph_trigger import SubscriptionGraphTrigger 
 from  serviceEndpoints.mentionGraph_trigger import MentionGraphTrigger
+from  serviceEndpoints.dashboardAnalytics import DashboardTrigger
 
 
 app = Flask(__name__)
@@ -32,6 +33,11 @@ api.add_resource(CrawlerTrigger, SNA_URL + '/crawl')
 #----------------------------------------------------------------
 api.add_resource(SubscriptionGraphTrigger, SNA_URL + '/subscription_graph')
 api.add_resource(MentionGraphTrigger, SNA_URL + '/mention_graph')
+
+
+# Dashboard Trigger ENDPOINTS
+#----------------------------------------------------------------
+api.add_resource(DashboardTrigger, SNA_URL + '/DashboardTrigger')
 
 
 if __name__ == '__main__':

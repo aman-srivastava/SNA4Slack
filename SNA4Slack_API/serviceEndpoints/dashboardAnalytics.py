@@ -1,16 +1,16 @@
 import uuid
 import json
 from datetime import datetime
+from config import Config
 
 from flask_restful import Resource, request
-from flask import Flask, request, jsonify, _request_ctx_stack
+from flask import Flask, request, jsonify, make_response
 
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
 from cassandra.cqlengine.management import sync_table
 from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
-from utils import Utils
 
 from objects.slack_archive import SlackArchive
 
@@ -26,15 +26,15 @@ class DashboardTrigger(Resource):
             in: header
             type: string
             required: true
-            default: "kubernetes"
+            default: "openaddresses"
             description: Enter team name
           - name: channel_name
             in: header
             type: string
             required: false
-            default: "test"
+            default: "general"
             description: Enter team name
-          - name: member
+          - name: messageSender
             in: header
             type: string
             required: false
@@ -53,16 +53,32 @@ class DashboardTrigger(Resource):
           200:
             description: Parse Slack archive and save data to database
         """
-        Utils.get_Connection_SNA4Slack()
-        sync_table(SlackArchive)
-        instances = SlackArchive.objects.filter(teamName=self.team_name)
-        channel_Count = instances.distinct(channelName)
-        user_Count = instances.distinct(messageSender)
+        team_name = '\'' + request.headers.get('team_Name') + '\''
+        channelName = request.headers.get('channel_name')
+        messageSender = request.headers.get('messageSender')
 
-        if request.headers.get('channel_name'):
-            instances = instances.filter(channelName=self.channel_name)
-        
-        if request.headers.get('channel_name'):
-            instances = instances.filter(channelName=self.channel_name)
+        ap = PlainTextAuthProvider(
+            username=Config.DB_USER, password=Config.DB_PASSWORD)
+        node_ips = [Config.NODE_IP]
+        cluster = Cluster(node_ips, auth_provider=ap)
+        session = cluster.connect()
+        connection.setup(node_ips, Config.KEYSPACE_NAME,
+                         protocol_version=3, auth_provider=ap)
 
-        return "Success"
+        rows = session.execute(
+            'SELECT "teamName","channelName","messageSender", COUNT(*) as "msgCount" \
+             FROM sna4slack_metrics.slack_archive_test \
+             WHERE "teamName" = {0} \
+             GROUP BY "teamName", "channelName","messageSender";'.format(team_name))
+
+        cluster.shutdown()
+        output = []
+        for row in rows:
+            temp = {
+                'teamName': str(row.teamName),
+                'channelName': str(row.channelName),
+                'messageSender': str(row.messageSender),
+                'messageCount': str(row.msgCount)
+            }
+            output.append(temp)
+        return json.dumps(output)

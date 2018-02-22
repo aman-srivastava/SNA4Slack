@@ -3,9 +3,11 @@
 import json
 import uuid
 import sys
+import dateutil.parser
 from time import sleep
 from random import randint
 from datetime import datetime
+
 from selenium import webdriver
 from pyvirtualdisplay import Display
 from objects.slack_archive import *
@@ -23,6 +25,7 @@ class SlackSpider():
     def __init__(self):
         self.all_items = []
         self.channelList = []
+        self.dataList = []
         self.pageSize = 0
         self.urlsToHit = []
         self.TeamName = ''
@@ -49,6 +52,7 @@ class SlackSpider():
         self.driver.get(url)
         sleep(randint(4, 10))
 
+    # Grab items from divisions
     def grab_list_items(self):
         print('grabbing list of items...')
 
@@ -60,6 +64,7 @@ class SlackSpider():
             else:
                 pass
 
+    # Process division elements
     def process_elements(self, div):
         msg_sender = ''
         msg_time = ''
@@ -90,6 +95,7 @@ class SlackSpider():
         else:
             return None
 
+    # Parse the URL
     def parse(self, url):
         self.get_page(url)
         self.grab_list_items()
@@ -99,16 +105,19 @@ class SlackSpider():
             return False, False
         pass
 
+    # Get list of channels in a team
     def getChannelList(self):
         for channelName in self.driver.find_elements_by_xpath('//ul[@class="channels-list"]//li//a'):
             self.channelList.append(channelName.text)
         pass
 
+    # Get the total number of pages in each channel in each page
     def getPageSize(self, url_Template):
         for page in self.driver.find_elements_by_xpath('//ul[@class="pagination pagination-vertical"]//li[@class="page-item active"]'):
             self.pageSize = int(page.text)
         pass
 
+    # Build the list of URL's to hit
     def buildTarget(self, teamName):
         url_Template = "https://{0}.slackarchive.io/".format(teamName)
         self.get_page(url_Template)
@@ -126,27 +135,28 @@ class SlackSpider():
                 self.urlsToHit.append(urlObject)
         pass
 
+    # Run the crawler
     def runSpider(self, teamName):
         self.buildTarget(teamName)
         count = 0
         returnList = []
+
         Utils.get_Connection_SNA4Slack()
         sync_table(SlackArchive)
+
         for url in self.urlsToHit:
             self.TeamName = url[0]
             self.ChannelName = url[1]
-
-            for cdr in self.parse(url[2]):
+            for data in self.parse(url[2]):
                 node_object = SlackArchive(id=uuid.uuid1(),
-                                           teamName=cdr.teamName,
-                                           channelName=cdr.channelName,
-                                           messageSender=cdr.messageSender.rstrip().lstrip(),
-                                           messageBody=cdr.messageBody.rstrip().lstrip(),
-                                           senderAvatar=cdr.senderAvatar.rstrip().lstrip(),
-                                           messageTime=datetime.strptime(
-                                               cdr.messageTime, "%b %d, %Y %H:%M")
-                                           )
+                                           teamName=data.teamName,
+                                           channelName=data.channelName,
+                                           messageSender=data.messageSender.rstrip().lstrip(),
+                                           messageBody=data.messageBody.rstrip().lstrip(),
+                                           senderAvatar=data.senderAvatar.rstrip().lstrip(),
+                                           messageTime=dateutil.parser.parse(data.messageTime))
                 node_object.save()
+
     pass
 
 
@@ -159,3 +169,4 @@ if __name__ == "__main__":
         slackSpider.close_driver()
     else:
         print 'Pass team name as parameter!'
+
