@@ -42,7 +42,13 @@ class TestClass(object):
                          "average_clustering"], 5) == \
                round(TEST_DATA["average_clustering"], 5)
 
+    def test_average_connectivity(self):
+        self.graph_builder.compute_avg_connectivity()
+        assert round(self.graph_builder.graph.graph[
+                         "average_connectivity"], 5) == \
+               round(TEST_DATA["average_connectivity"], 5)
+
     def test_for_density(self):
         self.graph_builder.compute_density()
          assert round(self.graph_builder.graph.graph["density"], 5) == \
-                round(TEST_DATA["density"], 5)s
+                round(TEST_DATA["density"], 5)
