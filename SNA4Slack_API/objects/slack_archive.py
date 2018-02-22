@@ -9,11 +9,10 @@ from cassandra.cqlengine.usertype import UserType
 
 class SlackArchive(Model):
     __key_space__ = 'sna4slack_metrics'  # Not Required
-    __table_name__ = 'slack_archive'
+    __table_name__ = 'slack_archive_test'
     id = columns.UUID(primary_key = True)
-    #teams = columns.List(columns.UserDefinedType(slackTeam))
-    teamName = columns.Text(index=True)
-    channelName = columns.Text(index=True)
+    teamName = columns.Text(primary_key = True)
+    channelName = columns.Text(primary_key = True)
     messageSender = columns.Text()
     messageBody = columns.Text()
     senderAvatar = columns.Text()
