@@ -174,6 +174,33 @@ $( document ).ready(function() {
 	
 });
 
+$( document ).ready(function() {
+	d3.json("https://api.mlab.com/api/1/databases/sna4slack/collections/analytics?apiKey=dPpfbNvB6jRs-hvv-Veb1uVkXnX06Maa", function(error, analytics) {
+	var noOfMessages = 0
+	var noOfChannels = []
+	var noOfMembers = []
+	for(var i = 0 ; i<analytics[0].analytics.length ; i++){
+		noOfMessages += parseInt(analytics[0].analytics[i].messageCount);
+
+		if (noOfMembers.indexOf(analytics[0].analytics[i].messageSender) === -1){
+		noOfMembers.push(analytics[0].analytics[i].messageSender);
+		}
+		if (noOfChannels.indexOf(analytics[0].analytics[i].channelName) === -1){
+		noOfChannels.push(analytics[0].analytics[i].channelName);
+		}
+		
+	}
+	document.getElementById("totalMessages").innerHTML = noOfMessages;
+	document.getElementById("totalMembers").innerHTML = noOfMembers.length;
+	document.getElementById("totalChannels").innerHTML = noOfChannels.length;
+	  if (error) throw error;
+	});
+});
+
+
+
+
+
 document.getElementById("GraphDescription").innerHTML = "Hover your mouse over nodes and edges to get a quick summary. Click on nodes to get detailed information.";
 document.getElementById("userName").innerHTML = "Username"
 document.getElementById("neighbours").innerHTML = "-Neighbours-"
