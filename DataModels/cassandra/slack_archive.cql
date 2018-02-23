@@ -1,14 +1,18 @@
 CREATE TABLE sna4slack_metrics.slack_archive (
-    id uuid PRIMARY KEY,
+    "teamName" text,
     "channelName" text,
-    "messageBody" text,
     "messageSender" text,
+    id uuid,
+    "messageBody" text,
     "messageTime" timestamp,
-    "teamName" text
-) WITH bloom_filter_fp_chance = 0.01
+    "senderAvatar" text,
+    PRIMARY KEY ("teamName", "channelName", "messageSender", id)
+) WITH CLUSTERING ORDER BY ("channelName" ASC, "messageSender" ASC, id ASC)
+    AND bloom_filter_fp_chance = 0.01
     AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
     AND comment = ''
-    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': 
+'32', 'min_threshold': '4'}
     AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
     AND crc_check_chance = 1.0
     AND dclocal_read_repair_chance = 0.1
@@ -19,6 +23,3 @@ CREATE TABLE sna4slack_metrics.slack_archive (
     AND min_index_interval = 128
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
-CREATE INDEX "slack_archive_teamName_idx" ON sna4slack_metrics.slack_archive ("teamName");
-CREATE INDEX "slack_archive_channelName_idx" ON sna4slack_metrics.slack_archive ("channelName");
-
