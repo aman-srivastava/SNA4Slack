@@ -21,8 +21,13 @@ class TestClass(object):
         for node in TEST_DATA["degree_centrality"].keys():
             assert self.graph_builder.graph.nodes[node]["degree_centrality"] == \
                    TEST_DATA["degree_centrality"][node]
-	
-	def compute_avg_clustering(self):
+    
+    def test_average_node_connectivity(self):
+        self.graph_builder.compute_avg_node_connectivity()
+        assert round(self.graph_builder.graph.graph[average_node_connectivity"], 5) == \
+               round(TEST_DATA["average_connectivity"], 5)
+    
+    def compute_avg_clustering(self):
         ac = nx.average_clustering(self.graph)
         self.graph.graph[AVERAGE_CLUSTERING] = ac
         logging.debug(self.__class__.__name__ + ": Clustering computed.")
@@ -37,8 +42,8 @@ class TestClass(object):
         self.graph_builder.compute_density()
          assert round(self.graph_builder.graph.graph["density"], 5) == \
                 round(TEST_DATA["density"], 5)
-	
-	def test_for_average_clustering(self):
+    
+    def test_for_average_clustering(self):
         self.graph_builder.compute_avg_clustering()
         assert round(self.graph_builder.graph.graph["average_clustering"], 5) == \
                round(TEST_DATA["average_clustering"], 5)
