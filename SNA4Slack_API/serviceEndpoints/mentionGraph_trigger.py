@@ -6,12 +6,13 @@ from flask_restful import Resource, request
 from flask import Flask, request, jsonify, _request_ctx_stack
 
 from NetworkX.src.mention_graph import MentionGraph
+from Helpers.mongoHelper import MongoHelper
 
 
 class MentionGraphTrigger(Resource):
 
     def get(self):
-        """Initializes crawler to get team data and save in database 
+        """Initializes crawler to get team data and save in database
         Implemented in flask for python 2.7
         ---
         parameters:
@@ -25,7 +26,7 @@ class MentionGraphTrigger(Resource):
             in: header
             type: string
             required: false
-            default: 
+            default:
             description: Narrow down graph nodes to a channel within team
           - name: directed
             in: header
@@ -48,9 +49,8 @@ class MentionGraphTrigger(Resource):
             description: Parse Slack archive and save data to database
         """
         team_Name = request.headers.get('team_Name')
-        #channel = request.headers.get('channel')
-        #directed = request.headers.get('directed')
-        print team_Name
+        # channel = request.headers.get('channel')
+        # directed = request.headers.get('directed')
 
         graph_gen = MentionGraph(team_Name,
                                  directed=False)
@@ -68,4 +68,6 @@ class MentionGraphTrigger(Resource):
         graph_gen.compute_avg_clustering()
         print 'Compute clustering'
 
-        return json.dumps(graph_gen.json())
+        data = '{"mention-graph":' + json.dumps(graph_gen.json()) + '}'
+
+        return MongoHelper.manageInsert(team_Name, json.loads(data))

@@ -125,7 +125,7 @@ class MentionGraph(object):
             self.graph.graph[AVERAGE_CLUSTERING] = 0
 
     def json(self):
-        return json.dumps(json_graph.node_link_data(self.graph))
+        return json_graph.node_link_data(self.graph)
 
 
 def run():

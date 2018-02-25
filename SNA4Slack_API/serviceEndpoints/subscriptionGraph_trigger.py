@@ -7,12 +7,12 @@ from flask import Flask, request, jsonify, _request_ctx_stack
 
 from utils import Utils
 from NetworkX.src.subscription_graph import SubscriptionGraph
-
+from Helpers.mongoHelper import MongoHelper
 
 class SubscriptionGraphTrigger (Resource):
 
     def get(self):
-        """Initializes crawler to get team data and save in database 
+        """Initializes crawler to get team data and save in database
         Implemented in flask for python 2.7
         ---
         parameters:
@@ -26,7 +26,7 @@ class SubscriptionGraphTrigger (Resource):
             in: header
             type: string
             required: false
-            default: 
+            default:
             description: Narrow down graph nodes to a channel within team
           - name: directed
             in: header
@@ -49,8 +49,8 @@ class SubscriptionGraphTrigger (Resource):
             description: Parse Slack archive and save data to database
         """
         team_Name = request.headers.get('team_Name')
-        #channel = request.headers.get('channel')
-        #directed = request.headers.get('directed')
+        # channel = request.headers.get('channel')
+        # directed = request.headers.get('directed')
 
         graph_gen = SubscriptionGraph(team_Name, directed=False)
         print 'Graph done'
@@ -64,7 +64,9 @@ class SubscriptionGraphTrigger (Resource):
         print 'Compute density'
         graph_gen.compute_avg_connectivity()
         print 'Compute connectivity'
-        graph_gen.compute_avg_clustering()
+        # graph_gen.compute_avg_clustering()
         print 'Compute clustering'
 
-        return json.dumps(graph_gen.json())
+        data = '{"subscription-graph":' + json.dumps(graph_gen.json()) + '}'
+
+        return MongoHelper.manageInsert(team_Name, json.loads(data))

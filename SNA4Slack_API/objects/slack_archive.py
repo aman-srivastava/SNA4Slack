@@ -6,14 +6,15 @@ from datetime import datetime
 from cassandra.cqlengine.management import sync_table
 from cassandra.cqlengine.models import Model
 from cassandra.cqlengine.usertype import UserType
+from config import Config
 
 class SlackArchive(Model):
     __key_space__ = 'sna4slack_metrics'  # Not Required
-    __table_name__ = 'slack_archive'
+    __table_name__ = 'slack_archive_dev'
     teamName = columns.Text(primary_key = True)
     channelName = columns.Text(primary_key = True)
-    id = columns.UUID(primary_key = True)
-    messageSender = columns.Text()
+    messageSender = columns.Text(primary_key = True)
+    id = columns.UUID(primary_key = True)    
     messageBody = columns.Text()
     senderAvatar = columns.Text()
     messageTime = columns.DateTime()

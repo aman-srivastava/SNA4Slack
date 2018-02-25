@@ -13,6 +13,7 @@ from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
 
 from objects.slack_archive import SlackArchive
+from Helpers.mongoHelper import MongoHelper
 
 
 class DashboardTrigger(Resource):
@@ -53,7 +54,7 @@ class DashboardTrigger(Resource):
           200:
             description: Parse Slack archive and save data to database
         """
-        team_name = '\'' + request.headers.get('team_Name') + '\''
+        team_name = request.headers.get('team_Name')
         channelName = request.headers.get('channel_name')
         messageSender = request.headers.get('messageSender')
 
@@ -67,9 +68,11 @@ class DashboardTrigger(Resource):
 
         rows = session.execute(
             'SELECT "teamName","channelName","messageSender", COUNT(*) as "msgCount" \
-             FROM sna4slack_metrics.slack_archive \
-             WHERE "teamName" = {0} \
-             GROUP BY "teamName", "channelName","messageSender";'.format(team_name))
+             FROM {0}.{1} \
+             WHERE "teamName" = {2} \
+             GROUP BY "teamName", "channelName","messageSender";'.format(Config.KEYSPACE_NAME,
+                                                                         Config.DB_COLUMN_FAMILY,
+                                                                         '\'' + team_name + '\''))
 
         cluster.shutdown()
         output = []
@@ -81,4 +84,9 @@ class DashboardTrigger(Resource):
                 'messageCount': str(row.msgCount)
             }
             output.append(temp)
-        return json.dumps(output)
+        data = '{"dataAnalytics":' + json.dumps(output) + '}'
+
+        print team_name
+        print data
+
+        return MongoHelper.manageInsert(team_name, json.loads(data))

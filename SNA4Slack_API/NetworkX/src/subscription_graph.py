@@ -127,7 +127,7 @@ class SubscriptionGraph(object):
         logging.debug(self.__class__.__name__ + ": Clustering computed.")
 
     def json(self):
-        return json.dumps(json_graph.node_link_data(self.graph))
+        return json_graph.node_link_data(self.graph)
 
 
 def run():
@@ -145,7 +145,7 @@ def run():
     print 'Compute density'
     graph_gen.compute_avg_connectivity()
     print 'Compute connectivity'
-    graph_gen.compute_avg_clustering()
+    #graph_gen.compute_avg_clustering()
     print 'Compute clustering'
 
     graph_gen.print_graph()
