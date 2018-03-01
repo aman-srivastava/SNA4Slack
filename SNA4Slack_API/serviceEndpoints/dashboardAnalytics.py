@@ -86,7 +86,4 @@ class DashboardTrigger(Resource):
             output.append(temp)
         data = '{"dataAnalytics":' + json.dumps(output) + '}'
 
-        print team_name
-        print data
-
         return MongoHelper.manageInsert(team_name, json.loads(data))

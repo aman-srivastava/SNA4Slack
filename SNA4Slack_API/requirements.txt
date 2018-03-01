@@ -8,3 +8,4 @@ selenium
 pyvirtualdisplay
 networkx
 dateutils
+pymongo
