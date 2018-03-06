@@ -1,0 +1,126 @@
+<html>
+<head></head>
+<body>
+
+<div id="pieChart"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js"></script>
+<script src="d3pie.min.js"></script>
+<script>
+var pie = new d3pie("pieChart", {
+	"header": {
+		"title": {
+			"text": "Channels",
+			"color": "#000000",
+			"fontSize": 50
+		},
+		"subtitle": {
+			"text": "Total Messages",
+			"color": "#b80000"
+		},
+		"location": "pie-center",
+		"titleSubtitlePadding": 3
+	},
+	"footer": {
+		"text": "Channel-Message Pie Chart",
+		"color": "#e81414",
+		"fontSize": 10,
+		"font": "open sans",
+		"location": "bottom-left"
+	},
+	"size": {
+		"canvasWidth": 590,
+		"pieOuterRadius": "83%"
+	},
+	"data": {
+		"sortOrder": "label-desc",
+		"content": [
+			{
+				"label": "Channel 1",
+				"value": 30,
+				"color": "#fdd000"
+			},
+			{
+				"label": "Channel 2",
+				"value": 20,
+				"color": "#ccab12"
+			},
+			{
+				"label": "Channel 3",
+				"value": 45,
+				"color": "#dd8d11"
+			},
+			{
+				"label": "Channel 4",
+				"value": 11,
+				"color": "#999999"
+			},
+			{
+				"label": "Channel 5",
+				"value": 13,
+				"color": "#999999"
+			},
+			{
+				"label": "Channel 6",
+				"value": 12,
+				"color": "#999999"
+			}
+		]
+	},
+	"labels": {
+		"outer": {
+			"format": "label-percentage2"
+		},
+		"inner": {
+			"format": "none"
+		},
+		"mainLabel": {
+			"color": "#e41111",
+			"fontSize": 11
+		},
+		"percentage": {
+			"color": "#999999",
+			"fontSize": 11,
+			"decimalPlaces": 5
+		},
+		"value": {
+			"color": "#e1e1e1",
+			"font": "verdana"
+		},
+		"lines": {
+			"enabled": true
+		},
+		"truncation": {
+			"enabled": true
+		}
+	},
+	"effects": {
+		"load": {
+			"speed": 1030
+		},
+		"pullOutSegmentOnClick": {
+			"effect": "elastic",
+			"speed": 400,
+			"size": 8
+		}
+	},
+	"misc": {
+		"colors": {
+			"segmentStroke": "#222222"
+		},
+		"gradient": {
+			"enabled": true,
+			"percentage": 47,
+			"color": "#a0123d"
+		},
+		"pieCenterOffset": {
+			"x": 15,
+			"y": 15
+		}
+	},
+	"callbacks": {}
+});
+</script>
+
+</body>
+</html>
