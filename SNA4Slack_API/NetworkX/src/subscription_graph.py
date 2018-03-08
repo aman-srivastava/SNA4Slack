@@ -122,9 +122,12 @@ class SubscriptionGraph(object):
             self.__class__.__name__ + ": Connectivity computed.")
 
     def compute_avg_clustering(self):
-        ac = nx.average_clustering(self.graph)
-        self.graph.graph[AVERAGE_CLUSTERING] = ac
-        logging.debug(self.__class__.__name__ + ": Clustering computed.")
+        try:
+            ac = nx.average_clustering(self.graph)
+            self.graph.graph[AVERAGE_CLUSTERING] = ac
+            logging.debug(self.__class__.__name__ + ": Clustering computed.")
+        except Exception as e:
+            self.graph.graph[AVERAGE_CLUSTERING] = 0
 
     def json(self):
         return json_graph.node_link_data(self.graph)

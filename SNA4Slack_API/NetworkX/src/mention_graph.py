@@ -121,7 +121,7 @@ class MentionGraph(object):
             ac = nx.average_clustering(self.graph)
             self.graph.graph[AVERAGE_CLUSTERING] = ac
             logging.debug(self.__class__.__name__ + ": Clustering computed.")
-        except ZeroDivisionError as e:
+        except Exception as e:
             self.graph.graph[AVERAGE_CLUSTERING] = 0
 
     def json(self):
@@ -129,8 +129,8 @@ class MentionGraph(object):
 
 
 def run():
-    graph_gen = MentionGraph("padgett_florentine_business",
-                             directed=False)
+    graph_gen = MentionGraph("flatartagency",
+                             directed=True)
     print 'Graph done'
     graph_gen.compute_closeness_centrality()
     print 'Compute closeness'
@@ -142,7 +142,7 @@ def run():
     print 'Compute density'
     graph_gen.compute_avg_connectivity()
     print 'Compute connectivity'
-    graph_gen.compute_avg_clustering()
+    #graph_gen.compute_avg_clustering()
     print 'Compute clustering'
 
     graph_gen.print_graph()
@@ -153,3 +153,4 @@ def run():
     graph_gen.draw_graph()
 
 
+run()
