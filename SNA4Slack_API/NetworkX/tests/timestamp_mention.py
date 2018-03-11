@@ -23,6 +23,7 @@ EDGE_WEIGHT_LABEL = "weight"
 CLOSENESS_CENTRALITY = "closeness_centrality"
 DEGREE_CENTRALITY = "degree_centrality"
 BETWEENNESS_CENTRALITY = "betweenness_centrality"
+TIESTAMP = "timestamp"
 
 
 class MentionGraph(object):
@@ -36,13 +37,24 @@ class MentionGraph(object):
 
     def build_graph(self):
         self.build_user_nodes()
+        self.add_timestamp_values()
         
+    def add_timestamp_values(self):
+        Utils.get_Connection_SNA4Slack()
+        tsvalues = SlackArchive.objects.filter(timeStamp=self.timeStamp)
+        for val in tsvalues:
+            if self.graph.has_node(val):
+                self.graph[val][self.graph.node][TIMESTAMP] += 1;
+    
     def build_user_nodes(self):
         Utils.get_Connection_SNA4Slack()
         sync_table(SlackArchive)
         instances = SlackArchive.objects.filter(teamName=self.team_name)
+        tsvalues = SlackArchive.objects.filter(timeStamp=self.timeStamp)
         for row in instances:
             self.graph.add_node(row[SENDER_COLUMN])
+            for val in tsvalues:
+                self.graph.nodes.add_value(val)
 
     def print_graph(self):
         print self.graph.nodes
