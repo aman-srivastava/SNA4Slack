@@ -50,9 +50,10 @@ class SubscriptionGraphTrigger (Resource):
         """
         team_Name = request.headers.get('team_Name')
         # channel = request.headers.get('channel')
-        # directed = request.headers.get('directed')
+        directed = request.headers.get('directed')
+        directed = directed in ("True", "true")
 
-        graph_gen = SubscriptionGraph(team_Name, directed=False)
+        graph_gen = SubscriptionGraph(team_Name, directed)
         print 'Graph done'
         graph_gen.compute_closeness_centrality()
         print 'Compute closeness'

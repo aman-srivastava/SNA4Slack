@@ -27,6 +27,7 @@ BETWEENNESS_CENTRALITY = "betweenness_centrality"
 GRAPH_DENSITY = "density"
 AVERAGE_CLUSTERING = "average_clustering"
 AVERAGE_CONNECTIVITY = "average_connectivity"
+USER_PROFILE_PIC = "senderAvatar"
 
 # Initializing logger
 #logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
@@ -51,6 +52,7 @@ class MentionGraph(object):
         instances = SlackArchive.objects.filter(teamName=self.team_name)
         for row in instances:
             self.graph.add_node(row[SENDER_COLUMN])
+            nx.set_node_attributes(self.graph, row[USER_PROFILE_PIC], USER_PROFILE_PIC)
 
     def build_reference_edges(self):
         Utils.get_Connection_SNA4Slack()
@@ -121,7 +123,7 @@ class MentionGraph(object):
             ac = nx.average_clustering(self.graph)
             self.graph.graph[AVERAGE_CLUSTERING] = ac
             logging.debug(self.__class__.__name__ + ": Clustering computed.")
-        except ZeroDivisionError as e:
+        except Exception as e:
             self.graph.graph[AVERAGE_CLUSTERING] = 0
 
     def json(self):
@@ -129,8 +131,8 @@ class MentionGraph(object):
 
 
 def run():
-    graph_gen = MentionGraph("padgett_florentine_business",
-                             directed=False)
+    graph_gen = MentionGraph("flatartagency",
+                             directed=True)
     print 'Graph done'
     graph_gen.compute_closeness_centrality()
     print 'Compute closeness'
@@ -142,14 +144,15 @@ def run():
     print 'Compute density'
     graph_gen.compute_avg_connectivity()
     print 'Compute connectivity'
-    graph_gen.compute_avg_clustering()
+    #graph_gen.compute_avg_clustering()
     print 'Compute clustering'
 
     graph_gen.print_graph()
     print graph_gen.json()
-    with open('data.json', 'w') as outfile:
+    #with open('data.json', 'w') as outfile:
         # json.dumps(graph_gen.json(), outfile)
-        outfile.write(graph_gen.json())
+     #   outfile.write(graph_gen.json())
     graph_gen.draw_graph()
 
 
+run()
