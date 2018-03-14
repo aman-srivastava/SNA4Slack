@@ -3,6 +3,10 @@
 
 <!-- Mirrored from pixinvent.com/bootstrap-admin-template/robust/html/ltr/vertical-menu-template/navbar-hide-on-scroll-top.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jan 2018 06:53:37 GMT -->
 <head>
+    <!-- CHART CSS BEGIN-->
+
+    <!-- CHART CSS END-->
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -184,33 +188,33 @@
 
         </div>
         <div class="content-body"><!-- Description -->
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="card">
-						<div class="card-header">
-							<h4 class="card-title">Centrality Graph</h4>
-							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-							<div class="heading-elements">
-								<ul class="list-inline mb-0">
-									<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-									<li><a data-action="reload"><i class="icon-reload"></i></a></li>
-									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-									<li><a data-action="close"><i class="icon-cross2"></i></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="card-body collapse in">
-							<div class="card-block">
-								<div style="text-align:center;"><br/>
-									<svg id="centrality-svg" width="960" height="600" style="border: solid black 2px;background-color:rgba(0,0,0,0.4);"></svg>
-								</div>
-								<div id="controls" style="text-align:center;">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+
+
+          <!-- Simple Bar Chart -->
+          <div class="row">
+              <div class="col-xs-12">
+                  <div class="card">
+                      <div class="card-header">
+                          <h4 class="card-title">Total Members per Month</h4>
+                          <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                          <div class="heading-elements">
+                              <ul class="list-inline mb-0">
+                                  <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                  <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                                  <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                                  <li><a data-action="close"><i class="icon-cross2"></i></a></li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="card-body collapse in">
+                          <div class="card-block">
+                              <div id="bar-chart" class="height-400"></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="card">
@@ -325,6 +329,16 @@
     <script src="../../../app-assets/vendors/js/extensions/underscore-min.js" type="text/javascript"></script>
     <script src="../../../app-assets/vendors/js/extensions/clndr.min.js" type="text/javascript"></script>
     <script src="../../../app-assets/vendors/js/extensions/unslider-min.js" type="text/javascript"></script>
+
+    <script src="../../../app-assets/vendors/js/charts/flot/jquery.flot.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/charts/flot/jquery.flot.resize.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/charts/flot/jquery.flot.categories.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/charts/flot/jquery.flot.threshold.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/charts/flot/jquery.flot.stack.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/charts/flot/jquery.flot.errorbars.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/charts/flot/jquery.flot.navigate.js" type="text/javascript"></script>
+
+
     <!-- END PAGE VENDOR JS-->
     <!-- BEGIN ROBUST JS-->
     <!-- build:js app-assets/js/app.min.js-->
@@ -344,6 +358,12 @@
 		}
 	</script>
 	<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- BEGIN CHART  JS-->
+
+  <script src="../../../app-assets/js/scripts/charts/flot/bar/bar.min.js" type="text/javascript"></script>
+  <!-- END CHART JS-->
+
 </body>
 
 <!-- Mirrored from pixinvent.com/bootstrap-admin-template/robust/html/ltr/vertical-menu-template/navbar-hide-on-scroll-top.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jan 2018 06:53:38 GMT -->
