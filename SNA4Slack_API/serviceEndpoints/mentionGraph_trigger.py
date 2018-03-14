@@ -68,6 +68,11 @@ class MentionGraphTrigger(Resource):
         graph_gen.compute_avg_clustering()
         print 'Compute clustering'
 
-        data = '{"mention-graph":' + json.dumps(graph_gen.json()) + '}'
+        if directed == True:
+            data = '{"directed-mention-graph":' + \
+                json.dumps(graph_gen.json()) + '}'
+        else:
+            data = '{"undirected-mention-graph":' + \
+                json.dumps(graph_gen.json()) + '}'
 
         return MongoHelper.manageInsert(team_Name, json.loads(data))

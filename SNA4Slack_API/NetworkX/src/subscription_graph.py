@@ -155,7 +155,7 @@ def run():
     print 'Compute clustering'
 
     graph_gen.print_graph()
-    print graph_gen.json()
+    #print graph_gen.json()
     with open('data.json', 'w') as outfile:
         # json.dumps(graph_gen.json(), outfile)
         outfile.write(graph_gen.json())

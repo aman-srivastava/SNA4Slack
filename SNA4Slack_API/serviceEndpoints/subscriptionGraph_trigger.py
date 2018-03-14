@@ -68,6 +68,9 @@ class SubscriptionGraphTrigger (Resource):
         # graph_gen.compute_avg_clustering()
         print 'Compute clustering'
 
-        data = '{"subscription-graph":' + json.dumps(graph_gen.json()) + '}'
+        if directed == True:
+            data = '{"directed-subscription-graph":' + json.dumps(graph_gen.json()) + '}'
+        else:
+            data = '{"undirected-subscription-graph":' + json.dumps(graph_gen.json()) + '}'
 
         return MongoHelper.manageInsert(team_Name, json.loads(data))
