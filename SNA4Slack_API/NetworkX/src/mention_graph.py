@@ -27,6 +27,7 @@ BETWEENNESS_CENTRALITY = "betweenness_centrality"
 GRAPH_DENSITY = "density"
 AVERAGE_CLUSTERING = "average_clustering"
 AVERAGE_CONNECTIVITY = "average_connectivity"
+USER_PROFILE_PIC = "senderAvatar"
 
 # Initializing logger
 #logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
@@ -51,6 +52,7 @@ class MentionGraph(object):
         instances = SlackArchive.objects.filter(teamName=self.team_name)
         for row in instances:
             self.graph.add_node(row[SENDER_COLUMN])
+            nx.set_node_attributes(self.graph, row[USER_PROFILE_PIC], USER_PROFILE_PIC)
 
     def build_reference_edges(self):
         Utils.get_Connection_SNA4Slack()
@@ -147,9 +149,9 @@ def run():
 
     graph_gen.print_graph()
     print graph_gen.json()
-    with open('data.json', 'w') as outfile:
+    #with open('data.json', 'w') as outfile:
         # json.dumps(graph_gen.json(), outfile)
-        outfile.write(graph_gen.json())
+     #   outfile.write(graph_gen.json())
     graph_gen.draw_graph()
 
 
