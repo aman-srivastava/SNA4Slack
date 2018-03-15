@@ -29,8 +29,8 @@ $(window).on("load", function(){
         responsive: true,
         maintainAspectRatio: false,
         responsiveAnimationDuration:500,
-        legend: {
-            position: 'top',
+        legend: {display: false,
+            position: 'bottom',
         },
         scales: {
             xAxes: [{
@@ -55,7 +55,7 @@ $(window).on("load", function(){
             }]
         },
         title: {
-            display: true,
+            display: false,
             text: 'Chart.js Bar Chart'
         }
     };
@@ -64,16 +64,10 @@ $(window).on("load", function(){
     var chartData = {
         labels: ["January", "February", "March", "April", "May"],
         datasets: [{
-            label: "My First dataset",
+            label: "Conversations",
             data: [65, 59, 80, 81, 56],
             backgroundColor: "#673AB7",
             hoverBackgroundColor: "rgba(103,58,183,.9)",
-            borderColor: "transparent"
-        }, {
-            label: "My Second dataset",
-            data: [28, 48, 40, 19, 86],
-            backgroundColor: "#E91E63",
-            hoverBackgroundColor: "rgba(233,30,99,.9)",
             borderColor: "transparent"
         }]
     };

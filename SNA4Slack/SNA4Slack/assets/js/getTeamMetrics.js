@@ -13,6 +13,8 @@ $( document ).ready(function() {
 		  linkedByIndex[d.source + ',' + d.target] = 1;
 		  linkedByIndex[d.target + ',' + d.source] = 1;
 	  });
+	  console.log(linkedByIndex);
+	  	  console.log(graph.links);
 	  // A function to test if two nodes are neighboring.
 	  function neighboring(a, b) {
 		  return linkedByIndex[a.id + ',' + b.id];
@@ -25,6 +27,7 @@ $( document ).ready(function() {
 
 	  // Collision detection based on degree centrality.
 	  simulation.force("collide", d3.forceCollide().radius( function (d) { return degreeSize(d.degree); }));
+
 	  var link = container.append("g")
 		  .attr("class", "links")
 		.selectAll("line")
@@ -190,9 +193,9 @@ $( document ).ready(function() {
 		}
 		
 	}
-	document.getElementById("totalMessages").innerHTML = noOfMessages;
-	document.getElementById("totalMembers").innerHTML = noOfMembers.length;
-	document.getElementById("totalChannels").innerHTML = noOfChannels.length;
+	//document.getElementById("totalMessages").innerHTML = noOfMessages;
+	//document.getElementById("totalMembers").innerHTML = noOfMembers.length;
+	//document.getElementById("totalChannels").innerHTML = noOfChannels.length;
 	  if (error) throw error;
 	});
 });
