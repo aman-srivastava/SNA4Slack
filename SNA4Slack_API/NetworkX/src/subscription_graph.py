@@ -31,6 +31,7 @@ AVERAGE_CLUSTERING = "average_clustering"
 AVERAGE_CONNECTIVITY = "average_node_connectivity"
 USER_PROFILE_PIC = "senderAvatar"
 
+
 # Initializing logger
 # logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
 
@@ -55,8 +56,8 @@ class SubscriptionGraph(object):
         instances = SlackArchive.objects.filter(teamName=self.team_name)
         for row in instances:
             self.graph.add_node(row[SENDER_COLUMN])
-            nx.set_node_attributes(self.graph, row[USER_PROFILE_PIC],
-                                   USER_PROFILE_PIC)
+            self.graph.node[row[SENDER_COLUMN]][USER_PROFILE_PIC] = row[
+                USER_PROFILE_PIC]
 
     def build_reference_edges(self):
         Utils.get_Connection_SNA4Slack()
@@ -137,7 +138,7 @@ class SubscriptionGraph(object):
 
 
 def run():
-    team = "subscriptionTest"
+    team = "flatartagency"
     graph_gen = SubscriptionGraph(team,
                                   directed=False)
     print 'Graph done'
@@ -151,12 +152,15 @@ def run():
     print 'Compute density'
     graph_gen.compute_avg_connectivity()
     print 'Compute connectivity'
-    #graph_gen.compute_avg_clustering()
+    # graph_gen.compute_avg_clustering()
     print 'Compute clustering'
 
     graph_gen.print_graph()
-    #print graph_gen.json()
+    print graph_gen.json()
     with open('data.json', 'w') as outfile:
-        # json.dumps(graph_gen.json(), outfile)
+    # json.dumps(graph_gen.json(), outfile)
         outfile.write(graph_gen.json())
     graph_gen.draw_graph()
+
+
+

@@ -52,7 +52,8 @@ class MentionGraph(object):
         instances = SlackArchive.objects.filter(teamName=self.team_name)
         for row in instances:
             self.graph.add_node(row[SENDER_COLUMN])
-            nx.set_node_attributes(self.graph, row[USER_PROFILE_PIC], USER_PROFILE_PIC)
+            self.graph.node[row[SENDER_COLUMN]][USER_PROFILE_PIC] = row[
+                USER_PROFILE_PIC]
 
     def build_reference_edges(self):
         Utils.get_Connection_SNA4Slack()
