@@ -9,19 +9,29 @@ def main():
     import pyspark
     from pyspark.sql import SQLContext, SparkSession
 
-    sparkSession = SparkSession.builder\
-        .appName("understanding_sparksession")\
-        .config("spark.cassandra.connection.host", "104.155.179.66")\
-        .config("spark.cassandra.auth.username", "cassandra")\
-        .config("spark.cassandra.auth.password", "LYN1bQNCds3T")\
-        .master("local[*]").getOrCreate()
-    print sparkSession
+    spark = None
+    try:
+        '''spark = SparkSession.builder\
+            .appName("understanding_sparksession")\
+            .config("spark.cassandra.connection.host", "104.155.179.66")\
+            .config("spark.cassandra.auth.username", "cassandra")\
+            .config("spark.cassandra.auth.password", "LYN1bQNCds3T")\
+            .master("local[*]").getOrCreate()'''
+        spark = SparkSession.builder\
+            .master("local[*]")\
+            .config("spark.driver.cores", 1)\
+            .appName("understanding_sparksession")\
+            .getOrCreate()
+    except Exception as error:
+        print error
+
+    print spark
 
     load_options = {"table": "slack_archive_dev", "keyspace": "sna4slack_metrics",
                     "spark.cassandra.input.split.size_in_mb": "10"}
 
     try:
-        df = sparkSession.read\
+        df = spark.read\
             .format("org.apache.spark.sql.cassandra")\
             .options(table="slack_archive_dev", keyspace="sna4slack_metrics").load().show()
     except Exception as error:

@@ -1,0 +1,8 @@
+pyspark \
+    --jars ${PYSPARK_ROOT}/pyspark_cassandra-0.1.3.jar  \
+    --driver-class-path ${PYSPARK_ROOT}/pyspark_cassandra-0.1.3.jar \
+    --py-files ${PYSPARK_ROOT}/pyspark_cassandra-0.1.3-py2.7.egg \
+    --conf spark.cassandra.connection.host=104.155.179.66 \
+    --conf spark.cassandra.auth.username=cassandra \
+    --conf spark.cassandra.auth.password=LYN1bQNCds3T \
+    --master spark://127.0.0.1:7077

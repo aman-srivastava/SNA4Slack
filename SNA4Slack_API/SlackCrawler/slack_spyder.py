@@ -37,7 +37,7 @@ class SlackSpider():
         self.display = Display(visible=0, size=(800, 600))
         self.display.start()
         self.driver = webdriver.Chrome("/var/chromedriver/chromedriver")
-        sleep(randint(5, 9))
+        sleep(randint(7, 9))
 
     # Close chromedriver
     def close_driver(self):
@@ -50,37 +50,39 @@ class SlackSpider():
     def get_page(self, url):
         print('getting page...')
         self.driver.get(url)
-        sleep(randint(4, 10))
+        sleep(randint(6, 10))
 
     # Grab items from divisions
     def grab_list_items(self):
         print('grabbing list of items...')
-
+        senderAvatar = ''
         for div in self.driver.find_elements_by_xpath('//ul[@class="messages"]//li'):
-            data = self.process_elements(div)
+            data = self.process_elements(div, senderAvatar)
 
             if data:
                 self.all_items.append(data)
+                if data.senderAvatar != '':
+                    senderAvatar = data.senderAvatar
             else:
                 pass
 
     # Process division elements
-    def process_elements(self, div):
-        msg_sender = ''
-        msg_time = ''
-        msg_body = ''
+    def process_elements(self, div, senderAvatar):
         msg_sender_avatar = ''
+
+        msg_sender = div.find_element_by_class_name(
+            "msg-user").get_attribute('innerText')
+        msg_time = div.find_element_by_class_name(
+            "msg-time").get_attribute('innerText')
+        msg_body = div.find_element_by_class_name(
+            "msg-body").get_attribute('innerText')
+        avatar = div.find_element_by_xpath('.//*[@class="msg-avatar"]')
+
         try:
-            msg_sender = div.find_element_by_xpath(
-                './/*[@class="msg-user"]').text
-            msg_time = div.find_element_by_xpath(
-                './/*[@class="msg-time"]').text
-            msg_sender_avatar = div.find_element_by_xpath(
-                './/*[@class="msg-thumb"]').get_attribute('src')
-            msg_body = div.find_element_by_xpath(
-                './/*[@class="msg-body"]').text
-        except Exception:
-            pass
+            msg_sender_avatar = avatar.find_element_by_class_name(
+                'msg-thumb').get_attribute('src')
+        except Exception as error:
+            msg_sender_avatar = senderAvatar
 
         if msg_sender and msg_time and msg_body:
             archiveObj = SlackArchive()
@@ -90,8 +92,8 @@ class SlackSpider():
             archiveObj.senderAvatar = msg_sender_avatar
             archiveObj.messageTime = msg_time
             archiveObj.messageSender = msg_sender
-
             return archiveObj
+
         else:
             return None
 
@@ -137,10 +139,8 @@ class SlackSpider():
 
     # Run the crawler
     def runSpider(self, teamName):
-        self.buildTarget(teamName)
-        count = 0
-        returnList = []
 
+        self.buildTarget(teamName)
         Utils.get_Connection_SNA4Slack()
         sync_table(SlackArchive)
 
@@ -148,15 +148,17 @@ class SlackSpider():
             self.TeamName = url[0]
             self.ChannelName = url[1]
             for data in self.parse(url[2]):
-                node_object = SlackArchive(id=uuid.uuid1(),
-                                           teamName=data.teamName,
-                                           channelName=data.channelName,
-                                           messageSender=data.messageSender.rstrip().lstrip(),
-                                           messageBody=data.messageBody.rstrip().lstrip(),
-                                           senderAvatar=data.senderAvatar.rstrip().lstrip(),
-                                           messageTime=dateutil.parser.parse(data.messageTime))
-                node_object.save()
-
+                if data:
+                    node_object = SlackArchive(id=uuid.uuid1(),
+                                               teamName=data.teamName,
+                                               channelName=data.channelName,
+                                               messageSender=data.messageSender.rstrip().lstrip(),
+                                               messageBody=data.messageBody.rstrip().lstrip(),
+                                               senderAvatar=data.senderAvatar,
+                                               messageTime=dateutil.parser.parse(data.messageTime))
+                    node_object.save()
+                else:
+                    print 'No data found'
     pass
 
 
@@ -169,4 +171,3 @@ if __name__ == "__main__":
         slackSpider.close_driver()
     else:
         print 'Pass team name as parameter!'
-
