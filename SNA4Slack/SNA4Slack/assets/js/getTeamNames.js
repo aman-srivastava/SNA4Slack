@@ -13,4 +13,4 @@ $( document ).ready(function() {
       }
 	});
 });
-
+$('#search').click( function(e) {e.preventDefault(); document.location.href = "Dashboard.html?teamName="+document.getElementById('teamNames').value.replace(".slackarchive.io",""); return false; } );
