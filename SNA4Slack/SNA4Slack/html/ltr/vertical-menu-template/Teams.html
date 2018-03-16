@@ -51,6 +51,35 @@
 		  		  stroke-width: 2.5px;
 
 		}
+   .ui-autocomplete {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+	color:#55595C;
+    display: none;
+    min-width: 160px;   
+    padding: .5rem .75rem;
+    margin: 0 0 10px 25px;
+    list-style: none;
+    background-color: #eeeeee;
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    *border-right-width: 2px;
+    *border-bottom-width: 2px;
+}
 
 		.nodes circle {
 		  stroke: #fff;
@@ -232,7 +261,7 @@
 									  <span id="measures1" style="color:#F6BB42;">Degree: 0 | Betweenness: 0 | Closeness: 0</span>
 									</div>
 									
-									<div id="graph1" style="border: solid black 2px;background-color:rgba(220,220,220,0.4);">
+									<div id="graph1" style="border: solid black 1px;background-color:rgba(220,220,220,0.4);">
 									</div>
 									<hr/>
 									<fieldset>
