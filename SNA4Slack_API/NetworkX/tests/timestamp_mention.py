@@ -47,14 +47,17 @@ class MentionGraph(object):
                 self.graph[val][self.graph.node][TIMESTAMP] += 1;
     
     def build_user_nodes(self):
-        Utils.get_Connection_SNA4Slack()
-        sync_table(SlackArchive)
-        instances = SlackArchive.objects.filter(teamName=self.team_name)
-        tsvalues = SlackArchive.objects.filter(timeStamp=self.timeStamp)
-        for row in instances:
-            self.graph.add_node(row[SENDER_COLUMN])
-            for val in tsvalues:
-                self.graph.nodes.add_value(val)
+        try:
+            Utils.get_Connection_SNA4Slack()
+            sync_table(SlackArchive)
+            instances = SlackArchive.objects.filter(teamName=self.team_name)
+            tsvalues = SlackArchive.objects.filter(timeStamp=self.timeStamp)
+            for row in instances:
+                self.graph.add_node(row[SENDER_COLUMN])
+                for val in tsvalues:
+                    self.graph.nodes.add_value(val)
+        except Exception as e:
+            print "exception found during node building: " + str(e)
 
     def print_graph(self):
         print self.graph.nodes
