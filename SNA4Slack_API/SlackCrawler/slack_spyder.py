@@ -37,7 +37,7 @@ class SlackSpider():
         self.display = Display(visible=0, size=(800, 600))
         self.display.start()
         self.driver = webdriver.Chrome("/var/chromedriver/chromedriver")
-        sleep(randint(7, 9))
+        sleep(randint(9, 10))
 
     # Close chromedriver
     def close_driver(self):
@@ -50,7 +50,7 @@ class SlackSpider():
     def get_page(self, url):
         print('getting page...')
         self.driver.get(url)
-        sleep(randint(6, 10))
+        sleep(randint(8, 10))
 
     # Grab items from divisions
     def grab_list_items(self):
@@ -69,14 +69,18 @@ class SlackSpider():
     # Process division elements
     def process_elements(self, div, senderAvatar):
         msg_sender_avatar = ''
+        try:
+            msg_sender = div.find_element_by_class_name(
+                "msg-user").get_attribute('innerText')
+            msg_time = div.find_element_by_class_name(
+                "msg-time").get_attribute('innerText')
+            msg_body = div.find_element_by_class_name(
+                "msg-body").get_attribute('innerText')
+            avatar = div.find_element_by_xpath('.//*[@class="msg-avatar"]')
+        except Exception as error:
+            print 'element not found exception'
+            return None
 
-        msg_sender = div.find_element_by_class_name(
-            "msg-user").get_attribute('innerText')
-        msg_time = div.find_element_by_class_name(
-            "msg-time").get_attribute('innerText')
-        msg_body = div.find_element_by_class_name(
-            "msg-body").get_attribute('innerText')
-        avatar = div.find_element_by_xpath('.//*[@class="msg-avatar"]')
 
         try:
             msg_sender_avatar = avatar.find_element_by_class_name(
@@ -99,12 +103,16 @@ class SlackSpider():
 
     # Parse the URL
     def parse(self, url):
+        self.all_items = []
         self.get_page(url)
         self.grab_list_items()
         if self.all_items:
+            print url
+            print len(self.all_items)
+            print "__________"
             return self.all_items
         else:
-            return False, False
+            return False
         pass
 
     # Get list of channels in a team
@@ -157,8 +165,10 @@ class SlackSpider():
                                                senderAvatar=data.senderAvatar,
                                                messageTime=dateutil.parser.parse(data.messageTime))
                     node_object.save()
+                    print 'Data saved'
                 else:
                     print 'No data found'
+                    print url[2]
     pass
 
 
