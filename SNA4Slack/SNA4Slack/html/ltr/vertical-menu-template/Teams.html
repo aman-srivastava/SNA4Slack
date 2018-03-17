@@ -181,14 +181,14 @@
       <!-- main menu content-->
       <div class="main-menu-content">
         <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
-          <li class=" nav-item"><a href="Dashboard.html"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span></a>
+          <li class=" nav-item active"><a href="Dashboard.html" id="dashboardPageLink"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span></a>
           </li>
 		  <li class=" navigation-header"><span data-i18n="nav.category.layouts">METRICS</span><i data-toggle="tooltip" data-placement="right" data-original-title="Metrics" class="icon-ellipsis icon-ellipsis"></i>
-          <li class=" nav-item active"><a href="Teams.html"><i class="icon-users"></i><span data-i18n="nav.teams.main" class="menu-title">Team</span></a>
+          <li class=" nav-item"><a href="Teams.html" id="TeamsPageLink"><i class="icon-users"></i><span data-i18n="nav.teams.main" class="menu-title">Team</span></a>
           </li>
-          <li class=" nav-item"><a href="ChannelMain.html"><i class="icon-slack"></i><span data-i18n="nav.channels.main" class="menu-title">Channels</span></a>
+          <li class=" nav-item"><a href="ChannelMain.html" id="ChannelsPageLink"><i class="icon-slack"></i><span data-i18n="nav.channels.main" class="menu-title">Channels</span></a>
           </li>
-          <li class=" nav-item"><a href="MembersMain.html"><i class="icon-user"></i><span data-i18n="nav.members.main" class="menu-title">Members</span></a>
+          <li class=" nav-item"><a href="MembersMain.html" id="MembersPageLink"><i class="icon-user"></i><span data-i18n="nav.members.main" class="menu-title">Members</span></a>
           </li>
 		  <li class=" navigation-header"><span data-i18n="nav.category.layouts">Team Summary</span><i data-toggle="tooltip" data-placement="right" data-original-title="Team Summary" class="icon-ellipsis icon-ellipsis"></i>
         </ul>
@@ -201,24 +201,24 @@
           <div class="insights">
             <div class="col-xs-12">
               <p>Name:</p>
-              <p>Kubernetes</p>
+              <p id="teamNameSidebar"></p>
             </div>
             <div class="col-xs-12">
               <p>URL:</p>
-              <p>kubernetes.slackarchive.io</p>
+              <a href="#" id="teamURLLink" target="_blank"><p id="teamURLTag"></p></a>			  
             </div>
 			<div class="col-xs-12">
-              <p>Channel Count:</p>
-              <p>201</p>
-            </div>
-            <div class="col-xs-12">
               <p>Member Count:</p>
-              <p>1,200</p>
+              <p  id="memberCount"></p>
             </div>
 			<div class="col-xs-12">
               <p>Conversation Count:</p>
-              <p>22,807</p>
+              <p  id="conversationCount"></p>
             </div>
+			<div class="col-xs-12">
+              <p>Channel Count:</p>
+              <p id="channelCount"></p>
+            </div>			
           </div>
           <div class="actions"><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Settings"><span aria-hidden="true" class="icon-cog3"></span></a><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Lock"><span aria-hidden="true" class="icon-lock4"></span></a><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Logout"><span aria-hidden="true" class="icon-power3"></span></a></div>
         </div>
@@ -236,7 +236,7 @@
 			
 			<section id="minimal-statistics-bg">
 				<div class="row">
-						<h4>Team Metrics | Kubernetes</h4>
+						<h4 id="teamNameHeader2">Team Metrics | Kubernetes</h4>
 						<hr/>
 					
 				</div>
@@ -276,10 +276,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-6 col-lg-12">
+					<div class="col-xl-12 col-lg-12">
 						<div class="card card-inverse box-shadow-0 card-success">
 							<div class="card-header">
-								<h4 class="card-title">Mention Based (Directed)</h4>
+								<h4 class="card-title">Mention Based (Undirected)</h4>
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
 									<ul class="list-inline mb-0">
@@ -292,24 +292,17 @@
 							</div>
 							<div class="card-body collapse in">
 								<div class="card-block">
-									<p class="card-text">Hover your mouse over nodes to get centrality measures</p>
-									<div class="report" style="text-align:center">
-									  <h2 style="color:gray; font-family:Helvetica">
-									  <span id="user2"></span>
-									  <span id="dCount2"></span>
-									  <span id="rCount2"></span>
-									  <span id="coCount2"></span>
-									  <span id="cCount2"></span>
-									  <span id="user2"></span></h2>
-									</div>
-									<div id="graph2" style="border: solid black 2px;background-color:rgba(0,0,0,0.4);">
+									<div style="z-index:1;position:absolute;background-color:rgba(0,0,0,0.7);border: solid black 1px;width:calc(100% - 3rem);text-align:center;">
+									  <span id="measures2" style="color:#F6BB42;">Degree: 0 | Betweenness: 0 | Closeness: 0</span>
+									</div>							
+									<div id="graph2" style="border: solid black 1px;background-color:rgba(220,220,220,0.4);">
 									</div>
 									<hr/>
 									<fieldset>
 										<div class="input-group">
-											<input id="search2" type="text" class="form-control" placeholder="Search by Username" aria-describedby="button-addon2">
+											<input id="search2" type="text" class="form-control" placeholder="Hover over nodes or search by username..." aria-describedby="button-addon2">
 											<span class="input-group-btn" id="button-addon2">
-												<button class="btn btn-warning" type="button" onclick="searchNode2()">Find</button>
+												<button class="btn btn-warning" type="button" onclick="searchNode2()" style="font-weight:bold;">Search</button>
 											</span>
 										</div>
 									</fieldset>
@@ -319,7 +312,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xl-6 col-lg-12">
+					<div class="col-xl-12 col-lg-12">
 						<div class="card card-inverse box-shadow-0 card-danger">
 							<div class="card-header">
 								<h4 class="card-title">Subscription Based (Undirected)</h4>
@@ -335,24 +328,17 @@
 							</div>
 							<div class="card-body collapse in">
 								<div class="card-block">
-									<p class="card-text">Hover your mouse over nodes to get centrality measures</p>
-									<div class="report" style="text-align:center">
-									  <h2 style="color:gray; font-family:Helvetica">
-									  <span id="user3"></span>
-									  <span id="dCount3"></span>
-									  <span id="rCount3"></span>
-									  <span id="coCount3"></span>
-									  <span id="cCount3"></span>
-									  <span id="user3"></span></h2>
-									</div>
-									<div id="graph3" style="border: solid black 2px;background-color:rgba(0,0,0,0.4);">
+									<div style="z-index:1;position:absolute;background-color:rgba(0,0,0,0.7);border: solid black 1px;width:calc(100% - 3rem);text-align:center;">
+									  <span id="measures3" style="color:#F6BB42;">Degree: 0 | Betweenness: 0 | Closeness: 0</span>
+									</div>							
+									<div id="graph3" style="border: solid black 1px;background-color:rgba(220,220,220,0.4);">
 									</div>
 									<hr/>
 									<fieldset>
 										<div class="input-group">
-											<input id="search3" type="text" class="form-control" placeholder="Search by Username" aria-describedby="button-addon2">
+											<input id="search3" type="text" class="form-control" placeholder="Hover over nodes or search by username..." aria-describedby="button-addon2">
 											<span class="input-group-btn" id="button-addon2">
-												<button class="btn btn-warning" type="button" onclick="searchNode3()">Find</button>
+												<button class="btn btn-warning" type="button" onclick="searchNode3()" style="font-weight:bold;">Search</button>
 											</span>
 										</div>
 									</fieldset>
@@ -360,7 +346,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-6 col-lg-12">
+					<div class="col-xl-12 col-lg-12">
 						<div class="card card-inverse box-shadow-0 card-info">
 							<div class="card-header">
 								<h4 class="card-title">Subscription Based (Directed)</h4>
@@ -376,24 +362,17 @@
 							</div>
 							<div class="card-body collapse in">
 								<div class="card-block">
-									<p class="card-text">Hover your mouse over nodes to get centrality measures</p>
-									<div class="report" style="text-align:center">
-									  <h2 style="color:gray; font-family:Helvetica">
-									  <span id="user4"></span>
-									  <span id="dCount4"></span>
-									  <span id="rCount4"></span>
-									  <span id="coCount4"></span>
-									  <span id="cCount4"></span>
-									  <span id="user4"></span></h2>
-									</div>
-									<div id="graph4" style="border: solid black 2px;background-color:rgba(0,0,0,0.4);">
+									<div style="z-index:1;position:absolute;background-color:rgba(0,0,0,0.7);border: solid black 1px;width:calc(100% - 3rem);text-align:center;">
+									  <span id="measures4" style="color:#F6BB42;">Degree: 0 | Betweenness: 0 | Closeness: 0</span>
+									</div>							
+									<div id="graph4" style="border: solid black 1px;background-color:rgba(220,220,220,0.4);">
 									</div>
 									<hr/>
 									<fieldset>
 										<div class="input-group">
-											<input id="search4" type="text" class="form-control" placeholder="Search by Username" aria-describedby="button-addon2">
+											<input id="search4" type="text" class="form-control" placeholder="Hover over nodes or search by username..." aria-describedby="button-addon2">
 											<span class="input-group-btn" id="button-addon2">
-												<button class="btn btn-warning" type="button" onclick="searchNode4()">Find</button>
+												<button class="btn btn-warning" type="button" onclick="searchNode4()" style="font-weight:bold;">Search</button>
 											</span>
 										</div>
 									</fieldset>
@@ -453,6 +432,7 @@
     <!-- END ROBUST JS-->
     <!-- BEGIN PAGE LEVEL JS-->
 	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="../../../assets/js/getMentionDirected.js" type="text/javascript"></script>
 	<script src="../../../assets/js/getMentionUndirected.js" type="text/javascript"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type='text/javascript' src="http://code.jquery.com/ui/1.11.3/jquery-ui.min.js"> </script>
