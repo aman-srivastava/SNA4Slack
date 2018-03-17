@@ -1,0 +1,283 @@
+{
+    "_id": {
+        "$oid": "5aac9c0d734d1d1b8288bef0"
+    },
+    "dataAnalytics": [
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "40",
+            "messageSender": "ahtiainen"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "147",
+            "messageSender": "arjwright"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "124",
+            "messageSender": "asaarnio"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "13",
+            "messageSender": "ashnazir"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "2856",
+            "messageSender": "carsten"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "57",
+            "messageSender": "centurion"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "48",
+            "messageSender": "colinlixiaojian"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "17",
+            "messageSender": "danny.siu"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "17",
+            "messageSender": "dermotmcg"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "201",
+            "messageSender": "gerbick"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "19",
+            "messageSender": "harrih"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "48",
+            "messageSender": "jugibugi"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "14",
+            "messageSender": "juho"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "90",
+            "messageSender": "lg-fuzo"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "563",
+            "messageSender": "locusf"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "34",
+            "messageSender": "marc"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "20",
+            "messageSender": "martin"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "131",
+            "messageSender": "matias"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "45",
+            "messageSender": "mg0314a"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "13",
+            "messageSender": "mgraham"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "15",
+            "messageSender": "niilo"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "13",
+            "messageSender": "pasi"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "54",
+            "messageSender": "petri"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "1918",
+            "messageSender": "r0kk3rz"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "14",
+            "messageSender": "robert"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "387",
+            "messageSender": "steph"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "99",
+            "messageSender": "tswindell"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "52",
+            "messageSender": "vgrade"
+        },
+        {
+            "channelName": "general",
+            "teamName": "zipperglobal",
+            "messageCount": "16",
+            "messageSender": "willish"
+        },
+        {
+            "channelName": "imagineers",
+            "teamName": "zipperglobal",
+            "messageCount": "111",
+            "messageSender": "abranson"
+        },
+        {
+            "channelName": "imagineers",
+            "teamName": "zipperglobal",
+            "messageCount": "408",
+            "messageSender": "arjwright"
+        },
+        {
+            "channelName": "imagineers",
+            "teamName": "zipperglobal",
+            "messageCount": "701",
+            "messageSender": "carsten"
+        },
+        {
+            "channelName": "imagineers",
+            "teamName": "zipperglobal",
+            "messageCount": "242",
+            "messageSender": "gerbick"
+        },
+        {
+            "channelName": "imagineers",
+            "teamName": "zipperglobal",
+            "messageCount": "256",
+            "messageSender": "locusf"
+        },
+        {
+            "channelName": "imagineers",
+            "teamName": "zipperglobal",
+            "messageCount": "878",
+            "messageSender": "r0kk3rz"
+        },
+        {
+            "channelName": "imagineers",
+            "teamName": "zipperglobal",
+            "messageCount": "161",
+            "messageSender": "steph"
+        },
+        {
+            "channelName": "imagineers",
+            "teamName": "zipperglobal",
+            "messageCount": "191",
+            "messageSender": "tswindell"
+        },
+        {
+            "channelName": "random",
+            "teamName": "zipperglobal",
+            "messageCount": "24",
+            "messageSender": "abranson"
+        },
+        {
+            "channelName": "random",
+            "teamName": "zipperglobal",
+            "messageCount": "90",
+            "messageSender": "arjwright"
+        },
+        {
+            "channelName": "random",
+            "teamName": "zipperglobal",
+            "messageCount": "7",
+            "messageSender": "asaarnio"
+        },
+        {
+            "channelName": "random",
+            "teamName": "zipperglobal",
+            "messageCount": "241",
+            "messageSender": "carsten"
+        },
+        {
+            "channelName": "random",
+            "teamName": "zipperglobal",
+            "messageCount": "86",
+            "messageSender": "gerbick"
+        },
+        {
+            "channelName": "random",
+            "teamName": "zipperglobal",
+            "messageCount": "220",
+            "messageSender": "locusf"
+        },
+        {
+            "channelName": "random",
+            "teamName": "zipperglobal",
+            "messageCount": "455",
+            "messageSender": "r0kk3rz"
+        },
+        {
+            "channelName": "random",
+            "teamName": "zipperglobal",
+            "messageCount": "239",
+            "messageSender": "steph"
+        },
+        {
+            "channelName": "random",
+            "teamName": "zipperglobal",
+            "messageCount": "50",
+            "messageSender": "tswindell"
+        }
+    ]
+}

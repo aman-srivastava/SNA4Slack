@@ -1,0 +1,35 @@
+{
+    "_id": {
+        "$oid": "5a6266f1f36d2815ee4a801e"
+    },
+    "teams": [
+        {
+            "url": "http://dummy.slackarchive.io",
+            "name": "Dummy"
+        },
+        {
+            "url": "http://buffercommunity.slackarchive.io",
+            "name": "Buffer Community"
+        },
+        {
+            "url": "http://openaddresses.slackarchive.io",
+            "name": "OpenAddresses"
+        },
+        {
+            "url": "http://kubernetes.slackarchive.io",
+            "name": "Kubernetes"
+        },
+        {
+            "url": "http://punecoders.slackarchive.io",
+            "name": "Pune Coders"
+        },
+        {
+            "url": "http://flatartagency.slackarchive.io",
+            "name": "Flat Art Agency"
+        },
+        {
+            "url": "http://zipperglobal.slackarchive.io",
+            "name": "Zipper Global"
+        }
+    ]
+}

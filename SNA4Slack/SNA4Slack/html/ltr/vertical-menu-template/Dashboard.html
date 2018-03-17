@@ -40,6 +40,8 @@
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/calendars/clndr.min.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/colors/palette-climacon.min.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/users.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/loaders/loaders.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/colors/palette-loader.min.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
@@ -132,14 +134,14 @@
       <!-- main menu content-->
       <div class="main-menu-content">
         <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
-          <li class=" nav-item active"><a href="Dashboard.html"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span></a>
+          <li class=" nav-item active"><a href="Dashboard.html" id="dashboardPageLink"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span></a>
           </li>
 		  <li class=" navigation-header"><span data-i18n="nav.category.layouts">METRICS</span><i data-toggle="tooltip" data-placement="right" data-original-title="Metrics" class="icon-ellipsis icon-ellipsis"></i>
-          <li class=" nav-item"><a href="Teams.html"><i class="icon-users"></i><span data-i18n="nav.teams.main" class="menu-title">Team</span></a>
+          <li class=" nav-item"><a href="Teams.html" id="TeamsPageLink"><i class="icon-users"></i><span data-i18n="nav.teams.main" class="menu-title">Team</span></a>
           </li>
-          <li class=" nav-item"><a href="ChannelMain.html"><i class="icon-slack"></i><span data-i18n="nav.channels.main" class="menu-title">Channels</span></a>
+          <li class=" nav-item"><a href="ChannelMain.html" id="ChannelsPageLink"><i class="icon-slack"></i><span data-i18n="nav.channels.main" class="menu-title">Channels</span></a>
           </li>
-          <li class=" nav-item"><a href="MembersMain.html"><i class="icon-user"></i><span data-i18n="nav.members.main" class="menu-title">Members</span></a>
+          <li class=" nav-item"><a href="MembersMain.html" id="MembersPageLink"><i class="icon-user"></i><span data-i18n="nav.members.main" class="menu-title">Members</span></a>
           </li>
 		  <li class=" navigation-header"><span data-i18n="nav.category.layouts">Team Summary</span><i data-toggle="tooltip" data-placement="right" data-original-title="Team Summary" class="icon-ellipsis icon-ellipsis"></i>
         </ul>
@@ -152,24 +154,24 @@
           <div class="insights">
             <div class="col-xs-12">
               <p>Name:</p>
-              <p>Kubernetes</p>
+              <p id="teamNameSidebar"></p>
             </div>
             <div class="col-xs-12">
               <p>URL:</p>
-              <p>kubernetes.slackarchive.io</p>
+              <a href="#" id="teamURLLink" target="_blank"><p id="teamURLTag"></p></a>			  
             </div>
 			<div class="col-xs-12">
-              <p>Channel Count:</p>
-              <p>201</p>
-            </div>
-            <div class="col-xs-12">
               <p>Member Count:</p>
-              <p>1,200</p>
+              <p  id="memberCount"></p>
             </div>
 			<div class="col-xs-12">
               <p>Conversation Count:</p>
-              <p>22,807</p>
+              <p  id="conversationCount"></p>
             </div>
+			<div class="col-xs-12">
+              <p>Channel Count:</p>
+              <p id="channelCount"></p>
+            </div>			
           </div>
           <div class="actions"><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Settings"><span aria-hidden="true" class="icon-cog3"></span></a><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Lock"><span aria-hidden="true" class="icon-lock4"></span></a><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Logout"><span aria-hidden="true" class="icon-power3"></span></a></div>
         </div>
@@ -186,7 +188,7 @@
         <div class="content-body"><!-- Description -->
 			<section id="minimal-statistics-bg">
 				<div class="row">
-						<h4>Dashboard | Kubernetes</h4>
+						<h4 id="teamNameHeader">Dashboard | Kubernetes</h4>
 						<hr/>
 					
 				</div>
@@ -200,8 +202,15 @@
 											<i class="icon-ios-people white font-large-2 float-xs-left"></i>
 										</div>
 										<div class="media-body white text-xs-right">
-											<h3 id="noOfUsers">0</h3>
-											<span>Users</span>
+											<h3 id="noOfUsers">
+												<div class="loader-container">
+													<div class="loader-container">
+													<div class="semi-circle-spin loader-white">
+														<div></div>
+													</div>
+												</div>
+											</h3>
+											<span>Members</span>
 										</div>
 									</div>
 								</div>
@@ -217,7 +226,14 @@
 											<i class="icon-chatbubbles white font-large-2 float-xs-left"></i>
 										</div>
 										<div class="media-body white text-xs-right">
-											<h3 id="noOfConversations">0</h3>
+											<h3 id="noOfConversations">
+												<div class="loader-container">
+													<div class="loader-container">
+													<div class="semi-circle-spin loader-white">
+														<div></div>
+													</div>
+												</div>
+											</h3>
 											<span>Conversations</span>
 										</div>
 									</div>
@@ -234,7 +250,14 @@
 											<i class="icon-slack white font-large-2 float-xs-left"></i>
 										</div>
 										<div class="media-body white text-xs-right">
-											<h3 id="noOfChannels">0</h3>
+											<h3 id="noOfChannels">
+												<div class="loader-container">
+													<div class="loader-container">
+													<div class="semi-circle-spin loader-white">
+														<div></div>
+													</div>
+												</div>
+											</h3>
 											<span>Channels</span>
 										</div>
 									</div>
@@ -251,7 +274,14 @@
 											<i class="icon-at white font-large-2 float-xs-left"></i>
 										</div>
 										<div class="media-body white text-xs-right">
-											<h3 id="noOfMentions">0</h3>
+											<h3 id="noOfMentions">
+												<div class="loader-container">
+													<div class="loader-container">
+													<div class="semi-circle-spin loader-white">
+														<div></div>
+													</div>
+												</div>
+											</h3>
 											<span>Mentions</span>
 										</div>
 									</div>
@@ -305,59 +335,59 @@
 										<thead>
 											<tr>
 												<th>Username</th>
-												<th>Profile Pic</th>
+												<th>User Avatar</th>
+												<th>Mentions</th>
 												<th>Popularity</th>
-												<th>Activity</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
-												<td class="text-truncate">SarahW</td>
+												<td class="text-truncate" id="superstar1username"></td>
 												<td class="text-truncate">
-													<span class="avatar avatar-xs"><img src="../../../app-assets/images/portrait/small/avatar-s-4.png" alt="avatar"></span> <span></span>
+													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif" id="superstar1avatar" alt="avatar"></span> <span></span>
 												</td>
-												<td class="text-truncate"><span class="tag tag-success">High</span></td>
-												<td class="valign-middle"><progress value="88" max="100" class="progress progress-xs progress-success m-0">88%</progress></td>
+												<td class="text-truncate"><span id="superstar1mentions" class="tag tag-success"></span></td>
+												<td class="valign-middle"><progress id="superstar1popularity" value="0" max="100" class="progress progress-xs progress-success m-0"></progress></td>
 											</tr>
 											<tr>
-												<td class="text-truncate">EdwardC</td>
+												<td class="text-truncate" id="superstar2username"></td>
 												<td class="text-truncate">
-													<span class="avatar avatar-xs"><img src="../../../app-assets/images/portrait/small/avatar-s-5.png" alt="avatar"></span> <span></span>
+													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar2avatar" alt="avatar"></span> <span></span>
 												</td>
-												<td class="text-truncate"><span class="tag tag-warning">Medium</span></td>
-												<td class="valign-middle"><progress value="55" max="100" class="progress progress-xs progress-warning m-0">55%</progress></td>
+												<td class="text-truncate"><span id="superstar2mentions" class="tag tag-success"></span></td>
+												<td class="valign-middle"><progress id="superstar2popularity" value="0" max="100" class="progress progress-xs progress-success m-0"></progress></td>
 											</tr>
 											<tr>
-												<td class="text-truncate">CarolE</td>
+												<td class="text-truncate" id="superstar3username"></td>
 												<td class="text-truncate">
-													<span class="avatar avatar-xs"><img src="../../../app-assets/images/portrait/small/avatar-s-6.png" alt="avatar"></span> <span></span>
+													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar3avatar" alt="avatar"></span> <span></span>
 												</td>
-												<td class="text-truncate"><span class="tag tag-danger">Low</span></td>
-												<td class="valign-middle"><progress value="25" max="100" class="progress progress-xs progress-danger m-0">25%</progress></td>
+												<td class="text-truncate"><span  id="superstar3mentions"class="tag tag-warning"></span></td>
+												<td class="valign-middle"><progress id="superstar3popularity" value="0" max="100" class="progress progress-xs progress-warning m-0"></progress></td>
 											</tr>
 											<tr>
-												<td class="text-truncate">GregoryL</td>
+												<td class="text-truncate" id="superstar4username"></td>
 												<td class="text-truncate">
-													<span class="avatar avatar-xs"><img src="../../../app-assets/images/portrait/small/avatar-s-7.png" alt="avatar"></span> <span></span>
+													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar4avatar" alt="avatar"></span> <span></span>
 												</td>
-												<td class="text-truncate"><span class="tag tag-success">High</span></td>
-												<td class="valign-middle"><progress value="95" max="100" class="progress progress-xs progress-success m-0">95%</progress></td>
+												<td class="text-truncate"><span  id="superstar4mentions"class="tag tag-warning"></span></td>
+												<td class="valign-middle"><progress id="superstar4popularity" value="0" max="100" class="progress progress-xs progress-warning m-0"></progress></td>
 											</tr>
 											<tr>
-												<td class="text-truncate">SusanS</td>
+												<td class="text-truncate" id="superstar5username"></td>
 												<td class="text-truncate">
-													<span class="avatar avatar-xs"><img src="../../../app-assets/images/portrait/small/avatar-s-8.png" alt="avatar"></span> <span></span>
+													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar5avatar" alt="avatar"></span> <span></span>
 												</td>
-												<td class="text-truncate"><span class="tag tag-warning">Medium</span></td>
-												<td class="valign-middle"><progress value="45" max="100" class="progress progress-xs progress-warning m-0">45%</progress></td>
+												<td class="text-truncate"><span id="superstar5mentions"class="tag tag-danger"></span></td>
+												<td class="valign-middle"><progress id="superstar5popularity" value="0" max="100" class="progress progress-xs progress-danger m-0"></progress></td>
 											</tr>
 											<tr>
-												<td class="text-truncate">WalterK</td>
+												<td class="text-truncate" id="superstar6username"></td>
 												<td class="text-truncate">
-													<span class="avatar avatar-xs"><img src="../../../app-assets/images/portrait/small/avatar-s-9.png" alt="avatar"></span> <span></span>
+													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar6avatar" alt="avatar"></span> <span></span>
 												</td>
-												<td class="text-truncate"><span class="tag tag-danger">Low</span></td>
-												<td class="valign-middle"><progress value="15" max="100" class="progress progress-xs progress-danger m-0">15%</progress></td>
+												<td class="text-truncate"><span id="superstar6mentions"class="tag tag-danger"></span></td>
+												<td class="valign-middle"><progress id="superstar6popularity" value="0" max="100" class="progress progress-xs progress-danger m-0"></progress></td>
 											</tr>
 										</tbody>
 									</table>
