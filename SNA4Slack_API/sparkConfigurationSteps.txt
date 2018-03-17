@@ -1,0 +1,39 @@
+Spark prebuilt version: 2.1.0-bin-hadoop2.7
+Download from: https://spark.apache.org/downloads.html
+
+Configuration steps: 
+1. Environment Variables:
+	add the following to .bashrc file
+
+	export SPARK_HOME= path to spark-2.1.0
+	export PATH=$SPARK_HOME:$PATH
+	export PYTHONPATH=$SPARK_HOME/python
+	export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+	export PATH=$PATH:$JAVA_HOME/bin
+	export SPARK_MASTER_IP=127.0.0.1
+	export PYSPARK_SUBMIT_ARGS="--master local[2] pyspark-shell"
+
+   save and exit
+   use command
+   	source ~/.bashrc 
+   to make the changes permanent
+
+2. Spark Configuration:
+
+	1. Set SPARK_MASTER_IP to 192.168.0.1 by adding
+		SPARK_MASTER_IP=192.168.0.1
+	   to file: "$SPARK_HOME/spark-2.1/conf/spark-env.sh"
+
+	2. Add default dependencies to file "$SPARK_HOME/spark-2.1/conf/spark-defaults.conf"
+		spark.jars.packages com.datastax.spark:spark-cassandra-connector_2.11:2.0.6
+
+Example: 
+1. Start spark shell:	
+	$SPARK_HOME/bin/pyspark
+
+2. Update spark variable with cinfiguartion values:
+	spark = SparkSession.builder.appName("understanding_sparksession").config("spark.cassandra.connection.host", "104.155.179.66").config("spark.cassandra.auth.username", "cassandra").config("spark.cassandra.auth.password", "LYN1bQNCds3T").master("local[*]").getOrCreate()
+
+3. Create dataframe on cassandra
+	df = spark.read.format("org.apache.spark.sql.cassandra").options(table="slack_archive_dev", keyspace="sna4slack_metrics").load()
+	df.show(10)
