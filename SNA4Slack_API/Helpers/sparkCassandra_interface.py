@@ -6,7 +6,7 @@ import findspark
 
 class sparkCassandraHelper():
 
-    def main(self):
+    def createSparkSession(self):
         findspark.init(os.environ['SPARK_HOME'])
         import pyspark
         from pyspark.sql import SQLContext, SparkSession
@@ -22,15 +22,27 @@ class sparkCassandraHelper():
         except Exception as error:
             print error
 
-        print spark
+        return spark
 
+    def main(self):
+        spark = self.createSparkSession()
         try:
             df = spark.read\
                 .format("org.apache.spark.sql.cassandra")\
                 .options(table="slack_archive_dev", keyspace="sna4slack_metrics").load()
-            df.show(10)
+            df.createOrReplaceTempView("archives")
+
+            jsonOut = spark.sql("SELECT max(teamName) as teamName,messageSender, count(messageBody) as msgCount \
+                FROM archives \
+                WHERE teamName= 'openaddresses' \
+                GROUP BY  messageSender \
+                ORDER BY msgCount").toJSON()
+
+            jsonOut.collect()
+
         except Exception as error:
             print "Error occured"
+        spark.stop()
 
 if __name__ == '__main__':
     sch = sparkCassandraHelper()
