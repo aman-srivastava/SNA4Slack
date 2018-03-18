@@ -9,3 +9,5 @@ pyvirtualdisplay
 networkx
 dateutils
 pymongo
+findspark
+re

@@ -16,7 +16,7 @@ def crawlerHarness():
 
     slackSpider = SlackSpider()
     slackSpider.start_driver()
-    slackSpider.parse("https://kubernetes.slackarchive.io/kubernetes-users/page-100")
+    print slackSpider.parse("https://kubernetes.slackarchive.io/community-sites/page-1")
     # slackSpider.runSpider(sys.argv[1])
     # "https://punecoders.slackarchive.io/general/page-2")
     slackSpider.close_driver()

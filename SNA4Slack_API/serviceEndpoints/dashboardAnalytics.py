@@ -14,6 +14,7 @@ from cassandra.cqlengine import columns, connection
 
 from objects.slack_archive import SlackArchive
 from Helpers.mongoHelper import MongoHelper
+from Helpers.sparkCassandra_interface import sparkCassandraHelper
 
 
 class DashboardTrigger(Resource):
@@ -54,11 +55,14 @@ class DashboardTrigger(Resource):
           200:
             description: Parse Slack archive and save data to database
         """
-        team_name = request.headers.get('team_Name')
+        teamName = request.headers.get('team_Name')
         channelName = request.headers.get('channel_name')
         messageSender = request.headers.get('messageSender')
+        sch = sparkCassandraHelper(teamName)
+        sch.main()
 
-        ap = PlainTextAuthProvider(
+
+        '''ap = PlainTextAuthProvider(
             username=Config.DB_USER, password=Config.DB_PASSWORD)
         node_ips = [Config.NODE_IP]
         cluster = Cluster(node_ips, auth_provider=ap)
@@ -85,5 +89,7 @@ class DashboardTrigger(Resource):
             }
             output.append(temp)
         data = '{"dataAnalytics":' + json.dumps(output) + '}'
+        
 
-        return MongoHelper.manageInsert(team_name, json.loads(data))
+        return MongoHelper.manageInsert(teamName, json.loads(data))'''
+        return "Success"
