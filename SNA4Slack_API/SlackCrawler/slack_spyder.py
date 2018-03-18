@@ -54,12 +54,14 @@ class SlackSpider():
 
     # Grab items from divisions
     def grab_list_items(self):
+        self.all_items = []
         print('grabbing list of items...')
         senderAvatar = ''
         for div in self.driver.find_elements_by_xpath('//ul[@class="messages"]//li'):
             data = self.process_elements(div, senderAvatar)
 
             if data:
+                print 'Data'
                 self.all_items.append(data)
                 if data.senderAvatar != '':
                     senderAvatar = data.senderAvatar
@@ -80,7 +82,6 @@ class SlackSpider():
         except Exception as error:
             print 'element not found exception'
             return None
-
 
         try:
             msg_sender_avatar = avatar.find_element_by_class_name(
@@ -103,7 +104,6 @@ class SlackSpider():
 
     # Parse the URL
     def parse(self, url):
-        self.all_items = []
         self.get_page(url)
         self.grab_list_items()
         if self.all_items:
@@ -112,7 +112,7 @@ class SlackSpider():
             print "__________"
             return self.all_items
         else:
-            return False
+            return [False]
         pass
 
     # Get list of channels in a team
@@ -165,10 +165,9 @@ class SlackSpider():
                                                senderAvatar=data.senderAvatar,
                                                messageTime=dateutil.parser.parse(data.messageTime))
                     node_object.save()
-                    print 'Data saved'
                 else:
-                    print 'No data found'
                     print url[2]
+                    print 'No data found'
     pass
 
 
