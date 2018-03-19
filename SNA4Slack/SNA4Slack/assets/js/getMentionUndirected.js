@@ -22,7 +22,7 @@ $( document ).ready(function() {
 			graph = graph[j]['undirected-mention-graph'];
 		};
 	}
-	console.log(graph);
+	//console.log(graph);
 	var linkedByIndex = {};
 	var edges = [];
 	graph.links.forEach(function(e) {

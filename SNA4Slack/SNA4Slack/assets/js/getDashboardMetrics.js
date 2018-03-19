@@ -26,32 +26,156 @@ $( document ).ready(function() {
 				};
 			}
 			
-			//console.log(data);
+			console.log(data);
 			var noOfMessages = 0
 			var noOfChannels = []
 			var noOfMembers = []
-			for(var i = 0 ; i<data.length ; i++){
-				noOfMessages += parseInt(data[i].messageCount);
-
-				if (noOfMembers.indexOf(data[i].messageSender) === -1){
-				noOfMembers.push(data[i].messageSender);
-				}
-				if (noOfChannels.indexOf(data[i].channelName) === -1){
-				noOfChannels.push(data[i].channelName);
-				}
-				
+			for(var i = 0 ; i<data.messageCount_channel.length ; i++){
+				noOfMessages += parseInt(data.messageCount_channel[i].msgCount);
 			}
+			
+			/*
+			for(var i = 0 ; i<data.messageCount_sender.length ; i++){
+				if (noOfMembers.indexOf(data.messageCount_sender[i].messageSender) === -1){
+				noOfMembers.push(data.messageCount_sender[i].messageSender);
+				}				
+			}
+			*/
+			
 			document.getElementById("noOfConversations").innerHTML = noOfMessages;
-			document.getElementById("noOfUsers").innerHTML = noOfMembers.length;
-			document.getElementById("noOfChannels").innerHTML = noOfChannels.length;
+			document.getElementById("noOfUsers").innerHTML = data.messageCount_sender.length;
+			document.getElementById("noOfChannels").innerHTML = data['messageCount_channel'].length;
 
 			document.getElementById("conversationCount").innerHTML = noOfMessages;
-			document.getElementById("memberCount").innerHTML = noOfMembers.length;
-			document.getElementById("channelCount").innerHTML = noOfChannels.length;
+			document.getElementById("memberCount").innerHTML = data.messageCount_sender.length;
+			document.getElementById("channelCount").innerHTML = data['messageCount_channel'].length;
+			
+			var ctx = $("#column-chart");
+
+			// Chart Options
+			var chartOptions = {
+				// Elements options apply to all of the options unless overridden in a dataset
+				// In this case, we are setting the border of each bar to be 2px wide and green
+				elements: {
+					rectangle: {
+						borderWidth: 2,
+						borderColor: 'rgb(0, 255, 0)',
+						borderSkipped: 'bottom'
+					}
+				},
+				responsive: true,
+				maintainAspectRatio: false,
+				responsiveAnimationDuration:500,
+				legend: {display: false,
+					position: 'bottom',
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						gridLines: {
+							color: "#f3f3f3",
+							drawTicks: false,
+						},
+						scaleLabel: {
+							display: true,
+						}
+					}],
+					yAxes: [{
+						display: true,
+						gridLines: {
+							color: "#f3f3f3",
+							drawTicks: false,
+						},
+						scaleLabel: {
+							display: true,
+						}
+					}]
+				},
+				title: {
+					display: false,
+					text: 'Chart.js Bar Chart'
+				}
+			};
+
+			var labels = [];
+			var values = [];
+			for(var i = 0 ; i<data.messageCount_yearlyDist.length ; i++){
+				var month;
+				switch (data.messageCount_yearlyDist[i].Month) {
+					case 1:
+						month = "Jan";
+						break;
+					case 2:
+						month = "Feb";
+						break;
+					case 3:
+						month = "Mar";
+						break;
+					case 4:
+						month = "Apr";
+						break;
+					case 5:
+						month = "May";
+						break;
+					case 6:
+						month = "Jun";
+						break;
+					case 7:
+						month = "Jul";
+						break;
+					case 8:
+						month = "Aug";
+						break;
+					case 9:
+						month = "Sep";
+						break;
+					case 10:
+						month = "Oct";
+						break;
+					case 11:
+						month = "Nov";
+						break;
+					case 12:
+						month = "Dec";
+				}
+				labels.push(month+", "+data.messageCount_yearlyDist[i].Year);
+				values.push(data.messageCount_yearlyDist[i].msgCount)
+			}
+			
+			// Chart Data
+			var chartData = {
+				labels: labels,
+				datasets: [{
+					label: "Conversations",
+					data: values,
+					backgroundColor: "#673AB7",
+					hoverBackgroundColor: "rgba(103,58,183,.9)",
+					borderColor: "transparent"
+				}]
+			};
+
+			var config = {
+				type: 'bar',
+
+				// Chart Options
+				options : chartOptions,
+
+				data : chartData
+			};
+
+			// Create the chart
+			var lineChart = new Chart(ctx, config);
+		  
+			
+			
 			},
         error: function (XMLHttpRequest, textStatus, errorThrown) {
         console.log('error', errorThrown);
-      }
+		}      
+		
+	  
+	  
+
 	});
 });
 $( document ).ready(function() {
@@ -70,18 +194,19 @@ $( document ).ready(function() {
 					data = data[j]['directed-mention-graph'].links;
 				};
 			}
+			//console.log(data);
 			var noOfMentions = 0;
 			var teamSuperstars = {};
 			for(var i = 0 ; i<data.length ; i++){
 				noOfMentions += parseInt(data[i].weight);
-				//console.log(data[i].target+": "+data[i].weight);
 				if(!(data[i].target in teamSuperstars)){
-					teamSuperstars[data[i].target] = data[i].weight;
+					teamSuperstars[data[i].target] = parseInt(data[i].weight);
 				}
 				else{
-					teamSuperstars[data[i].target]+=teamSuperstars[data[i].target];
+					teamSuperstars[data[i].target]=teamSuperstars[data[i].target]+parseInt(data[i].weight);
 				}
 			}
+			console.log(teamSuperstars);
 			var items = Object.keys(teamSuperstars).map(function(key) {
 				return [key, teamSuperstars[key]];
 			});

@@ -266,7 +266,7 @@ $( document ).ready(function() {
 			})
     .on("mouseout", function(d) {exit_highlight();})
 		.on("mouseup",  
-			function() {console.log("mouseUp: ", focus_node, highlight_node);
+			function() {//console.log("mouseUp: ", focus_node, highlight_node);
 				if (focus_node!==null)
       {
         focus_node = null;
