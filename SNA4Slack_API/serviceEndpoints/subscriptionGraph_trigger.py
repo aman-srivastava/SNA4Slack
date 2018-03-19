@@ -9,6 +9,7 @@ from utils import Utils
 from NetworkX.src.subscription_graph import SubscriptionGraph
 from Helpers.mongoHelper import MongoHelper
 
+
 class SubscriptionGraphTrigger (Resource):
 
     def get(self):
@@ -52,6 +53,7 @@ class SubscriptionGraphTrigger (Resource):
         # channel = request.headers.get('channel')
         directed = request.headers.get('directed')
         directed = directed in ("True", "true")
+        documentType = ''
 
         graph_gen = SubscriptionGraph(team_Name, directed)
         print 'Graph done'
@@ -69,8 +71,12 @@ class SubscriptionGraphTrigger (Resource):
         print 'Compute clustering'
 
         if directed == True:
-            data = '{"directed-subscription-graph":' + json.dumps(graph_gen.json()) + '}'
+            documentType = "directed-subscription-graph"
+            data = '{"documentType" :"directed-subscription-graph", "directed-subscription-graph":' + \
+                json.dumps(graph_gen.json()) + '}'
         else:
-            data = '{"undirected-subscription-graph":' + json.dumps(graph_gen.json()) + '}'
+            documentType = "undirected-subscription-graph"
+            data = '{"documentType" :"undirected-subscription-graph","undirected-subscription-graph":' + \
+                json.dumps(graph_gen.json()) + '}'
 
-        return MongoHelper.manageInsert(team_Name, json.loads(data))
+        return MongoHelper.manageInsert(team_Name, json.loads(data), documentType)

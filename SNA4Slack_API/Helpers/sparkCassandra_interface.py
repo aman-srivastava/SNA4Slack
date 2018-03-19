@@ -46,7 +46,7 @@ class sparkCassandraHelper():
             WHERE teamName = '{0}' \
             GROUP BY channelName, messageSender \
             ORDER BY msgCount".format(self.teamName))
-        data = '{"dataAnalytics": {"messageCount_channel_sender":' + \
+        data = '{"documentType": "dataAnalytics","dataAnalytics": {"messageCount_channel_sender":' + \
             str(jsonOut.toJSON(use_unicode=False).collect()).replace("'", "") + ','
 
         #MongoHelper.manageInsert(self.teamName, jsonOut.collect().encode("ascii","replace"))
@@ -85,7 +85,16 @@ class sparkCassandraHelper():
             str(jsonOut.toJSON(use_unicode=False).collect()
                 ).replace("'", "") + ','
 
-        # 5. Get Emoji count per team
+        # 5. Get first message sent time and user in the team
+        jsonOut = spark.sql("SELECT MIN(messageTime) as messageTime, channelName \
+            FROM archives \
+            WHERE teamName ='{0}' \
+            GROUP BY channelName".format(self.teamName))
+
+        data = data + '"firstMessage":' + \
+            str(jsonOut.toJSON(use_unicode=False).collect()).replace("'", "") + ','
+
+        # 6. Get Emoji count per team
         highpoints = re.compile(
             u'[\U00000000-\U0000009F]|\
             [\U00000020-\U0000007E]|\
@@ -102,15 +111,13 @@ class sparkCassandraHelper():
         jsonOut = lines.flatMap(lambda x: re.sub(highpoints, '', x)) \
             .map(lambda x: (x, 1)) \
             .reduceByKey(add).toDF(['emoji', 'emojiCount'])
-        #jsonOut = tempOut.select(col('emoji'), tempOut.emojiCount.cast('string').alias('emojiCount'))
 
-        #MongoHelper.manageInsert(self.teamName, jsonOut.collect().encode("ascii","replace"))
         data = data + '"emojiCount":' + \
             str(jsonOut.toJSON(use_unicode=False).collect()
                 ).replace("'", "").replace("\\", "\\\\") + '} }'
+
         spark.stop()
-        print data
-        return MongoHelper.manageInsert(self.teamName, json.loads(data))
+        return MongoHelper.manageInsert(self.teamName, json.loads(data), "dataAnalytics")
 
 
 if __name__ == '__main__':

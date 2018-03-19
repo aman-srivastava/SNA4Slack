@@ -59,37 +59,4 @@ class DashboardTrigger(Resource):
         channelName = request.headers.get('channel_name')
         messageSender = request.headers.get('messageSender')
         sch = sparkCassandraHelper(teamName)
-        sch.main()
-
-
-        '''ap = PlainTextAuthProvider(
-            username=Config.DB_USER, password=Config.DB_PASSWORD)
-        node_ips = [Config.NODE_IP]
-        cluster = Cluster(node_ips, auth_provider=ap)
-        session = cluster.connect()
-        connection.setup(node_ips, Config.KEYSPACE_NAME,
-                         protocol_version=3, auth_provider=ap)
-
-        rows = session.execute(
-            'SELECT "teamName","channelName","messageSender", COUNT(*) as "msgCount" \
-             FROM {0}.{1} \
-             WHERE "teamName" = {2} \
-             GROUP BY "teamName", "channelName","messageSender";'.format(Config.KEYSPACE_NAME,
-                                                                         Config.DB_COLUMN_FAMILY,
-                                                                         '\'' + team_name + '\''))
-
-        cluster.shutdown()
-        output = []
-        for row in rows:
-            temp = {
-                'teamName': str(row.teamName),
-                'channelName': str(row.channelName),
-                'messageSender': str(row.messageSender),
-                'messageCount': str(row.msgCount)
-            }
-            output.append(temp)
-        data = '{"dataAnalytics":' + json.dumps(output) + '}'
-        
-
-        return MongoHelper.manageInsert(teamName, json.loads(data))'''
-        return "Success"
+        return sch.main()
