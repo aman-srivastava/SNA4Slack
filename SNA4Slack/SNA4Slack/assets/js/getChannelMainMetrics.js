@@ -64,6 +64,22 @@ $( document ).ready(function() {
     console.log('Max Messages: '+maxMessages)
     console.log('Least Messages: '+minMessages)
     console.log('Total channels: ' +data.messageCount_channel.length)
+		 
+		 
+	console.log('------------------------------------------')
+
+    var channelMemberMap = {}
+    for( var i = 0; i<data.memberCount_channel.length; i++){
+      channelMemberMap[data.memberCount_channel[i].channelName] = data.memberCount_channel[i].memberCount
+    }
+
+    for(var i in channelMemberMap) {
+      if (channelMemberMap.hasOwnProperty(i)) {
+        console.log('Channel is: ' + i + ' --- ' +'Total Members are ' + channelMemberMap[i]);
+      }
+
+    }
+
 
 			},
 
