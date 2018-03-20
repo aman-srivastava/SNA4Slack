@@ -275,6 +275,67 @@
 					</div>
 				</div>
 			</div>
+
+      <!-- Table head options start -->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Channel Info</h4>
+                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                        <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                        <li><a data-action="close"><i class="icon-cross2"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body collapse in">
+                <div class="card-block card-dashboard">
+                    <p>Channel Specific stats</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>#</th>
+                                <th>Username</th>
+                                <th>Messages</th>
+                                <th>Mentions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>333</td>
+                                <td>24</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Otto</td>
+                                <td>589</td>
+                                <td>45</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Fiedel</td>
+                                <td>289</td>
+                                <td>33</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Table head options end -->
       <div class="row">
           <div class="col-xl-4 col-lg-6 col-md-12">
               <div class="card">
@@ -350,78 +411,7 @@
                   </div>
               </div>
           </div>
-          <div class="col-xl-4 col-lg-12 col-md-12">
-              <div class="card">
-                  <div class="card-header">
-                      <h4 class="card-title">Members</h4>
-                      <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                      <div class="heading-elements">
-                          <ul class="list-inline mb-0">
-                              <li><a data-action="reload"><i class="icon-reload"></i></a></li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="card-body">
-                      <div id="friends-activity" class="list-group height-400 position-relative">
-                          <a href="#" class="list-group-item list-group-item-action media active">
-                              <div class="media-left">
-                                  <img class="media-object avatar avatar-sm rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-7.png" alt="Generic placeholder image">
-                              </div>
-                              <div class="media-body">
-                                  <h5 class="list-group-item-heading">Sanchit Narang <span class="font-medium-4 float-xs-right">1,0215</span></h5>
-                                  <p class="list-group-item-text"><span class="tag tag-success">IOS</span><span class="tag tag-warning ml-1">Android</span></p>
-                              </div>
-                          </a>
-                          <a href="#" class="list-group-item list-group-item-action media">
-                              <div class="media-left">
-                                  <img class="media-object avatar avatar-sm rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-8.png" alt="Generic placeholder image">
-                              </div>
-                              <div class="media-body">
-                                  <h5 class="list-group-item-heading">Aman Srivastva <span class="font-medium-4 float-xs-right">2,0215</span></h5>
-                                  <p class="list-group-item-text"><span class="tag tag-danger">IOS</span> <span class="tag tag-primary ml-1">React Native</span></p>
-                              </div>
-                          </a>
-                          <a href="#" class="list-group-item list-group-item-action media">
-                              <div class="media-left">
-                                  <img class="media-object avatar avatar-sm rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-9.png" alt="Generic placeholder image">
-                              </div>
-                              <div class="media-body">
-                                  <h5 class="list-group-item-heading">Shuchir Inamdar<span class="font-medium-4 float-xs-right">1,112</span></h5>
-                                  <p class="list-group-item-text"><span class="tag tag-success">Backend</span> <span class="tag tag-warning ml-1">MATLAB</span> <span class="tag bg-grey ml-1">Other</span></p>
-                              </div>
-                          </a>
-                          <a href="#" class="list-group-item list-group-item-action media">
-                              <div class="media-left">
-                                  <img class="media-object avatar avatar-sm rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-10.png" alt="Generic placeholder image">
-                              </div>
-                              <div class="media-body">
-                                  <h5 class="list-group-item-heading">Nikhil Tibrewal<span class="font-medium-4 float-xs-right">2,815</span></h5>
-                                  <p class="list-group-item-text"><span class="tag tag-warning">Fitness</span> <span class="tag tag-danger ml-1">IOS</span></p>
-                              </div>
-                          </a>
-                          <a href="#" class="list-group-item list-group-item-action media">
-                              <div class="media-left">
-                                  <img class="media-object avatar avatar-sm rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-11.png" alt="Generic placeholder image">
-                              </div>
-                              <div class="media-body">
-                                  <h5 class="list-group-item-heading">Abhimanyu Dogra<span class="font-medium-4 float-xs-right">3,226</span></h5>
-                                  <p class="list-group-item-text"><span class="tag tag-danger">Android</span> <span class="tag tag-success ml-1">Simulink</span></p>
-                              </div>
-                          </a>
-                          <a href="#" class="list-group-item list-group-item-action media">
-                              <div class="media-left">
-                                  <img class="media-object avatar avatar-sm rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-12.png" alt="Generic placeholder image">
-                              </div>
-                              <div class="media-body">
-                                  <h5 class="list-group-item-heading">Ishan Dikshit<span class="font-medium-4 float-xs-right">4,564</span></h5>
-                                  <p class="list-group-item-text"><span class="tag tag-success">Simulink</span> <span class="tag tag-primary ml-1">Fitness</span></p>
-                              </div>
-                          </a>
 
-                      </div>
-                  </div>
-              </div>
-          </div>
       </div>
       <!--/ CRM stats -->
         </div>
@@ -474,7 +464,8 @@
     <!-- /build-->
     <!-- END ROBUST JS-->
     <script src="https://d3js.org/d3.v4.min.js"></script>
-	<script src="../../../assets/js/getTeamMetrics.js" type="text/javascript"></script>
+	<!-- <script src="../../../assets/js/getTeamMetrics.js" type="text/javascript"></script> -->
+  <script src="../../../assets/js/getChannelMetrics.js" type="text/javascript"></script>
 	<!-- BEGIN PAGE LEVEL JS-->
     <script src="../../../app-assets/js/scripts/pages/dashboard-project.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
