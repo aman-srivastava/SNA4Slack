@@ -54,14 +54,14 @@ class subscriptionGraph(object):
             for row in instances:
                 if row[CHANNEL_NAME] in channel_record.keys():
                     if row[SENDER_COLUMN] not in channel_record[row[CHANNEL_NAME]]:
-+                    for user in channel_record[row[CHANNEL_NAME]]:
-+                        if self.graph.has_edge(row[SENDER_COLUMN], user):
-+                            self.graph[row[SENDER_COLUMN]][user][
-+                                EDGE_WEIGHT_LABEL] += 1
-+                        else:
-+                            self.graph.add_edge(row[SENDER_COLUMN], user,
-+                                                weight=1)
-+                    channel_record[row[CHANNEL_NAME]].add(row[SENDER_COLUMN])
+                        for user in channel_record[row[CHANNEL_NAME]]:
+                            if self.graph.has_edge(row[SENDER_COLUMN], user):
+                                self.graph[row[SENDER_COLUMN]][user][
+                                    EDGE_WEIGHT_LABEL] += 1
+                            else:
+                                self.graph.add_edge(row[SENDER_COLUMN], user,
+                                                    weight=1)
+                    channel_record[row[CHANNEL_NAME]].add(row[SENDER_COLUMN])
               
             tsvalues = SlackArchive.objects.filter(timeStamp=self.timeStamp)
             for row in instances:
