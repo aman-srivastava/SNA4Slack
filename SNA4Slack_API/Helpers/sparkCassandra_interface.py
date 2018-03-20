@@ -6,6 +6,9 @@ import re
 from operator import add
 from mongoHelper import MongoHelper
 import json
+import pyspark
+from pyspark.sql import SQLContext, SparkSession
+from pyspark.sql.functions import col
 
 
 class sparkCassandraHelper():
@@ -14,11 +17,6 @@ class sparkCassandraHelper():
         self.teamName = teamName
 
     def createSparkSession(self):
-        findspark.init(os.environ['SPARK_HOME'])
-        import pyspark
-        from pyspark.sql import SQLContext, SparkSession
-        from pyspark.sql.functions import col
-
         spark = None
         try:
             spark = SparkSession.builder\
@@ -38,14 +36,14 @@ class sparkCassandraHelper():
         df = spark.read\
             .format("org.apache.spark.sql.cassandra")\
             .options(table="slack_archive_dev", keyspace="sna4slack_metrics").load()
+        df = df.where(df.teamName == self.teamName)
         df.createOrReplaceTempView("archives")
 
         # 1. Get message count per team, per channel, per user
         jsonOut = spark.sql("SELECT channelName, messageSender, COUNT(messageBody) AS msgCount \
             FROM archives \
-            WHERE teamName = '{0}' \
             GROUP BY channelName, messageSender \
-            ORDER BY msgCount".format(self.teamName))
+            ORDER BY msgCount")
         data = '{"documentType": "dataAnalytics","dataAnalytics": {"messageCount_channel_sender":' + \
             str(jsonOut.toJSON(use_unicode=False).collect()).replace("'", "") + ','
 
@@ -54,9 +52,8 @@ class sparkCassandraHelper():
         # 2. Get message count per team, per user
         jsonOut = spark.sql("SELECT messageSender, COUNT(messageBody) AS msgCount \
             FROM archives \
-            WHERE teamName = '{0}' \
             GROUP BY teamName, messageSender \
-            ORDER BY msgCount".format(self.teamName))
+            ORDER BY msgCount")
         data = data + '"messageCount_sender":' + \
             str(jsonOut.toJSON(use_unicode=False).collect()
                 ).replace("'", "") + ','
@@ -64,9 +61,8 @@ class sparkCassandraHelper():
         # 3. Get message count per team, per channel
         jsonOut = spark.sql("SELECT channelName, COUNT(messageBody) AS msgCount \
             FROM archives \
-            WHERE teamName = '{0}' \
             GROUP BY teamName, channelName \
-            ORDER BY msgCount".format(self.teamName))
+            ORDER BY msgCount")
 
         data = data + '"messageCount_channel":' + \
             str(jsonOut.toJSON(use_unicode=False).collect()
@@ -76,10 +72,9 @@ class sparkCassandraHelper():
         jsonOut = spark.sql("SELECT Year, Month,COUNT(*) AS msgCount \
             FROM (\
                     SELECT month(messageTime) AS Month, year(messageTime) AS Year \
-                    FROM archives \
-                    WHERE teamName='{0}') AS innerQuery \
+                    FROM archives) AS innerQuery \
             GROUP BY Year, Month\
-            ORDER BY Year, Month".format(self.teamName))
+            ORDER BY Year, Month")
 
         data = data + '"messageCount_yearlyDist":' + \
             str(jsonOut.toJSON(use_unicode=False).collect()
@@ -88,13 +83,23 @@ class sparkCassandraHelper():
         # 5. Get first message sent time and user in the team
         jsonOut = spark.sql("SELECT MIN(messageTime) as messageTime, channelName \
             FROM archives \
-            WHERE teamName ='{0}' \
             GROUP BY channelName".format(self.teamName))
 
         data = data + '"firstMessage":' + \
             str(jsonOut.toJSON(use_unicode=False).collect()).replace("'", "") + ','
 
-        # 6. Get Emoji count per team
+        # 6. Get urls and count
+        #urlR = re.compile('^(https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+).*')
+        lines = df.rdd.map(lambda r: r["messageBody"])
+        tokenized = lines.flatMap(lambda x: re.findall(
+            'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', x))
+        jsonOut = tokenized.map(lambda x: (x, 1)).reduceByKey(add).toDF(
+            ['url', 'urlCount']).sort(col("urlCount").desc()).limit(20)
+
+        data = data + '"sharedURLs":' + \
+            str(jsonOut.toJSON(use_unicode=False).collect()).replace("'", "") + ','
+
+        # 7. Get Emoji count per team
         highpoints = re.compile(
             u'[\U00000000-\U0000009F]|\
             [\U00000020-\U0000007E]|\
@@ -106,17 +111,17 @@ class sparkCassandraHelper():
             [\U000002B0-\U000002FF]|\
             [\U00000370-\U000003FF]')
 
-        lines = df.where(df.teamName == self.teamName).rdd.map(
-            lambda r: r["messageBody"])
+        lines = df.rdd.map(lambda r: r["messageBody"])
         jsonOut = lines.flatMap(lambda x: re.sub(highpoints, '', x)) \
             .map(lambda x: (x, 1)) \
-            .reduceByKey(add).toDF(['emoji', 'emojiCount'])
+            .reduceByKey(add).toDF(['emoji', 'emojiCount']).sort(col("emojiCount").desc()).limit(20)
 
         data = data + '"emojiCount":' + \
             str(jsonOut.toJSON(use_unicode=False).collect()
                 ).replace("'", "").replace("\\", "\\\\") + '} }'
 
         spark.stop()
+        print data
         return MongoHelper.manageInsert(self.teamName, json.loads(data), "dataAnalytics")
 
 

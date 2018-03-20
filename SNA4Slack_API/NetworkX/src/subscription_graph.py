@@ -163,6 +163,3 @@ def run():
     # json.dumps(graph_gen.json(), outfile)
         outfile.write(graph_gen.json())
     graph_gen.draw_graph()
-
-
-run()
