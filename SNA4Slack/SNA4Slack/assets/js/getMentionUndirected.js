@@ -1,7 +1,7 @@
 var optArray2 = []; //place holder for search names
 var force2 = d3.layout.force()
-  .linkDistance(200)
-  .charge(-1000)
+  .linkDistance(5000)
+  .charge(-5000)
   .size([w,h]);
 var svg2 = d3.select("#graph2").append("svg");
 var zoom2 = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
@@ -286,7 +286,7 @@ $( document ).ready(function() {
 
 });
   function calculateRepliesAngle2(d){
-    var fraction = d.degree_centrality*100/29;
+    var fraction = d.degree_centrality*1000/29;
     return 360;
   }
   
@@ -295,7 +295,7 @@ $( document ).ready(function() {
   }
   
   function calculateCommentsAngleEnd2(d){
-    var fraction = d.degree_centrality*100/29;
+    var fraction = d.degree_centrality*1000/29;
     return 0;
   }
  

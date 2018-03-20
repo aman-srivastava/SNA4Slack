@@ -68,8 +68,8 @@ var size = d3.scale.linear()
 var thickness = d3.scale.linear()
   .range([1, 20]);
 var force = d3.layout.force()
-  .linkDistance(200)
-  .charge(-1000)
+  .linkDistance(5000)
+  .charge(-5000)
   .size([w,h]);
 var default_comments_color = "#FFFFFF";
 var default_replies_color ="#d62728";
@@ -80,7 +80,7 @@ var max_text_size = 24;
 var nominal_stroke = 4.86;
 var max_stroke = 5.5;
 var max_base_node_size = 41;
-var min_zoom = .2;
+var min_zoom = .05;
 var max_zoom = 7;
 var svg = d3.select("#graph1").append("svg");
 var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
@@ -91,7 +91,7 @@ svg.style("cursor","move");
 svg.append('defs').append('marker')
         .attr({'id':'arrowhead',
                'viewBox':'-0 -5 10 10',
-               'refX':35,
+               'refX':250,
                'refY':0,
                'markerUnits':'userSpaceOnUse',
                'orient':'auto',
@@ -99,7 +99,7 @@ svg.append('defs').append('marker')
                'markerHeight':40,
                'xoverflow':'visible'})
         .append('svg:path')
-            .attr('d', 'M 0,-3 L 10 ,0 L 0,3')
+            .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
             .attr('fill', '#FFFFFF')
             .attr('stroke','#FFFFFF');
 		
@@ -377,7 +377,7 @@ $( document ).ready(function() {
   
   function resize() {
     
-    var width = document.getElementById("graph1").style.width, height = 420;
+    var width = document.getElementById("graph1").style.width, height = window.innerHeight-330;
     
     svg.attr("width", width).attr("height", height);
     force.size([force.size()[0]+(width-w)/zoom.scale(),force.size()[1]+(height-h)/zoom.scale()]).resume();
@@ -392,7 +392,7 @@ $( document ).ready(function() {
 
 });
   function calculateRepliesAngle(d){
-    var fraction = d.degree_centrality*100/29;
+    var fraction = d.degree_centrality*1000/29;
     return 360;
   }
   
@@ -401,7 +401,7 @@ $( document ).ready(function() {
   }
   
   function calculateCommentsAngleEnd(d){
-    var fraction = d.degree_centrality*100/29;
+    var fraction = d.degree_centrality*1000/29;
     return 0;
   }
  
@@ -417,7 +417,7 @@ $( document ).ready(function() {
     // add circle clip
     nodes = d3.selectAll(".node");
     //set size domain based on input value
-  	size.domain([1, d3.max(nodes.data(), function(d) { return +d[parameter]; })]);
+  	size.domain([1, d3.max(nodes.data(), function(d) { console.log(d);return +d[parameter]; })]);
     
     nodes.selectAll("circle")      
       .attr("r", function(d){return size(d[parameter])/2});

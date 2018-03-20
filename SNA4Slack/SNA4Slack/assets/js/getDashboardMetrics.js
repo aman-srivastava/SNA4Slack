@@ -20,13 +20,15 @@ $( document ).ready(function() {
 		 url: "https://api.mlab.com/api/1/databases/sna4slack/collections/"+teamName+"?apiKey=dPpfbNvB6jRs-hvv-Veb1uVkXnX06Maa",
 		 type: 'GET',
          success: function (data) {
+			console.log(data);
 			for(var j = 0 ; j<data.length ; j++){
+				console.log(data[j]);
 				if(data[j]['dataAnalytics']!=null){
 					data = data[j]['dataAnalytics'];
 				};
 			}
 			
-			console.log(data);
+			//console.log(data);
 			var noOfMessages = 0
 			var noOfChannels = []
 			var noOfMembers = []
@@ -206,7 +208,7 @@ $( document ).ready(function() {
 					teamSuperstars[data[i].target]=teamSuperstars[data[i].target]+parseInt(data[i].weight);
 				}
 			}
-			console.log(teamSuperstars);
+			//console.log(teamSuperstars);
 			var items = Object.keys(teamSuperstars).map(function(key) {
 				return [key, teamSuperstars[key]];
 			});

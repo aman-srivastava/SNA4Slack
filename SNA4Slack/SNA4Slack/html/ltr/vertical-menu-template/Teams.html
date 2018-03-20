@@ -248,6 +248,8 @@
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
 									<ul class="list-inline mb-0">
+										<button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#mentionDirectedInfo"><i class="icon-info black"></i> Help</button>
+
 										<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
 										<li><a data-action="reload"><i class="icon-reload"></i></a></li>
 										<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
@@ -257,13 +259,41 @@
 							</div>
 							<div class="card-body collapse in">
 								<div class="card-block">
+									<div class="modal fade text-xs-left" id="mentionDirectedInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+									  <div class="modal-dialog" role="document">
+										<div class="modal-content">
+										  <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											  <span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Mention-based Directed Centrality Graph</h4>
+										  </div>
+										  <div class="modal-body">
+											<h5><i class="icon-arrow-right-c"></i> About</h5>
+											<p>This graph consists of nodes and edges. The nodes in the graph represent the users in the selected slack team. The edges in the graph represent the number of mentions between users in slack conversations. </p>
+											<hr>
+											<h5><i class="icon-lightbulb-o"></i> How to use this graph?</h5>
+											<p>1. Use the mouse-wheel to zoom in and out.</p>
+											<p>2. Hover over a node to highlight its neighbours and get the three measures of centrality- Degree, Betweenness & Closeness for the node</p>
+											<p>3. Click on a node to show only the highlighted node and its neighbours.</p>
+											<p>4. Use the search bar to find a known user by its username.</p>
+											<div class="alert alert-success" role="alert">
+												<span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+											</div>
+										  </div>
+										  <div class="modal-footer">
+											<button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+										  </div>
+										</div>
+									  </div>
+									</div>
 									<div style="z-index:1;position:absolute;background-color:rgba(0,0,0,0.7);border: solid black 1px;width:calc(100% - 3rem);text-align:center;">
 									  <span id="measures1" style="color:#F6BB42;">Degree: 0 | Betweenness: 0 | Closeness: 0</span>
 									</div>
 									
 									<div id="graph1" style="border: solid black 1px;background-color:rgba(220,220,220,0.4);">
 									</div>
-									<hr/>
+									<p></p>
 									<fieldset>
 										<div class="input-group">
 											<input id="search1" type="text" class="form-control" placeholder="Hover over nodes or search by username..." aria-describedby="button-addon2">
@@ -283,6 +313,7 @@
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
 									<ul class="list-inline mb-0">
+										<button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#mentionUndirectedInfo"><i class="icon-info black"></i> Help</button>
 										<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
 										<li><a data-action="reload"><i class="icon-reload"></i></a></li>
 										<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
@@ -292,6 +323,34 @@
 							</div>
 							<div class="card-body collapse in">
 								<div class="card-block">
+									<div class="modal fade text-xs-left" id="mentionUndirectedInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+									  <div class="modal-dialog" role="document">
+										<div class="modal-content">
+										  <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											  <span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Mention-based Undirected Centrality Graph</h4>
+										  </div>
+										  <div class="modal-body">
+											<h5><i class="icon-arrow-right-c"></i> About</h5>
+											<p>This graph consists of nodes and edges. The nodes in the graph represent the users in the selected slack team. The edges in the graph represent the number of mentions between users in slack conversations. </p>
+											<hr>
+											<h5><i class="icon-lightbulb-o"></i> How to use this graph?</h5>
+											<p>1. Use the mouse-wheel to zoom in and out.</p>
+											<p>2. Hover over a node to highlight its neighbours and get the three measures of centrality- Degree, Betweenness & Closeness for the node</p>
+											<p>3. Click on a node to show only the highlighted node and its neighbours.</p>
+											<p>4. Use the search bar to find a known user by its username.</p>
+											<div class="alert alert-success" role="alert">
+												<span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+											</div>
+										  </div>
+										  <div class="modal-footer">
+											<button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+										  </div>
+										</div>
+									  </div>
+									</div>
 									<div style="z-index:1;position:absolute;background-color:rgba(0,0,0,0.7);border: solid black 1px;width:calc(100% - 3rem);text-align:center;">
 									  <span id="measures2" style="color:#F6BB42;">Degree: 0 | Betweenness: 0 | Closeness: 0</span>
 									</div>							
@@ -315,10 +374,11 @@
 					<div class="col-xl-12 col-lg-12">
 						<div class="card card-inverse box-shadow-0 card-danger">
 							<div class="card-header">
-								<h4 class="card-title">Subscription Based (Undirected)</h4>
+								<h4 class="card-title">Subscription Based (Directed)</h4>
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
 									<ul class="list-inline mb-0">
+										<button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#subscriptionDirectedInfo"><i class="icon-info black"></i> Help</button>
 										<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
 										<li><a data-action="reload"><i class="icon-reload"></i></a></li>
 										<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
@@ -328,6 +388,34 @@
 							</div>
 							<div class="card-body collapse in">
 								<div class="card-block">
+									<div class="modal fade text-xs-left" id="subscriptionDirectedInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+									  <div class="modal-dialog" role="document">
+										<div class="modal-content">
+										  <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											  <span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Subscription-based Directed Centrality Graph</h4>
+										  </div>
+										  <div class="modal-body">
+											<h5><i class="icon-arrow-right-c"></i> About</h5>
+											<p>This graph consists of nodes and edges. The nodes in the graph represent the users in the selected slack team. The edges in the graph connect users who share one or more channels. </p>
+											<hr>
+											<h5><i class="icon-lightbulb-o"></i> How to use this graph?</h5>
+											<p>1. Use the mouse-wheel to zoom in and out.</p>
+											<p>2. Hover over a node to highlight its neighbours and get the three measures of centrality- Degree, Betweenness & Closeness for the node</p>
+											<p>3. Click on a node to show only the highlighted node and its neighbours.</p>
+											<p>4. Use the search bar to find a known user by its username.</p>
+											<div class="alert alert-success" role="alert">
+												<span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+											</div>
+										  </div>
+										  <div class="modal-footer">
+											<button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+										  </div>
+										</div>
+									  </div>
+									</div>
 									<div style="z-index:1;position:absolute;background-color:rgba(0,0,0,0.7);border: solid black 1px;width:calc(100% - 3rem);text-align:center;">
 									  <span id="measures3" style="color:#F6BB42;">Degree: 0 | Betweenness: 0 | Closeness: 0</span>
 									</div>							
@@ -349,10 +437,11 @@
 					<div class="col-xl-12 col-lg-12">
 						<div class="card card-inverse box-shadow-0 card-info">
 							<div class="card-header">
-								<h4 class="card-title">Subscription Based (Directed)</h4>
+								<h4 class="card-title">Subscription Based (Undirected)</h4>
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
 									<ul class="list-inline mb-0">
+										<button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#subscriptionUndirectedInfo"><i class="icon-info black"></i> Help</button>
 										<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
 										<li><a data-action="reload"><i class="icon-reload"></i></a></li>
 										<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
@@ -362,6 +451,34 @@
 							</div>
 							<div class="card-body collapse in">
 								<div class="card-block">
+									<div class="modal fade text-xs-left" id="subscriptionUndirectedInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+									  <div class="modal-dialog" role="document">
+										<div class="modal-content">
+										  <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											  <span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Subscription-based Undirected Centrality Graph</h4>
+										  </div>
+										  <div class="modal-body">
+											<h5><i class="icon-arrow-right-c"></i> About</h5>
+											<p>This graph consists of nodes and edges. The nodes in the graph represent the users in the selected slack team. The edges in the graph connect users who share one or more channels. </p>
+											<hr>
+											<h5><i class="icon-lightbulb-o"></i> How to use this graph?</h5>
+											<p>1. Use the mouse-wheel to zoom in and out.</p>
+											<p>2. Hover over a node to highlight its neighbours and get the three measures of centrality- Degree, Betweenness & Closeness for the node</p>
+											<p>3. Click on a node to show only the highlighted node and its neighbours.</p>
+											<p>4. Use the search bar to find a known user by its username.</p>
+											<div class="alert alert-success" role="alert">
+												<span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+											</div>
+										  </div>
+										  <div class="modal-footer">
+											<button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+										  </div>
+										</div>
+									  </div>
+									</div>
 									<div style="z-index:1;position:absolute;background-color:rgba(0,0,0,0.7);border: solid black 1px;width:calc(100% - 3rem);text-align:center;">
 									  <span id="measures4" style="color:#F6BB42;">Degree: 0 | Betweenness: 0 | Closeness: 0</span>
 									</div>							
