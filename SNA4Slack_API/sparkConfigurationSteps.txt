@@ -37,3 +37,6 @@ Example:
 3. Create dataframe on cassandra
 	df = spark.read.format("org.apache.spark.sql.cassandra").options(table="slack_archive_dev", keyspace="sna4slack_metrics").load()
 	df.show(10)
+
+
+spark.sql("SELECT max(teamName) as teamName,messageSender, count(messageBody) as msgCount FROM archives WHERE teamName='openaddresses' GROUP BY  messageSender ORDER BY msgCount")

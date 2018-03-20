@@ -50,6 +50,7 @@ class MentionGraphTrigger(Resource):
         """
         team_Name = request.headers.get('team_Name')
         # channel = request.headers.get('channel')
+        documentType = ''
         directed = request.headers.get('directed')
         directed = directed in ("True", "true")
 
@@ -69,10 +70,12 @@ class MentionGraphTrigger(Resource):
         print 'Compute clustering'
 
         if directed == True:
-            data = '{"directed-mention-graph":' + \
+            documentType = "directed-mention-graph"
+            data = '{"documentType": "directed-mention-graph", "directed-mention-graph":' + \
                 json.dumps(graph_gen.json()) + '}'
         else:
-            data = '{"undirected-mention-graph":' + \
+            documentType = "undirected-mention-graph"
+            data = '{"documentType": "undirected-mention-graph", "undirected-mention-graph":' + \
                 json.dumps(graph_gen.json()) + '}'
 
-        return MongoHelper.manageInsert(team_Name, json.loads(data))
+        return MongoHelper.manageInsert(team_Name, json.loads(data), documentType)

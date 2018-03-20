@@ -1,14 +1,113 @@
-var optArray2 = []; //place holder for search names
-var force2 = d3.layout.force()
+var team;
+if(window.location.href.includes("?teamName")){
+		team = window.location.href.substring(window.location.href.indexOf("?")+10);
+		document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+team;
+		document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+team;
+		document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+team;
+		document.getElementById("MembersPageLink").href = "MembersMain.html?teamName="+team;
+	}
+
+$( document ).ready(function() {
+	var teamName;
+	if(window.location.href.includes("?teamName")){
+					teamName = window.location.href.substring(window.location.href.indexOf("?")+10);
+				}
+	document.getElementById("teamNameHeader2").innerHTML = "Team Metrics | "+teamName;
+	document.getElementById("teamNameSidebar").innerHTML = teamName;
+	document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
+	document.getElementById("teamURLLink").href = "http://"+teamName+".slackarchive.io";
+	$.ajax({
+		 url: "https://api.mlab.com/api/1/databases/sna4slack/collections/"+teamName+"?apiKey=dPpfbNvB6jRs-hvv-Veb1uVkXnX06Maa",
+		 type: 'GET',
+         success: function (data) {
+			for(var j = 0 ; j<data.length ; j++){
+				if(data[j]['dataAnalytics']!=null){
+					data = data[j]['dataAnalytics'];
+				};
+			}
+			
+			//console.log(data);
+			var noOfMessages = 0
+			var noOfChannels = []
+			var noOfMembers = []
+			for(var i = 0 ; i<data.length ; i++){
+				noOfMessages += parseInt(data[i].messageCount);
+
+				if (noOfMembers.indexOf(data[i].messageSender) === -1){
+				noOfMembers.push(data[i].messageSender);
+				}
+				if (noOfChannels.indexOf(data[i].channelName) === -1){
+				noOfChannels.push(data[i].channelName);
+				}
+				
+			}
+
+			document.getElementById("conversationCount").innerHTML = noOfMessages;
+			document.getElementById("memberCount").innerHTML = noOfMembers.length;
+			document.getElementById("channelCount").innerHTML = noOfChannels.length;
+			},
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+        console.log('error', errorThrown);
+      }
+	});
+});
+	
+	
+var optArray = []; //place holder for search names
+  
+var w = window.innerWidth,
+    h = window.innerHeight;
+var focus_node = null,
+    highlight_node = null;
+var text_center = false;
+var highlight_color = "#373A3C";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.linear()
+  .range([20,120]);
+var thickness = d3.scale.linear()
+  .range([1, 20]);
+var force = d3.layout.force()
   .linkDistance(200)
   .charge(-1000)
   .size([w,h]);
-var svg2 = d3.select("#graph2").append("svg");
-var zoom2 = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
-var g2 = svg2.append("g");
-svg2.style("cursor","move");
+var default_comments_color = "#FFFFFF";
+var default_replies_color ="#d62728";
+var default_link_color = "#FFFFFF";
+var nominal_base_node_size = 8;
+var nominal_text_size = 20;
+var max_text_size = 24;
+var nominal_stroke = 4.86;
+var max_stroke = 5.5;
+var max_base_node_size = 41;
+var min_zoom = .2;
+var max_zoom = 7;
+var svg = d3.select("#graph1").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+svg.style("cursor","move");
+
+
+svg.append('defs').append('marker')
+        .attr({'id':'arrowhead',
+               'viewBox':'-0 -5 10 10',
+               'refX':35,
+               'refY':0,
+               'markerUnits':'userSpaceOnUse',
+               'orient':'auto',
+               'markerWidth':40,
+               'markerHeight':40,
+               'xoverflow':'visible'})
+        .append('svg:path')
+            .attr('d', 'M 0,-3 L 10 ,0 L 0,3')
+            .attr('fill', '#FFFFFF')
+            .attr('stroke','#FFFFFF');
 		
 		
+var totalDiscussions = 0,
+    totalReplies = 0,
+    totalConnections = 0,
+    totalComments = 0;
 $( document ).ready(function() {
 	var teamName;
 	if(window.location.href.includes("?teamName")){
@@ -18,11 +117,10 @@ $( document ).ready(function() {
 	
 	for(var j = 0 ; j<graph.length ; j++){
 		//console.log(data[j]);
-		if(graph[j]['undirected-mention-graph']!=null){
-			graph = graph[j]['undirected-mention-graph'];
+		if(graph[j]['directed-mention-graph']!=null){
+			graph = graph[j]['directed-mention-graph'];
 		};
 	}
-	//console.log(graph);
 	var linkedByIndex = {};
 	var edges = [];
 	graph.links.forEach(function(e) {
@@ -61,13 +159,18 @@ $( document ).ready(function() {
   
   // collect all the node names for search auto-complete
   for (var i = 0; i < graph.nodes.length; i++) {
-    optArray2.push(graph.nodes[i].id);
+    optArray.push(graph.nodes[i].id);
 	}
-  optArray2 = optArray2.sort();
+  optArray = optArray.sort();
   // assign number of total discussions
+  totalDiscussions = graph.totalDiscussions;
+  totalComments = graph.totalComments;
   
   // calculate total replies
   graph.links.forEach(function(d){totalReplies+=d['weight']});
+  
+  // calculate total people
+  totalConnections = graph.nodes.length;
   
   updateReport();
   
@@ -78,23 +181,25 @@ $( document ).ready(function() {
   		d.x = d.y = w / n * i;
 		});
   
-  force2
+  force
     .nodes(graph.nodes)
     .links(edges)
     .start();
   // add lines between people
-  var link = g2.selectAll(".link")
+  var link = g.selectAll(".link")
     .data(edges)
     .enter().append("line")
     	.attr("class", "link")
-			.style("stroke-width", function(d){return thickness(d.value*2);})
-			.style("stroke", default_link_color);
+			.style("stroke-width", function(d){return thickness(d.value);})
+			.style("stroke", default_link_color)
+			.attr('marker-end','url(#arrowhead)')
 
-  var node = g2.selectAll(".node")
+
+  var node = g.selectAll(".node")
     .data(graph.nodes)
     .enter().append("g")
     .attr("class", "node")
-    .call(force2.drag)
+    .call(force.drag)
   
   // add circle clip
   var clipPath = node.append("clipPath")
@@ -116,7 +221,7 @@ $( document ).ready(function() {
      						.innerRadius(function(d){return size(d.degree_centrality*1000)/2})
     						.outerRadius(function(d){return size(d.degree_centrality*1000)/2 + 7})
             		.startAngle(Math.PI)
-    						.endAngle(calculateRepliesAngle2)
+    						.endAngle(calculateRepliesAngle)
            );
   
   var commentsArc = node.append("path")
@@ -125,11 +230,11 @@ $( document ).ready(function() {
   		.attr("d", d3.svg.arc()
         .innerRadius(function(d){return size(d.degree_centrality*1000)/2})
         .outerRadius(function(d){return size(d.degree_centrality*1000)/2 + 7})
-        .startAngle(calculateCommentsAngleStart2)
-        .endAngle(calculateCommentsAngleEnd2)
+        .startAngle(calculateCommentsAngleStart)
+        .endAngle(calculateCommentsAngleEnd)
        );
   
-  var text = g2.selectAll(".text")
+  var text = g.selectAll(".text")
     .data(graph.nodes)
     .enter().append("text")
     	.attr("dy", ".35em")
@@ -143,9 +248,9 @@ $( document ).ready(function() {
     	.text(function(d) { return '\u2002'+d.id; });
   function updateReport(d){
     if (d=== undefined){
-      d3.select("#measures2").text('Degree: 0 | Betweenness: 0 | Closeness: 0');
+      d3.select("#measures1").text('Degree: 0 | Betweenness: 0 | Closeness: 0');
     }else{
-      d3.select("#measures2").text('Degree: '+d.degree_centrality.toString().substring(0, 6)+' | Betweenness: '+d.betweenness_centrality.toString().substring(0, 6)+' | Closeness: '+d.closeness_centrality.toString().substring(0, 6));
+      d3.select("#measures1").text('Degree: '+d.degree_centrality.toString().substring(0, 6)+' | Betweenness: '+d.betweenness_centrality.toString().substring(0, 6)+' | Closeness: '+d.closeness_centrality.toString().substring(0, 6));
     }
   }
   
@@ -160,8 +265,8 @@ $( document ).ready(function() {
           if (highlight_node === null) set_highlight(d)
 			})
     .on("mouseout", function(d) {exit_highlight();})
-	.on("mouseup",  
-			function() {
+		.on("mouseup",  
+			function() {//console.log("mouseUp: ", focus_node, highlight_node);
 				if (focus_node!==null)
       {
         focus_node = null;
@@ -170,7 +275,7 @@ $( document ).ready(function() {
           updateReport();
           commentsArc.style("opacity", 1);
           repliesArc.style("opacity", 1);
-		  image.style("opacity", 1);
+					image.style("opacity", 1);
           text.style("opacity", 1);
           link.style("opacity", 1);
         }
@@ -211,7 +316,7 @@ $( document ).ready(function() {
 	function set_highlight(d)
     {
       
-      svg2.style("cursor","pointer");
+      svg.style("cursor","pointer");
       
       updateReport(d);
       if (focus_node!==null) d = focus_node;
@@ -232,7 +337,7 @@ $( document ).ready(function() {
 		
     if (focus_node===null)
 			{
-				svg2.style("cursor","move");
+				svg.style("cursor","move");
 				
         if (highlight_color!="white")
 					{
@@ -244,18 +349,18 @@ $( document ).ready(function() {
  
   
     
-  zoom2.on("zoom", function() {
-		g2.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  zoom.on("zoom", function() {
+		g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 	});
 	
   
-  svg2.call(zoom2);
+  svg.call(zoom);
   
-  resize2();
+  resize();
   
-  d3.select(window).on("resize", resize2);
+  d3.select(window).on("resize", resize);
 	  
-  force2.on("tick", function() {
+  force.on("tick", function() {
   	
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
     text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
@@ -270,31 +375,32 @@ $( document ).ready(function() {
 	});
   
   
-  function resize2() {
+  function resize() {
     
-    var width = document.getElementById("graph2").style.width, height = 420;
+    var width = document.getElementById("graph1").style.width, height = 420;
     
-    svg2.attr("width", width).attr("height", height);
-    force2.size([force2.size()[0]+(width-w)/zoom2.scale(),force2.size()[1]+(height-h)/zoom2.scale()]).resume();
+    svg.attr("width", width).attr("height", height);
+    force.size([force.size()[0]+(width-w)/zoom.scale(),force.size()[1]+(height-h)/zoom.scale()]).resume();
     
     w = width;
     
     h = height;
   }
+  
 
 });
 
 });
-  function calculateRepliesAngle2(d){
+  function calculateRepliesAngle(d){
     var fraction = d.degree_centrality*100/29;
     return 360;
   }
   
-  function calculateCommentsAngleStart2(d){
-    return calculateRepliesAngle2(d);
+  function calculateCommentsAngleStart(d){
+    return calculateRepliesAngle(d);
   }
   
-  function calculateCommentsAngleEnd2(d){
+  function calculateCommentsAngleEnd(d){
     var fraction = d.degree_centrality*100/29;
     return 0;
   }
@@ -303,10 +409,10 @@ $( document ).ready(function() {
   d3.select("#circlesize")
   	.on("change", function(d) {
          var sizedBy = d3.select(this).property("weight");
-  				resizeNodes2(sizedBy);
+  				resizeNodes(sizedBy);
   		});
   
-	function resizeNodes2(parameter){ 
+	function resizeNodes(parameter){ 
   
     // add circle clip
     nodes = d3.selectAll(".node");
@@ -328,19 +434,19 @@ $( document ).ready(function() {
         .innerRadius(function(d){return size(d[parameter])/2})
         .outerRadius(function(d){return size(d[parameter])/2 + 7})
             .startAngle(Math.PI)
-            .endAngle(calculateRepliesAngle2));
+            .endAngle(calculateRepliesAngle));
     nodes.selectAll(".commentPath")
     	.attr("d", d3.svg.arc()
           .innerRadius(function(d){return size(d[parameter])/2})
           .outerRadius(function(d){return size(d[parameter])/2 + 7})
-          .startAngle(calculateCommentsAngleStart2)
-          .endAngle(calculateCommentsAngleEnd2)
+          .startAngle(calculateCommentsAngleStart)
+          .endAngle(calculateCommentsAngleEnd)
          );
   
   	d3.selectAll(".text")
     	.attr("dx", function(d){return size(d[parameter])/2;});
     
-    force2.start();
+    force.start();
   }
   
   
@@ -348,22 +454,22 @@ $( document ).ready(function() {
 // assign optArray to search box
 // Search box is modified from this post > http://www.coppelia.io/2014/07/an-a-to-z-of-extra-features-for-the-d3-force-layout/
 $(function () {
-    $("#search2").autocomplete({
-        source: optArray2
+    $("#search1").autocomplete({
+        source: optArray
     });
 });
-function searchNode2() {
+function searchNode1() {
     //find the node
-    var selectedVal = document.getElementById('search2').value;
+    var selectedVal = document.getElementById('search1').value;
     
-  		svg2.selectAll(".node")
+  		svg.selectAll(".node")
         .filter(function (d) { return d.id != selectedVal;})
       		.style("opacity", highlight_trans/2)
       		.transition()
         	.duration(5000)
         	.style("opacity", 1);
       
-      svg2.selectAll(".link, .text, .replyPath, .commentPath")
+      svg.selectAll(".link, .text, .replyPath, .commentPath")
         .style("opacity", highlight_trans/2)
         .transition()
         .duration(5000)

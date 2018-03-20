@@ -14,6 +14,7 @@ from cassandra.cqlengine import columns, connection
 
 from objects.slack_archive import SlackArchive
 from Helpers.mongoHelper import MongoHelper
+from Helpers.sparkCassandra_interface import sparkCassandraHelper
 
 
 class DashboardTrigger(Resource):
@@ -54,36 +55,8 @@ class DashboardTrigger(Resource):
           200:
             description: Parse Slack archive and save data to database
         """
-        team_name = request.headers.get('team_Name')
+        teamName = request.headers.get('team_Name')
         channelName = request.headers.get('channel_name')
         messageSender = request.headers.get('messageSender')
-
-        ap = PlainTextAuthProvider(
-            username=Config.DB_USER, password=Config.DB_PASSWORD)
-        node_ips = [Config.NODE_IP]
-        cluster = Cluster(node_ips, auth_provider=ap)
-        session = cluster.connect()
-        connection.setup(node_ips, Config.KEYSPACE_NAME,
-                         protocol_version=3, auth_provider=ap)
-
-        rows = session.execute(
-            'SELECT "teamName","channelName","messageSender", COUNT(*) as "msgCount" \
-             FROM {0}.{1} \
-             WHERE "teamName" = {2} \
-             GROUP BY "teamName", "channelName","messageSender";'.format(Config.KEYSPACE_NAME,
-                                                                         Config.DB_COLUMN_FAMILY,
-                                                                         '\'' + team_name + '\''))
-
-        cluster.shutdown()
-        output = []
-        for row in rows:
-            temp = {
-                'teamName': str(row.teamName),
-                'channelName': str(row.channelName),
-                'messageSender': str(row.messageSender),
-                'messageCount': str(row.msgCount)
-            }
-            output.append(temp)
-        data = '{"dataAnalytics":' + json.dumps(output) + '}'
-
-        return MongoHelper.manageInsert(team_name, json.loads(data))
+        sch = sparkCassandraHelper(teamName)
+        return sch.main()
