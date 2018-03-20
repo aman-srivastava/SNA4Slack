@@ -341,92 +341,165 @@
       					</div>
       				</div>
 
-            <div class="row">
-    					<div class="col-xl-8 col-lg-12">
-    						<div class="card">
-    							<div class="card-header">
-    								<h4 class="card-title">Team Superstars</h4>
-    								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-    								<div class="heading-elements">
-    									<ul class="list-inline mb-0">
-    										<li><a data-action="reload"><i class="icon-reload"></i></a></li>
-    										<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-    									</ul>
-    								</div>
-    							</div>
-    							<div class="card-body">
-    								<div class="card-block">
-    									<p class="m-0">This table shows the most active members of this team</p>
-    								</div>
-    								<div class="table-responsive">
-    									<table class="table table-hover mb-0">
-    										<thead>
-    											<tr>
-    												<th>Username</th>
-    												<th>User Avatar</th>
-    												<th>Mentions</th>
-    												<th>Popularity</th>
-    											</tr>
-    										</thead>
-    										<tbody>
-    											<tr>
-    												<td class="text-truncate" id="superstar1username"></td>
-    												<td class="text-truncate">
-    													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif" id="superstar1avatar" alt="avatar"></span> <span></span>
-    												</td>
-    												<td class="text-truncate"><span id="superstar1mentions" class="tag tag-success"></span></td>
-    												<td class="valign-middle"><progress id="superstar1popularity" value="0" max="100" class="progress progress-xs progress-success m-0"></progress></td>
-    											</tr>
-    											<tr>
-    												<td class="text-truncate" id="superstar2username"></td>
-    												<td class="text-truncate">
-    													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar2avatar" alt="avatar"></span> <span></span>
-    												</td>
-    												<td class="text-truncate"><span id="superstar2mentions" class="tag tag-success"></span></td>
-    												<td class="valign-middle"><progress id="superstar2popularity" value="0" max="100" class="progress progress-xs progress-success m-0"></progress></td>
-    											</tr>
-    											<tr>
-    												<td class="text-truncate" id="superstar3username"></td>
-    												<td class="text-truncate">
-    													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar3avatar" alt="avatar"></span> <span></span>
-    												</td>
-    												<td class="text-truncate"><span  id="superstar3mentions"class="tag tag-warning"></span></td>
-    												<td class="valign-middle"><progress id="superstar3popularity" value="0" max="100" class="progress progress-xs progress-warning m-0"></progress></td>
-    											</tr>
-    											<tr>
-    												<td class="text-truncate" id="superstar4username"></td>
-    												<td class="text-truncate">
-    													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar4avatar" alt="avatar"></span> <span></span>
-    												</td>
-    												<td class="text-truncate"><span  id="superstar4mentions"class="tag tag-warning"></span></td>
-    												<td class="valign-middle"><progress id="superstar4popularity" value="0" max="100" class="progress progress-xs progress-warning m-0"></progress></td>
-    											</tr>
-    											<tr>
-    												<td class="text-truncate" id="superstar5username"></td>
-    												<td class="text-truncate">
-    													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/img.png"  id="superstar5avatar" alt="avatar"></span> <span></span>
-    												</td>
-    												<td class="text-truncate"><span id="superstar5mentions"class="tag tag-danger"></span></td>
-    												<td class="valign-middle"><progress id="superstar5popularity" value="0" max="100" class="progress progress-xs progress-danger m-0"></progress></td>
-    											</tr>
-    											<tr>
-    												<td class="text-truncate" id="superstar6username"></td>
-    												<td class="text-truncate">
-    													<span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar6avatar" alt="avatar"></span> <span></span>
-    												</td>
-    												<td class="text-truncate"><span id="superstar6mentions"class="tag tag-danger"></span></td>
-    												<td class="valign-middle"><progress id="superstar6popularity" value="0" max="100" class="progress progress-xs progress-danger m-0"></progress></td>
-    											</tr>
-    										</tbody>
-    									</table>
-    								</div>
-    							</div>
-    						</div>
-    					</div>
+              <div class="col-xl-8 col-lg-12">
+               <div class="card">
+                 <div class="card-header">
+                   <h4 class="card-title">Team Superstars</h4>
+                   <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                   <div class="heading-elements">
+                     <ul class="list-inline mb-0">
+                       <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                       <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                     </ul>
+                   </div>
+                 </div>
+                 <div class="card-body">
+                   <div class="card-block">
+                     <p class="m-0">This table shows the most active members of this team</p>
+                   </div>
+                   <div class="table-responsive">
+                     <table class="table table-hover mb-0">
+                       <thead>
+                         <tr>
+                           <th>Username</th>
+                           <th>User Avatar</th>
+                           <th>Mentions</th>
+                           <th>Popularity</th>
+                         </tr>
+                       </thead>
+                       <tbody>
+                         <tr>
+                           <td class="text-truncate" id="superstar1username"></td>
+                           <td class="text-truncate">
+                             <span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif" id="superstar1avatar" alt="avatar"></span> <span></span>
+                           </td>
+                           <td class="text-truncate"><span id="superstar1mentions" class="tag tag-success"></span></td>
+                           <td class="valign-middle"><progress id="superstar1popularity" value="0" max="100" class="progress progress-xs progress-success m-0"></progress></td>
+                         </tr>
+                         <tr>
+                           <td class="text-truncate" id="superstar2username"></td>
+                           <td class="text-truncate">
+                             <span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar2avatar" alt="avatar"></span> <span></span>
+                           </td>
+                           <td class="text-truncate"><span id="superstar2mentions" class="tag tag-success"></span></td>
+                           <td class="valign-middle"><progress id="superstar2popularity" value="0" max="100" class="progress progress-xs progress-success m-0"></progress></td>
+                         </tr>
+                         <tr>
+                           <td class="text-truncate" id="superstar3username"></td>
+                           <td class="text-truncate">
+                             <span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar3avatar" alt="avatar"></span> <span></span>
+                           </td>
+                           <td class="text-truncate"><span  id="superstar3mentions"class="tag tag-warning"></span></td>
+                           <td class="valign-middle"><progress id="superstar3popularity" value="0" max="100" class="progress progress-xs progress-warning m-0"></progress></td>
+                         </tr>
+                         <tr>
+                           <td class="text-truncate" id="superstar4username"></td>
+                           <td class="text-truncate">
+                             <span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar4avatar" alt="avatar"></span> <span></span>
+                           </td>
+                           <td class="text-truncate"><span  id="superstar4mentions"class="tag tag-warning"></span></td>
+                           <td class="valign-middle"><progress id="superstar4popularity" value="0" max="100" class="progress progress-xs progress-warning m-0"></progress></td>
+                         </tr>
+                         <tr>
+                           <td class="text-truncate" id="superstar5username"></td>
+                           <td class="text-truncate">
+                             <span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/img.png"  id="superstar5avatar" alt="avatar"></span> <span></span>
+                           </td>
+                           <td class="text-truncate"><span id="superstar5mentions"class="tag tag-danger"></span></td>
+                           <td class="valign-middle"><progress id="superstar5popularity" value="0" max="100" class="progress progress-xs progress-danger m-0"></progress></td>
+                         </tr>
+                         <tr>
+                           <td class="text-truncate" id="superstar6username"></td>
+                           <td class="text-truncate">
+                             <span class="avatar avatar-xs"><img src="../../../app-assets/images/icons/spinner.gif"  id="superstar6avatar" alt="avatar"></span> <span></span>
+                           </td>
+                           <td class="text-truncate"><span id="superstar6mentions"class="tag tag-danger"></span></td>
+                           <td class="valign-middle"><progress id="superstar6popularity" value="0" max="100" class="progress progress-xs progress-danger m-0"></progress></td>
+                         </tr>
+                       </tbody>
+                     </table>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+              <!-- Selectable Tree -->
+              <!-- <div class="row"> -->
+
+              <!-- Searchable Tree -->
+              <div class="col-md-4 col-sm-12">
+                  <div class="card">
+                      <div class="card-header">
+                          <h4 class="card-title">Searchable Tree</h4>
+                      </div>
+                      <div class="card-body">
+                          <div class="card-block">
+                              <div class="form-group">
+                                  <div class="seachbox mb-2">
+                                      <input type="text" class="form-control round" placeholder="Search" id="input-search" name="input-search">
+                                  </div>
+                              </div>
+
+                              <div class="row mb-1">
+                                  <div class="col-md-8 col-sm-12">
+                                      <div class="form-group">
+                                          <label class="mr-1">
+                                              <input type="checkbox" id="chk-ignore-case" value="false">
+                                              Ignore Case
+                                          </label>
+                                          <label class="mr-1">
+                                              <input type="checkbox" id="chk-exact-match" value="false">
+                                              Exact Match
+                                          </label>
+                                          <label class="mr-1">
+                                              <input type="checkbox" id="chk-reveal-results" value="false">
+                                              Reveal Results
+                                          </label>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4 col-sm-12">
+                                      <button type="button" class="btn btn-primary mr-2 mb-1 float-xs-left" id="btn-search">Search</button>
+                                      <button type="button" class="btn btn-primary mb-1 float-xs-left" id="btn-clear-search">Clear</button>
+                                  </div>
+                              </div>
+
+                              <div class="row">
+                                  <div class="col-md-6 col-sm-12">
+                                      <div id="searchable-tree" class="treeview">
+                                        <ul class="list-group">
+                                          <li class="list-group-item node-searchable-tree node-selected" data-nodeid="0" style="color:#FFFFFF;background-color:#428bca;">
+                                            <span class="icon expand-icon icon-plus4"></span>
+                                            <span class="icon node-icon"></span>Parent 1</li>
+                                          <li class="list-group-item node-searchable-tree" data-nodeid="5" style="color:undefined;background-color:undefined;">
+                                            <span class="icon"></span>
+                                            <span class="icon node-icon"></span>Parent 2</li>
+                                          <li class="list-group-item node-searchable-tree" data-nodeid="6" style="color:undefined;background-color:undefined;">
+                                            <span class="icon"></span>
+                                            <span class="icon node-icon"></span>Parent 3</li>
+                                          <li class="list-group-item node-searchable-tree" data-nodeid="7" style="color:undefined;background-color:undefined;">
+                                            <span class="icon"></span>
+                                            <span class="icon node-icon"></span>Parent 4</li>
+                                          <li class="list-group-item node-searchable-tree" data-nodeid="8" style="color:undefined;background-color:undefined;">
+                                            <span class="icon"></span>
+                                            <span class="icon node-icon"></span>Parent 5</li>
+                                        </ul>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6 col-sm-12">
+                                      <div id="search-output"></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+
 
     				</div>
 
-    			</div>
+
+
+    			<!-- </div> -->
     			<!--/ projects table with monthly chart -->
         </div>
       </div>
@@ -469,7 +542,9 @@
     <script src="../../../app-assets/vendors/js/extensions/underscore-min.js" type="text/javascript"></script>
     <script src="../../../app-assets/vendors/js/extensions/clndr.min.js" type="text/javascript"></script>
     <script src="../../../app-assets/vendors/js/extensions/unslider-min.js" type="text/javascript"></script>
-    <!-- END PAGE VENDOR JS-->
+
+
+  <!-- END PAGE VENDOR JS-->
     <!-- BEGIN ROBUST JS-->
     <!-- build:js app-assets/js/app.min.js-->
     <script src="../../../app-assets/js/core/app-menu.min.js" type="text/javascript"></script>
@@ -481,6 +556,10 @@
 	<script src="../../../assets/js/getChannelMainMetrics.js" type="text/javascript"></script>
 	<!-- BEGIN PAGE LEVEL JS-->
     <script src="../../../app-assets/js/scripts/pages/dashboard-project.min.js" type="text/javascript"></script>
+
+
+    <script src="../../../app-assets/js/scripts/extensions/tree-view.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/extensions/bootstrap-treeview.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
 	<script type="text/javascript">
 		function googleTranslateElementInit() {
