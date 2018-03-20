@@ -246,6 +246,52 @@
           </div>
           <!-- Inverse table end -->
 
+          <!-- Popover Triggers start -->
+          <section id="popover-triggers">
+          	<div class="row ">
+          		<div class="card">
+          			<div class="card-header">
+          				<h4 class="card-title">Messages Per Year</h4>
+          				<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                  		<div class="heading-elements">
+          					<ul class="list-inline mb-0">
+          						<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+          						<li><a data-action="reload"><i class="icon-reload"></i></a></li>
+          						<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+          						<li><a data-action="close"><i class="icon-cross2"></i></a></li>
+          					</ul>
+          				</div>
+          			</div>
+          			<div class="card-body collapse in">
+          				<div class="card-block">
+          					<p>Count of total messages by all members per year.</p>
+          					<div class="row">
+                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 text-xs-center">
+          							<!-- <h5 class="text-xs-center">Click</h5> -->
+          							<div class="text-xs-center">
+          									<button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 4563" data-original-title="Number of Messages" data-trigger="click" data-placement="bottom">
+          										2015
+          									</button>
+          								</div>
+          							<!-- <p class="text-xs-center mt-1">Use <code>data-trigger="click"</code> for click trigger. This is a default trigger.</p> -->
+          						</div>
+          						<div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 text-xs-center">
+          							<!-- <h5 class="text-xs-center">Click</h5> -->
+          							<div class="text-xs-center">
+          									<button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 7363" data-original-title="Number of Messages" data-trigger="click" data-placement="bottom">
+          										2016
+          									</button>
+          								</div>
+          							<!-- <p class="text-xs-center mt-1">Use <code>data-trigger="click"</code> for click trigger. This is a default trigger.</p> -->
+          						</div>
+
+          					</div>
+          				</div>
+          			</div>
+          		</div>
+          	</div>
+          </section>
+          <!-- Popover Triggers end -->
 
           <!-- Simple Bar Chart -->
           <div class="row">
@@ -405,9 +451,13 @@
     <!-- /build-->
     <!-- END ROBUST JS-->
     <script src="https://d3js.org/d3.v4.min.js"></script>
-	<script src="../../../assets/js/getTeamMetrics.js" type="text/javascript"></script>
+	<!-- <script src="../../../assets/js/getTeamMetrics.js" type="text/javascript"></script> -->
 	<!-- BEGIN PAGE LEVEL JS-->
     <script src="../../../app-assets/js/scripts/pages/dashboard-project.min.js" type="text/javascript"></script>
+
+    <script src="../../../assets/js/getMembersMainMetrics.js" type="text/javascript"></script>
+
+    <script src="../../../app-assets/js/scripts/popover/popover.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
 	<script type="text/javascript">
 		function googleTranslateElementInit() {
