@@ -52,17 +52,14 @@ class subscriptionGraph(object):
             sync_table(SlackArchive)
             instances = SlackArchive.objects.filter(teamName=self.team_name)
             for row in instances:
-                if row[CHANNEL_NAME] in channel_record.keys():
-                    if row[SENDER_COLUMN] not in channel_record[row[CHANNEL_NAME]]:
-+                    for user in channel_record[row[CHANNEL_NAME]]:
-+                        if self.graph.has_edge(row[SENDER_COLUMN], user):
-+                            self.graph[row[SENDER_COLUMN]][user][
-+                                EDGE_WEIGHT_LABEL] += 1
-+                        else:
-+                            self.graph.add_edge(row[SENDER_COLUMN], user,
-+                                                weight=1)
-+                    channel_record[row[CHANNEL_NAME]].add(row[SENDER_COLUMN])
-              
+              if row[CHANNEL_NAME] in channel_record.keys():
+                  for user in channel_record[row[CHANNEL_NAME]]:
+                      if self.graph.has_edge(row[SENDER_COLUMN], user):
+                          self.graph[row[SENDER_COLUMN]][user][
+                              EDGE_WEIGHT_LABEL] += 1
+                      else:
+                          self.graph.add_edge(row[SENDER_COLUMN], user,
+                                              weight=1
             tsvalues = SlackArchive.objects.filter(timeStamp=self.timeStamp)
             for row in instances:
                 self.graph.add_node(row[SENDER_COLUMN])
@@ -86,7 +83,7 @@ class subscriptionGraph(object):
 
 def run():
     graph_gen = subscriptionGraph("padgett_florentine_business",
-                             directed=False)
+                             directed=True)
     print("generated the graph")
 
     graph_gen.print_graph()
