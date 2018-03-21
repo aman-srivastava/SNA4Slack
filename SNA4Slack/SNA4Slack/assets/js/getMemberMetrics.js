@@ -32,6 +32,8 @@ $( document ).ready(function() {
       var memberName = 'carsten'
 			console.log(data);
 
+
+			document.getElementById("MemberName").innerHTML = memberName;
       console.log('Member Name: '+memberName)
 
       console.log('---------------------------------------')
@@ -45,6 +47,8 @@ $( document ).ready(function() {
       }
 
       console.log('Channels part of: '+memberChannels)
+
+			document.getElementById("NumberOfChannels").innerHTML = memberChannels.length;
       console.log('Number of channels part of: '+memberChannels.length)
 
       console.log('---------------------------------------')
@@ -58,6 +62,8 @@ $( document ).ready(function() {
         }
       }
 
+			document.getElementById("LastActiveStamp").innerHTML = lastActive;
+			document.getElementById("FirstMessageStamp").innerHTML = firstMessage;
       console.log('FirstMessage: '+firstMessage)
       console.log('LastActive: '+lastActive);
 
@@ -71,6 +77,7 @@ $( document ).ready(function() {
         }
       }
 
+			document.getElementById("TotalMessagesByMember").innerHTML = totalMessagesByMember;
       console.log('Total Messages by Member: '+totalMessagesByMember)
 
       console.log('---------------------------------------')
@@ -82,9 +89,31 @@ $( document ).ready(function() {
           }
       }
 
+			var popoverDiv = document.getElementById("PopoverTriggers")
+
       for(var i in memberChannelMessageMap) {
         if (memberChannelMessageMap.hasOwnProperty(i)) {
           console.log('Channel is: ' + i + ' --- ' +'Number of Messages are ' + memberChannelMessageMap[i]);
+
+					var newButton = document.createElement("button")
+
+					newButton.setAttribute("type", "button")
+					newButton.setAttribute("class", "btn btn-info")
+					newButton.setAttribute("data-toggle", "popover")
+					newButton.setAttribute("data-content","Total Number of Messages: 4563")
+					newButton.setAttribute("data-original-title", "Number of Messages")
+					newButton.setAttribute("data-placement","bottom")
+					//newButton.style.padding = "50px 10px 20px 30px"
+					//newButton.setAttribute("onClick","myFunction()")
+					newButton.style.border = "solid #000"
+
+					// function myFunction(){
+					// 	alert(temp)
+					// }
+
+					newButton.innerHTML = i + "-->" + memberChannelMessageMap[i];
+					popoverDiv.appendChild(newButton);
+
         }
 
       }

@@ -191,10 +191,10 @@
 
                           <div class="card-block">
                               <div class="row">
-                                  <div class="col-xl-3 col-lg-6 col-md-12 border-right-grey border-right-lighten-3 clearfix">
+                                  <div class="col-xl-6 col-lg-6 col-md-12 border-right-grey border-right-lighten-3 clearfix">
                                       <div class="float-xs-left pl-2">
                                           <span class="grey darken-1 block">Slack Name</span>
-                                          <span class="font-large-2 line-height-1 text-bold-300">snarang2</span>
+                                          <span class="font-large-2 line-height-1 text-bold-300" id = "MemberName"></span>
                                       </div>
                                       <!-- Use this for Superscript on right -->
                                       <div class="float-xs-left mt-2">
@@ -202,10 +202,10 @@
                                       </div>
                                       <!--  End of "Use this for Superscript on right" -->
                                   </div>
-                                  <div class="col-xl-3 col-lg-6 col-md-12 border-right-grey border-right-lighten-3 clearfix">
+                                  <div class="col-xl-6 col-lg-6 col-md-12 border-right-grey border-right-lighten-3 clearfix">
                                       <div class="float-xs-left pl-2">
                                           <span class="grey darken-1 block">Number of Channels</span>
-                                          <span class="font-large-3 line-height-1 text-bold-300">185</span>
+                                          <span class="font-large-3 line-height-1 text-bold-300" id = "NumberOfChannels"></span>
                                       </div>
                                       <div class="float-xs-left mt-2">
                                           <span class="grey darken-1 block"></span>
@@ -291,12 +291,12 @@
                                   <div class="my-1 text-xs-center">
                                       <div class="card-header mb-2 pt-0">
                                           <span class="danger">Last Active</span>
-                                          <h3 class="font-large-2 text-bold-200">22 Dec 17 <span class="font-medium-1 grey darken-1 text-bold-400"></span></h3>
+                                          <p class="font-medium-1 text-bold-100" id = "LastActiveStamp">22 Dec 17 <span class="font-medium-1 grey darken-1 text-bold-200"></span></p>
                                       </div>
                                       <div class="card-body">
                                           <ul class="list-inline clearfix mt-1 mb-0">
                                               <li>
-                                                  <h2 class="grey darken-1 text-bold-400">13 January 201</h2>
+                                                  <h6 class="grey darken-1 text-bold-400" id = "FirstMessageStamp">13 January 201</h6>
                                                   <span class="danger">Joined</span>
                                               </li>
                                           </ul>
@@ -320,7 +320,7 @@
 								<div class="col-lg-4 col-md-12 col-sm-12 border-right-blue-grey border-right-lighten-5">
 									<div class="p-1 text-xs-center">
 										<div>
-											<h3 class="font-large-1 grey darken-1 text-bold-400">84,962</h3>
+											<h3 class="font-large-1 grey darken-1 text-bold-400" id = "TotalMessagesByMember"></h3>
 											<span class="font-small-3 grey darken-1">Total Messages</span>
 										</div>
 										<div class="card-body overflow-hidden">
@@ -379,24 +379,24 @@
               <div class="card-block">
                 <p>Count of total messages per member per channel.</p>
                 <div class="row">
-                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 text-xs-center">
+                  <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 text-xs-center">
                     <!-- <h5 class="text-xs-center">Click</h5> -->
-                    <div class="text-xs-center">
-                        <button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 4563" data-original-title="Number of Messages" data-trigger="click" data-placement="bottom">
+                    <div class="text-xs-left" id = "PopoverTriggers">
+                        <!-- <button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 4563" data-original-title="Number of Messages" data-trigger="click" data-placement="bottom">
                           Channel 1
-                        </button>
+                        </button> -->
                       </div>
                     <!-- <p class="text-xs-center mt-1">Use <code>data-trigger="click"</code> for click trigger. This is a default trigger.</p> -->
                   </div>
-                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 text-xs-center">
-                    <!-- <h5 class="text-xs-center">Click</h5> -->
+                  <!-- <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 text-xs-center">
+
                     <div class="text-xs-center">
                         <button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 7363" data-original-title="Number of Messages" data-trigger="click" data-placement="bottom">
                           Channel 2
                         </button>
                       </div>
-                    <!-- <p class="text-xs-center mt-1">Use <code>data-trigger="click"</code> for click trigger. This is a default trigger.</p> -->
-                  </div>
+
+                  </div> -->
 
                 </div>
               </div>
