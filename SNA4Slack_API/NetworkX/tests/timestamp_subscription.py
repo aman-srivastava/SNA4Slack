@@ -83,7 +83,7 @@ class subscriptionGraph(object):
 
 def run():
     graph_gen = subscriptionGraph("padgett_florentine_business",
-                             directed=True)
+                             directed=False)
     print("generated the graph")
 
     graph_gen.print_graph()
