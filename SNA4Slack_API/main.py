@@ -39,6 +39,5 @@ api.add_resource(MentionGraphTrigger, SNA_URL + '/mention_graph')
 #----------------------------------------------------------------
 api.add_resource(DashboardTrigger, SNA_URL + '/DashboardTrigger')
 
-
 if __name__ == '__main__':
     app.run(debug=True)
