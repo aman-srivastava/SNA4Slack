@@ -202,7 +202,7 @@
                                       <i class="icon-box font-large-1 blue-grey"></i>
                                   </div>
                                   <div class="media-body text-xs-right">
-                                      <span class="font-large-2 text-bold-300 info">5,879</span>
+                                      <span class="font-large-2 text-bold-300 info" id = "TotalMessages"></span>
                                   </div>
                                   <p class="text-muted">Total Messages <span class="info float-xs-right"></span>
 
@@ -214,7 +214,7 @@
                                       <i class="icon-tag3 font-large-1 blue-grey"></i>
                                   </div>
                                   <div class="media-body text-xs-right">
-                                      <span class="font-large-2 text-bold-300 deep-orange">423</span>
+                                      <span class="font-large-2 text-bold-300 deep-orange" id = "TotalMembers"></span>
                                   </div>
                                   <p class="text-muted">Total Members<span class="deep-orange float-xs-right"></span></p>
 
@@ -226,7 +226,7 @@
                                       <i class="icon-shuffle3 font-large-1 blue-grey"></i>
                                   </div>
                                   <div class="media-body text-xs-right">
-                                      <span class="font-large-2 text-bold-300 danger">61</span>
+                                      <span class="font-large-2 text-bold-300 danger" id = "TotalEmoticons"></span>
                                   </div>
                                   <p class="text-muted">Total Emoticons<span class="danger float-xs-right"></span></p>
 
@@ -238,7 +238,7 @@
                                       <i class="icon-box font-large-1 blue-grey"></i>
                                   </div>
                                   <div class="media-body text-xs-right">
-                                      <span class="font-large-2 text-bold-300 success">68</span>
+                                      <span class="font-large-2 text-bold-300 success" id = "TotalURLs"></span>
                                   </div>
                                   <p class="text-muted">Total URLs<span class="success float-xs-right"></span></p>
 
@@ -275,30 +275,26 @@
                               <table class="table table-inverse mb-0">
                                   <thead>
                                       <tr>
-                                          <th>#</th>
                                           <th>User Name</th>
                                           <th>First Message</th>
                                       </tr>
                                   </thead>
-                                  <tbody>
-                                      <tr>
-                                          <th scope="row">1</th>
+                                  <tbody id = "Member-FirstMessage-Table">
+                                      <!-- <tr>
                                           <td>snarang2</td>
                                           <td>June 2, 2013</td>
 
                                       </tr>
                                       <tr>
-                                          <th scope="row">2</th>
                                           <td>asriva3</td>
                                           <td>March 10, 2013</td>
 
                                       </tr>
                                       <tr>
-                                          <th scope="row">3</th>
                                           <td>sinamda2</td>
                                           <td>April 10, 2011</td>
 
-                                      </tr>
+                                      </tr> -->
                                   </tbody>
                               </table>
                           </div>
@@ -334,27 +330,23 @@
                           <table class="table">
                               <thead>
                                   <tr>
-                                      <th>#</th>
                                       <th>User Name</th>
                                       <th>Last Active</th>
                                   </tr>
                               </thead>
-                              <tbody>
-                                  <tr>
-                                      <th scope="row">1</th>
+                              <tbody id = "Member-LastActive-Table">
+                                  <!-- <tr>
                                       <td>Mark</td>
                                       <td>June 25, 2016</td>
                                   </tr>
                                   <tr>
-                                      <th scope="row">2</th>
                                       <td>Mark</td>
                                       <td>June 25, 2016</td>
                                   </tr>
                                   <tr>
-                                      <th scope="row">3</th>
                                       <td>Mark</td>
                                       <td>June 25, 2016</td>
-                                  </tr>
+                                  </tr> -->
                               </tbody>
                           </table>
                       </div>
@@ -386,24 +378,30 @@
           				<div class="card-block">
           					<p>Count of total messages by all members per year.</p>
           					<div class="row">
-                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 text-xs-center">
-          							<!-- <h5 class="text-xs-center">Click</h5> -->
-          							<div class="text-xs-center">
-          									<button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 4563" data-original-title="Number of Messages" data-trigger="click" data-placement="bottom">
+                      <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 text-xs-center">
+
+          							<div class="text-xs-center" id = "PopoverTriggers">
+
+                            
+          									<!-- <button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 4563" data-original-title="Number of Messages" data-trigger="click" data-placement="bottom">
           										2015
           									</button>
+
+                            <button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 7363" data-original-title="Number of Messages"  data-placement="bottom">
+          										2016
+          									</button> -->
           								</div>
-          							<!-- <p class="text-xs-center mt-1">Use <code>data-trigger="click"</code> for click trigger. This is a default trigger.</p> -->
+
           						</div>
-          						<div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 text-xs-center">
-          							<!-- <h5 class="text-xs-center">Click</h5> -->
+          						<!-- <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 text-xs-center">
+
           							<div class="text-xs-center">
-          									<button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 7363" data-original-title="Number of Messages" data-trigger="click" data-placement="bottom">
+          									<button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 7363" data-original-title="Number of Messages"  data-placement="bottom">
           										2016
           									</button>
           								</div>
-          							<!-- <p class="text-xs-center mt-1">Use <code>data-trigger="click"</code> for click trigger. This is a default trigger.</p> -->
-          						</div>
+
+          						</div> -->
 
           					</div>
           				</div>
