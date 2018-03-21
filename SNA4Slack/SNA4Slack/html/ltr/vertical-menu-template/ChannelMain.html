@@ -190,8 +190,8 @@
 
 
           <!-- projects table with monthly chart -->
-    			<div class="row">
-    				<div class="col-xl-8 col-lg-12">
+    			<!-- <div class="row"> -->
+    				<div class="col-xl-6 col-lg-12">
     					<div class="card">
     						<div class="card-header">
     							<h4 class="card-title">Current Channels</h4>
@@ -206,7 +206,7 @@
     						<div class="card-body">
 
     							<div class="table-responsive">
-    								<table class="table table-hover mb-0">
+    								<table  class="table table-hover mb-0">
     									<thead>
     										<tr>
     											<th>Channel</th>
@@ -214,8 +214,8 @@
 
     										</tr>
     									</thead>
-    									<tbody>
-    										<tr>
+    									<tbody id = "Channel-Date-Table">
+    										<!-- <tr>
     											<td class="text-truncate">ReactJS App</td>
     											<td class="text-truncate"><span class="tag tag-success">22 May 2011</span></td>
 
@@ -244,14 +244,76 @@
     											<td class="text-truncate">Product UI</td>
     											<td class="text-truncate"><span class="tag tag-danger">1 May 2016</span></td>
 
-    										</tr>
+    										</tr> -->
     									</tbody>
     								</table>
     							</div>
     						</div>
     					</div>
     				</div>
-            <div class="col-xl-4 col-lg-6 col-md-12">
+
+            <div class="col-xl-6 col-lg-12">
+    					<div class="card">
+    						<div class="card-header">
+    							<h4 class="card-title">Current Channels</h4>
+    							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+    							<div class="heading-elements">
+    								<ul class="list-inline mb-0">
+    									<li><a data-action="reload"><i class="icon-reload"></i></a></li>
+    									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+    								</ul>
+    							</div>
+    						</div>
+    						<div class="card-body">
+
+    							<div class="table-responsive">
+    								<table  class="table table-hover mb-0">
+    									<thead>
+    										<tr>
+    											<th>Channel</th>
+    											<th>Members</th>
+
+    										</tr>
+    									</thead>
+    									<tbody id = "Channel-Member-Table">
+    										<!-- <tr>
+    											<td class="text-truncate">ReactJS App</td>
+    											<td class="text-truncate"><span class="tag tag-success">22 May 2011</span></td>
+
+    										</tr>
+    										<tr>
+    											<td class="text-truncate">Fitness App</td>
+    											<td class="text-truncate"><span class="tag tag-warning">11 May 2010</span></td>
+
+    										</tr>
+    										<tr>
+    											<td class="text-truncate">SOU plugin</td>
+    											<td class="text-truncate"><span class="tag tag-danger">13 June 2013</span></td>
+
+    										</tr>
+    										<tr>
+    											<td class="text-truncate">Android App</td>
+    											<td class="text-truncate"><span class="tag tag-success">15 December 2014</span></td>
+
+    										</tr>
+    										<tr>
+    											<td class="text-truncate">ABC Inc. UI/UX</td>
+    											<td class="text-truncate"><span class="tag tag-warning">2 January 2011</span></td>
+
+    										</tr>
+    										<tr>
+    											<td class="text-truncate">Product UI</td>
+    											<td class="text-truncate"><span class="tag tag-danger">1 May 2016</span></td>
+
+    										</tr> -->
+    									</tbody>
+    								</table>
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+
+            <div class="col-xl-12 col-lg-6 col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-block">
@@ -260,27 +322,87 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <span class="tag tag-default tag-pill bg-primary float-xs-right">40000</span> Total Messages
+                                <span id = "TotalMessages" class="tag tag-default tag-pill bg-primary float-xs-right"></span> Total Messages
                             </li>
                             <li class="list-group-item">
-                                <span class="tag tag-default tag-pill bg-info float-xs-right">22200</span> Average Messages
+                                <span id = "AverageMessages" class="tag tag-default tag-pill bg-info float-xs-right"></span> Average Messages
                             </li>
                             <li class="list-group-item">
-                                <span class="tag tag-default tag-pill bg-danger float-xs-right">8000</span> Max Messages
+                                <span id = "MaxMessages" class="tag tag-default tag-pill bg-danger float-xs-right"></span> Max Messages
                             </li>
                             <li class="list-group-item">
-                                <span class="tag tag-default tag-pill bg-warning float-xs-right">1120</span> Least Messages
+                                <span id = "LeastMessages"class="tag tag-default tag-pill bg-warning float-xs-right"></span> Least Messages
                             </li>
                             <li class="list-group-item">
-                                <span class="tag tag-default tag-pill bg-success float-xs-right">18</span>Total Channels
+                                <span id = "TotalChannels" class="tag tag-default tag-pill bg-success float-xs-right"></span>Total Channels
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
 
+            <!-- Bordered table start -->
             <div class="row">
-      				<div class="col-xl-8 col-lg-12">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Channel Member Table</h4>
+                            <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                            <div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                    <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                                    <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                                    <li><a data-action="close"><i class="icon-cross2"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body collapse in">
+                            <!-- <div class="card-block card-dashboard">
+                                <p class="card-text">Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p>
+                            </div> -->
+                            <div class="table-responsive">
+                                <table class="table table-bordered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Channel Name</th>
+                                            <th>Member List</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id = "Channel-Memberlist-Table">
+                                        <!-- <tr>
+
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>Otto</td>
+                                            <td>@TwBootstrap</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bordered table end -->
+
+
+            <div class="row">
+      				<div class="col-xl-6 col-lg-12">
       					<div class="card">
       						<div class="card-header">
       							<h4 class="card-title">Current Channels</h4>
@@ -303,8 +425,8 @@
 
       										</tr>
       									</thead>
-      									<tbody>
-      										<tr>
+      									<tbody id = "Channel-Message-Table">
+      										<!-- <tr>
       											<td class="text-truncate">ReactJS App</td>
       											<td class="text-truncate"><span class="tag tag-success">3000</span></td>
 
@@ -333,7 +455,7 @@
       											<td class="text-truncate">Product UI</td>
       											<td class="text-truncate"><span class="tag tag-danger">8000</span></td>
 
-      										</tr>
+      										</tr> -->
       									</tbody>
       								</table>
       							</div>
@@ -426,83 +548,13 @@
               <!-- Selectable Tree -->
               <!-- <div class="row"> -->
 
-              <!-- Searchable Tree -->
-              <div class="col-md-4 col-sm-12">
-                  <div class="card">
-                      <div class="card-header">
-                          <h4 class="card-title">Searchable Tree</h4>
-                      </div>
-                      <div class="card-body">
-                          <div class="card-block">
-                              <div class="form-group">
-                                  <div class="seachbox mb-2">
-                                      <input type="text" class="form-control round" placeholder="Search" id="input-search" name="input-search">
-                                  </div>
-                              </div>
-
-                              <div class="row mb-1">
-                                  <div class="col-md-8 col-sm-12">
-                                      <div class="form-group">
-                                          <label class="mr-1">
-                                              <input type="checkbox" id="chk-ignore-case" value="false">
-                                              Ignore Case
-                                          </label>
-                                          <label class="mr-1">
-                                              <input type="checkbox" id="chk-exact-match" value="false">
-                                              Exact Match
-                                          </label>
-                                          <label class="mr-1">
-                                              <input type="checkbox" id="chk-reveal-results" value="false">
-                                              Reveal Results
-                                          </label>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4 col-sm-12">
-                                      <button type="button" class="btn btn-primary mr-2 mb-1 float-xs-left" id="btn-search">Search</button>
-                                      <button type="button" class="btn btn-primary mb-1 float-xs-left" id="btn-clear-search">Clear</button>
-                                  </div>
-                              </div>
-
-                              <div class="row">
-                                  <div class="col-md-6 col-sm-12">
-                                      <div id="searchable-tree" class="treeview">
-                                        <ul class="list-group">
-                                          <li class="list-group-item node-searchable-tree node-selected" data-nodeid="0" style="color:#FFFFFF;background-color:#428bca;">
-                                            <span class="icon expand-icon icon-plus4"></span>
-                                            <span class="icon node-icon"></span>Parent 1</li>
-                                          <li class="list-group-item node-searchable-tree" data-nodeid="5" style="color:undefined;background-color:undefined;">
-                                            <span class="icon"></span>
-                                            <span class="icon node-icon"></span>Parent 2</li>
-                                          <li class="list-group-item node-searchable-tree" data-nodeid="6" style="color:undefined;background-color:undefined;">
-                                            <span class="icon"></span>
-                                            <span class="icon node-icon"></span>Parent 3</li>
-                                          <li class="list-group-item node-searchable-tree" data-nodeid="7" style="color:undefined;background-color:undefined;">
-                                            <span class="icon"></span>
-                                            <span class="icon node-icon"></span>Parent 4</li>
-                                          <li class="list-group-item node-searchable-tree" data-nodeid="8" style="color:undefined;background-color:undefined;">
-                                            <span class="icon"></span>
-                                            <span class="icon node-icon"></span>Parent 5</li>
-                                        </ul>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-6 col-sm-12">
-                                      <div id="search-output"></div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-
-
-    				</div>
 
 
 
     			<!-- </div> -->
     			<!--/ projects table with monthly chart -->
         </div>
-      </div>
+      <!-- </div> -->
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
