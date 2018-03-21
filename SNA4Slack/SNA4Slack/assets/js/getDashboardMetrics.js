@@ -22,7 +22,7 @@ $( document ).ready(function() {
          success: function (data) {
 			console.log(data);
 			for(var j = 0 ; j<data.length ; j++){
-				console.log(data[j]);
+				//console.log(data[j]);
 				if(data[j]['dataAnalytics']!=null){
 					data = data[j]['dataAnalytics'];
 				};
@@ -75,21 +75,22 @@ $( document ).ready(function() {
 					xAxes: [{
 						display: true,
 						gridLines: {
-							color: "#f3f3f3",
+							color: "#D8BFD8",
 							drawTicks: false,
 						},
 						scaleLabel: {
-							display: true,
+							display: true
 						}
 					}],
 					yAxes: [{
 						display: true,
 						gridLines: {
-							color: "#f3f3f3",
+							color: "#D8BFD8",
 							drawTicks: false,
 						},
 						scaleLabel: {
 							display: true,
+							labelString: 'Total Conversations'
 						}
 					}]
 				},
@@ -168,7 +169,94 @@ $( document ).ready(function() {
 			// Create the chart
 			var lineChart = new Chart(ctx, config);
 		  
+			var ctx = $("#url-pie-chart");
+
+			// Chart Options
+			var chartOptions = {
+				legend: {display: true,
+					position: 'top',
+					labels:{fontSize:12}
+				},
+				responsive: true,
+				maintainAspectRatio: false,
+				responsiveAnimationDuration:500,
+			};
+
 			
+			var labels = [];
+			var values = [];
+			for(var i = 0 ; i<5 ; i++){
+				labels.push(data.sharedURLs[i].url.replace("https://","").replace("http://","").replace("www.",""));
+				values.push(data.sharedURLs[i].urlCount)
+			}
+			
+			// Chart Data
+			var chartData = {
+				labels: labels,
+				datasets: [{
+					label: "My First dataset",
+					data: values,
+					backgroundColor: ["#673AB7","#E91E63","#009688","#FF5722","#00BCD4"],
+				}]
+			};
+
+			var config = {
+				type: 'pie',
+
+				// Chart Options
+				options : chartOptions,
+
+				data : chartData
+			};
+
+			// Create the chart
+			var pieSimpleChart = new Chart(ctx, config);
+			
+			
+
+		  
+			var ctx = $("#emoji-pie-chart");
+
+			// Chart Options
+			var chartOptions = {
+				legend: {display: true,
+					position: 'top',
+					labels:{fontSize:18}
+				},
+				responsive: true,
+				maintainAspectRatio: false,
+				responsiveAnimationDuration:500,
+			};
+
+			
+			var labels = [];
+			var values = [];
+			for(var i = 0 ; i<5 ; i++){
+				labels.push("  "+decodeURIComponent(data.emojiCount[i].emoji.replace(/\x/g,"%").replace(/\\/g,""))+"  ");
+				values.push(data.emojiCount[i].emojiCount)
+			}
+			
+			// Chart Data
+			var chartData = {
+				labels: labels,
+				datasets: [{
+					label: "My First dataset",
+					data: values,
+					backgroundColor: ["#673AB7","#E91E63","#009688","#FF5722","#00BCD4"],
+				}]
+			};
+
+			var config = {
+				type: 'doughnut',
+
+				// Chart Options
+				options : chartOptions,
+
+				data : chartData
+			};
+
+			// Create the chart
+			var pieSimpleChart = new Chart(ctx, config);
 			
 			},
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -222,45 +310,19 @@ $( document ).ready(function() {
 			
 			document.getElementById("noOfMentions").innerHTML = noOfMentions;
 
-			
-			document.getElementById("superstar1username").innerHTML = items[0][0];
-			document.getElementById("superstar1avatar").src = nodes[nodes.map(function(x) {return x.id; }).indexOf(items[0][0])].senderAvatar;
-			document.getElementById("superstar1mentions").innerHTML = items[0][1];
-			document.getElementById("superstar1popularity").max = max;
-			document.getElementById("superstar1popularity").value = items[0][1];
-			
-			document.getElementById("superstar2username").innerHTML = items[1][0];
-			document.getElementById("superstar2avatar").src = nodes[nodes.map(function(x) {return x.id; }).indexOf(items[1][0])].senderAvatar;
-			document.getElementById("superstar2mentions").innerHTML = items[1][1];
-			document.getElementById("superstar2popularity").max = max;
-			document.getElementById("superstar2popularity").value = items[1][1];
-			
-			document.getElementById("superstar3username").innerHTML = items[2][0];
-			document.getElementById("superstar3avatar").src = nodes[nodes.map(function(x) {return x.id; }).indexOf(items[2][0])].senderAvatar;
-			document.getElementById("superstar3mentions").innerHTML = items[2][1];
-			document.getElementById("superstar3popularity").max = max;
-			document.getElementById("superstar3popularity").value = items[2][1];
-			
-			document.getElementById("superstar4username").innerHTML = items[3][0];
-			document.getElementById("superstar4avatar").src = nodes[nodes.map(function(x) {return x.id; }).indexOf(items[3][0])].senderAvatar;
-			document.getElementById("superstar4mentions").innerHTML = items[3][1];
-			document.getElementById("superstar4popularity").max = max;
-			document.getElementById("superstar4popularity").value = items[3][1];
-			
-			
-			document.getElementById("superstar5username").innerHTML = items[4][0];
-			document.getElementById("superstar5avatar").src = nodes[nodes.map(function(x) {return x.id; }).indexOf(items[4][0])].senderAvatar;
-			document.getElementById("superstar5mentions").innerHTML = items[4][1];
-			document.getElementById("superstar5popularity").max = max;
-			document.getElementById("superstar5popularity").value = items[4][1];
-			
-			
-			document.getElementById("superstar6username").innerHTML = items[5][0];
-			document.getElementById("superstar6avatar").src = nodes[nodes.map(function(x) {return x.id; }).indexOf(items[5][0])].senderAvatar;
-			document.getElementById("superstar6mentions").innerHTML = items[5][1];
-			document.getElementById("superstar6popularity").max = max;
-			document.getElementById("superstar6popularity").value = items[5][1];
-			
+			for(var i = 0 ; i<items.length ; i++){
+				var username = "superstar"+(i+1)+"username";
+				var avatar = "superstar"+(i+1)+"avatar";
+				var mentions = "superstar"+(i+1)+"mentions";
+				var popularity = "superstar"+(i+1)+"popularity";
+				
+				document.getElementById(username).innerHTML = items[i][0];
+				document.getElementById(avatar).src = nodes[nodes.map(function(x) {return x.id; }).indexOf(items[i][0])].senderAvatar;
+				document.getElementById(mentions).innerHTML = items[i][1];
+				document.getElementById(popularity).max = max;
+				document.getElementById(popularity).value = items[i][1];
+				
+			}
 			
 			
 			},

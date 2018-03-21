@@ -96,6 +96,9 @@ $( document ).ready(function() {
     .attr("class", "node")
     .call(force2.drag)
   
+  
+  
+  
   // add circle clip
   var clipPath = node.append("clipPath")
   		.attr("id", function(d){return "clipCircle_" + d.id})

@@ -6,10 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>Hide on Scroll Top - Robust Bootstrap Admin Template</title>
+    <meta name="description" content="SNA4Slack - Social Network Analysis & Visualizationfor Slack Teams">
+    <meta name="keywords" content="sna4slack, network, analysis">
+    <meta name="author" content="Aman Srivastava">
+    <title>SNA4Slack | Dashboard</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../../app-assets/images/ico/apple-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../../app-assets/images/ico/apple-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../../app-assets/images/ico/apple-icon-120.png">
@@ -291,8 +291,8 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="card">
-							<div class="card-header">
+						<div class="card card-inverse box-shadow-0 card-outline-primary bg-white">
+							<div class="card-header card-head-inverse bg-primary">
 								<h4 class="card-title">Activity Timeline</h4>
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
@@ -313,15 +313,17 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xl-8 col-lg-12">
-						<div class="card">
-							<div class="card-header">
+					<div class="col-xl-12 col-lg-12">
+						<div class="card card-inverse box-shadow-0 card-outline-warning bg-white">
+							<div class="card-header card-head-inverse bg-warning">
 								<h4 class="card-title">Team Superstars</h4>
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
 									<ul class="list-inline mb-0">
+										<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
 										<li><a data-action="reload"><i class="icon-reload"></i></a></li>
 										<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+										<li><a data-action="close"><i class="icon-cross2"></i></a></li>
 									</ul>
 								</div>
 							</div>
@@ -394,10 +396,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-4 col-lg-12">
-						<div class="card">
-							<div class="card-header">
-								<h4 class="card-title">URL Statistics</h4>
+					<div class="col-xl-6 col-lg-12">
+						<div class="card card-inverse box-shadow-0 card-outline-info bg-white">
+							<div class="card-header card-head-inverse bg-info">
+								<h4 class="card-title">Top URLs Shared</h4>
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
 									<ul class="list-inline mb-0">
@@ -410,14 +412,34 @@
 							</div>
 							<div class="card-body collapse in">
 								<div class="card-block">
-									<canvas id="simple-pie-chart" height="400"></canvas>
+									<canvas id="url-pie-chart" height="400"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-12">
+						<div class="card card-inverse box-shadow-0 card-outline-danger bg-white">
+							<div class="card-header card-head-inverse bg-danger">
+								<h4 class="card-title">Top Emojis/Reactions</h4>
+								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+								<div class="heading-elements">
+									<ul class="list-inline mb-0">
+										<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+										<li><a data-action="reload"><i class="icon-reload"></i></a></li>
+										<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+										<li><a data-action="close"><i class="icon-cross2"></i></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="card-body collapse in">
+								<div class="card-block">
+									<canvas id="emoji-pie-chart" height="400"></canvas>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</section>
-			
+			</section>			
         </div>
       </div>
     </div>
@@ -425,9 +447,8 @@
 
 
     <footer class="footer footer-static footer-light navbar-border">
-      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">PIXINVENT </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
+      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2018 <a href="search-page.html" target="_blank" class="text-bold-800 grey darken-2">SNA4Slack </a>, All rights reserved. </span><a href="https://sway.com/FMHnrhMih9tsSB2F" target="_blank"><span class="float-md-right d-xs-block d-md-inline-block">Meet the Team</span></p>
     </footer>
-
     <!-- BEGIN VENDOR JS-->
     <!-- build:js app-assets/js/vendors.min.js-->
     <script src="../../../app-assets/js/core/libraries/jquery.min.js" type="text/javascript"></script>
@@ -469,7 +490,6 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
 	<!-- BEGIN PAGE LEVEL JS-->
     <script src="../../../assets/js/getDashboardMetrics.js" type="text/javascript"></script>
-    <script src="../../../app-assets/js/scripts/charts/chartjs/pie-doughnut/pie-simple.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
 	<script type="text/javascript">
 		function googleTranslateElementInit() {
