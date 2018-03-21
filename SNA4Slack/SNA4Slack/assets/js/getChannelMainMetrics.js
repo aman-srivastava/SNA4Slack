@@ -69,7 +69,21 @@ $( document ).ready(function() {
       messageArray.push(data.messageCount_channel[i].msgCount)
     }
 
+		var emojiCountArray = []
+    for (var i = 0; i<data.emojiCount.length; i++) {
+      emojiCountArray.push(data.emojiCount[i].emojiCount)
+    }
+
+		var urlCountArray = []
+    for (var i = 0; i<data.sharedURLs.length; i++) {
+      urlCountArray.push(data.sharedURLs[i].urlCount)
+    }
+
     var sumMessages = messageArray.reduce((a, b) => a + b, 0);
+		var sumEmoticons = emojiCountArray.reduce((a, b) => a + b, 0);
+		var sumURL = urlCountArray.reduce((a, b) => a + b, 0);
+
+
 
     var maxMessages = Math.max.apply(null, messageArray)
     var minMessages = Math.min.apply(null, messageArray)
@@ -79,6 +93,8 @@ $( document ).ready(function() {
 		document.getElementById("MaxMessages").innerHTML = maxMessages;
 		document.getElementById("LeastMessages").innerHTML = minMessages;
 		document.getElementById("TotalChannels").innerHTML = data.messageCount_channel.length;
+		document.getElementById("TotalEmoticons").innerHTML = sumEmoticons;
+		document.getElementById("TotalURLs").innerHTML = sumURL;
 
     // console.log('Message Array: '+messageArray);
     // console.log('Total Messages: '+sumMessages);

@@ -211,19 +211,19 @@
               <div class="card bg-gradient-x-pink">
                   <div class="card-body">
                       <div class="row">
-                          <div class="col-lg-3 col-sm-12 border-right-pink border-right-lighten-3">
+                          <div class="col-lg-6 col-sm-12 border-right-pink border-right-lighten-3">
                               <div class="card-block text-xs-center">
-                                  <h1 class="display-4 white"><i class="icon-bulb font-large-2"></i> 1579</h1>
+                                  <h1 class="display-4 white" id = "TotalMessagesPerChannel"></h1>
                                   <span class="white">Messages</span>
                               </div>
                           </div>
-                          <div class="col-lg-3 col-sm-12 border-right-pink border-right-lighten-3">
+                          <div class="col-lg-6 col-sm-12 border-right-pink border-right-lighten-3">
                               <div class="card-block text-xs-center">
-                                  <h1 class="display-4 white"><i class="icon-bulb font-large-2"></i> 1423</h1>
+                                  <h1 class="display-4 white" id = "TotalMembersPerChannel"></h1>
                                   <span class="white">Members</span>
                               </div>
                           </div>
-                          <div class="col-lg-3 col-sm-12 border-right-pink border-right-lighten-3">
+                          <!-- <div class="col-lg-3 col-sm-12 border-right-pink border-right-lighten-3">
                               <div class="card-block text-xs-center">
                                   <h1 class="display-4 white"><i class="icon-bulb font-large-2"></i> 61</h1>
                                   <span class="white">URLs</span>
@@ -234,7 +234,7 @@
                                   <h1 class="display-4 white"><i class="icon-bulb font-large-2"></i> 687</h1>
                                   <span class="white">Emoticons</span>
                               </div>
-                          </div>
+                          </div> -->
                       </div>
                   </div>
               </div>
@@ -265,31 +265,27 @@
                     <table class="table">
                         <thead class="thead-inverse">
                             <tr>
-                                <th>#</th>
                                 <th>Username</th>
                                 <th>Messages</th>
 
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
+                        <tbody id = "Message-Per-Member-per-Channel">
+                            <!-- <tr>
                                 <td>Mark</td>
                                 <td>333</td>
 
                             </tr>
                             <tr>
-                                <th scope="row">2</th>
                                 <td>Otto</td>
                                 <td>589</td>
 
                             </tr>
                             <tr>
-                                <th scope="row">3</th>
                                 <td>Fiedel</td>
                                 <td>289</td>
 
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
 
@@ -304,7 +300,6 @@
                         <table class="table">
                             <thead class="thead-inverse">
                                 <tr>
-                                    <th>#</th>
                                     <th>Username</th>
                                     <th>Mentions</th>
 
@@ -312,19 +307,16 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row">1</th>
                                     <td>snarng2</td>
                                     <td>37</td>
 
                                 </tr>
                                 <tr>
-                                    <th scope="row">2</th>
                                     <td>sinamda3</td>
                                     <td>89</td>
 
                                 </tr>
                                 <tr>
-                                    <th scope="row">3</th>
                                     <td>ntibrewa</td>
                                     <td>24</td>
 
@@ -347,16 +339,16 @@
                       <div class="card-block text-xs-center">
                           <div class="card-header mb-2">
                               <span class="success darken-1">Total Messages</span>
-                              <h3 class="font-large-2 grey darken-1 text-bold-200">24,879</h3>
+                              <h3 class="font-large-2 grey darken-1 text-bold-200" id = "TotalMessagesPerChannelSplit"></h3>
                           </div>
                           <div class="card-body">
                               <ul class="list-inline clearfix mt-2 mb-0">
                                   <li class="border-right-grey border-right-lighten-2 pr-2">
-                                      <h2 class="grey darken-1 text-bold-400">750</h2>
+                                      <h2 class="grey darken-1 text-bold-400" id= "MaxMessagesByUserInChannel"></h2>
                                       <span class="success">Max Messages</span>
                                   </li>
                                   <li class="pl-2">
-                                      <h2 class="grey darken-1 text-bold-400">253</h2>
+                                      <h2 class="grey darken-1 text-bold-400" id= "LeastMessagesByUserInChannel"></h2>
                                       <span class="danger">Least Messages</span>
                                   </li>
                               </ul>
@@ -371,7 +363,7 @@
                       <div class="card-block">
                           <div class="media">
                               <div class="media-body text-xs-left">
-                                  <h3 class="success">Sanchit Narang</h3>
+                                  <h3 class="success" id="MostActiveMember"></h3>
                                   <span>Most Active Member</span>
                               </div>
                               <div class="media-right media-middle">
@@ -387,7 +379,7 @@
                       <div class="card-block">
                           <div class="media">
                               <div class="media-body text-xs-left">
-                                  <h3 class="deep-orange">snarang2</h3>
+                                  <h3 class="deep-orange" id="LeastActiveMember"></h3>
                                   <span>Least Active Member</span>
                               </div>
                               <div class="media-right media-middle">
@@ -403,8 +395,8 @@
                       <div class="card-block">
                           <div class="media">
                               <div class="media-body text-xs-left">
-                                  <h3 class="info">456</h3>
-                                  <span>Number of mentions</span>
+                                  <h3 class="info">snarang2</h3>
+                                  <span>Most mentions</span>
                               </div>
                               <div class="media-right media-middle">
                                   <i class="icon-user5 info font-large-2 float-xs-right"></i>
@@ -425,7 +417,7 @@
 
 
     <footer class="footer footer-static footer-light navbar-border">
-      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">Some Text </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
+      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">SNA4SLACK Group 3 </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
     </footer>
 
     <!-- BEGIN VENDOR JS-->

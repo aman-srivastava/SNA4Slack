@@ -39,6 +39,7 @@ $( document ).ready(function() {
         }
       }
 
+			document.getElementById("TotalMessagesPerChannel").innerHTML = messagesPerChannel;
       console.log('TotalMessages: '+messagesPerChannel)
 
       console.log('-----------------------------------------------')
@@ -50,6 +51,7 @@ $( document ).ready(function() {
         }
       }
 
+			document.getElementById("TotalMembersPerChannel").innerHTML = membersPerChannel;
       console.log('Total Members: '+membersPerChannel)
 
       console.log('-----------------------------------------------')
@@ -61,9 +63,16 @@ $( document ).ready(function() {
         }
       }
 
+			var table = document.getElementById("Message-Per-Member-per-Channel")
       for(var i in userMessagePerChannelMap) {
         if (userMessagePerChannelMap.hasOwnProperty(i)) {
           console.log('User is: ' + i + ' --- ' +'Number of Messages are ' + userMessagePerChannelMap[i]);
+					var row = table.insertRow(0);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					cell1.innerHTML = i;
+					cell2.innerHTML = userMessagePerChannelMap[i];
+					// cell2.className = "tag tag-danger";
         }
 
       }
@@ -75,6 +84,10 @@ $( document ).ready(function() {
       let arr = Object.values(userMessagePerChannelMap);
       let min = Math.min(...arr);
       let max = Math.max(...arr);
+
+			document.getElementById("TotalMessagesPerChannelSplit").innerHTML = messagesPerChannel;
+			document.getElementById("MaxMessagesByUserInChannel").innerHTML = max;
+			document.getElementById("LeastMessagesByUserInChannel").innerHTML = min;
 
       console.log( `Min messages by user: ${min}, Max messages by user: ${max}` );
 
@@ -94,6 +107,9 @@ $( document ).ready(function() {
 
 
       }
+
+			document.getElementById("MostActiveMember").innerHTML = mostActiveMember;
+			document.getElementById("LeastActiveMember").innerHTML = leastActiveMember;
       console.log('LeastActiveMember: '+leastActiveMember)
       console.log('mostActiveMember: '+mostActiveMember)
 
