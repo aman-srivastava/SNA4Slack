@@ -188,12 +188,13 @@
               <div class="col-xs-12">
                   <div class="card">
                       <div class="card-body">
+
                           <div class="card-block">
                               <div class="row">
                                   <div class="col-xl-3 col-lg-6 col-md-12 border-right-grey border-right-lighten-3 clearfix">
                                       <div class="float-xs-left pl-2">
                                           <span class="grey darken-1 block">Slack Name</span>
-                                          <span class="font-large-3 line-height-1 text-bold-300">snarang2</span>
+                                          <span class="font-large-2 line-height-1 text-bold-300">snarang2</span>
                                       </div>
                                       <!-- Use this for Superscript on right -->
                                       <div class="float-xs-left mt-2">
@@ -210,7 +211,7 @@
                                           <span class="grey darken-1 block"></span>
                                       </div>
                                   </div>
-                                  <div class="col-xl-3 col-lg-6 col-md-12 border-right-grey border-right-lighten-3 clearfix">
+                                  <!-- <div class="col-xl-3 col-lg-6 col-md-12 border-right-grey border-right-lighten-3 clearfix">
                                       <div class="float-xs-left pl-2">
                                           <span class="grey darken-1 block">Private Channels</span>
                                           <span class="font-large-3 line-height-1 text-bold-300">64</span>
@@ -229,7 +230,7 @@
                                           <span class="grey darken-1 block"></span>
                                           <span class="block"><i class="icon-arrow-up4 success"></i></span>
                                       </div>
-                                  </div>
+                                  </div> -->
                               </div>
                           </div>
                       </div>
@@ -273,14 +274,14 @@
                               <div class="col-xl-3 col-lg-6 col-md-12 border-right-blue-grey border-right-lighten-5">
                                   <div class="my-1 text-xs-center">
                                       <div class="card-header mb-2 pt-0">
-                                          <span class="success">No. of Pinned Posts</span>
+                                          <span class="success">Number of URLs</span>
                                           <h3 class="font-large-2 text-bold-200">402 <span class="font-medium-1 grey darken-1 text-bold-400"></span></h3>
                                       </div>
                                       <div class="card-body">
                                           <ul class="list-inline clearfix mt-1 mb-0">
                                               <li>
                                                   <h2 class="grey darken-1 text-bold-400">15</h2>
-                                                  <span class="success">This Month</span>
+                                                  <span class="success">Number of Emoticons</span>
                                               </li>
                                           </ul>
                                       </div>
@@ -309,6 +310,8 @@
           </div>
 
 
+
+
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="card">
@@ -318,20 +321,11 @@
 									<div class="p-1 text-xs-center">
 										<div>
 											<h3 class="font-large-1 grey darken-1 text-bold-400">84,962</h3>
-											<span class="font-small-3 grey darken-1">Total Conversations</span>
+											<span class="font-small-3 grey darken-1">Total Messages</span>
 										</div>
 										<div class="card-body overflow-hidden">
 											<div id="morris-comments" class="height-75"></div>
-											<ul class="list-inline clearfix mb-0">
-												<li class="border-right-grey border-right-lighten-2 pr-2">
-													<h3 class="success text-bold-400">8,200</h3>
-													<span class="font-small-3 grey darken-1"><i class="icon-calendar4 success"></i> This Month</span>
-												</li>
-												<li class="pl-2">
-													<h3 class="success text-bold-400">5,400</h3>
-													<span class="font-small-3 grey darken-1"><i class="icon-calendar4 success"></i> This Week</span>
-												</li>
-											</ul>
+
 										</div>
 									</div>
 								</div>
@@ -343,16 +337,7 @@
 										</div>
 										<div class="card-body overflow-hidden">
 											<div id="morris-likes" class="height-75"></div>
-											<ul class="list-inline clearfix mb-0">
-												<li class="border-right-grey border-right-lighten-2 pr-2">
-													<h3 class="primary text-bold-400">4789</h3>
-													<span class="font-small-3 grey darken-1"><i class="icon-calendar4 success"></i> This Month</span>
-												</li>
-												<li class="pl-2">
-													<h3 class="primary text-bold-400">389</h3>
-													<span class="font-small-3 grey darken-1"><i class="icon-calendar4 success"></i> This Week</span>
-												</li>
-											</ul>
+
 										</div>
 									</div>
 								</div>
@@ -364,16 +349,7 @@
 										</div>
 										<div class="card-body overflow-hidden">
 											<div id="morris-views" class="height-75"></div>
-											<ul class="list-inline clearfix mb-0">
-												<li class="border-right-grey border-right-lighten-2 pr-2">
-													<h3 class="danger text-bold-400">81</h3>
-													<span class="font-small-3 grey darken-1"><i class="icon-calendar4 success"></i> This Month</span>
-												</li>
-												<li class="pl-2">
-													<h3 class="danger text-bold-400">498</h3>
-													<span class="font-small-3 grey darken-1"><i class="icon-calendar4 success"></i> This Week</span>
-												</li>
-											</ul>
+
 										</div>
 									</div>
 								</div>
@@ -382,6 +358,53 @@
 					</div>
 				</div>
 			</div>
+
+      <!-- Popover Triggers start -->
+      <section id="popover-triggers">
+        <div class="row ">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Messages Per Channel Per Member</h4>
+              <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                  <div class="heading-elements">
+                <ul class="list-inline mb-0">
+                  <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                  <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                  <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                  <li><a data-action="close"><i class="icon-cross2"></i></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-body collapse in">
+              <div class="card-block">
+                <p>Count of total messages per member per channel.</p>
+                <div class="row">
+                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 text-xs-center">
+                    <!-- <h5 class="text-xs-center">Click</h5> -->
+                    <div class="text-xs-center">
+                        <button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 4563" data-original-title="Number of Messages" data-trigger="click" data-placement="bottom">
+                          Channel 1
+                        </button>
+                      </div>
+                    <!-- <p class="text-xs-center mt-1">Use <code>data-trigger="click"</code> for click trigger. This is a default trigger.</p> -->
+                  </div>
+                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 text-xs-center">
+                    <!-- <h5 class="text-xs-center">Click</h5> -->
+                    <div class="text-xs-center">
+                        <button type="button" class="btn btn-info" data-toggle="popover" data-content="Total Number of Messages: 7363" data-original-title="Number of Messages" data-trigger="click" data-placement="bottom">
+                          Channel 2
+                        </button>
+                      </div>
+                    <!-- <p class="text-xs-center mt-1">Use <code>data-trigger="click"</code> for click trigger. This is a default trigger.</p> -->
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Popover Triggers end -->
 
 
         </div>
@@ -434,9 +457,11 @@
     <!-- /build-->
     <!-- END ROBUST JS-->
     <script src="https://d3js.org/d3.v4.min.js"></script>
-	<script src="../../../assets/js/getTeamMetrics.js" type="text/javascript"></script>
+	<script src="../../../assets/js/getMemberMetrics.js" type="text/javascript"></script>
 	<!-- BEGIN PAGE LEVEL JS-->
     <script src="../../../app-assets/js/scripts/pages/dashboard-project.min.js" type="text/javascript"></script>
+
+    <script src="../../../app-assets/js/scripts/popover/popover.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
 	<script type="text/javascript">
 		function googleTranslateElementInit() {
