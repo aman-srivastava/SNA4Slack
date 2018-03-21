@@ -22,7 +22,7 @@ $( document ).ready(function() {
 			console.log(data);
 
       var channelsDateMap = {}
-
+			var table = document.getElementById("Channel-Date-Table")
 
       for(var i = 0 ; i<data.firstMessage.length ; i++){
         //console.log(data[i].firstMessage[i])
@@ -31,12 +31,22 @@ $( document ).ready(function() {
       for(var i in channelsDateMap) {
         if (channelsDateMap.hasOwnProperty(i)) {
           console.log('Channel is: ' + i + ' --- ' +'First Message is on ' + channelsDateMap[i]);
+					var row = table.insertRow(0);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					cell1.innerHTML = i;
+					cell2.innerHTML = channelsDateMap[i];
+					cell2.className = "tag tag-danger";
         }
       }
+
+
+
 
       console.log('------------------------------------------')
 
     var channelsMessagesMap = {}
+		var table2 = document.getElementById("Channel-Message-Table")
 
     for(var i = 0 ; i<data.messageCount_channel.length ; i++){
       channelsMessagesMap[data.messageCount_channel[i].channelName] = data.messageCount_channel[i].msgCount
@@ -44,6 +54,12 @@ $( document ).ready(function() {
     for(var i in channelsMessagesMap) {
       if (channelsMessagesMap.hasOwnProperty(i)) {
         console.log('Channel is: ' + i + ' --- ' +'Total Messages are ' + channelsMessagesMap[i]);
+				var row = table2.insertRow(0);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				cell1.innerHTML = i;
+				cell2.innerHTML = channelsMessagesMap[i];
+				cell2.className = "tag tag-success";
       }
 
     }
@@ -58,14 +74,20 @@ $( document ).ready(function() {
     var maxMessages = Math.max.apply(null, messageArray)
     var minMessages = Math.min.apply(null, messageArray)
 
-    console.log('Message Array: '+messageArray);
-    console.log('Total Messages: '+sumMessages);
-    console.log('Average Messages: '+sumMessages/3)
-    console.log('Max Messages: '+maxMessages)
-    console.log('Least Messages: '+minMessages)
-    console.log('Total channels: ' +data.messageCount_channel.length)
-		 
-		 
+		document.getElementById("TotalMessages").innerHTML = sumMessages;
+		document.getElementById("AverageMessages").innerHTML = Math.round(sumMessages/3);
+		document.getElementById("MaxMessages").innerHTML = maxMessages;
+		document.getElementById("LeastMessages").innerHTML = minMessages;
+		document.getElementById("TotalChannels").innerHTML = data.messageCount_channel.length;
+
+    // console.log('Message Array: '+messageArray);
+    // console.log('Total Messages: '+sumMessages);
+    // console.log('Average Messages: '+sumMessages/3)
+    // console.log('Max Messages: '+maxMessages)
+    // console.log('Least Messages: '+minMessages)
+    // console.log('Total channels: ' +data.messageCount_channel.length)
+
+
 	console.log('------------------------------------------')
 
     var channelMemberMap = {}
@@ -73,12 +95,61 @@ $( document ).ready(function() {
       channelMemberMap[data.memberCount_channel[i].channelName] = data.memberCount_channel[i].memberCount
     }
 
+		var table3 = document.getElementById("Channel-Member-Table")
+
     for(var i in channelMemberMap) {
       if (channelMemberMap.hasOwnProperty(i)) {
         console.log('Channel is: ' + i + ' --- ' +'Total Members are ' + channelMemberMap[i]);
+				var row = table3.insertRow(0);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				cell1.innerHTML = i;
+				cell2.innerHTML = channelMemberMap[i];
+				cell2.className = "tag tag-success";
       }
 
     }
+
+		var channelArray = []
+
+		for(var i = 0; i<data.memberCount_channel.length; i++){
+			channelArray.push(data.memberCount_channel[i].channelName)
+		}
+
+		console.log(channelArray)
+
+
+		var channelMembersListMap = {}
+
+		for(var i=0 ;i<data.messageCount_channel_sender.length; i++){
+			channelMembersListMap[data.messageCount_channel_sender[i].channelName] = []
+		}
+
+		for(var j = 0; j<channelArray.length; j++){
+			var z = []
+			for(var i=0 ;i<data.messageCount_channel_sender.length; i++){
+				if(channelArray[j] == data.messageCount_channel_sender[i].channelName)
+					channelMembersListMap[channelArray[j]] = z.push(data.messageCount_channel_sender[i].messageSender)
+			}
+			channelMembersListMap[channelArray[j]] = z
+		}
+
+		var table4 = document.getElementById("Channel-Memberlist-Table")
+		for(var i in channelMembersListMap) {
+      if (channelMembersListMap.hasOwnProperty(i)) {
+        console.log('Channel is: ' + i + ' --- ' +'List of Members are ' + channelMembersListMap[i]);
+				var row = table4.insertRow(0);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				cell1.innerHTML = i;
+				cell2.innerHTML = channelMembersListMap[i];
+				//cell2.className = "tag tag-success";
+
+      }
+
+    }
+
+
 
 
 			},
