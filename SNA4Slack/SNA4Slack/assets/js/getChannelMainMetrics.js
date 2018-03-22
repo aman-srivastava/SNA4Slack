@@ -159,14 +159,10 @@ $( document ).ready(function() {
 				var cell2 = row.insertCell(1);
 				cell1.innerHTML = i;
 				cell2.innerHTML = channelMembersListMap[i];
-				//cell2.className = "tag tag-success";
 
       }
 
     }
-
-
-
 
 			},
 
