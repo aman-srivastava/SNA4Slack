@@ -272,7 +272,29 @@ $( document ).ready(function() {
       .attr("cy", function(d) { return d.y; });
 	});
   
-  
+	var min = d3.min(graph.links, function(d) {return d.weight; });
+	var max = d3.max(graph.links, function(d) {return d.weight; })/2;
+	var value = d3.min(graph.links, function(d) {return d.weight; });    
+	
+	$(function() {
+
+            $( "#slider2" ).slider({
+               min: min,
+               max: max,
+			   slide: function(event, ui) {updateLinks(ui.value);}			   
+         })
+    });
+	
+	function updateLinks(value){document.getElementById("threshold2").innerHTML="Edge Weight: "+value;
+		var threshold = value;
+		  svg2.selectAll(".link")
+		   .style("stroke-width", function(d) { 
+			 return d.value>=threshold ? thickness(d.value*2):0; 
+		  })
+		} 
+		
+		
+		
   function resize2() {
     
     var width = document.getElementById("graph2").style.width, height = 420;

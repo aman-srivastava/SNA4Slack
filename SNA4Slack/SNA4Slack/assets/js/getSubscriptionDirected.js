@@ -1,95 +1,14 @@
-var team;
-if(window.location.href.includes("?teamName")){
-		team = window.location.href.substring(window.location.href.indexOf("?")+10);
-		document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+team;
-		document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+team;
-		document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+team;
-		document.getElementById("MembersPageLink").href = "MembersMain.html?teamName="+team;
-	}
-
-$( document ).ready(function() {
-	var teamName;
-	if(window.location.href.includes("?teamName")){
-					teamName = window.location.href.substring(window.location.href.indexOf("?")+10);
-				}
-	document.getElementById("teamNameHeader2").innerHTML = "Team Metrics | "+teamName;
-	document.getElementById("teamNameSidebar").innerHTML = teamName;
-	document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
-	document.getElementById("teamURLLink").href = "http://"+teamName+".slackarchive.io";
-	$.ajax({
-		 url: "https://api.mlab.com/api/1/databases/sna4slack/collections/"+teamName+"?apiKey=dPpfbNvB6jRs-hvv-Veb1uVkXnX06Maa",
-		 type: 'GET',
-         success: function (data) {
-			for(var j = 0 ; j<data.length ; j++){
-				if(data[j]['dataAnalytics']!=null){
-					data = data[j]['dataAnalytics'];
-				};
-			}
-			
-			//console.log(data);
-			var noOfMessages = 0
-			var noOfChannels = []
-			var noOfMembers = []
-			for(var i = 0 ; i<data.messageCount_channel.length ; i++){
-				noOfMessages += parseInt(data.messageCount_channel[i].msgCount);
-			}
-			
-			/*
-			for(var i = 0 ; i<data.messageCount_sender.length ; i++){
-				if (noOfMembers.indexOf(data.messageCount_sender[i].messageSender) === -1){
-				noOfMembers.push(data.messageCount_sender[i].messageSender);
-				}				
-			}
-			*/
-			
-			document.getElementById("conversationCount").innerHTML = noOfMessages;
-			document.getElementById("memberCount").innerHTML = data.messageCount_sender.length;
-			document.getElementById("channelCount").innerHTML = data['messageCount_channel'].length;
-			},
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-        console.log('error', errorThrown);
-      }
-	});
-});
-	
-	
-var optArray = []; //place holder for search names
-  
-var w = window.innerWidth,
-    h = window.innerHeight;
-var focus_node = null,
-    highlight_node = null;
-var text_center = false;
-var highlight_color = "#373A3C";
-var highlight_trans = 0.1;
-  
-var size = d3.scale.linear()
-  .range([20,120]);
-var thickness = d3.scale.linear()
-  .range([1, 20]);
-var force = d3.layout.force()
+var optArray3 = []; //place holder for search names
+var force3 = d3.layout.force()
   .linkDistance(5000)
   .charge(-5000)
   .size([w,h]);
-var default_comments_color = "#FFFFFF";
-var default_replies_color ="#d62728";
-var default_link_color = "#FFFFFF";
-var nominal_base_node_size = 8;
-var nominal_text_size = 20;
-var max_text_size = 24;
-var nominal_stroke = 4.86;
-var max_stroke = 5.5;
-var max_base_node_size = 41;
-var min_zoom = .05;
-var max_zoom = 7;
-var svg = d3.select("#graph1").append("svg");
-var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
-var g = svg.append("g");
-svg.style("cursor","move");
-
-
-svg.append('defs').append('marker')
-        .attr({'id':'arrowhead',
+var svg3 = d3.select("#graph3").append("svg");
+var zoom3 = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g3 = svg3.append("g");
+svg3.style("cursor","move");
+svg3.append('defs').append('marker')
+        .attr({'id':'arrowhead3',
                'viewBox':'-0 -5 10 10',
                'refX':250,
                'refY':0,
@@ -102,12 +21,8 @@ svg.append('defs').append('marker')
             .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
             .attr('fill', '#FFFFFF')
             .attr('stroke','#FFFFFF');
+				
 		
-		
-var totalDiscussions = 0,
-    totalReplies = 0,
-    totalConnections = 0,
-    totalComments = 0;
 $( document ).ready(function() {
 	var teamName;
 	if(window.location.href.includes("?teamName")){
@@ -117,10 +32,11 @@ $( document ).ready(function() {
 	
 	for(var j = 0 ; j<graph.length ; j++){
 		//console.log(data[j]);
-		if(graph[j]['directed-mention-graph']!=null){
-			graph = graph[j]['directed-mention-graph'];
+		if(graph[j]['directed-subscription-graph']!=null){
+			graph = graph[j]['directed-subscription-graph'];
 		};
 	}
+	//console.log(graph);
 	var linkedByIndex = {};
 	var edges = [];
 	graph.links.forEach(function(e) {
@@ -159,18 +75,13 @@ $( document ).ready(function() {
   
   // collect all the node names for search auto-complete
   for (var i = 0; i < graph.nodes.length; i++) {
-    optArray.push(graph.nodes[i].id);
+    optArray3.push(graph.nodes[i].id);
 	}
-  optArray = optArray.sort();
+  optArray3 = optArray3.sort();
   // assign number of total discussions
-  totalDiscussions = graph.totalDiscussions;
-  totalComments = graph.totalComments;
   
   // calculate total replies
   graph.links.forEach(function(d){totalReplies+=d['weight']});
-  
-  // calculate total people
-  totalConnections = graph.nodes.length;
   
   updateReport();
   
@@ -181,25 +92,24 @@ $( document ).ready(function() {
   		d.x = d.y = w / n * i;
 		});
   
-  force
+  force3
     .nodes(graph.nodes)
     .links(edges)
     .start();
   // add lines between people
-  var link = g.selectAll(".link")
+  var link = g3.selectAll(".link")
     .data(edges)
     .enter().append("line")
     	.attr("class", "link")
 			.style("stroke-width", function(d){return thickness(d.value);})
 			.style("stroke", default_link_color)
-			.attr('marker-end','url(#arrowhead)')
+			.attr('marker-end','url(#arrowhead3)');
 
-
-  var node = g.selectAll(".node")
+  var node = g3.selectAll(".node")
     .data(graph.nodes)
     .enter().append("g")
     .attr("class", "node")
-    .call(force.drag)
+    .call(force3.drag)
   
   // add circle clip
   var clipPath = node.append("clipPath")
@@ -221,7 +131,7 @@ $( document ).ready(function() {
      						.innerRadius(function(d){return size(d.degree_centrality*1000)/2})
     						.outerRadius(function(d){return size(d.degree_centrality*1000)/2 + 7})
             		.startAngle(Math.PI)
-    						.endAngle(calculateRepliesAngle)
+    						.endAngle(calculateRepliesAngle3)
            );
   
   var commentsArc = node.append("path")
@@ -230,11 +140,11 @@ $( document ).ready(function() {
   		.attr("d", d3.svg.arc()
         .innerRadius(function(d){return size(d.degree_centrality*1000)/2})
         .outerRadius(function(d){return size(d.degree_centrality*1000)/2 + 7})
-        .startAngle(calculateCommentsAngleStart)
-        .endAngle(calculateCommentsAngleEnd)
+        .startAngle(calculateCommentsAngleStart3)
+        .endAngle(calculateCommentsAngleEnd3)
        );
   
-  var text = g.selectAll(".text")
+  var text = g3.selectAll(".text")
     .data(graph.nodes)
     .enter().append("text")
     	.attr("dy", ".35em")
@@ -248,9 +158,9 @@ $( document ).ready(function() {
     	.text(function(d) { return '\u2002'+d.id; });
   function updateReport(d){
     if (d=== undefined){
-      d3.select("#measures1").text('Degree: 0 | Betweenness: 0 | Closeness: 0');
+      d3.select("#measures3").text('Degree: 0 | Betweenness: 0 | Closeness: 0');
     }else{
-      d3.select("#measures1").text('Degree: '+d.degree_centrality.toString().substring(0, 6)+' | Betweenness: '+d.betweenness_centrality.toString().substring(0, 6)+' | Closeness: '+d.closeness_centrality.toString().substring(0, 6));
+      d3.select("#measures3").text('Degree: '+d.degree_centrality.toString().substring(0, 6)+' | Betweenness: '+d.betweenness_centrality.toString().substring(0, 6)+' | Closeness: '+d.closeness_centrality.toString().substring(0, 6));
     }
   }
   
@@ -265,8 +175,8 @@ $( document ).ready(function() {
           if (highlight_node === null) set_highlight(d)
 			})
     .on("mouseout", function(d) {exit_highlight();})
-		.on("mouseup",  
-			function() {//console.log("mouseUp: ", focus_node, highlight_node);
+	.on("mouseup",  
+			function() {
 				if (focus_node!==null)
       {
         focus_node = null;
@@ -275,7 +185,7 @@ $( document ).ready(function() {
           updateReport();
           commentsArc.style("opacity", 1);
           repliesArc.style("opacity", 1);
-					image.style("opacity", 1);
+		  image.style("opacity", 1);
           text.style("opacity", 1);
           link.style("opacity", 1);
         }
@@ -316,7 +226,7 @@ $( document ).ready(function() {
 	function set_highlight(d)
     {
       
-      svg.style("cursor","pointer");
+      svg3.style("cursor","pointer");
       
       updateReport(d);
       if (focus_node!==null) d = focus_node;
@@ -337,7 +247,7 @@ $( document ).ready(function() {
 		
     if (focus_node===null)
 			{
-				svg.style("cursor","move");
+				svg3.style("cursor","move");
 				
         if (highlight_color!="white")
 					{
@@ -349,18 +259,18 @@ $( document ).ready(function() {
  
   
     
-  zoom.on("zoom", function() {
-		g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  zoom3.on("zoom", function() {
+		g3.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 	});
 	
   
-  svg.call(zoom);
+  svg3.call(zoom3);
   
-  resize();
+  resize3();
   
-  d3.select(window).on("resize", resize);
+  d3.select(window).on("resize", resize3);
 	  
-  force.on("tick", function() {
+  force3.on("tick", function() {
   	
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
     text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
@@ -373,63 +283,33 @@ $( document ).ready(function() {
     node.attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; });
 	});
-
-
-	var min = d3.min(graph.links, function(d) {return d.weight; });
-	var max = d3.max(graph.links, function(d) {return d.weight; })/2;
-	var value = d3.min(graph.links, function(d) {return d.weight; });    
-	
-	$(function() {
-
-            $( "#slider1" ).slider({
-               min: min,
-               max: max,
-			   slide: function(event, ui) {updateLinks(ui.value);}			   
-         })
-    });
-	
-	function updateLinks(value){document.getElementById("threshold1").innerHTML="Edge Weight: "+value;
-		var threshold = value;
-		  svg.selectAll(".link")
-		   .style("stroke-width", function(d) { 
-			 return d.value>=threshold ? thickness(d.value):0; 
-		  })
-		  .attr('marker-end',function(d) { 
-			 return d.value>=threshold ? 'url(#arrowhead)':null; 
-		  });
-		} 
-		
-		
-			
-			
-			
   
-  function resize() {
+  
+  function resize3() {
     
-    var width = document.getElementById("graph1").style.width, height = window.innerHeight-430;
+    var width = document.getElementById("graph3").style.width, height = 420;
     
-    svg.attr("width", width).attr("height", height);
-    force.size([force.size()[0]+(width-w)/zoom.scale(),force.size()[1]+(height-h)/zoom.scale()]).resume();
+    svg3.attr("width", width).attr("height", height);
+    force3.size([force3.size()[0]+(width-w)/zoom3.scale(),force3.size()[1]+(height-h)/zoom3.scale()]).resume();
     
     w = width;
     
     h = height;
   }
-  
 
 });
 
 });
-  function calculateRepliesAngle(d){
+  function calculateRepliesAngle3(d){
     var fraction = d.degree_centrality*1000/29;
     return 360;
   }
   
-  function calculateCommentsAngleStart(d){
-    return calculateRepliesAngle(d);
+  function calculateCommentsAngleStart3(d){
+    return calculateRepliesAngle3(d);
   }
   
-  function calculateCommentsAngleEnd(d){
+  function calculateCommentsAngleEnd3(d){
     var fraction = d.degree_centrality*1000/29;
     return 0;
   }
@@ -438,15 +318,15 @@ $( document ).ready(function() {
   d3.select("#circlesize")
   	.on("change", function(d) {
          var sizedBy = d3.select(this).property("weight");
-  				resizeNodes(sizedBy);
+  				resizeNodes3(sizedBy);
   		});
   
-	function resizeNodes(parameter){ 
+	function resizeNodes3(parameter){ 
   
     // add circle clip
     nodes = d3.selectAll(".node");
     //set size domain based on input value
-  	size.domain([1, d3.max(nodes.data(), function(d) { console.log(d);return +d[parameter]; })]);
+  	size.domain([1, d3.max(nodes.data(), function(d) { return +d[parameter]; })]);
     
     nodes.selectAll("circle")      
       .attr("r", function(d){return size(d[parameter])/2});
@@ -463,19 +343,19 @@ $( document ).ready(function() {
         .innerRadius(function(d){return size(d[parameter])/2})
         .outerRadius(function(d){return size(d[parameter])/2 + 7})
             .startAngle(Math.PI)
-            .endAngle(calculateRepliesAngle));
+            .endAngle(calculateRepliesAngle3));
     nodes.selectAll(".commentPath")
     	.attr("d", d3.svg.arc()
           .innerRadius(function(d){return size(d[parameter])/2})
           .outerRadius(function(d){return size(d[parameter])/2 + 7})
-          .startAngle(calculateCommentsAngleStart)
-          .endAngle(calculateCommentsAngleEnd)
+          .startAngle(calculateCommentsAngleStart3)
+          .endAngle(calculateCommentsAngleEnd3)
          );
   
   	d3.selectAll(".text")
     	.attr("dx", function(d){return size(d[parameter])/2;});
     
-    force.start();
+    force3.start();
   }
   
   
@@ -483,22 +363,22 @@ $( document ).ready(function() {
 // assign optArray to search box
 // Search box is modified from this post > http://www.coppelia.io/2014/07/an-a-to-z-of-extra-features-for-the-d3-force-layout/
 $(function () {
-    $("#search1").autocomplete({
-        source: optArray
+    $("#search3").autocomplete({
+        source: optArray3
     });
 });
-function searchNode1() {
+function searchNode3() {
     //find the node
-    var selectedVal = document.getElementById('search1').value;
+    var selectedVal = document.getElementById('search3').value;
     
-  		svg.selectAll(".node")
+  		svg3.selectAll(".node")
         .filter(function (d) { return d.id != selectedVal;})
       		.style("opacity", highlight_trans/2)
       		.transition()
         	.duration(5000)
         	.style("opacity", 1);
       
-      svg.selectAll(".link, .text, .replyPath, .commentPath")
+      svg3.selectAll(".link, .text, .replyPath, .commentPath")
         .style("opacity", highlight_trans/2)
         .transition()
         .duration(5000)
