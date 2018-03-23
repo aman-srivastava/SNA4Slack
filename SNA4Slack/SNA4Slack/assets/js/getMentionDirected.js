@@ -387,26 +387,42 @@ $( document ).ready(function() {
 			   slide: function(event, ui) {updateLinks(ui.value);}			   
          })
     });
-	
+	var threshold = 0;
+	var toggleArrows = true;
 	function updateLinks(value){document.getElementById("threshold1").innerHTML="Edge Weight: "+value;
-		var threshold = value;
+		threshold = value;
 		  svg.selectAll(".link")
 		   .style("stroke-width", function(d) { 
 			 return d.value>=threshold ? thickness(d.value):0; 
 		  })
 		  .attr('marker-end',function(d) { 
-			 return d.value>=threshold ? 'url(#arrowhead)':null; 
+			 if (toggleArrows){return d.value>=threshold ? 'url(#arrowhead)':null; }
+			 else {return null;}
 		  });
 		} 
 		
 		
-			
+	$('#showDirections1').click( function(e) { 
+	toggleArrows = true;
+		svg.selectAll(".link")
+		  .attr('marker-end',function(d) { 
+					return d.value>=threshold ? 'url(#arrowhead)':null; 
+				});
+		document.getElementById("toggleDirections1").innerHTML="Directed";		} );
+	
+	$('#hideDirections1').click( function(e) { 
+	toggleArrows = false;
+		svg.selectAll(".link")
+		  .attr('marker-end',function(d) { 
+					return null; 
+				});
+	document.getElementById("toggleDirections1").innerHTML="Undirected"				} );
 			
 			
   
   function resize() {
     
-    var width = document.getElementById("graph1").style.width, height = window.innerHeight-430;
+    var width = document.getElementById("graph1").style.width, height = window.innerHeight-330;
     
     svg.attr("width", width).attr("height", height);
     force.size([force.size()[0]+(width-w)/zoom.scale(),force.size()[1]+(height-h)/zoom.scale()]).resume();
