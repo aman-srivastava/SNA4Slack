@@ -23,8 +23,7 @@ EDGE_WEIGHT_LABEL = "weight"
 CLOSENESS_CENTRALITY = "closeness_centrality"
 DEGREE_CENTRALITY = "degree_centrality"
 BETWEENNESS_CENTRALITY = "betweenness_centrality"
-TIESTAMP = "timestamp"
-
+MESSAGE_TIMESTAMP = "messageTime"
 
 class subscriptionGraph(object):
     def __init__(self, team_name, directed=True):
@@ -44,7 +43,7 @@ class subscriptionGraph(object):
         tsvalues = SlackArchive.objects.filter(timeStamp=self.timeStamp)
         for val in tsvalues:
             if self.graph.has_node(val):
-                self.graph[val][self.graph.node][TIMESTAMP] += 1;
+                self.graph[val][self.graph.node][MESSAGE_TIMESTAMP] += 1;
     
     def build_user_nodes(self):
         try:
@@ -82,7 +81,7 @@ class subscriptionGraph(object):
 
 
 def run():
-    graph_gen = subscriptionGraph("padgett_florentine_business",
+    graph_gen = subscriptionGraph("unconnected_triplet_data",
                              directed=False)
     print("generated the graph")
 
