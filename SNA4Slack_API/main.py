@@ -3,10 +3,10 @@ from flasgger import Swagger
 from flask import Flask, jsonify, abort, make_response, request, render_template
 from flask_restful import Api, Resource, reqparse, fields, marshal
 
-from  serviceEndpoints.crawler_trigger import CrawlerTrigger
-from  serviceEndpoints.subscriptionGraph_trigger import SubscriptionGraphTrigger 
-from  serviceEndpoints.mentionGraph_trigger import MentionGraphTrigger
-from  serviceEndpoints.dashboardAnalytics import DashboardTrigger
+from serviceEndpoints.crawler_trigger import CrawlerTrigger
+from serviceEndpoints.subscriptionGraph_trigger import SubscriptionGraphTrigger
+from serviceEndpoints.mentionGraph_trigger import MentionGraphTrigger
+from serviceEndpoints.dashboardAnalytics import DashboardTrigger
 
 #app = Flask(__name__, template_folder='/home/shuchir/SER517/SNA4Slack/SNA4Slack/SNA4Slack/html/ltr/vertical-menu-template')
 app = Flask(__name__)
@@ -21,7 +21,7 @@ swagger = Swagger(app)
 def home():
    return render_template('search-page.html')'''
 
-#URL DEFINITIONS
+# URL DEFINITIONS
 #----------------
 SNA_URL = "/sna4slack-ws/metrics"
 

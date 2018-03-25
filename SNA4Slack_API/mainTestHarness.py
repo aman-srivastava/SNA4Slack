@@ -6,6 +6,8 @@ from Helpers.mongoHelper import MongoHelper
 from Helpers.sparkCassandra_interface import sparkCassandraHelper
 from NetworkX.src.subscription_graph import SubscriptionGraph
 import json
+from utils import Utils
+from objects.slack_archive import SlackArchive
 
 
 def graphHarness():
@@ -27,7 +29,7 @@ def crawlerHarness():
     slackSpider.close_driver()
 
 
-def mentionGraphGer(team_Name, directed):
+def mentionGraphGen(team_Name, directed):
     graph_gen = MentionGraph(team_Name, directed)
     print 'Graph done'
     graph_gen.compute_closeness_centrality()
@@ -85,20 +87,29 @@ def subscriptionGraphGen(team_Name, directed):
 
 
 def bulkInsert():
-    teams = ['flatartagency', 'punecoders', 'openaddresses', 'zipperglobal', 'bitcoinhivemind',
-             'sqlcommunity', 'steam-makers', 'apachecloudstack', 'buffercommunity']
+    teams = ['punecoders', 'openaddresses', 'flatartagency', 'zipperglobal', 'apachecloudstack',
+             'steam-makers', 'bitcoinhivemind', 'shank-group', 'bitcoinclassic', 'sqlcommunity', 'buffercommunity']
+    # Batch Crawl
+    for team_Name in teams:
+        try:
+            slackSpider = SlackSpider()
+            slackSpider.start_driver()
+            slackSpider.runSpider(team_Name)
+            slackSpider.close_driver()
+        except:
+            print 'error occured'
+
     for team_Name in teams:
         sch = sparkCassandraHelper(team_Name)
         print 'Batch for team {0}'.format(team_Name)
-        print 'DataAnalytics: ' + sch.main()
+        spark = sch.createSparkSession()
+        print sch.getSubscriptionGraph(spark)
 
-        '''for directed in [True, False]:
+        for directed in [True, False]:
             mentionGraphGen(team_Name, directed)
-
-            if team_Name not in ['buffercommunity', 'sqlcommunity']:
-                subscriptionGraphGen(team_Name, directed)'''
+        subscriptionGraphGen(team_Name, False)
         print '_________________________________________________________________________________________________'
-
+    return True
 
 if __name__ == "__main__":
     bulkInsert()
