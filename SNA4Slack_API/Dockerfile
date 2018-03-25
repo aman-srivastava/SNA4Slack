@@ -11,7 +11,8 @@ WORKDIR $APP_HOME
 ADD . $APP_HOME
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r $APP_HOME/requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r $APP_HOME/requirements.txt
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
@@ -20,4 +21,4 @@ EXPOSE 80
 ENV NAME sna4slack
 
 # Run app.py when the container launches
-CMD ["python", "main.py"]
+CMD ["python", "./SNA4Slack_API/main.py"]

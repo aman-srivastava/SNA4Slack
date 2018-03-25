@@ -10,4 +10,4 @@ networkx
 dateutils
 pymongo
 findspark
-re
+pyspark
