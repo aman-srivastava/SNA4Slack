@@ -1,0 +1,31 @@
+version: '1'
+services:
+
+  frontend:
+    build: ./SNA4Slack
+    container_name: sna4slack_frontend
+    command: npm run start
+    ports:
+      - '8080:80'
+    volumes:
+     - ./SNA4Slack:/sna4slack
+    environment:
+      NODE_ENV: development
+
+  backend:
+    build: ./SNA4Slack_API
+    container_name: sna4slack_backend
+    command: python main.py
+    ports:
+      - '4000:5000'
+    depends_on:
+      - db
+    volumes:
+      - ./SNA4Slack_API:/sna4slack_backend
+      - bundle:/usr/local/bundle
+    environment:
+      PYTHON_ENV: development
+
+volumes:
+  db_data:
+  bundle:
