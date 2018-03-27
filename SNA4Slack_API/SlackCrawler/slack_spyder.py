@@ -123,6 +123,8 @@ class SlackSpider():
         url_Template = "https://{0}.slackarchive.io/".format(teamName)
         self.get_page(url_Template)
         self.getChannelList()
+        if teamName == 'buffercommunity':
+            self.channelList = self.channelList[7:]
         for channel in self.channelList:
             channelName = channel[1:].strip()
             urlA = url_Template + channelName + "/"

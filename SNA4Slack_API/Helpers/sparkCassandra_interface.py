@@ -15,6 +15,7 @@ class sparkCassandraHelper():
 
     def __init__(self, teamName):
         self.teamName = teamName
+        self.df = None
 
     def createSparkSession(self):
         spark = None
@@ -26,11 +27,11 @@ class sparkCassandraHelper():
                 .config("spark.cassandra.auth.password", "LYN1bQNCds3T")\
                 .master("local[*]")\
                 .getOrCreate()
-            df = spark.read\
+            self.df = spark.read\
                 .format("org.apache.spark.sql.cassandra")\
                 .options(table="slack_archive_dev", keyspace="sna4slack_metrics").load()
-            df = df.where(df.teamName == self.teamName)
-            df.createOrReplaceTempView("archives")
+            self.df = self.df.where(self.df.teamName == self.teamName)
+            self.df.createOrReplaceTempView("archives")
         except Exception as error:
             print error
 
@@ -109,7 +110,7 @@ class sparkCassandraHelper():
             str(jsonOut.toJSON(use_unicode=False).collect()).replace("'", "") + ','
 
         # 8. Get top 20 urls and urls count
-        lines = df.rdd.map(lambda r: r["messageBody"])
+        lines = self.df.rdd.map(lambda r: r["messageBody"])
         tokenized = lines.flatMap(lambda x: re.findall(
             'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', x))
         jsonOut = tokenized.map(lambda x: (x, 1)).reduceByKey(add).toDF(
@@ -145,7 +146,7 @@ class sparkCassandraHelper():
         |\U0001F570|\U0001F590|\U0001F595|\U0001F596|\U0001F5A4|\U0001F5A5|\U0001F5A8 \
         |\U0001F5B1|\U0001F5B2|\U0001F5BC|\U0001F5E1|\U0001F5E3|\U0001F5E8|\U0001F5EF|\U0001F5F3'
 
-        lines = df.rdd.map(lambda r: r["messageBody"])
+        lines = self.df.rdd.map(lambda r: r["messageBody"])
         jsonOut = lines.flatMap(lambda x: re.findall(emojiCode, x)).map(lambda x: (x, 1)) \
             .reduceByKey(add).toDF(['emoji', 'emojiCount']).sort(col("emojiCount").desc()).limit(20)
 
@@ -156,8 +157,24 @@ class sparkCassandraHelper():
         data = data.replace("\\", "\\\\\\\\")
         spark.stop()
         return MongoHelper.manageInsert(self.teamName, json.loads(data), "dataAnalytics")
-        
+
+    def getSubscriptionGraphInverse(self, spark):
+        # SubscriptionGraph
+        jsonOut = spark.sql("SELECT messageSender, channelName, COUNT(messageBody) AS msgCount \
+            FROM archives \
+            GROUP BY messageSender,channelName \
+            ORDER BY messageSender")
+
+        data = '{"documentType" :"spark-sub-graph-inv","spark-sub-graph-inv":{ "name": "' + \
+            self.teamName + '", "children": ' + \
+            str(jsonOut.toJSON(use_unicode=False).collect()) + ' } }'
+
+        data = data.replace("'", "").replace("\\", "\\\\\\\\")
+
+        return MongoHelper.manageInsert(self.teamName, json.loads(data), "spark-sub-graph-inv")
+
 if __name__ == '__main__':
     sch = sparkCassandraHelper('buffercommunity')
     spark = sch.createSparkSession()
     sch.main(spark)
+    sch.getSubscriptionGraph(spark)

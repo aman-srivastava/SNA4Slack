@@ -58,40 +58,12 @@ def mentionGraphGen(team_Name, directed):
     print documentType + ': ' + MongoHelper.manageInsert(team_Name, json.loads(data), documentType)
 
 
-def subscriptionGraphGen(team_Name, directed):
-    graph_gen = SubscriptionGraph(team_Name, directed)
-    print 'Graph done'
-    graph_gen.compute_closeness_centrality()
-    print 'Compute closeness'
-    graph_gen.compute_betweenness_centrality()
-    print 'Compute betweenness'
-    graph_gen.compute_degree_centrality()
-    print 'Compute centrality'
-    graph_gen.compute_density()
-    print 'Compute density'
-    graph_gen.compute_avg_connectivity()
-    print 'Compute connectivity'
-    # graph_gen.compute_avg_clustering()
-    print 'Compute clustering'
-
-    if directed == True:
-        documentType = "directed-subscription-graph"
-        data = '{"documentType" :"directed-subscription-graph", "directed-subscription-graph":' + \
-            json.dumps(graph_gen.json()) + '}'
-    else:
-        documentType = "undirected-subscription-graph"
-        data = '{"documentType" :"undirected-subscription-graph","undirected-subscription-graph":' + \
-            json.dumps(graph_gen.json()) + '}'
-
-    print documentType + ': ' + MongoHelper.manageInsert(team_Name, json.loads(data), documentType)
-
-
 def bulkInsert():
-    teams = ['punecoders', 'openaddresses', 'flatartagency', 'zipperglobal', 'apachecloudstack',
-             'steam-makers', 'bitcoinhivemind', 'shank-group', 'bitcoinclassic', 'sqlcommunity', 'buffercommunity']
+    teams = ['sqlcommunity', 'samvera']
     # Batch Crawl
     for team_Name in teams:
         try:
+            print 'Crawling team {0}'.format(team_Name)
             slackSpider = SlackSpider()
             slackSpider.start_driver()
             slackSpider.runSpider(team_Name)
@@ -99,15 +71,17 @@ def bulkInsert():
         except:
             print 'error occured'
 
+    #teams = ['blockstack', 'buffercommunity', 'bitcoinclassic', 'sqlcommunity', 'samvera']
+
     for team_Name in teams:
         sch = sparkCassandraHelper(team_Name)
-        print 'Batch for team {0}'.format(team_Name)
         spark = sch.createSparkSession()
-        print sch.getSubscriptionGraph(spark)
+        print 'Batch for team {0}'.format(team_Name)
+        print 'Subscription graph: ' + sch.getSubscriptionGraphInverse(spark)
+        print 'Data analytics: ' + sch.main(spark)
 
         for directed in [True, False]:
             mentionGraphGen(team_Name, directed)
-        subscriptionGraphGen(team_Name, False)
         print '_________________________________________________________________________________________________'
     return True
 
