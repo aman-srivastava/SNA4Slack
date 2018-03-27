@@ -190,7 +190,7 @@ $( document ).ready(function() {
     .data(edges)
     .enter().append("line")
     	.attr("class", "link")
-			.style("stroke-width", function(d){return thickness(d.value);})
+			.style("stroke-width", function(d){return thickness(d.value*1.5);})
 			.style("stroke", default_link_color)
 			.attr('marker-end','url(#arrowhead)')
 
@@ -199,8 +199,9 @@ $( document ).ready(function() {
     .data(graph.nodes)
     .enter().append("g")
     .attr("class", "node")
-    .call(force.drag)
-  
+    .call(force.drag);
+	node.append('title')
+		  .text(function(d) {return "@"+d.id;});
   // add circle clip
   var clipPath = node.append("clipPath")
   		.attr("id", function(d){return "clipCircle_" + d.id})
@@ -393,7 +394,7 @@ $( document ).ready(function() {
 		threshold = value;
 		  svg.selectAll(".link")
 		   .style("stroke-width", function(d) { 
-			 return d.value>=threshold ? thickness(d.value):0; 
+			 return d.value>=threshold ? thickness(d.value*1.5):0; 
 		  })
 		  .attr('marker-end',function(d) { 
 			 if (toggleArrows){return d.value>=threshold ? 'url(#arrowhead)':null; }

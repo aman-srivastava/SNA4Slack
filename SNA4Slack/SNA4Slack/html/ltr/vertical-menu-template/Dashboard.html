@@ -196,7 +196,7 @@
 					<div class="col-xl-3 col-lg-6 col-xs-12">
 						<div class="card bg-cyan">
 							<div class="card-body">
-								<div class="card-block">
+								<div class="card-block" title="Total members in this team">
 									<div class="media">
 										<div class="media-left media-middle">
 											<i class="icon-ios-people white font-large-2 float-xs-left"></i>
@@ -219,7 +219,7 @@
 					<div class="col-xl-3 col-lg-6 col-xs-12">
 						<div class="card bg-deep-orange">
 							<div class="card-body">
-								<div class="card-block">
+								<div class="card-block" title="Total conversations in this team">
 									<div class="media">
 										<div class="media-left media-middle">
 											<i class="icon-chatbubbles white font-large-2 float-xs-left"></i>
@@ -243,7 +243,7 @@
 					<div class="col-xl-3 col-lg-6 col-xs-12">
 						<div class="card bg-teal">
 							<div class="card-body">
-								<div class="card-block">
+								<div class="card-block" title="Total channels in this team">
 									<div class="media">
 										<div class="media-left media-middle">
 											<i class="icon-slack white font-large-2 float-xs-left"></i>
@@ -267,7 +267,7 @@
 					<div class="col-xl-3 col-lg-6 col-xs-12">
 						<div class="card bg-pink">
 							<div class="card-body">
-								<div class="card-block">
+								<div class="card-block" title="Total mentions in this team">
 									<div class="media">
 										<div class="media-left media-middle">
 											<i class="icon-at white font-large-2 float-xs-left"></i>
@@ -297,6 +297,8 @@
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
 									<ul class="list-inline mb-0">
+										<button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#activityTimelineInfo"><i class="icon-info black"></i> Help</button>
+
 										<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
 										<li><a data-action="reload"><i class="icon-reload"></i></a></li>
 										<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
@@ -306,6 +308,32 @@
 							</div>
 							<div class="card-body collapse in">
 								<div class="card-block">
+									<div class="modal fade text-xs-left" id="activityTimelineInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+									  <div class="modal-dialog" role="document">
+										<div class="modal-content">
+										  <div class="modal-header card-head-inverse bg-primary">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											  <span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Activity Timeline</h4>
+										  </div>
+										  <div class="modal-body">
+											<h5><i class="icon-arrow-right-c"></i> About</h5>
+											<p>This bar graph shows the overall timespan of conversations for a given slack team as available on slackarchive.io. Each bar represents a month of time. The height of each bar represents the conversation total for that month.</p>
+											<hr>
+											<h5><i class="icon-lightbulb-o"></i> How to use this graph?</h5>
+											<p>1. Use the mouse-pointer to hover over a bar.</p>
+											<p>2. The month and conversation count is displayed in a bubble.</p><hr>
+											<div class="alert alert-success" role="alert">
+												<span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+											</div>
+										  </div>
+										  <div class="modal-footer">
+											<button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+										  </div>
+										</div>
+									  </div>
+									</div>
 									<canvas id="column-chart" height="400"></canvas>
 								</div>
 							</div>
@@ -320,6 +348,7 @@
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
 									<ul class="list-inline mb-0">
+										<button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#teamSuperstarsInfo"><i class="icon-info black"></i> Help</button>
 										<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
 										<li><a data-action="reload"><i class="icon-reload"></i></a></li>
 										<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
@@ -330,6 +359,30 @@
 							<div class="card-body">
 								<div class="card-block">
 									<p class="m-0">This table shows the most popular members of this team</p>
+									<div class="modal fade text-xs-left" id="teamSuperstarsInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+									  <div class="modal-dialog" role="document">
+										<div class="modal-content">
+										  <div class="modal-header card-head-inverse bg-warning">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											  <span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Team Superstars</h4>
+										  </div>
+										  <div class="modal-body">
+											<h5><i class="icon-arrow-right-c"></i> About</h5>
+											<p>This table shows the top members in a team based on the number of times they are mentioned by their teammates using the "@" symbol.</p>
+											<hr>
+											
+											<div class="alert alert-success" role="alert">
+												<span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+											</div>
+										  </div>
+										  <div class="modal-footer">
+											<button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+										  </div>
+										</div>
+									  </div>
+									</div>
 								</div>
 								<div class="table-responsive">
 									<table class="table table-hover mb-0">
