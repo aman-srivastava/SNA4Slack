@@ -109,6 +109,42 @@
 			color: #ff8914;
 		  }	  
 	</style>
+	<style>
+
+	.mainBars rect{
+	  shape-rendering: auto;
+	  fill-opacity: 0;
+	  stroke-width: 0.5px;
+	  stroke: rgb(0, 0, 0);
+	  stroke-opacity: 0;
+	}
+	.subBars{
+		shape-rendering:crispEdges;
+	}
+	.edges{
+		stroke:none;
+		fill-opacity:0.5;
+	}
+	
+	
+	text{
+		font-size:8px;
+	}
+	.mainBars rect{
+	  shape-rendering: auto;
+	  fill-opacity: 0;
+	  stroke-width: 0.1px;
+	  stroke: rgb(0, 0, 0);
+	  stroke-opacity: 0;
+	}
+	.subBars{
+		shape-rendering:crispEdges;
+	}
+	.edges{
+		stroke:none;
+		fill-opacity:0.5;
+	}
+	</style>
   </head>
   <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
 
@@ -247,7 +283,7 @@
 					<div class="col-xl-12 col-lg-12">
 						<div class="card card-inverse box-shadow-0 card-primary">
 							<div class="card-header">
-								<h4 class="card-title">Mention Based (Directed)</h4>
+								<h4 class="card-title">Mention-based User Network</h4>
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
 									<ul class="list-inline mb-0">
@@ -272,21 +308,23 @@
 									<div class="modal fade text-xs-left" id="mentionDirectedInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
 									  <div class="modal-dialog" role="document">
 										<div class="modal-content">
-										  <div class="modal-header">
+										  <div class="modal-header card-head-inverse bg-primary">
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											  <span aria-hidden="true">&times;</span>
 											</button>
-											<h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Mention-based Directed Centrality Graph</h4>
+											<h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Mention-Based User Network</h4>
 										  </div>
 										  <div class="modal-body">
 											<h5><i class="icon-arrow-right-c"></i> About</h5>
-											<p>This graph consists of nodes and edges. The nodes in the graph represent the users in the selected slack team. The edges in the graph represent the number of mentions between users in slack conversations. </p>
+											<p>This graph shows a network of users based on user-mentions for a given slack team. It consists of nodes and edges. The nodes in the graph represent the users in the selected slack team. The edges in the graph represent the number of mentions between users in slack conversations.</p>
 											<hr>
 											<h5><i class="icon-lightbulb-o"></i> How to use this graph?</h5>
 											<p>1. Use the mouse-wheel to zoom in and out.</p>
-											<p>2. Hover over a node to highlight its neighbours and get the three measures of centrality- Degree, Betweenness & Closeness for the node</p>
+											<p>2. Hover over a node to highlight its neighbours and get the three measures of centrality- Degree, Betweenness & Closeness for the node, in the top section of the graph</p>
 											<p>3. Click on a node to show only the highlighted node and its neighbours.</p>
 											<p>4. Use the search bar to find a known user by its username.</p>
+											<p>5. Use the Edge-weight threshold slider to filter edges based on its weight (or the number of mentions between two users).</p>
+											<p>5. Use the "Directed/Undirected" dropdown above the graph to toggle Edge Directions On or Off.</p><hr>
 											<div class="alert alert-success" role="alert">
 												<span class="text-bold-600">Thank you!</span> You successfully read this important  message.
 											</div>
@@ -297,7 +335,7 @@
 										</div>
 									  </div>
 									</div>
-									<div style="z-index:1;position:absolute;background-color:rgba(0,0,0,0.7);border: solid black 1px;width:calc(100% - 3rem);text-align:center;">
+									<div style="z-index:1;position:absolute;background-color:rgba(0,0,0,0.7);border: solid black 1px;width:calc(100% - 3rem);text-align:center;font-size:1.2rem;">
 									  <span id="measures1" style="color:#F6BB42;">Degree: 0 | Betweenness: 0 | Closeness: 0</span>
 									</div>
 									<div id="graph1" style="border: solid black 1px;background-color:rgba(220,220,220,0.4);">
@@ -328,6 +366,7 @@
 						</div>
 					</div>
 				</div>
+				<!--
 				<div class="row">
 					<div class="col-xl-12 col-lg-12">
 						<div class="card card-inverse box-shadow-0 card-success">
@@ -405,12 +444,12 @@
 						</div>
 					</div>
 				</div>
-				<!--
+				-->
 				<div class="row">
 					<div class="col-xl-12 col-lg-12">
-						<div class="card card-inverse box-shadow-0 card-danger">
+						<div class="card card-inverse box-shadow-0 card-success">
 							<div class="card-header">
-								<h4 class="card-title">Subscription Based (Directed)</h4>
+								<h4 class="card-title">Activity-based Channel Subscriptions</h4>
 								<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 								<div class="heading-elements">
 									<ul class="list-inline mb-0">
@@ -427,21 +466,21 @@
 									<div class="modal fade text-xs-left" id="subscriptionDirectedInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
 									  <div class="modal-dialog" role="document">
 										<div class="modal-content">
-										  <div class="modal-header">
+										  <div class="modal-header card-head-inverse bg-success">
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											  <span aria-hidden="true">&times;</span>
 											</button>
-											<h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Subscription-based Directed Centrality Graph</h4>
+											<h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Activity-Based Channel Subscriptions</h4>
 										  </div>
 										  <div class="modal-body">
 											<h5><i class="icon-arrow-right-c"></i> About</h5>
-											<p>This graph consists of nodes and edges. The nodes in the graph represent the users in the selected slack team. The edges in the graph connect users who share one or more channels. </p>
+											<p>This graph shows a many-to-many relationship between Channels and Members of a Team. The bars on the left hand side represent channels, whereas the bars on the right hand side represent members. Percentage activities of each member across all channels may be tracked from this graph.</p>
 											<hr>
 											<h5><i class="icon-lightbulb-o"></i> How to use this graph?</h5>
-											<p>1. Use the mouse-wheel to zoom in and out.</p>
-											<p>2. Hover over a node to highlight its neighbours and get the three measures of centrality- Degree, Betweenness & Closeness for the node</p>
-											<p>3. Click on a node to show only the highlighted node and its neighbours.</p>
-											<p>4. Use the search bar to find a known user by its username.</p>
+											<p>1. Use the mouse-pointer to hover over Channel or Member bars.</p>
+											<p>2. When user hovers over a Channel bar, the graph updates to show the percentage activity of each member in that channel</p>
+											<p>2. When user hovers over a Member bar, the graph updates to show the percentage activity of that member in each channel.</p>
+											<hr>
 											<div class="alert alert-success" role="alert">
 												<span class="text-bold-600">Thank you!</span> You successfully read this important  message.
 											</div>
@@ -452,38 +491,22 @@
 										</div>
 									  </div>
 									</div>
-									<div style="z-index:1;position:absolute;background-color:rgba(0,0,0,0.7);border: solid black 1px;width:calc(100% - 3rem);text-align:center;">
-									  <span id="measures3" style="color:#F6BB42;">Degree: 0 | Betweenness: 0 | Closeness: 0</span>
-									</div>							
-									<div id="graph3" style="border: solid black 1px;background-color:rgba(220,220,220,0.4);">
+									<div style="z-index:1;position:absolute;background-color:rgba(0,0,0,0.1);border: solid black 0px;width:calc(100% - 3rem);text-align:center;font-size:1.2rem;">
+									  <span style="color:#333333;float: left;
+										width: 50%;">Percentage Conversations by Channel</span>
+										<span style="color:#333333;float: left;
+										width: 50%;">Percentage Conversations by Member</span>
+										
 									</div>
-									<hr/>
-									<fieldset>
-										<div class="col-md-6">
-											<div class="form-group">
-												<div class="ui-slider-warning jui-slider-default" id="slider3"></div>
-											</div>
-										</div>
-										<div class="col-md-2 block-tag">
-											<div class="form-group">
-												<span style="color:white;" id="threshold2">Edge Weight:</span>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="input-group">
-												<input id="search3" type="text" class="form-control" placeholder="Search by username..." aria-describedby="button-addon2">
-												<span class="input-group-btn" id="button-addon2">
-													<button class="btn btn-warning" type="button" onclick="searchNode3()" style="font-weight:bold;">Search</button>
-												</span>
-											</div>
-										</div>
-									</fieldset>
+									<div id="graph3" style="border: solid black 1px;background-color:rgba(220,220,220,0.4);background-color:#F1F1F1;overflow: scroll;height:800px;">
+									</div>
+									
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				-->
+				<!--
 				<div class="row">
 					<div class="col-xl-12 col-lg-12">
 						<div class="card card-inverse box-shadow-0 card-info">
@@ -561,6 +584,7 @@
 						</div>
 					</div>
 				</div>
+				-->
 			</section>
         </div>
       </div>
@@ -615,12 +639,12 @@
 	<script src="../../../app-assets/js/scripts/ui/jquery-ui/slider-spinner.min.js" type="text/javascript"></script>
 	<script src="../../../app-assets/vendors/js/ui/jquery-ui-slider-pips.min.js" type="text/javascript"></script>
     <script src="https://d3js.org/d3.v3.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://vizjs.org/viz.v1.1.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type='text/javascript' src="http://code.jquery.com/ui/1.11.3/jquery-ui.min.js"> </script>
 	<script type='text/javascript' src="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"> </script>
 	<script src="../../../assets/js/getMentionDirected.js" type="text/javascript"></script>
-	<script src="../../../assets/js/getMentionUndirected.js" type="text/javascript"></script>
-	<script src="../../../assets/js/getSubscriptionUndirected.js" type="text/javascript"></script>
+	<script src="../../../assets/js/getSubscriptionDirected.js" type="text/javascript"></script>
 	
 	<!-- END PAGE LEVEL JS-->
 	<script type="text/javascript">
