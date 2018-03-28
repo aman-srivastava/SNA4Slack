@@ -17,6 +17,7 @@ from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
 from objects.slack_archive import SlackArchive
 
+MESSAGE_TIMESTAMP = "messageTime"
 SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
 EDGE_WEIGHT_LABEL = "weight"
@@ -44,7 +45,7 @@ class MentionGraph(object):
         tsvalues = SlackArchive.objects.filter(timeStamp=self.timeStamp)
         for val in tsvalues:
             if self.graph.has_node(val):
-                self.graph[val][self.graph.node][TIMESTAMP] += 1;
+                self.graph[val][self.graph.node][MESSAGE_TIMESTAMP] += 1;
     
     def build_user_nodes(self):
         try:
@@ -73,7 +74,7 @@ class MentionGraph(object):
 
 
 def run():
-    graph_gen = MentionGraph("padgett_florentine_business",
+    graph_gen = MentionGraph("single_node",
                              directed=True)
     print("generated the graph")
 
