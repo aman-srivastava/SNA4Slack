@@ -39,6 +39,8 @@ $( document ).ready(function() {
         }
       }
 
+			document.getElementById("HeaderChannelIndividual").innerHTML = teamName+" | "+channelName;
+			document.getElementById("ChannelName").innerHTML = teamName+" | "+channelName+" - SNA4SLACK";
 			document.getElementById("TotalMessagesPerChannel").innerHTML = messagesPerChannel;
       console.log('TotalMessages: '+messagesPerChannel)
 
