@@ -59,7 +59,7 @@ def mentionGraphGen(team_Name, directed):
 
 
 def bulkInsert():
-    teams = ['sqlcommunity', 'samvera']
+    '''teams = ['sqlcommunity', 'samvera']
     # Batch Crawl
     for team_Name in teams:
         try:
@@ -69,9 +69,9 @@ def bulkInsert():
             slackSpider.runSpider(team_Name)
             slackSpider.close_driver()
         except:
-            print 'error occured'
+            print 'error occured' '''
 
-    #teams = ['blockstack', 'buffercommunity', 'bitcoinclassic', 'sqlcommunity', 'samvera']
+    teams = ['blockstack', 'buffercommunity', 'bitcoinclassic', 'sqlcommunity', 'samvera']
 
     for team_Name in teams:
         sch = sparkCassandraHelper(team_Name)

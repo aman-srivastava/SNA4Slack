@@ -34,7 +34,6 @@ class sparkCassandraHelper():
             self.df.createOrReplaceTempView("archives")
         except Exception as error:
             print error
-
         return spark
 
     def main(self, spark):
