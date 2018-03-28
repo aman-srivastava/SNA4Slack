@@ -21,6 +21,8 @@ $( document ).ready(function() {
 
 			console.log(data);
 
+			document.getElementById("Header").innerHTML = teamName+" | Channel Main Metrics"
+
       var channelsDateMap = {}
 			var table = document.getElementById("Channel-Date-Table")
 

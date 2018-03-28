@@ -191,21 +191,28 @@
 
           <!-- projects table with monthly chart -->
     			<!-- <div class="row"> -->
-    				<div class="col-xl-6 col-lg-12">
+          <div class="row">
+  						<h4 id="Header"></h4>
+  						<hr/>
+
+  				</div>
+    				<div class="col-xl-12 col-lg-12">
     					<div class="card">
     						<div class="card-header">
-    							<h4 class="card-title">Current Channels</h4>
+    							<h4 class="card-title">Channel Creation</h4>
     							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
     							<div class="heading-elements">
     								<ul class="list-inline mb-0">
-    									<li><a data-action="reload"><i class="icon-reload"></i></a></li>
-    									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                      <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                      <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
     								</ul>
     							</div>
     						</div>
-    						<div class="card-body">
 
-    							<div class="table-responsive">
+
+    						<!-- <div class="card-body"> -->
+                  <div class="card-body collapse in">
+                  <div class="table-responsive">
     								<table  class="table table-hover mb-0">
     									<thead>
     										<tr>
@@ -215,36 +222,7 @@
     										</tr>
     									</thead>
     									<tbody id = "Channel-Date-Table">
-    										<!-- <tr>
-    											<td class="text-truncate">ReactJS App</td>
-    											<td class="text-truncate"><span class="tag tag-success">22 May 2011</span></td>
 
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Fitness App</td>
-    											<td class="text-truncate"><span class="tag tag-warning">11 May 2010</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">SOU plugin</td>
-    											<td class="text-truncate"><span class="tag tag-danger">13 June 2013</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Android App</td>
-    											<td class="text-truncate"><span class="tag tag-success">15 December 2014</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">ABC Inc. UI/UX</td>
-    											<td class="text-truncate"><span class="tag tag-warning">2 January 2011</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Product UI</td>
-    											<td class="text-truncate"><span class="tag tag-danger">1 May 2016</span></td>
-
-    										</tr> -->
     									</tbody>
     								</table>
     							</div>
@@ -255,18 +233,17 @@
             <div class="col-xl-6 col-lg-12">
     					<div class="card">
     						<div class="card-header">
-    							<h4 class="card-title">Current Channels</h4>
+    							<h4 class="card-title">Channel Member</h4>
     							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
     							<div class="heading-elements">
     								<ul class="list-inline mb-0">
-    									<li><a data-action="reload"><i class="icon-reload"></i></a></li>
-    									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                      <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                      <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
     								</ul>
     							</div>
     						</div>
-    						<div class="card-body">
-
-    							<div class="table-responsive">
+                <div class="card-body collapse in">
+                <div class="table-responsive">
     								<table  class="table table-hover mb-0">
     									<thead>
     										<tr>
@@ -276,36 +253,7 @@
     										</tr>
     									</thead>
     									<tbody id = "Channel-Member-Table">
-    										<!-- <tr>
-    											<td class="text-truncate">ReactJS App</td>
-    											<td class="text-truncate"><span class="tag tag-success">22 May 2011</span></td>
 
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Fitness App</td>
-    											<td class="text-truncate"><span class="tag tag-warning">11 May 2010</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">SOU plugin</td>
-    											<td class="text-truncate"><span class="tag tag-danger">13 June 2013</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Android App</td>
-    											<td class="text-truncate"><span class="tag tag-success">15 December 2014</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">ABC Inc. UI/UX</td>
-    											<td class="text-truncate"><span class="tag tag-warning">2 January 2011</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Product UI</td>
-    											<td class="text-truncate"><span class="tag tag-danger">1 May 2016</span></td>
-
-    										</tr> -->
     									</tbody>
     								</table>
     							</div>
@@ -313,13 +261,58 @@
     					</div>
     				</div>
 
+            <!-- <div class="row"> -->
+      				<div class="col-xl-6 col-lg-12">
+      					<div class="card">
+      						<div class="card-header">
+      							<h4 class="card-title">Channel Message</h4>
+      							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+      							<div class="heading-elements">
+      								<ul class="list-inline mb-0">
+                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+      								</ul>
+      							</div>
+      						</div>
+                  <div class="card-body collapse in">
+                  <div class="table-responsive">
+      								<table class="table table-hover mb-0">
+      									<thead>
+      										<tr>
+      											<th>Channel</th>
+      											<th>Total Messages</th>
+
+      										</tr>
+      									</thead>
+      									<tbody id = "Channel-Message-Table">
+
+      									</tbody>
+      								</table>
+      							</div>
+      						</div>
+      					</div>
+      				</div>
+
             <div class="col-xl-12 col-lg-6 col-md-12">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="card-block">
+                  <div class="card-header">
+      							<h4 class="card-title">Stats</h4>
+
+      							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+      							<div class="heading-elements">
+      								<ul class="list-inline mb-0">
+                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+      								</ul>
+      							</div>
+      						</div>
+                  <div class="card-body collapse in">
+                  <div class="table-responsive">
+                    <!-- <div class="card-body"> -->
+                        <!-- <div class="card-block">
                             <h4 class="card-title">Stats</h4>
                             <p class="card-text">Some quick stats for Channels.</p>
-                        </div>
+                        </div> -->
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <span id = "TotalMessages" class="tag tag-default tag-pill bg-primary float-xs-right"></span> Total Messages
@@ -347,6 +340,8 @@
                 </div>
             </div>
 
+
+
             <!-- Bordered table start -->
             <div class="row">
                 <div class="col-xs-12">
@@ -364,9 +359,7 @@
                             </div>
                         </div>
                         <div class="card-body collapse in">
-                            <!-- <div class="card-block card-dashboard">
-                                <p class="card-text">Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p>
-                            </div> -->
+
                             <div class="table-responsive">
                                 <table class="table table-bordered mb-0">
                                     <thead>
@@ -377,26 +370,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id = "Channel-Memberlist-Table">
-                                        <!-- <tr>
 
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>Otto</td>
-                                            <td>@TwBootstrap</td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -406,70 +380,74 @@
             </div>
             <!-- Bordered table end -->
 
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Channel Message PieChart</h4>
+                            <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                            <div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                    <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                                    <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                                    <li><a data-action="close"><i class="icon-cross2"></i></a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <!-- <div class="card-body">
+                          <div class="card-block">
+                            <p class="m-0">This Pie Chart shows the division of messages of this team</p>
+                          </div>
+                          <div id="pieChartChannelMessage"></div>
+                        </div> -->
+
+                        <div class="card-body collapse in">
+
+                            <div class="table-responsive">
+                                <div id="pieChartChannelMessage"></div>
+                            </div>
+                        </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
-      				<div class="col-xl-6 col-lg-12">
-      					<div class="card">
-      						<div class="card-header">
-      							<h4 class="card-title">Current Channels</h4>
-      							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-      							<div class="heading-elements">
-      								<ul class="list-inline mb-0">
-      									<li><a data-action="reload"><i class="icon-reload"></i></a></li>
-      									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-      								</ul>
-      							</div>
-      						</div>
-      						<div class="card-body">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Channel Member PieChart</h4>
+                            <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                            <div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                    <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                                    <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                                    <li><a data-action="close"><i class="icon-cross2"></i></a></li>
 
-      							<div class="table-responsive">
-      								<table class="table table-hover mb-0">
-      									<thead>
-      										<tr>
-      											<th>Channel</th>
-      											<th>Total Messages</th>
 
-      										</tr>
-      									</thead>
-      									<tbody id = "Channel-Message-Table">
-      										<!-- <tr>
-      											<td class="text-truncate">ReactJS App</td>
-      											<td class="text-truncate"><span class="tag tag-success">3000</span></td>
+                                </ul>
+                            </div>
 
-      										</tr>
-      										<tr>
-      											<td class="text-truncate">Fitness App</td>
-      											<td class="text-truncate"><span class="tag tag-warning">4000</span></td>
+                        </div>
+                        <div class="card-body collapse in">
 
-      										</tr>
-      										<tr>
-      											<td class="text-truncate">SOU plugin</td>
-      											<td class="text-truncate"><span class="tag tag-danger">5000</span></td>
+                            <div class="table-responsive">
+                                <div id="pieChartChannelMember"></div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      										</tr>
-      										<tr>
-      											<td class="text-truncate">Android App</td>
-      											<td class="text-truncate"><span class="tag tag-success">6000</span></td>
-
-      										</tr>
-      										<tr>
-      											<td class="text-truncate">ABC Inc. UI/UX</td>
-      											<td class="text-truncate"><span class="tag tag-warning">7000</span></td>
-
-      										</tr>
-      										<tr>
-      											<td class="text-truncate">Product UI</td>
-      											<td class="text-truncate"><span class="tag tag-danger">8000</span></td>
-
-      										</tr> -->
-      									</tbody>
-      								</table>
-      							</div>
-      						</div>
-      					</div>
-      				</div>
-
-              <div class="col-xl-8 col-lg-12">
+              <div class="col-xs-12">
                <div class="card">
                  <div class="card-header">
                    <h4 class="card-title">Team Superstars</h4>
@@ -478,13 +456,16 @@
                      <ul class="list-inline mb-0">
                        <li><a data-action="reload"><i class="icon-reload"></i></a></li>
                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                       <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                      <li><a data-action="close"><i class="icon-cross2"></i></a></li>
                      </ul>
                    </div>
                  </div>
-                 <div class="card-body">
+                 <!-- <div class="card-body">
                    <div class="card-block">
                      <p class="m-0">This table shows the most active members of this team</p>
-                   </div>
+                   </div> -->
+                   <div class="card-body collapse in">
                    <div class="table-responsive">
                      <table class="table table-hover mb-0">
                        <thead>
@@ -549,25 +530,14 @@
                    </div>
                  </div>
                </div>
+
              </div>
 
-              <!-- Selectable Tree -->
-              <!-- <div class="row"> -->
-
-
-
-
-    			<!-- </div> -->
-    			<!--/ projects table with monthly chart -->
-        </div>
-      <!-- </div> -->
     </div>
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <footer class="footer footer-static footer-light navbar-border">
-      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">SNA4SLACK - Group 3 </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
-    </footer>
+
+
 
     <!-- BEGIN VENDOR JS-->
     <!-- build:js app-assets/js/vendors.min.js-->
@@ -612,6 +582,7 @@
     <!-- END ROBUST JS-->
     <script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="../../../assets/js/getChannelMainMetrics.js" type="text/javascript"></script>
+
 	<!-- BEGIN PAGE LEVEL JS-->
     <script src="../../../app-assets/js/scripts/pages/dashboard-project.min.js" type="text/javascript"></script>
 
@@ -622,6 +593,15 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js"></script>
     <script src="pie_javascript.js"></script>
+
+    <!-- Channel Message Pie-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js"></script>
+    <script src="../../../assets/js/pie_javascript.js"></script>
+    <script src = "../../../assets/js/metrics_ChannelMessage.js"></script>
+    <script src = "../../../assets/js/metrics_ChannelMember.js"></script>
+    <!-- Channel Message Pie-->
     <!-- END PAGE LEVEL JS-->
 	<script type="text/javascript">
 		function googleTranslateElementInit() {
