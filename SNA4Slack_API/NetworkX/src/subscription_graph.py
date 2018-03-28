@@ -140,7 +140,7 @@ class SubscriptionGraph(object):
 
 
 def run():
-    team = "flatartagency"
+    team = "openaddresses"
     graph_gen = SubscriptionGraph(team,
                                   directed=False)
     print 'Graph done'
@@ -159,7 +159,7 @@ def run():
 
     graph_gen.print_graph()
     print graph_gen.json()
-    with open('data.json', 'w') as outfile:
+    #with open('data.json', 'w') as outfile:
     # json.dumps(graph_gen.json(), outfile)
-        outfile.write(graph_gen.json())
-    graph_gen.draw_graph()
+    #    outfile.write(graph_gen.json())
+    #graph_gen.draw_graph()

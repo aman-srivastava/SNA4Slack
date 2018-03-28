@@ -28,9 +28,11 @@ GRAPH_DENSITY = "density"
 AVERAGE_CLUSTERING = "average_clustering"
 AVERAGE_CONNECTIVITY = "average_connectivity"
 USER_PROFILE_PIC = "senderAvatar"
+CHANNEL_NAME = "channelName"
+
 
 # Initializing logger
-#logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
+# logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
 
 
 class MentionGraph(object):
@@ -54,6 +56,7 @@ class MentionGraph(object):
             self.graph.add_node(row[SENDER_COLUMN])
             self.graph.node[row[SENDER_COLUMN]][USER_PROFILE_PIC] = row[
                 USER_PROFILE_PIC]
+            self.graph.node[row[SENDER_COLUMN]]["message_count"] = {}
 
     def build_reference_edges(self):
         Utils.get_Connection_SNA4Slack()
@@ -71,6 +74,14 @@ class MentionGraph(object):
                         else:
                             self.graph.add_edge(row[SENDER_COLUMN], elem,
                                                 weight=1)
+                        if row[CHANNEL_NAME] in \
+                                self.graph.node[row[SENDER_COLUMN]][
+                                    "message_count"].keys():
+                            self.graph.node[row[SENDER_COLUMN]][
+                                "message_count"][row[CHANNEL_NAME]] += 1
+                        else:
+                            self.graph.node[row[SENDER_COLUMN]][
+                                "message_count"][row[CHANNEL_NAME]] = 1
 
     def print_graph(self):
         print self.graph.nodes
@@ -132,7 +143,7 @@ class MentionGraph(object):
 
 
 def run():
-    graph_gen = MentionGraph("flatartagency",
+    graph_gen = MentionGraph("openaddresses",
                              directed=True)
     print 'Graph done'
     graph_gen.compute_closeness_centrality()
@@ -145,12 +156,12 @@ def run():
     print 'Compute density'
     graph_gen.compute_avg_connectivity()
     print 'Compute connectivity'
-    #graph_gen.compute_avg_clustering()
+    # graph_gen.compute_avg_clustering()
     print 'Compute clustering'
 
-    graph_gen.print_graph()
-    #print graph_gen.json()
-    #with open('data.json', 'w') as outfile:
-        # json.dumps(graph_gen.json(), outfile)
-     #   outfile.write(graph_gen.json())
+    # graph_gen.print_graph()
+    print graph_gen.json()
+    # with open('data.json', 'w') as outfile:
+    # json.dumps(graph_gen.json(), outfile)
+    #   outfile.write(graph_gen.json())
     graph_gen.draw_graph()

@@ -88,10 +88,12 @@ class TreeGraph(object):
 
 
 def run():
-    team = "openaddresses"
+    team = "buffercommunity"
     graph_gen = TreeGraph(team)
     print 'Graph done'
     graph_gen.print_graph()
     print graph_gen.json()
 
-run()
+    with open('treedata.json', 'w') as outfile:
+        outfile.write(str(graph_gen.json()))
+
