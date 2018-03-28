@@ -17,6 +17,7 @@ from cassandra.cqlengine.management import sync_table
 from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
 from objects.slack_archive import SlackArchive
+from Helpers.mongoHelper import MongoHelper
 
 SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
@@ -37,6 +38,7 @@ MENTION_COUNT = "mention_count"
 
 
 class MentionGraph(object):
+
     def __init__(self, team_name, directed=True):
         if directed:
             self.graph = nx.DiGraph()
@@ -141,6 +143,32 @@ class MentionGraph(object):
 
     def json(self):
         return json_graph.node_link_data(self.graph)
+
+    def generateGraph(self):
+        documentType = ''
+        print 'Graph done'
+        self.compute_closeness_centrality()
+        print 'Compute closeness'
+        self.compute_betweenness_centrality()
+        print 'Compute betweenness'
+        self.compute_degree_centrality()
+        print 'Compute centrality'
+        self.compute_density()
+        print 'Compute density'
+        self.compute_avg_connectivity()
+        print 'Compute connectivity'
+        self.compute_avg_clustering()
+        print 'Compute clustering'
+        if directed == True:
+            documentType = "directed-mention-graph"
+            data = '{"documentType": "directed-mention-graph", "directed-mention-graph":' + \
+                json.dumps(graph_gen.json()) + '}'
+        else:
+            documentType = "undirected-mention-graph"
+            data = '{"documentType": "undirected-mention-graph", "undirected-mention-graph":' + \
+                json.dumps(graph_gen.json()) + '}'
+
+        return MongoHelper.manageInsert(team_Name, json.loads(data), documentType)
 
 
 def run():

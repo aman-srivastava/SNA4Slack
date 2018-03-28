@@ -12,8 +12,8 @@ from Helpers.mongoHelper import MongoHelper
 
 class SubscriptionGraphTrigger (Resource):
 
-    def get(self):
-        """Initializes crawler to get team data and save in database
+    def post(self):
+        """Generates Subscription graph of a specific Team using crawled data saved to Cassandra DB
         Implemented in flask for python 2.7
         ---
         parameters:
@@ -26,15 +26,9 @@ class SubscriptionGraphTrigger (Resource):
           - name: channel
             in: header
             type: string
-            required: false
+            required: falsez
             default:
             description: Narrow down graph nodes to a channel within team
-          - name: directed
-            in: header
-            type: boolean
-            required: true
-            default: True
-            description: Choose directed/undirected graph
         operationId: generateGraph
         consumes:
           - string
@@ -51,11 +45,8 @@ class SubscriptionGraphTrigger (Resource):
         """
         team_Name = request.headers.get('team_Name')
         # channel = request.headers.get('channel')
-        directed = request.headers.get('directed')
-        directed = directed in ("True", "true")
-        documentType = ''
 
-        graph_gen = SubscriptionGraph(team_Name, directed)
+        graph_gen = SubscriptionGraph(team_Name, True)
         print 'Graph done'
         graph_gen.compute_closeness_centrality()
         print 'Compute closeness'
@@ -69,14 +60,7 @@ class SubscriptionGraphTrigger (Resource):
         print 'Compute connectivity'
         # graph_gen.compute_avg_clustering()
         print 'Compute clustering'
-
-        if directed == True:
-            documentType = "directed-subscription-graph"
-            data = '{"documentType" :"directed-subscription-graph", "directed-subscription-graph":' + \
-                json.dumps(graph_gen.json()) + '}'
-        else:
-            documentType = "undirected-subscription-graph"
-            data = '{"documentType" :"undirected-subscription-graph","undirected-subscription-graph":' + \
-                json.dumps(graph_gen.json()) + '}'
-
+        documentType = "directed-subscription-graph"
+        data = '{"documentType" :"directed-subscription-graph", "directed-subscription-graph":' + \
+            json.dumps(graph_gen.json()) + '}'
         return MongoHelper.manageInsert(team_Name, json.loads(data), documentType)

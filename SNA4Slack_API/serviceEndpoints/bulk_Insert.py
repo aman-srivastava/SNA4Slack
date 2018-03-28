@@ -14,8 +14,8 @@ from flask import Flask, request, jsonify, _request_ctx_stack
 
 class BulkInsert (Resource):
 
-	def post(self):
-		"""Initializes crawler generates SNA data and saves to Mongo DB
+    def post(self):
+        """Initialize crawler(optional), generate SNA metric data and save to Mongo DB
         Implemented in flask for python 2.7
         ---
         parameters:
@@ -24,7 +24,7 @@ class BulkInsert (Resource):
             type: string
             required: true
             default: blockstack, buffercommunity
-            description: Enter list of team names
+            description: Enter comma separated list of team names
           - name: crawl_archives
             in: header
             type: boolean
@@ -45,29 +45,53 @@ class BulkInsert (Resource):
           200:
             description: Parse Slack archive and save data to database
         """
+        teams = request.headers.get('team_Names').split(',')
+        crawlArchive = request.headers.get('crawl_archives')
+        crawlArchive = crawlArchive in ("True", "true")
+        responseString = ''
+        if crawlArchive == True:
+            slackSpider = SlackSpider()
+            slackSpider.start_driver()
+            for team_Name in teams:
+                try:
+                    print 'Crawling team {0}'.format(team_Name)
+                    slackSpider.runSpider(team_Name)
+                except:
+                    print 'error occured'
 
-		teams = request.headers.get('team_Name').split(',')
-		crawlArchive = request.headers.get('crawl_archives')
+                slackSpider.close_driver()
+        for team_Name in teams:
+            sch = sparkCassandraHelper(team_Name)
+            spark = sch.createSparkSession()
+            responseString += 'Batch for team {0} \n'.format(team_Name)
+            try:
+                responseString += 'Subscription graph: {0} \n'.format(
+                    sch.getSubscriptionGraphInverse(spark))
+            except Exception as error:
+                responseString += 'Subscription graph: {0} \n'.format(
+                    'Failed to generate. Reason:' + str(error))
+            try:
+                responseString += 'Data analytics: {0} \n'.format(
+                    sch.main(spark))
+            except Exception as error:
+                responseString += 'Data analytics: {0} \n'.format(
+                    'Failed to generate. Reason:' + str(error))
 
-	    # Batch Crawl
-	    if crawlArchive == True:
-	    	slackSpider = SlackSpider()
-	    	slackSpider.start_driver()
-	    	for team_Name in teams:
-	    		try:
-	    			print 'Crawling team {0}'.format(team_Name)
-		            slackSpider.runSpider(team_Name)
-		        except:
-		            print 'error occured'
-		    slackSpider.close_driver()
+            for directed in [True, False]:
+                graph_gen = MentionGraph(team_Name, directed)
+                if directed:
+                    try:
+                        responseString += 'directed-mention-graph : {0} \n'.format(
+                            graph_gen.generateGraph())
+                    except Exception as error:
+                        responseString += 'directed-mention-graph: {0} \n'.format(
+                            'Failed to generate. Reason:' + str(error))
+                else:
+                    try:
+                        responseString += 'undirected-mention-graph : {0} \n'.format(
+                            graph_gen.generateGraph())
+                    except Exception as error:
+                        responseString += 'undirected-mention-graph: {0} \n'.format(
+                            'Failed to generate. Reason:' + str(error))
 
-	    for team_Name in teams:
-	        sch = sparkCassandraHelper(team_Name)
-	        spark = sch.createSparkSession()
-	        print 'Batch for team {0}'.format(team_Name)
-	        print 'Subscription graph: ' + sch.getSubscriptionGraphInverse(spark)
-	        print 'Data analytics: ' + sch.main(spark)
-
-	        for directed in [True, False]:
-	            mentionGraphGen(team_Name, directed)
-	    return True
+        return responseString

@@ -12,7 +12,7 @@ from Helpers.sparkCassandra_interface import sparkCassandraHelper
 
 class DashboardTrigger(Resource):
 
-    def get(self):
+    def post(self):
         """Initializes crawler to get team data and save in database 
         Implemented in flask for python 2.7
         ---
