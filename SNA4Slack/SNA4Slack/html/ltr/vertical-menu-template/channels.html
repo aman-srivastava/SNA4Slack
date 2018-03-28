@@ -9,7 +9,7 @@
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Channel Name - SNA4SLACK</title>
+    <title id="ChannelName"></title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../../app-assets/images/ico/apple-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../../app-assets/images/ico/apple-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../../app-assets/images/ico/apple-icon-120.png">
@@ -187,31 +187,23 @@
         <div class="content-header row">
 
         </div>
+
         <div class="content-body"><!-- Description -->
+          <div class="row">
+              <h4 id="HeaderChannelIndividual"></h4>
+              <hr/>
+
+          </div>
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="card">
-						<div class="card-header">
-							<h4 class="card-title">Team Name | Channel Name</h4>
-							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-							<div class="heading-elements">
-								<ul class="list-inline mb-0">
-									<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-									<li><a data-action="reload"><i class="icon-reload"></i></a></li>
-									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-									<li><a data-action="close"><i class="icon-cross2"></i></a></li>
-								</ul>
-							</div>
-						</div>
 
-				</div>
 			</div>
       <div class="row">
           <div class="col-xs-12">
-              <div class="card bg-gradient-x-pink">
+              <div class="card bg-info card-outline-black">
                   <div class="card-body">
                       <div class="row">
-                          <div class="col-lg-6 col-sm-12 border-right-pink border-right-lighten-3">
+                          <div class="col-lg-6 col-sm-12 border-right-black border-right-lighten-3">
                               <div class="card-block text-xs-center">
                                   <h1 class="display-4 white" id = "TotalMessagesPerChannel"></h1>
                                   <span class="white">Messages</span>
@@ -223,18 +215,7 @@
                                   <span class="white">Members</span>
                               </div>
                           </div>
-                          <!-- <div class="col-lg-3 col-sm-12 border-right-pink border-right-lighten-3">
-                              <div class="card-block text-xs-center">
-                                  <h1 class="display-4 white"><i class="icon-bulb font-large-2"></i> 61</h1>
-                                  <span class="white">URLs</span>
-                              </div>
-                          </div>
-                          <div class="col-lg-3 col-sm-12">
-                              <div class="card-block text-xs-center">
-                                  <h1 class="display-4 white"><i class="icon-bulb font-large-2"></i> 687</h1>
-                                  <span class="white">Emoticons</span>
-                              </div>
-                          </div> -->
+
                       </div>
                   </div>
               </div>
@@ -244,8 +225,8 @@
       <!-- Table head options start -->
 <div class="row">
     <div class="col-xs-12">
-        <div class="card">
-            <div class="card-header">
+        <div class="card card-inverse box-shadow-0 card-outline-danger bg-white">
+            <div class="card-header card-head-inverse bg-danger">
                 <h4 class="card-title">Channel Message Table</h4>
                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                 <div class="heading-elements">
@@ -262,8 +243,8 @@
                     <p>User Message table per channel</p>
                 </div>
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead class="thead-inverse">
+                    <table class="table table-bordered mb-0">
+                        <thead>
                             <tr>
                                 <th>Username</th>
                                 <th>Messages</th>
@@ -285,8 +266,8 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <div class="card">
-                <div class="card-header">
+            <div class="card card-inverse box-shadow-0 card-outline-success bg-white">
+                <div class="card-header card-head-inverse bg-success">
                     <h4 class="card-title">Channel Mention Table</h4>
                     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                     <div class="heading-elements">
@@ -304,7 +285,7 @@
                     </div>
                     <div class="table-responsive">
                         <table class="table">
-                            <thead class="thead-inverse">
+                            <thead>
                                 <tr>
                                     <th>Username</th>
                                     <th>Mentions</th>
@@ -340,45 +321,12 @@
 </div>
 
 
-<!-- <div class="card-body collapse in">
-    <div class="card-block card-dashboard">
-        <p>User Mention Table per channel</p>
-    </div>
-    <div class="table-responsive">
-        <table class="table">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>Username</th>
-                    <th>Mentions</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>snarng2</td>
-                    <td>37</td>
-
-                </tr>
-                <tr>
-                    <td>sinamda3</td>
-                    <td>89</td>
-
-                </tr>
-                <tr>
-                    <td>ntibrewa</td>
-                    <td>24</td>
-
-                </tr>
-            </tbody>
-        </table>
-
-        </div>
-    </div> -->
 
 <!-- Table head options end -->
       <div class="row">
-          <div class="col-xl-4 col-lg-6 col-md-12">
-              <div class="card">
+          <div class="col-xl-6 col-lg-6 col-md-12">
+              <div class="card card-outline-danger bg-white">
                   <div class="card-body">
                       <div class="card-block text-xs-center">
                           <div class="card-header mb-2">
@@ -401,8 +349,8 @@
                   </div>
               </div>
           </div>
-          <div class="col-xl-4 col-lg-12 col-md-12">
-              <div class="card">
+          <div class="col-xl-6 col-lg-12 col-md-12">
+              <div class="card card-outline-success bg-white">
                   <div class="card-body">
                       <div class="card-block">
                           <div class="media">
@@ -418,7 +366,7 @@
                       </div>
                   </div>
               </div>
-              <div class="card">
+              <div class="card card-outline-deep-orange bg-white">
                   <div class="card-body">
                       <div class="card-block">
                           <div class="media">
@@ -430,11 +378,11 @@
                                   <i class="icon-banknote deep-orange font-large-2 float-xs-right"></i>
                               </div>
                           </div>
-                          <progress class="progress progress-sm progress-deep-orange mt-1 mb-0" value="35" max="100"></progress>
+                          <progress class="progress progress-sm progress-deep-orange mt-1 mb-0" value="15" max="100"></progress>
                       </div>
                   </div>
               </div>
-              <div class="card">
+              <div class="card card-outline-info bg-white">
                   <div class="card-body">
                       <div class="card-block">
                           <div class="media">
