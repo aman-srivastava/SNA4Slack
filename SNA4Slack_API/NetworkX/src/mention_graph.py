@@ -29,7 +29,7 @@ AVERAGE_CLUSTERING = "average_clustering"
 AVERAGE_CONNECTIVITY = "average_connectivity"
 USER_PROFILE_PIC = "senderAvatar"
 CHANNEL_NAME = "channelName"
-MESSAGE_COUNT = "message_count"
+MENTION_COUNT = "mention_count"
 
 
 # Initializing logger
@@ -57,7 +57,7 @@ class MentionGraph(object):
             self.graph.add_node(row[SENDER_COLUMN])
             self.graph.node[row[SENDER_COLUMN]][USER_PROFILE_PIC] = row[
                 USER_PROFILE_PIC]
-            self.graph.node[row[SENDER_COLUMN]]["message_count"] = {}
+            self.graph.node[row[SENDER_COLUMN]][MENTION_COUNT] = {}
 
     def build_reference_edges(self):
         Utils.get_Connection_SNA4Slack()
@@ -75,14 +75,14 @@ class MentionGraph(object):
                         else:
                             self.graph.add_edge(row[SENDER_COLUMN], elem,
                                                 weight=1)
-            if row[CHANNEL_NAME] in \
-                    self.graph.node[row[SENDER_COLUMN]][
-                        MESSAGE_COUNT].keys():
-                self.graph.node[row[SENDER_COLUMN]][
-                    MESSAGE_COUNT][row[CHANNEL_NAME]] += 1
-            else:
-                self.graph.node[row[SENDER_COLUMN]][
-                    MESSAGE_COUNT][row[CHANNEL_NAME]] = 1
+                    if row[CHANNEL_NAME] in \
+                            self.graph.node[row[SENDER_COLUMN]][
+                                MENTION_COUNT].keys():
+                        self.graph.node[row[SENDER_COLUMN]][
+                            MENTION_COUNT][row[CHANNEL_NAME]] += 1
+                    else:
+                        self.graph.node[row[SENDER_COLUMN]][
+                            MENTION_COUNT][row[CHANNEL_NAME]] = 1
 
     def print_graph(self):
         print self.graph.nodes
