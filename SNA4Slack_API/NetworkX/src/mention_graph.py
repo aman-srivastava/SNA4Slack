@@ -29,6 +29,7 @@ AVERAGE_CLUSTERING = "average_clustering"
 AVERAGE_CONNECTIVITY = "average_connectivity"
 USER_PROFILE_PIC = "senderAvatar"
 CHANNEL_NAME = "channelName"
+MESSAGE_COUNT = "message_count"
 
 
 # Initializing logger
@@ -74,14 +75,14 @@ class MentionGraph(object):
                         else:
                             self.graph.add_edge(row[SENDER_COLUMN], elem,
                                                 weight=1)
-                        if row[CHANNEL_NAME] in \
-                                self.graph.node[row[SENDER_COLUMN]][
-                                    "message_count"].keys():
-                            self.graph.node[row[SENDER_COLUMN]][
-                                "message_count"][row[CHANNEL_NAME]] += 1
-                        else:
-                            self.graph.node[row[SENDER_COLUMN]][
-                                "message_count"][row[CHANNEL_NAME]] = 1
+            if row[CHANNEL_NAME] in \
+                    self.graph.node[row[SENDER_COLUMN]][
+                        MESSAGE_COUNT].keys():
+                self.graph.node[row[SENDER_COLUMN]][
+                    MESSAGE_COUNT][row[CHANNEL_NAME]] += 1
+            else:
+                self.graph.node[row[SENDER_COLUMN]][
+                    MESSAGE_COUNT][row[CHANNEL_NAME]] = 1
 
     def print_graph(self):
         print self.graph.nodes
@@ -165,3 +166,5 @@ def run():
     # json.dumps(graph_gen.json(), outfile)
     #   outfile.write(graph_gen.json())
     graph_gen.draw_graph()
+
+run()
