@@ -32,6 +32,8 @@ $( document ).ready(function() {
       var memberName = 'carsten'
 			console.log(data);
 
+			document.getElementById("Header").innerHTML = teamName+" | " +memberName + " SNA4SLACK";
+
 
 			document.getElementById("MemberName").innerHTML = memberName;
       console.log('Member Name: '+memberName)
