@@ -21,6 +21,9 @@ $( document ).ready(function() {
 
 			console.log(data);
 
+			document.getElementById("Header").innerHTML = teamName+" | Member Main Metrics"
+			document.getElementById("Header2").innerHTML = teamName+" | Member Main Metrics"
+
       var users = []
 
       for (var i = 0; i<data.messageCount_sender.length; i++) {
@@ -160,6 +163,88 @@ $( document ).ready(function() {
       console.log('Total URLs: '+totalURLs)
 
       console.log('---------------------------------------------------------------')
+
+
+			var ctx = $("#column-chart");
+
+
+			// Chart Options
+			var chartOptions = {
+				// Elements options apply to all of the options unless overridden in a dataset
+				// In this case, we are setting the border of each bar to be 2px wide and green
+				elements: {
+					rectangle: {
+						borderWidth: 2,
+						borderColor: 'rgb(0, 255, 0)',
+						borderSkipped: 'bottom'
+					}
+				},
+				responsive: true,
+				maintainAspectRatio: false,
+				responsiveAnimationDuration:500,
+				legend: {display: false,
+					position: 'bottom',
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						gridLines: {
+							color: "#ff9999",
+							drawTicks: false,
+						},
+						scaleLabel: {
+							display: true
+						}
+					}],
+					yAxes: [{
+						display: true,
+						gridLines: {
+							color: "#ff9999",
+							drawTicks: false,
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'Total Conversations'
+						}
+					}]
+				},
+				title: {
+					display: false,
+					text: 'Chart.js Bar Chart'
+				}
+			};
+
+			var labels = [];
+			var values = [];
+			for(var i = 0 ; i<data.messageCount_sender.length ; i++){
+
+				labels.push(data.messageCount_sender[i].messageSender);
+				values.push(data.messageCount_sender[i].msgCount)
+			}
+
+			// Chart Data
+			var chartData = {
+				labels: labels,
+				datasets: [{
+					label: "Messages per Member",
+					data: values,
+					backgroundColor: "#990000",
+					hoverBackgroundColor: "#ff6666",
+					borderColor: "transparent"
+				}]
+			};
+
+			var config = {
+				type: 'bar',
+
+				// Chart Options
+				options : chartOptions,
+
+				data : chartData
+			};
+
+			// Create the chart
+			var lineChart = new Chart(ctx, config);
 
 			},
 
