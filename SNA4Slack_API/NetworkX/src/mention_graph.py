@@ -45,6 +45,7 @@ class MentionGraph(object):
         else:
             self.graph = nx.Graph()
         self.team_name = team_name
+        self.directed = directed
         self.build_graph()
 
     def build_graph(self):
@@ -159,16 +160,16 @@ class MentionGraph(object):
         print 'Compute connectivity'
         self.compute_avg_clustering()
         print 'Compute clustering'
-        if directed == True:
+        if self.directed == True:
             documentType = "directed-mention-graph"
             data = '{"documentType": "directed-mention-graph", "directed-mention-graph":' + \
-                json.dumps(graph_gen.json()) + '}'
+                json.dumps(self.json()) + '}'
         else:
             documentType = "undirected-mention-graph"
             data = '{"documentType": "undirected-mention-graph", "undirected-mention-graph":' + \
-                json.dumps(graph_gen.json()) + '}'
+                json.dumps(self.json()) + '}'
 
-        return MongoHelper.manageInsert(team_Name, json.loads(data), documentType)
+        return MongoHelper.manageInsert(self.team_name, json.loads(data), documentType)
 
 
 def run():

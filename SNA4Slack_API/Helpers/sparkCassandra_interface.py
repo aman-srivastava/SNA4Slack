@@ -15,7 +15,6 @@ class sparkCassandraHelper():
 
     def __init__(self, teamName):
         self.teamName = teamName
-        self.df = None
 
     def createSparkSession(self):
         spark = None
@@ -27,16 +26,15 @@ class sparkCassandraHelper():
                 .config("spark.cassandra.auth.password", "LYN1bQNCds3T")\
                 .master("local[*]")\
                 .getOrCreate()
-            self.df = spark.read\
-                .format("org.apache.spark.sql.cassandra")\
-                .options(table="slack_archive_dev", keyspace="sna4slack_metrics").load()
-            self.df = self.df.where(self.df.teamName == self.teamName)
-            self.df.createOrReplaceTempView("archives")
         except Exception as error:
             print error
         return spark
 
     def main(self, spark):
+        df = spark.read.format("org.apache.spark.sql.cassandra").options(
+            table="slack_archive_dev", keyspace="sna4slack_metrics").load()
+        df = df.where(df.teamName == self.teamName)
+        df.createOrReplaceTempView("archives")
 
         # 1. Get message count per team, per channel, per user
         jsonOut = spark.sql("SELECT channelName, messageSender, COUNT(messageBody) AS msgCount \
@@ -49,8 +47,7 @@ class sparkCassandraHelper():
         # 2. Get message count per team, per user
         jsonOut = spark.sql("SELECT messageSender, COUNT(messageBody) AS msgCount \
             FROM archives \
-            GROUP BY teamName, messageSender \
-            ORDER BY msgCount")
+            GROUP BY teamName, messageSender")
         data = data + '"messageCount_sender":' + \
             str(jsonOut.toJSON(use_unicode=False).collect()
                 ).replace("'", "") + ','
@@ -109,7 +106,7 @@ class sparkCassandraHelper():
             str(jsonOut.toJSON(use_unicode=False).collect()).replace("'", "") + ','
 
         # 8. Get top 20 urls and urls count
-        lines = self.df.rdd.map(lambda r: r["messageBody"])
+        lines = df.rdd.map(lambda r: r["messageBody"])
         tokenized = lines.flatMap(lambda x: re.findall(
             'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', x))
         jsonOut = tokenized.map(lambda x: (x, 1)).reduceByKey(add).toDF(
@@ -120,8 +117,7 @@ class sparkCassandraHelper():
 
         # 9. Most active hours
         jsonOut = spark.sql("SELECT hour, SUM(msgCount) AS msgCount \
-            FROM (\
-                    SELECT hour(messageTime) AS hour, 1 as msgCount FROM archives) AS innerQuery \
+            FROM (SELECT hour(messageTime) AS hour, 1 as msgCount FROM archives) AS innerQuery \
             GROUP BY hour ORDER BY hour")
         data = data + '"mostActiveHours":' + \
             str(jsonOut.toJSON(use_unicode=False).collect()).replace("'", "") + ','
@@ -145,7 +141,7 @@ class sparkCassandraHelper():
         |\U0001F570|\U0001F590|\U0001F595|\U0001F596|\U0001F5A4|\U0001F5A5|\U0001F5A8 \
         |\U0001F5B1|\U0001F5B2|\U0001F5BC|\U0001F5E1|\U0001F5E3|\U0001F5E8|\U0001F5EF|\U0001F5F3'
 
-        lines = self.df.rdd.map(lambda r: r["messageBody"])
+        lines = df.rdd.map(lambda r: r["messageBody"])
         jsonOut = lines.flatMap(lambda x: re.findall(emojiCode, x)).map(lambda x: (x, 1)) \
             .reduceByKey(add).toDF(['emoji', 'emojiCount']).sort(col("emojiCount").desc()).limit(20)
 
@@ -154,22 +150,34 @@ class sparkCassandraHelper():
                 ).replace("'", "") + '} }'
 
         data = data.replace("\\", "\\\\\\\\")
-        spark.stop()
+
         return MongoHelper.manageInsert(self.teamName, json.loads(data), "dataAnalytics")
 
     def getSubscriptionGraphInverse(self, spark):
+        df = spark.read.format("org.apache.spark.sql.cassandra").options(
+            table="slack_archive_dev", keyspace="sna4slack_metrics").load()
+        df = df.where(df.teamName == self.teamName)
+        df.createOrReplaceTempView("archives")
+
         # SubscriptionGraph
         jsonOut = spark.sql("SELECT messageSender, channelName, COUNT(messageBody) AS msgCount \
             FROM archives \
             GROUP BY messageSender,channelName \
             ORDER BY messageSender")
 
+        jsonOut = spark.sql("SELECT ROW_NUMBER()Over(PARTITION BY channelName ORDER BY msgCount DESC) as rN \
+            ,messageSender, channelName,msgCount FROM \
+            (SELECT messageSender, channelName, COUNT(messageBody) AS msgCount \
+            FROM archives \
+            GROUP BY messageSender,channelName) as innerQuery")
+
+        jsonOut = jsonOut.filter(jsonOut.rN < 30)
+
         data = '{"documentType" :"spark-sub-graph-inv","spark-sub-graph-inv":{ "name": "' + \
             self.teamName + '", "children": ' + \
             str(jsonOut.toJSON(use_unicode=False).collect()) + ' } }'
 
         data = data.replace("'", "").replace("\\", "\\\\\\\\")
-
         return MongoHelper.manageInsert(self.teamName, json.loads(data), "spark-sub-graph-inv")
 
 if __name__ == '__main__':
@@ -177,3 +185,4 @@ if __name__ == '__main__':
     spark = sch.createSparkSession()
     sch.main(spark)
     sch.getSubscriptionGraph(spark)
+    spark.stop()

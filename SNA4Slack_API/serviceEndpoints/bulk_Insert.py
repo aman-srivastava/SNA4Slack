@@ -23,13 +23,13 @@ class BulkInsert (Resource):
             in: header
             type: string
             required: true
-            default: blockstack, buffercommunity
+            default: openaddresses, zipperglobal
             description: Enter comma separated list of team names
           - name: crawl_archives
             in: header
             type: boolean
             required: true
-            default: True
+            default: False
             description: Choose either to crawl and get new dataset or use existing data
         operationId: grabDatasetGenerateGraph
         consumes:
@@ -53,6 +53,7 @@ class BulkInsert (Resource):
             slackSpider = SlackSpider()
             slackSpider.start_driver()
             for team_Name in teams:
+                team_Name = team_Name.strip()
                 try:
                     print 'Crawling team {0}'.format(team_Name)
                     slackSpider.runSpider(team_Name)
@@ -65,18 +66,19 @@ class BulkInsert (Resource):
             spark = sch.createSparkSession()
             responseString += 'Batch for team {0} \n'.format(team_Name)
             try:
-                responseString += 'Subscription graph: {0} \n'.format(
-                    sch.getSubscriptionGraphInverse(spark))
-            except Exception as error:
-                responseString += 'Subscription graph: {0} \n'.format(
-                    'Failed to generate. Reason:' + str(error))
-            try:
                 responseString += 'Data analytics: {0} \n'.format(
                     sch.main(spark))
             except Exception as error:
                 responseString += 'Data analytics: {0} \n'.format(
                     'Failed to generate. Reason:' + str(error))
 
+            try:
+                responseString += 'Subscription graph: {0} \n'.format(
+                    sch.getSubscriptionGraphInverse(spark))
+            except Exception as error:
+                responseString += 'Subscription graph: {0} \n'.format(
+                    'Failed to generate. Reason:' + str(error))
+        
             for directed in [True, False]:
                 graph_gen = MentionGraph(team_Name, directed)
                 if directed:
