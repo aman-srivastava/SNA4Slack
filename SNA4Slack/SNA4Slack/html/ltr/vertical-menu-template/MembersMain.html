@@ -13,7 +13,7 @@
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Members Main - SNA4SLACK</title>
+    <title id="Header2">Members Main - SNA4SLACK</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../../app-assets/images/ico/apple-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../../app-assets/images/ico/apple-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../../app-assets/images/ico/apple-icon-120.png">
@@ -189,14 +189,22 @@
         </div>
         <div class="content-body"><!-- Description -->
 
+          <div class="row">
+  						<h4 id="Header"></h4>
+  						<hr/>
+
+  				</div>
+
 	<!-- Members Main stats -->
+
+
   <div class="row">
       <div class="col-xs-12">
-          <div class="card">
+          <div class="card card-outline-danger bg-white">
               <div class="card-body">
                   <div class="card-block">
                       <div class="row">
-                          <div class="col-xl-3 col-lg-6 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                          <div class="col-xl-3 col-lg-6 col-sm-12 border-right-blue-grey border-right-lighten-5 ">
                               <div class="media px-1">
                                   <div class="media-left media-middle">
                                       <i class="icon-box font-large-1 blue-grey"></i>
@@ -250,12 +258,38 @@
           </div>
       </div>
   </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card card-inverse box-shadow-0 card-outline-danger bg-white">
+        <div class="card-header card-head-inverse bg-danger">
+          <h4 class="card-title">Member Message Bar Graph</h4>
+          <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+          <div class="heading-elements">
+            <ul class="list-inline mb-0">
+
+              <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+              <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+              <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+              <li><a data-action="close"><i class="icon-cross2"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-body collapse in">
+          <div class="card-block">
+
+            <canvas id="column-chart" height="400"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!--/ Members Main stats -->
 
           <div class="row">
               <div class="col-xs-12">
-                  <div class="card">
-                      <div class="card-header">
+                <div class="card card-inverse box-shadow-0 card-outline-info bg-white">
+                  <div class="card-header card-head-inverse bg-info">
                           <h4 class="card-title">Member - First Message Table</h4>
                           <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                           <div class="heading-elements">
@@ -280,21 +314,7 @@
                                       </tr>
                                   </thead>
                                   <tbody id = "Member-FirstMessage-Table">
-                                      <!-- <tr>
-                                          <td>snarang2</td>
-                                          <td>June 2, 2013</td>
 
-                                      </tr>
-                                      <tr>
-                                          <td>asriva3</td>
-                                          <td>March 10, 2013</td>
-
-                                      </tr>
-                                      <tr>
-                                          <td>sinamda2</td>
-                                          <td>April 10, 2011</td>
-
-                                      </tr> -->
                                   </tbody>
                               </table>
                           </div>
@@ -310,8 +330,8 @@
           <!-- Basic Tables start -->
   <div class="row">
       <div class="col-xs-12">
-          <div class="card">
-              <div class="card-header">
+        <div class="card card-inverse box-shadow-0 card-outline-danger bg-white">
+          <div class="card-header card-head-inverse bg-danger">
                   <h4 class="card-title">Member - Last Active Tables</h4>
                   <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                   <div class="heading-elements">
@@ -361,8 +381,9 @@
           <!-- Popover Triggers start -->
           <section id="popover-triggers">
           	<div class="row ">
-          		<div class="card">
-          			<div class="card-header">
+              <div class="col-xs-12">
+              <div class="card card-inverse box-shadow-0 card-outline-success bg-white">
+    						<div class="card-header card-head-inverse bg-success">
           				<h4 class="card-title">Messages Per Year</h4>
           				<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                   		<div class="heading-elements">
@@ -385,17 +406,18 @@
           								</div>
 
           						</div>
-          						
+
           					</div>
           				</div>
           			</div>
           		</div>
           	</div>
+          </div>
           </section>
           <!-- Popover Triggers end -->
 
           <!-- Simple Bar Chart -->
-          <div class="row">
+          <!-- <div class="row">
               <div class="col-xs-12">
                   <div class="card">
                       <div class="card-header">
@@ -417,7 +439,9 @@
                       </div>
                   </div>
               </div>
-          </div>
+          </div> -->
+
+
 
         </div>
       </div>
