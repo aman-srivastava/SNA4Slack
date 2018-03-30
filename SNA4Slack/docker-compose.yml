@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  hello_world:
+    build: .
+    ports:
+     - "80:80"
