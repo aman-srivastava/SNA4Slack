@@ -6,10 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title id="Header">Members Name - SNA4SLACK</title>
+    <meta name="description" content="SNA4Slack - Social Network Analysis & Visualizationfor Slack Teams">
+    <meta name="keywords" content="sna4slack, network, analysis">
+    <meta name="author" content="Aman Srivastava">
+    <title id = "Header">SNA4Slack | Member</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../../app-assets/images/ico/apple-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../../app-assets/images/ico/apple-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../../app-assets/images/ico/apple-icon-120.png">
@@ -74,7 +74,6 @@
           <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
             <ul class="nav navbar-nav">
               <li class="nav-item hidden-sm-down"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5"></i></a></li>
-              <li class="nav-item nav-search"><a href="#" class="nav-link nav-link-search fullscreen-search-btn"><i class="ficon icon-search7"></i></a></li>
               <li class="nav-item hidden-sm-down"><a href="#" class="nav-link nav-link-expand"><i class="ficon icon-expand2"></i></a></li>
 
             </ul>
@@ -132,14 +131,14 @@
       <!-- main menu content-->
       <div class="main-menu-content">
         <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
-          <li class=" nav-item active"><a href="Dashboard.html"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span></a>
+          <li class=" nav-item"><a href="Dashboard.html" id="dashboardPageLink"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span></a>
           </li>
 		  <li class=" navigation-header"><span data-i18n="nav.category.layouts">METRICS</span><i data-toggle="tooltip" data-placement="right" data-original-title="Metrics" class="icon-ellipsis icon-ellipsis"></i>
-          <li class=" nav-item"><a href="Teams.html"><i class="icon-users"></i><span data-i18n="nav.teams.main" class="menu-title">Team</span></a>
+          <li class=" nav-item"><a href="Teams.html" id="TeamsPageLink"><i class="icon-users"></i><span data-i18n="nav.teams.main" class="menu-title">Team</span></a>
           </li>
-          <li class=" nav-item"><a href="Channels.html"><i class="icon-slack"></i><span data-i18n="nav.channels.main" class="menu-title">Channels</span></a>
+          <li class=" nav-item"><a href="ChannelMain.html" id="ChannelsPageLink"><i class="icon-slack"></i><span data-i18n="nav.channels.main" class="menu-title">Channels</span></a>
           </li>
-          <li class=" nav-item"><a href="Members.html"><i class="icon-user"></i><span data-i18n="nav.members.main" class="menu-title">Members</span></a>
+          <li class=" nav-item active"><a href="MembersMain.html" id="MembersPageLink"><i class="icon-user"></i><span data-i18n="nav.members.main" class="menu-title">Members</span></a>
           </li>
 		  <li class=" navigation-header"><span data-i18n="nav.category.layouts">Team Summary</span><i data-toggle="tooltip" data-placement="right" data-original-title="Team Summary" class="icon-ellipsis icon-ellipsis"></i>
         </ul>
@@ -171,7 +170,7 @@
               <p id="channelCount"></p>
             </div>
           </div>
-          <div class="actions"><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Settings"><span aria-hidden="true" class="icon-cog3"></span></a><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Lock"><span aria-hidden="true" class="icon-lock4"></span></a><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Logout"><span aria-hidden="true" class="icon-power3"></span></a></div>
+          <div class="actions"><a href="" class="footer-toggle" data-placement="top" data-toggle="tooltip" data-original-title="Hide"><span aria-hidden="true" class="icon-toggle2"></span></a><a href="search-page.html" data-placement="top" data-toggle="tooltip" data-original-title="Change Team"><span aria-hidden="true" class="icon-list"></span></a><a href="search-page.html" data-placement="top" data-toggle="tooltip" data-original-title="Logout"><span aria-hidden="true" class="icon-power3"></span></a></div>
         </div>
       </div>
       <!-- main menu footer-->
@@ -409,7 +408,9 @@
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-
+    <footer class="footer footer-static footer-light navbar-border">
+      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2018 <a href="search-page.html" target="_blank" class="text-bold-800 grey darken-2">SNA4Slack </a>, All rights reserved. </span><a href="https://sway.com/FMHnrhMih9tsSB2F" target="_blank"><span class="float-md-right d-xs-block d-md-inline-block">Meet the Team</span></p>
+    </footer>
 
 
     <!-- BEGIN VENDOR JS-->

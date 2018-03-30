@@ -1,7 +1,10 @@
 var team;
 if(window.location.href.includes("?teamName")){
 		team = window.location.href.substring(window.location.href.indexOf("?")+10);
-
+		document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+team;
+		document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+team;
+		document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+team;
+		document.getElementById("MembersPageLink").href = "MembersMain.html?teamName="+team;
 	}
 
 $( document ).ready(function() {
@@ -173,9 +176,9 @@ $( document ).ready(function() {
         totalMembers = totalMembers + data.memberCount_channel[i].memberCount
       }
 
-			document.getElementById("memberCount").innerHTML = totalMembers;
+			document.getElementById("memberCount").innerHTML = data.messageCount_sender.length;
 
-			document.getElementById("TotalMembers").innerHTML = totalMembers;
+			document.getElementById("TotalMembers").innerHTML = data.messageCount_sender.length;
       console.log('Total Members: '+totalMembers)
 
       var totalEmoticons = 0
