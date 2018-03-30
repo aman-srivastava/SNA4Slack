@@ -6,7 +6,14 @@ if(window.location.href.includes("?teamName")){
 
 $( document ).ready(function() {
 	var teamName;
+	currentURL = window.location.href
 	if(window.location.href.includes("?teamName")){
+					// console.log(window.location.href)
+					// var splitURL = window.location.href.split("?")
+					// console.log(splitURL)
+					// t = splitURL[1].substring(splitURL[1].indexOf("t")+9)
+					// console.log(t)
+					// teamName = t
 					teamName = window.location.href.substring(window.location.href.indexOf("?")+10);
 				}
 	$.ajax({
@@ -21,11 +28,50 @@ $( document ).ready(function() {
 
 			console.log(data);
 
+			var select = document.getElementById("basicSelect")
+			for (var i = 0; i<data.firstMessage.length; i++){
+				  var opt = document.createElement('option');
+			    opt.value = data.firstMessage[i].channelName;
+			    opt.innerHTML = data.firstMessage[i].channelName;
+			    select.appendChild(opt);
+			}
+
+			$("#basicSelect").change(SelectChannelFunction);
+
+			function SelectChannelFunction(){
+// 				<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+//     <option value="">Select...</option>
+//     <option value="http://google.com">Google</option>
+//     <option value="http://yahoo.com">Yahoo</option>
+// </select>
+		// var x = document.getElementById("basicSelect").value;
+		// console.log('You selected: '+ x)
+
+			 console.log('insideselectchannelfunction')
+			// console.log(currentURL)
+			var z = window.location.href
+
+			var a = z.replace("ChannelMain", "channels");
+			console.log(this.selectedIndex)
+			console.log(this.options[this.selectedIndex].value)
+			a = a + "!channelName="+this.options[this.selectedIndex].value
+			// console.log(a)
+			// console.log(this.options[this.selectedIndex].value)
+			 // window.location.href = currentURL + "!channelName="+ this.options[this.selectedIndex].value
+			// console.log(window.location.href)
+			window.location.href = a
+			//console.log(z)
+
+			}
+
 			document.getElementById("Header").innerHTML = teamName+" | Channel Main Metrics"
 			document.getElementById("Header2").innerHTML = teamName+" | Channel Main Metrics"
 
       var channelsDateMap = {}
 			var table = document.getElementById("Channel-Date-Table")
+
+			//document.getElementById("Channel-Date-Table")
+
 
       for(var i = 0 ; i<data.firstMessage.length ; i++){
         //console.log(data[i].firstMessage[i])

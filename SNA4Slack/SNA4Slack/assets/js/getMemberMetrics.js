@@ -105,8 +105,7 @@ $( document ).ready(function() {
 					newButton.setAttribute("data-content","Total Number of Messages: 4563")
 					newButton.setAttribute("data-original-title", "Number of Messages")
 					newButton.setAttribute("data-placement","bottom")
-					//newButton.style.padding = "50px 10px 20px 30px"
-					//newButton.setAttribute("onClick","myFunction()")
+
 					newButton.style.border = "solid #000"
 
 					// function myFunction(){

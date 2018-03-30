@@ -11,8 +11,21 @@ if(window.location.href.includes("?teamName")){
 
 $( document ).ready(function() {
 	var teamName;
+	var channelName;
 	if(window.location.href.includes("?teamName")){
-					teamName = window.location.href.substring(window.location.href.indexOf("?")+10);
+							console.log(window.location.href)
+					var splitURL = window.location.href.split("!")
+					console.log('URL 0 IS: '+ splitURL[0])
+					console.log('URL 1 IS: '+ splitURL[1])
+					//  console.log(splitURL)
+					//  t = splitURL[1].substring(splitURL[1].indexOf("t")+9)
+					//  console.log(t)
+					//  teamName = t
+
+							teamName = splitURL[0].substring(splitURL[0].indexOf("?")+10);
+							console.log(teamName)
+							channelName = splitURL[1].substring(splitURL[1].indexOf("c")+12)
+							console.log(channelName)
 				}
 
   // var channelName;
@@ -29,15 +42,17 @@ $( document ).ready(function() {
 					data = data[j]['dataAnalytics'];
 				};
 			}
-      var channelName = 'general'
+      //var channelName = 'random'
 			console.log(data);
+			//console.log(channelName)
 
       var messagesPerChannel
       for (var i = 0; i<data.messageCount_channel.length; i++) {
-        if(channelName = data.messageCount_channel[i].channelName){
+        if(channelName == data.messageCount_channel[i].channelName){
           messagesPerChannel = data.messageCount_channel[i].msgCount
         }
       }
+
 
 			document.getElementById("HeaderChannelIndividual").innerHTML = teamName+" | "+channelName;
 			document.getElementById("ChannelName").innerHTML = teamName+" | "+channelName+" - SNA4SLACK";
