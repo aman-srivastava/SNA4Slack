@@ -44,6 +44,25 @@ $( document ).ready(function() {
 			}
       //var channelName = 'random'
 			console.log(data);
+
+			document.getElementById("teamNameSidebar").innerHTML = teamName;
+			document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
+			document.getElementById("teamURLLink").href = "http://"+teamName+".slackarchive.io";
+			document.getElementById("channelCount").innerHTML = data['messageCount_channel'].length;
+
+			var totalMessages = 0
+      for(var i = 0; i<data.messageCount_sender.length; i++){
+        totalMessages = totalMessages + data.messageCount_sender[i].msgCount
+      }
+
+			document.getElementById("conversationCount").innerHTML = totalMessages;
+
+			var totalMembers = 0
+      for(var i = 0; i<data.memberCount_channel.length; i++){
+        totalMembers = totalMembers + data.memberCount_channel[i].memberCount
+      }
+
+			document.getElementById("memberCount").innerHTML = totalMembers;
 			//console.log(channelName)
 
       var messagesPerChannel
