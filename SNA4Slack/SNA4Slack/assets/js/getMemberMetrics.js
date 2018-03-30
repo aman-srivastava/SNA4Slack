@@ -1,8 +1,8 @@
-var team;
-if(window.location.href.includes("?teamName")){
-		team = window.location.href.substring(window.location.href.indexOf("?")+10);
-
-	}
+// var team;
+// if(window.location.href.includes("?teamName")){
+// 		team = window.location.href.substring(window.location.href.indexOf("?")+10);
+//
+// 	}
 
 // var member;
 // if(window.location.href.includes("*memberName")){
@@ -11,8 +11,21 @@ if(window.location.href.includes("?teamName")){
 
 $( document ).ready(function() {
 	var teamName;
+	var memberName;
 	if(window.location.href.includes("?teamName")){
-					teamName = window.location.href.substring(window.location.href.indexOf("?")+10);
+							console.log(window.location.href)
+					var splitURL = window.location.href.split("!")
+					console.log('URL 0 IS: '+ splitURL[0])
+					console.log('URL 1 IS: '+ splitURL[1])
+					//  console.log(splitURL)
+					//  t = splitURL[1].substring(splitURL[1].indexOf("t")+9)
+					//  console.log(t)
+					//  teamName = t
+
+							teamName = splitURL[0].substring(splitURL[0].indexOf("?")+10);
+							console.log(teamName)
+							memberName = splitURL[1].substring(splitURL[1].indexOf("m")+11)
+							console.log(memberName)
 				}
 
   // var memberName;
@@ -29,8 +42,27 @@ $( document ).ready(function() {
 					data = data[j]['dataAnalytics'];
 				};
 			}
-      var memberName = 'carsten'
+      //var memberName = 'carsten'
 			console.log(data);
+
+			document.getElementById("teamNameSidebar").innerHTML = teamName;
+			document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
+			document.getElementById("teamURLLink").href = "http://"+teamName+".slackarchive.io";
+			document.getElementById("channelCount").innerHTML = data['messageCount_channel'].length;
+
+			var totalMessages = 0
+      for(var i = 0; i<data.messageCount_sender.length; i++){
+        totalMessages = totalMessages + data.messageCount_sender[i].msgCount
+      }
+
+			document.getElementById("conversationCount").innerHTML = totalMessages;
+
+			var totalMembers = 0
+      for(var i = 0; i<data.memberCount_channel.length; i++){
+        totalMembers = totalMembers + data.memberCount_channel[i].memberCount
+      }
+
+			document.getElementById("memberCount").innerHTML = totalMembers;
 
 			document.getElementById("Header").innerHTML = teamName+" | " +memberName + " SNA4SLACK";
 

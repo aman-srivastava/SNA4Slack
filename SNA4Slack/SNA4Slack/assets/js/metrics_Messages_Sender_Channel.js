@@ -6,8 +6,17 @@ if(window.location.href.includes("?teamName")){
 
 $( document ).ready(function() {
   var teamName;
-  if(window.location.href.includes("?teamName")){
-          teamName = window.location.href.substring(window.location.href.indexOf("?")+10);
+	var memberName;
+	if(window.location.href.includes("?teamName")){
+							console.log(window.location.href)
+					var splitURL = window.location.href.split("!")
+					console.log('URL 0 IS: '+ splitURL[0])
+					console.log('URL 1 IS: '+ splitURL[1])
+
+							teamName = splitURL[0].substring(splitURL[0].indexOf("?")+10);
+							console.log(teamName)
+							memberName = splitURL[1].substring(splitURL[1].indexOf("m")+11)
+							console.log(memberName)
         }
 
   $.ajax({
@@ -19,7 +28,7 @@ $( document ).ready(function() {
           data = data[j]['dataAnalytics'];
         };
       }
-      var memberName = 'carsten'
+      //var memberName = 'carsten'
       console.log(data);
 
 
@@ -36,7 +45,7 @@ $( document ).ready(function() {
       }
 
       var contents = []
-      
+
       for(var i in memberChannelMessageMap) {
         if (memberChannelMessageMap.hasOwnProperty(i)) {
           console.log('Channel is: ' + i + ' --- ' +'Number of Messages are ' + memberChannelMessageMap[i]);
@@ -79,7 +88,7 @@ $( document ).ready(function() {
   "data": {
     "sortOrder": "value-desc",
     "content": contents
-    
+
   },
   "labels": {
     "outer": {
@@ -127,6 +136,3 @@ $( document ).ready(function() {
 
   });
 });
-
-
-
