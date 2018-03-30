@@ -46,4 +46,4 @@ api.add_resource(DashboardTrigger, SNA_URL + '/DashboardTrigger')
 #----------------------------------------------------------------
 api.add_resource(BulkInsert, SNA_URL + '/BulkInsertTrigger')
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=80)
