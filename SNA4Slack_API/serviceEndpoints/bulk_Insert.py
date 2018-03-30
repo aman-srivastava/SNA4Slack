@@ -95,5 +95,6 @@ class BulkInsert (Resource):
                     except Exception as error:
                         responseString += 'undirected-mention-graph: {0} \n'.format(
                             'Failed to generate. Reason:' + str(error))
+            spark.stop()
 
         return responseString

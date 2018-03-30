@@ -160,10 +160,10 @@ class sparkCassandraHelper():
         df.createOrReplaceTempView("archives")
 
         # SubscriptionGraph
-        jsonOut = spark.sql("SELECT messageSender, channelName, COUNT(messageBody) AS msgCount \
+        '''jsonOut = spark.sql("SELECT messageSender, channelName, COUNT(messageBody) AS msgCount \
             FROM archives \
             GROUP BY messageSender,channelName \
-            ORDER BY messageSender")
+            ORDER BY messageSender") '''
 
         jsonOut = spark.sql("SELECT ROW_NUMBER()Over(PARTITION BY channelName ORDER BY msgCount DESC) as rN \
             ,messageSender, channelName,msgCount FROM \
@@ -171,7 +171,7 @@ class sparkCassandraHelper():
             FROM archives \
             GROUP BY messageSender,channelName) as innerQuery")
 
-        jsonOut = jsonOut.filter(jsonOut.rN < 30)
+        jsonOut = jsonOut.filter(jsonOut.rN < 10)
 
         data = '{"documentType" :"spark-sub-graph-inv","spark-sub-graph-inv":{ "name": "' + \
             self.teamName + '", "children": ' + \
