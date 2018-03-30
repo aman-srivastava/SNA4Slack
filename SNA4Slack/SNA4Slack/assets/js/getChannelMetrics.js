@@ -1,7 +1,10 @@
 var team;
 if(window.location.href.includes("?teamName")){
-		team = window.location.href.substring(window.location.href.indexOf("?")+10);
-
+		team = window.location.href.substring(window.location.href.indexOf("?")+10,window.location.href.indexOf("!"));
+		document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+team;
+		document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+team;
+		document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+team;
+		document.getElementById("MembersPageLink").href = "MembersMain.html?teamName="+team;
 	}
 
 // var channel;
@@ -62,7 +65,7 @@ $( document ).ready(function() {
         totalMembers = totalMembers + data.memberCount_channel[i].memberCount
       }
 
-			document.getElementById("memberCount").innerHTML = totalMembers;
+			document.getElementById("memberCount").innerHTML = data.messageCount_sender.length;
 			//console.log(channelName)
 
       var messagesPerChannel

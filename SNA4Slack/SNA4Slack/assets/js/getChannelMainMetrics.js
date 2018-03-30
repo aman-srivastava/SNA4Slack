@@ -1,4 +1,11 @@
-
+var team;
+if(window.location.href.includes("?teamName")){
+		team = window.location.href.substring(window.location.href.indexOf("?")+10);
+		document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+team;
+		document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+team;
+		document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+team;
+		document.getElementById("MembersPageLink").href = "MembersMain.html?teamName="+team;
+	}
 
 $( document ).ready(function() {
 	var teamName;
@@ -41,7 +48,7 @@ $( document ).ready(function() {
         totalMembers = totalMembers + data.memberCount_channel[i].memberCount
       }
 
-			document.getElementById("memberCount").innerHTML = totalMembers;
+			document.getElementById("memberCount").innerHTML = data.messageCount_sender.length;
 
 			var select = document.getElementById("basicSelect")
 			for (var i = 0; i<data.firstMessage.length; i++){
