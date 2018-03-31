@@ -47,6 +47,7 @@ $( document ).ready(function() {
 			}
       //var channelName = 'random'
 			console.log(data);
+			console.log(channelName)
 
 			document.getElementById("teamNameSidebar").innerHTML = teamName;
 			document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
@@ -85,7 +86,7 @@ $( document ).ready(function() {
 
       var membersPerChannel
       for (var i = 0; i<data.memberCount_channel.length; i++) {
-        if(channelName = data.memberCount_channel[i].channelName){
+        if(channelName == data.memberCount_channel[i].channelName){
           membersPerChannel = data.memberCount_channel[i].memberCount
         }
       }
@@ -97,7 +98,7 @@ $( document ).ready(function() {
 
       var userMessagePerChannelMap = {}
       for (var i = 0; i<data.messageCount_channel_sender.length; i++) {
-        if(channelName = data.messageCount_channel_sender[i].channelName){
+        if(channelName == data.messageCount_channel_sender[i].channelName){
           userMessagePerChannelMap[data.messageCount_channel_sender[i].messageSender] = data.messageCount_channel_sender[i].msgCount
         }
       }
@@ -118,9 +119,10 @@ $( document ).ready(function() {
 
       console.log('-----------------------------------------------')
 
-      let obj = { a: 4, b: 0.5 , c: 0.35, d: 5 };
+      //let obj = { a: 4, b: 0.5 , c: 0.35, d: 5 };
 
       let arr = Object.values(userMessagePerChannelMap);
+			console.log(arr)
       let min = Math.min(...arr);
       let max = Math.max(...arr);
 
