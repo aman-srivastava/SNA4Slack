@@ -97,7 +97,8 @@ $( document ).ready(function() {
 
       for(var i = 0 ; i<data.firstMessage.length ; i++){
         //console.log(data[i].firstMessage[i])
-        channelsDateMap[data.firstMessage[i].channelName] = data.firstMessage[i].messageTime
+				var strSliced = data.firstMessage[i].messageTime.slice(0, 10)
+        channelsDateMap[data.firstMessage[i].channelName] = strSliced
       }
       for(var i in channelsDateMap) {
         if (channelsDateMap.hasOwnProperty(i)) {
