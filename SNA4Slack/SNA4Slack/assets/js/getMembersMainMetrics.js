@@ -1,7 +1,10 @@
 var team;
 if(window.location.href.includes("?teamName")){
 		team = window.location.href.substring(window.location.href.indexOf("?")+10);
-
+		document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+team;
+		document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+team;
+		document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+team;
+		document.getElementById("MembersPageLink").href = "MembersMain.html?teamName="+team;
 	}
 
 $( document ).ready(function() {
@@ -20,6 +23,38 @@ $( document ).ready(function() {
 			}
 
 			console.log(data);
+
+			document.getElementById("teamNameSidebar").innerHTML = teamName;
+			document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
+			document.getElementById("teamURLLink").href = "http://"+teamName+".slackarchive.io";
+			document.getElementById("channelCount").innerHTML = data['messageCount_channel'].length;
+
+
+			var select = document.getElementById("basicSelectMember")
+			for (var i = 0; i<data.messageCount_sender.length; i++){
+				  var opt = document.createElement('option');
+			    opt.value = data.messageCount_sender[i].messageSender;
+			    opt.innerHTML = data.messageCount_sender[i].messageSender;
+			    select.appendChild(opt);
+			}
+
+			$("#basicSelectMember").change(SelectMemberFunction);
+
+			function SelectMemberFunction(){
+
+			 console.log('insideselectchannelfunction')
+			var z = window.location.href
+
+			var a = z.replace("MembersMain", "members");
+			console.log(this.selectedIndex)
+			console.log(this.options[this.selectedIndex].value)
+			a = a + "!memberName="+this.options[this.selectedIndex].value
+			window.location.href = a
+
+			}
+
+			document.getElementById("Header").innerHTML = teamName+" | Member Main Metrics"
+			document.getElementById("Header2").innerHTML = teamName+" | Member Main Metrics"
 
       var users = []
 
@@ -131,6 +166,8 @@ $( document ).ready(function() {
         totalMessages = totalMessages + data.messageCount_sender[i].msgCount
       }
 
+			document.getElementById("conversationCount").innerHTML = totalMessages;
+
 			document.getElementById("TotalMessages").innerHTML = totalMessages;
       console.log('Total Messages: '+totalMessages)
 
@@ -139,7 +176,9 @@ $( document ).ready(function() {
         totalMembers = totalMembers + data.memberCount_channel[i].memberCount
       }
 
-			document.getElementById("TotalMembers").innerHTML = totalMembers;
+			document.getElementById("memberCount").innerHTML = data.messageCount_sender.length;
+
+			document.getElementById("TotalMembers").innerHTML = data.messageCount_sender.length;
       console.log('Total Members: '+totalMembers)
 
       var totalEmoticons = 0
@@ -160,6 +199,171 @@ $( document ).ready(function() {
       console.log('Total URLs: '+totalURLs)
 
       console.log('---------------------------------------------------------------')
+
+
+			var ctx = $("#column-chart");
+
+
+			// Chart Options
+			var chartOptions = {
+				// Elements options apply to all of the options unless overridden in a dataset
+				// In this case, we are setting the border of each bar to be 2px wide and green
+				elements: {
+					rectangle: {
+						borderWidth: 2,
+						borderColor: 'rgb(0, 255, 0)',
+						borderSkipped: 'bottom'
+					}
+				},
+				responsive: true,
+				maintainAspectRatio: false,
+				responsiveAnimationDuration:500,
+				legend: {display: false,
+					position: 'bottom',
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						gridLines: {
+							color: "#ff9999",
+							drawTicks: false,
+						},
+						scaleLabel: {
+							display: true
+						}
+					}],
+					yAxes: [{
+						display: true,
+						gridLines: {
+							color: "#ff9999",
+							drawTicks: false,
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'Total Conversations'
+						}
+					}]
+				},
+				title: {
+					display: false,
+					text: 'Chart.js Bar Chart'
+				}
+			};
+
+			var labels = [];
+			var values = [];
+			for(var i = 0 ; i<data.messageCount_sender.length ; i++){
+
+				labels.push(data.messageCount_sender[i].messageSender);
+				values.push(data.messageCount_sender[i].msgCount)
+			}
+
+			// Chart Data
+			var chartData = {
+				labels: labels,
+				datasets: [{
+					label: "Messages per Member",
+					data: values,
+					backgroundColor: "#990000",
+					hoverBackgroundColor: "#ff6666",
+					borderColor: "transparent"
+				}]
+			};
+
+			var config = {
+				type: 'bar',
+
+				// Chart Options
+				options : chartOptions,
+
+				data : chartData
+			};
+
+			// Create the chart
+			var lineChart = new Chart(ctx, config);
+
+
+
+			var ctx = $("#column-hour-chart");
+
+
+			// Chart Options
+			var chartOptions = {
+				// Elements options apply to all of the options unless overridden in a dataset
+				// In this case, we are setting the border of each bar to be 2px wide and green
+				elements: {
+					rectangle: {
+						borderWidth: 2,
+						borderColor: 'rgb(0, 255, 0)',
+						borderSkipped: 'bottom'
+					}
+				},
+				responsive: true,
+				maintainAspectRatio: false,
+				responsiveAnimationDuration:500,
+				legend: {display: false,
+					position: 'bottom',
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						gridLines: {
+							color: "#008000",
+							drawTicks: false,
+						},
+						scaleLabel: {
+							display: true
+						}
+					}],
+					yAxes: [{
+						display: true,
+						gridLines: {
+							color: "#008000",
+							drawTicks: false,
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'Messages per Hour Count'
+						}
+					}]
+				},
+				title: {
+					display: false,
+					text: 'Chart.js Bar Chart'
+				}
+			};
+
+			var labels = [];
+			var values = [];
+			for(var i = 0 ; i<data.mostActiveHours.length ; i++){
+
+				labels.push(data.mostActiveHours[i].hour);
+				values.push(data.mostActiveHours[i].msgCount)
+			}
+
+			// Chart Data
+			var chartData = {
+				labels: labels,
+				datasets: [{
+					label: "Messages per Hour Count",
+					data: values,
+					backgroundColor: "#006400",
+					hoverBackgroundColor: "#ff6666",
+					borderColor: "transparent"
+				}]
+			};
+
+			var config = {
+				type: 'bar',
+
+				// Chart Options
+				options : chartOptions,
+
+				data : chartData
+			};
+
+			// Create the chart
+			var lineChart = new Chart(ctx, config);
 
 			},
 

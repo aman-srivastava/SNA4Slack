@@ -1,6 +1,6 @@
 var team;
 if(window.location.href.includes("?teamName")){
-		team = window.location.href.substring(window.location.href.indexOf("?")+10);
+		team = window.location.href.substring(window.location.href.indexOf("?")+10).replace("#","");
 		document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+team;
 		document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+team;
 		document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+team;

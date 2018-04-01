@@ -1,4 +1,4 @@
-version: '1'
+version: '2'
 services:
 
   frontend:
@@ -6,7 +6,7 @@ services:
     container_name: sna4slack_frontend
     command: npm run start
     ports:
-      - '8080:80'
+      - '4000:80'
     volumes:
      - ./SNA4Slack:/sna4slack
     environment:
@@ -17,7 +17,7 @@ services:
     container_name: sna4slack_backend
     command: python main.py
     ports:
-      - '4000:5000'
+      - '5000:5000'
     depends_on:
       - db
     volumes:

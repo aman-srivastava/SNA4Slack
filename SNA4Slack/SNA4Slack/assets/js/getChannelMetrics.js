@@ -1,7 +1,10 @@
 var team;
 if(window.location.href.includes("?teamName")){
-		team = window.location.href.substring(window.location.href.indexOf("?")+10);
-
+		team = window.location.href.substring(window.location.href.indexOf("?")+10,window.location.href.indexOf("!"));
+		document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+team;
+		document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+team;
+		document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+team;
+		document.getElementById("MembersPageLink").href = "MembersMain.html?teamName="+team;
 	}
 
 // var channel;
@@ -11,8 +14,21 @@ if(window.location.href.includes("?teamName")){
 
 $( document ).ready(function() {
 	var teamName;
+	var channelName;
 	if(window.location.href.includes("?teamName")){
-					teamName = window.location.href.substring(window.location.href.indexOf("?")+10);
+							console.log(window.location.href)
+					var splitURL = window.location.href.split("!")
+					console.log('URL 0 IS: '+ splitURL[0])
+					console.log('URL 1 IS: '+ splitURL[1])
+					//  console.log(splitURL)
+					//  t = splitURL[1].substring(splitURL[1].indexOf("t")+9)
+					//  console.log(t)
+					//  teamName = t
+
+							teamName = splitURL[0].substring(splitURL[0].indexOf("?")+10);
+							console.log(teamName)
+							channelName = splitURL[1].substring(splitURL[1].indexOf("c")+12)
+							console.log(channelName)
 				}
 
   // var channelName;
@@ -29,16 +45,40 @@ $( document ).ready(function() {
 					data = data[j]['dataAnalytics'];
 				};
 			}
-      var channelName = 'general'
+      //var channelName = 'random'
 			console.log(data);
+			console.log(channelName)
+
+			document.getElementById("teamNameSidebar").innerHTML = teamName;
+			document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
+			document.getElementById("teamURLLink").href = "http://"+teamName+".slackarchive.io";
+			document.getElementById("channelCount").innerHTML = data['messageCount_channel'].length;
+
+			var totalMessages = 0
+      for(var i = 0; i<data.messageCount_sender.length; i++){
+        totalMessages = totalMessages + data.messageCount_sender[i].msgCount
+      }
+
+			document.getElementById("conversationCount").innerHTML = totalMessages;
+
+			var totalMembers = 0
+      for(var i = 0; i<data.memberCount_channel.length; i++){
+        totalMembers = totalMembers + data.memberCount_channel[i].memberCount
+      }
+
+			document.getElementById("memberCount").innerHTML = data.messageCount_sender.length;
+			//console.log(channelName)
 
       var messagesPerChannel
       for (var i = 0; i<data.messageCount_channel.length; i++) {
-        if(channelName = data.messageCount_channel[i].channelName){
+        if(channelName == data.messageCount_channel[i].channelName){
           messagesPerChannel = data.messageCount_channel[i].msgCount
         }
       }
 
+
+			document.getElementById("HeaderChannelIndividual").innerHTML = teamName+" | "+channelName;
+			document.getElementById("ChannelName").innerHTML = teamName+" | "+channelName+" - SNA4SLACK";
 			document.getElementById("TotalMessagesPerChannel").innerHTML = messagesPerChannel;
       console.log('TotalMessages: '+messagesPerChannel)
 
@@ -46,7 +86,7 @@ $( document ).ready(function() {
 
       var membersPerChannel
       for (var i = 0; i<data.memberCount_channel.length; i++) {
-        if(channelName = data.memberCount_channel[i].channelName){
+        if(channelName == data.memberCount_channel[i].channelName){
           membersPerChannel = data.memberCount_channel[i].memberCount
         }
       }
@@ -58,7 +98,7 @@ $( document ).ready(function() {
 
       var userMessagePerChannelMap = {}
       for (var i = 0; i<data.messageCount_channel_sender.length; i++) {
-        if(channelName = data.messageCount_channel_sender[i].channelName){
+        if(channelName == data.messageCount_channel_sender[i].channelName){
           userMessagePerChannelMap[data.messageCount_channel_sender[i].messageSender] = data.messageCount_channel_sender[i].msgCount
         }
       }
@@ -79,9 +119,10 @@ $( document ).ready(function() {
 
       console.log('-----------------------------------------------')
 
-      let obj = { a: 4, b: 0.5 , c: 0.35, d: 5 };
+      //let obj = { a: 4, b: 0.5 , c: 0.35, d: 5 };
 
       let arr = Object.values(userMessagePerChannelMap);
+			console.log(arr)
       let min = Math.min(...arr);
       let max = Math.max(...arr);
 

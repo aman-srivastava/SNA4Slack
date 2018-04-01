@@ -81,7 +81,7 @@ class subscriptionGraph(object):
 
 
 def run():
-    graph_gen = subscriptionGraph("unconnected_triplet_data",
+    graph_gen = subscriptionGraph("single_node",
                              directed=False)
     print("generated the graph")
 

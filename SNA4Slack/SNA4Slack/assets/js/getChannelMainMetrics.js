@@ -1,12 +1,22 @@
 var team;
 if(window.location.href.includes("?teamName")){
 		team = window.location.href.substring(window.location.href.indexOf("?")+10);
-
+		document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+team;
+		document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+team;
+		document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+team;
+		document.getElementById("MembersPageLink").href = "MembersMain.html?teamName="+team;
 	}
 
 $( document ).ready(function() {
 	var teamName;
+	currentURL = window.location.href
 	if(window.location.href.includes("?teamName")){
+					// console.log(window.location.href)
+					// var splitURL = window.location.href.split("?")
+					// console.log(splitURL)
+					// t = splitURL[1].substring(splitURL[1].indexOf("t")+9)
+					// console.log(t)
+					// teamName = t
 					teamName = window.location.href.substring(window.location.href.indexOf("?")+10);
 				}
 	$.ajax({
@@ -21,12 +31,74 @@ $( document ).ready(function() {
 
 			console.log(data);
 
+			document.getElementById("teamNameSidebar").innerHTML = teamName;
+			document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
+			document.getElementById("teamURLLink").href = "http://"+teamName+".slackarchive.io";
+			document.getElementById("channelCount").innerHTML = data['messageCount_channel'].length;
+
+			var totalMessages = 0
+      for(var i = 0; i<data.messageCount_sender.length; i++){
+        totalMessages = totalMessages + data.messageCount_sender[i].msgCount
+      }
+
+			document.getElementById("conversationCount").innerHTML = totalMessages;
+
+			var totalMembers = 0
+      for(var i = 0; i<data.memberCount_channel.length; i++){
+        totalMembers = totalMembers + data.memberCount_channel[i].memberCount
+      }
+
+			document.getElementById("memberCount").innerHTML = data.messageCount_sender.length;
+
+			var select = document.getElementById("basicSelect")
+			for (var i = 0; i<data.firstMessage.length; i++){
+				  var opt = document.createElement('option');
+			    opt.value = data.firstMessage[i].channelName;
+			    opt.innerHTML = data.firstMessage[i].channelName;
+			    select.appendChild(opt);
+			}
+
+			$("#basicSelect").change(SelectChannelFunction);
+
+			function SelectChannelFunction(){
+// 				<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+//     <option value="">Select...</option>
+//     <option value="http://google.com">Google</option>
+//     <option value="http://yahoo.com">Yahoo</option>
+// </select>
+		// var x = document.getElementById("basicSelect").value;
+		// console.log('You selected: '+ x)
+
+			 console.log('insideselectchannelfunction')
+			// console.log(currentURL)
+			var z = window.location.href
+
+			var a = z.replace("ChannelMain", "channels");
+			console.log(this.selectedIndex)
+			console.log(this.options[this.selectedIndex].value)
+			a = a + "!channelName="+this.options[this.selectedIndex].value
+			// console.log(a)
+			// console.log(this.options[this.selectedIndex].value)
+			 // window.location.href = currentURL + "!channelName="+ this.options[this.selectedIndex].value
+			// console.log(window.location.href)
+			window.location.href = a
+			//console.log(z)
+
+			}
+
+			document.getElementById("Header").innerHTML = teamName+" | Channel Main Metrics"
+			document.getElementById("Header2").innerHTML = teamName+" | Channel Main Metrics"
+
       var channelsDateMap = {}
 			var table = document.getElementById("Channel-Date-Table")
 
+			//document.getElementById("Channel-Date-Table")
+
+
       for(var i = 0 ; i<data.firstMessage.length ; i++){
         //console.log(data[i].firstMessage[i])
-        channelsDateMap[data.firstMessage[i].channelName] = data.firstMessage[i].messageTime
+				var strSliced = data.firstMessage[i].messageTime.slice(0, 10)
+        channelsDateMap[data.firstMessage[i].channelName] = strSliced
       }
       for(var i in channelsDateMap) {
         if (channelsDateMap.hasOwnProperty(i)) {

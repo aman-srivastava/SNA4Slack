@@ -5,10 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>Channel Main - SNA4SLACK</title>
+    <meta name="description" content="SNA4Slack - Social Network Analysis & Visualizationfor Slack Teams">
+    <meta name="keywords" content="sna4slack, network, analysis">
+    <meta name="author" content="Aman Srivastava">
+    <title id = "Header2">SNA4Slack | Channels</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../../app-assets/images/ico/apple-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../../app-assets/images/ico/apple-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../../app-assets/images/ico/apple-icon-120.png">
@@ -74,7 +74,6 @@
           <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
             <ul class="nav navbar-nav">
               <li class="nav-item hidden-sm-down"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5"></i></a></li>
-              <li class="nav-item nav-search"><a href="#" class="nav-link nav-link-search fullscreen-search-btn"><i class="ficon icon-search7"></i></a></li>
               <li class="nav-item hidden-sm-down"><a href="#" class="nav-link nav-link-expand"><i class="ficon icon-expand2"></i></a></li>
 
             </ul>
@@ -132,14 +131,14 @@
       <!-- main menu content-->
       <div class="main-menu-content">
         <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
-          <li class=" nav-item active"><a href="Dashboard.html"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span></a>
+          <li class=" nav-item"><a href="Dashboard.html" id="dashboardPageLink"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span></a>
           </li>
 		  <li class=" navigation-header"><span data-i18n="nav.category.layouts">METRICS</span><i data-toggle="tooltip" data-placement="right" data-original-title="Metrics" class="icon-ellipsis icon-ellipsis"></i>
-          <li class=" nav-item"><a href="Teams.html"><i class="icon-users"></i><span data-i18n="nav.teams.main" class="menu-title">Team</span></a>
+          <li class=" nav-item"><a href="Teams.html" id="TeamsPageLink"><i class="icon-users"></i><span data-i18n="nav.teams.main" class="menu-title">Team</span></a>
           </li>
-          <li class=" nav-item"><a href="ChannelMain.html"><i class="icon-slack"></i><span data-i18n="nav.channels.main" class="menu-title">Channels</span></a>
+          <li class=" nav-item active"><a href="ChannelMain.html" id="ChannelsPageLink"><i class="icon-slack"></i><span data-i18n="nav.channels.main" class="menu-title">Channels</span></a>
           </li>
-          <li class=" nav-item"><a href="MembersMain.html"><i class="icon-user"></i><span data-i18n="nav.members.main" class="menu-title">Members</span></a>
+          <li class=" nav-item"><a href="MembersMain.html" id="MembersPageLink"><i class="icon-user"></i><span data-i18n="nav.members.main" class="menu-title">Members</span></a>
           </li>
 		  <li class=" navigation-header"><span data-i18n="nav.category.layouts">Team Summary</span><i data-toggle="tooltip" data-placement="right" data-original-title="Team Summary" class="icon-ellipsis icon-ellipsis"></i>
         </ul>
@@ -152,26 +151,26 @@
           <div class="insights">
             <div class="col-xs-12">
               <p>Name:</p>
-              <p>Kubernetes</p>
+              <p id="teamNameSidebar"></p>
             </div>
             <div class="col-xs-12">
               <p>URL:</p>
-              <p>kubernetes.slackarchive.io</p>
+              <a href="#" id="teamURLLink" target="_blank"><p id="teamURLTag"></p></a>
             </div>
 			<div class="col-xs-12">
-              <p>Channel Count:</p>
-              <p>201</p>
-            </div>
-            <div class="col-xs-12">
               <p>Member Count:</p>
-              <p>1,200</p>
+              <p  id="memberCount"></p>
             </div>
 			<div class="col-xs-12">
               <p>Conversation Count:</p>
-              <p>22,807</p>
+              <p  id="conversationCount"></p>
+            </div>
+			<div class="col-xs-12">
+              <p>Channel Count:</p>
+              <p id="channelCount"></p>
             </div>
           </div>
-          <div class="actions"><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Settings"><span aria-hidden="true" class="icon-cog3"></span></a><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Lock"><span aria-hidden="true" class="icon-lock4"></span></a><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Logout"><span aria-hidden="true" class="icon-power3"></span></a></div>
+          <div class="actions"><a href="" class="footer-toggle" data-placement="top" data-toggle="tooltip" data-original-title="Hide"><span aria-hidden="true" class="icon-toggle2"></span></a><a href="search-page.html" data-placement="top" data-toggle="tooltip" data-original-title="Change Team"><span aria-hidden="true" class="icon-list"></span></a><a href="search-page.html" data-placement="top" data-toggle="tooltip" data-original-title="Logout"><span aria-hidden="true" class="icon-power3"></span></a></div>
         </div>
       </div>
       <!-- main menu footer-->
@@ -191,21 +190,65 @@
 
           <!-- projects table with monthly chart -->
     			<!-- <div class="row"> -->
-    				<div class="col-xl-6 col-lg-12">
-    					<div class="card">
-    						<div class="card-header">
-    							<h4 class="card-title">Current Channels</h4>
+
+
+          <div class="row">
+  						<h4 id="Header">Channel Metrics</h4>
+  						<hr/>
+
+  				</div>
+
+
+
+          <div class="col-xl-12 col-lg-12">
+            <div class="card card-inverse box-shadow-0 card-outline-danger bg-white">
+              <div class="card-header card-head-inverse bg-danger">
+                <h4 class="card-title">Individual Channel View</h4>
+                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                <div class="heading-elements">
+                  <ul class="list-inline mb-0">
+                    <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                    <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+
+
+              <!-- <div class="card-body"> -->
+                <div class="card-body collapse in">
+                <div class="table-responsive">
+                  <br/>
+                  <div class="col-xs-8">
+                  <fieldset class="form-group">
+                      <select class="form-control" id="basicSelect" onchange="SelectChannelFunction()">
+                        <option>Select Option</option>
+
+                      </select>
+                  </fieldset>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Basic Select end -->
+    				<div class="col-xl-12 col-lg-12">
+    					<div class="card card-inverse box-shadow-0 card-outline-info bg-white">
+    						<div class="card-header card-head-inverse bg-info">
+    							<h4 class="card-title">Channel Creation</h4>
     							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
     							<div class="heading-elements">
     								<ul class="list-inline mb-0">
-    									<li><a data-action="reload"><i class="icon-reload"></i></a></li>
-    									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                      <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                      <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
     								</ul>
     							</div>
     						</div>
-    						<div class="card-body">
 
-    							<div class="table-responsive">
+
+    						<!-- <div class="card-body"> -->
+                  <div class="card-body collapse in">
+                  <div class="table-responsive">
     								<table  class="table table-hover mb-0">
     									<thead>
     										<tr>
@@ -215,36 +258,7 @@
     										</tr>
     									</thead>
     									<tbody id = "Channel-Date-Table">
-    										<!-- <tr>
-    											<td class="text-truncate">ReactJS App</td>
-    											<td class="text-truncate"><span class="tag tag-success">22 May 2011</span></td>
 
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Fitness App</td>
-    											<td class="text-truncate"><span class="tag tag-warning">11 May 2010</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">SOU plugin</td>
-    											<td class="text-truncate"><span class="tag tag-danger">13 June 2013</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Android App</td>
-    											<td class="text-truncate"><span class="tag tag-success">15 December 2014</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">ABC Inc. UI/UX</td>
-    											<td class="text-truncate"><span class="tag tag-warning">2 January 2011</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Product UI</td>
-    											<td class="text-truncate"><span class="tag tag-danger">1 May 2016</span></td>
-
-    										</tr> -->
     									</tbody>
     								</table>
     							</div>
@@ -253,20 +267,19 @@
     				</div>
 
             <div class="col-xl-6 col-lg-12">
-    					<div class="card">
-    						<div class="card-header">
-    							<h4 class="card-title">Current Channels</h4>
+    					<div class="card card-inverse box-shadow-0 card-outline-danger bg-white">
+    						<div class="card-header card-head-inverse bg-danger">
+    							<h4 class="card-title">Channel Member</h4>
     							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
     							<div class="heading-elements">
     								<ul class="list-inline mb-0">
-    									<li><a data-action="reload"><i class="icon-reload"></i></a></li>
-    									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                      <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                      <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
     								</ul>
     							</div>
     						</div>
-    						<div class="card-body">
-
-    							<div class="table-responsive">
+                <div class="card-body collapse in">
+                <div class="table-responsive">
     								<table  class="table table-hover mb-0">
     									<thead>
     										<tr>
@@ -276,36 +289,7 @@
     										</tr>
     									</thead>
     									<tbody id = "Channel-Member-Table">
-    										<!-- <tr>
-    											<td class="text-truncate">ReactJS App</td>
-    											<td class="text-truncate"><span class="tag tag-success">22 May 2011</span></td>
 
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Fitness App</td>
-    											<td class="text-truncate"><span class="tag tag-warning">11 May 2010</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">SOU plugin</td>
-    											<td class="text-truncate"><span class="tag tag-danger">13 June 2013</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Android App</td>
-    											<td class="text-truncate"><span class="tag tag-success">15 December 2014</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">ABC Inc. UI/UX</td>
-    											<td class="text-truncate"><span class="tag tag-warning">2 January 2011</span></td>
-
-    										</tr>
-    										<tr>
-    											<td class="text-truncate">Product UI</td>
-    											<td class="text-truncate"><span class="tag tag-danger">1 May 2016</span></td>
-
-    										</tr> -->
     									</tbody>
     								</table>
     							</div>
@@ -313,13 +297,58 @@
     					</div>
     				</div>
 
+            <!-- <div class="row"> -->
+      				<div class="col-xl-6 col-lg-12">
+      					<div class="card card-inverse box-shadow-0 card-outline-warning bg-white">
+      						<div class="card-header card-head-inverse bg-warning">
+      							<h4 class="card-title">Channel Message</h4>
+      							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+      							<div class="heading-elements">
+      								<ul class="list-inline mb-0">
+                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+      								</ul>
+      							</div>
+      						</div>
+                  <div class="card-body collapse in">
+                  <div class="table-responsive">
+      								<table class="table table-hover mb-0">
+      									<thead>
+      										<tr>
+      											<th>Channel</th>
+      											<th>Total Messages</th>
+
+      										</tr>
+      									</thead>
+      									<tbody id = "Channel-Message-Table">
+
+      									</tbody>
+      								</table>
+      							</div>
+      						</div>
+      					</div>
+      				</div>
+
             <div class="col-xl-12 col-lg-6 col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-block">
+                <div class="card card-inverse box-shadow-0 card-outline-primary bg-white">
+                  <div class="card-header card-head-inverse bg-primary">
+      							<h4 class="card-title">Stats</h4>
+
+      							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+      							<div class="heading-elements">
+      								<ul class="list-inline mb-0">
+                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+      								</ul>
+      							</div>
+      						</div>
+                  <div class="card-body collapse in">
+                  <div class="table-responsive">
+                    <!-- <div class="card-body"> -->
+                        <!-- <div class="card-block">
                             <h4 class="card-title">Stats</h4>
                             <p class="card-text">Some quick stats for Channels.</p>
-                        </div>
+                        </div> -->
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <span id = "TotalMessages" class="tag tag-default tag-pill bg-primary float-xs-right"></span> Total Messages
@@ -347,11 +376,13 @@
                 </div>
             </div>
 
+
+
             <!-- Bordered table start -->
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="card">
-                        <div class="card-header">
+                    <div class="card card-inverse box-shadow-0 card-outline-success bg-white">
+                        <div class="card-header card-head-inverse bg-success">
                             <h4 class="card-title">Channel Member Table</h4>
                             <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                             <div class="heading-elements">
@@ -364,9 +395,7 @@
                             </div>
                         </div>
                         <div class="card-body collapse in">
-                            <!-- <div class="card-block card-dashboard">
-                                <p class="card-text">Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p>
-                            </div> -->
+
                             <div class="table-responsive">
                                 <table class="table table-bordered mb-0">
                                     <thead>
@@ -377,26 +406,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id = "Channel-Memberlist-Table">
-                                        <!-- <tr>
 
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>Otto</td>
-                                            <td>@TwBootstrap</td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -406,85 +416,92 @@
             </div>
             <!-- Bordered table end -->
 
+            <div class="row">
+                <div class="col-xl-12 col-lg-6 col-md-12">
+                    <div class="card card-inverse box-shadow-0 card-outline-danger bg-white">
+                        <div class="card-header card-head-inverse bg-danger">
+                            <h4 class="card-title">Channel Message PieChart</h4>
+                            <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                            <div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                    <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                                    <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                                    <li><a data-action="close"><i class="icon-cross2"></i></a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <!-- <div class="card-body">
+                          <div class="card-block">
+                            <p class="m-0">This Pie Chart shows the division of messages of this team</p>
+                          </div>
+                          <div id="pieChartChannelMessage"></div>
+                        </div> -->
+
+                        <div class="card-body collapse in">
+
+                            <div class="table-responsive">
+                                <div id="pieChartChannelMessage"></div>
+                            </div>
+                        </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
 
             <div class="row">
-      				<div class="col-xl-6 col-lg-12">
-      					<div class="card">
-      						<div class="card-header">
-      							<h4 class="card-title">Current Channels</h4>
-      							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-      							<div class="heading-elements">
-      								<ul class="list-inline mb-0">
-      									<li><a data-action="reload"><i class="icon-reload"></i></a></li>
-      									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-      								</ul>
-      							</div>
-      						</div>
-      						<div class="card-body">
+                <div class="col-xs-12">
+                    <div class="card card-inverse box-shadow-0 card-outline-info bg-white">
+                        <div class="card-header card-head-inverse bg-info">
+                            <h4 class="card-title">Channel Member PieChart</h4>
+                            <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                            <div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                    <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                                    <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                                    <li><a data-action="close"><i class="icon-cross2"></i></a></li>
 
-      							<div class="table-responsive">
-      								<table class="table table-hover mb-0">
-      									<thead>
-      										<tr>
-      											<th>Channel</th>
-      											<th>Total Messages</th>
 
-      										</tr>
-      									</thead>
-      									<tbody id = "Channel-Message-Table">
-      										<!-- <tr>
-      											<td class="text-truncate">ReactJS App</td>
-      											<td class="text-truncate"><span class="tag tag-success">3000</span></td>
+                                </ul>
+                            </div>
 
-      										</tr>
-      										<tr>
-      											<td class="text-truncate">Fitness App</td>
-      											<td class="text-truncate"><span class="tag tag-warning">4000</span></td>
+                        </div>
+                        <div class="card-body collapse in">
 
-      										</tr>
-      										<tr>
-      											<td class="text-truncate">SOU plugin</td>
-      											<td class="text-truncate"><span class="tag tag-danger">5000</span></td>
+                            <div class="table-responsive">
+                                <div id="pieChartChannelMember"></div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      										</tr>
-      										<tr>
-      											<td class="text-truncate">Android App</td>
-      											<td class="text-truncate"><span class="tag tag-success">6000</span></td>
-
-      										</tr>
-      										<tr>
-      											<td class="text-truncate">ABC Inc. UI/UX</td>
-      											<td class="text-truncate"><span class="tag tag-warning">7000</span></td>
-
-      										</tr>
-      										<tr>
-      											<td class="text-truncate">Product UI</td>
-      											<td class="text-truncate"><span class="tag tag-danger">8000</span></td>
-
-      										</tr> -->
-      									</tbody>
-      								</table>
-      							</div>
-      						</div>
-      					</div>
-      				</div>
-
-              <div class="col-xl-8 col-lg-12">
-               <div class="card">
-                 <div class="card-header">
+              <div class="col-xs-12">
+               <div class="card card-inverse box-shadow-0 card-outline-info bg-white">
+                 <div class="card-header card-head-inverse bg-info">
                    <h4 class="card-title">Team Superstars</h4>
                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                    <div class="heading-elements">
                      <ul class="list-inline mb-0">
                        <li><a data-action="reload"><i class="icon-reload"></i></a></li>
                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                       <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                      <li><a data-action="close"><i class="icon-cross2"></i></a></li>
                      </ul>
                    </div>
                  </div>
-                 <div class="card-body">
+                 <!-- <div class="card-body">
                    <div class="card-block">
                      <p class="m-0">This table shows the most active members of this team</p>
-                   </div>
+                   </div> -->
+                   <div class="card-body collapse in">
                    <div class="table-responsive">
                      <table class="table table-hover mb-0">
                        <thead>
@@ -549,25 +566,16 @@
                    </div>
                  </div>
                </div>
+
              </div>
 
-              <!-- Selectable Tree -->
-              <!-- <div class="row"> -->
-
-
-
-
-    			<!-- </div> -->
-    			<!--/ projects table with monthly chart -->
-        </div>
-      <!-- </div> -->
     </div>
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
     <footer class="footer footer-static footer-light navbar-border">
-      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">SNA4SLACK - Group 3 </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
+      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2018 <a href="search-page.html" target="_blank" class="text-bold-800 grey darken-2">SNA4Slack </a>, All rights reserved. </span><a href="https://sway.com/FMHnrhMih9tsSB2F" target="_blank"><span class="float-md-right d-xs-block d-md-inline-block">Meet the Team</span></p>
     </footer>
+
 
     <!-- BEGIN VENDOR JS-->
     <!-- build:js app-assets/js/vendors.min.js-->
@@ -612,6 +620,7 @@
     <!-- END ROBUST JS-->
     <script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="../../../assets/js/getChannelMainMetrics.js" type="text/javascript"></script>
+
 	<!-- BEGIN PAGE LEVEL JS-->
     <script src="../../../app-assets/js/scripts/pages/dashboard-project.min.js" type="text/javascript"></script>
 
@@ -622,6 +631,15 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js"></script>
     <script src="pie_javascript.js"></script>
+
+    <!-- Channel Message Pie-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js"></script>
+    <script src="../../../assets/js/pie_javascript.js"></script>
+    <script src = "../../../assets/js/metrics_ChannelMessage.js"></script>
+    <script src = "../../../assets/js/metrics_ChannelMember.js"></script>
+    <!-- Channel Message Pie-->
     <!-- END PAGE LEVEL JS-->
 	<script type="text/javascript">
 		function googleTranslateElementInit() {

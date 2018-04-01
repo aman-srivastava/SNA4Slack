@@ -16,7 +16,7 @@ $.getScript('https://d3js.org/d3.v4.min.js', function() {
 				array.push(graph[j]['spark-sub-graph-inv'].children[i].messageSender);
 				array.push(graph[j]['spark-sub-graph-inv'].children[i].msgCount);
 				array.push(0);
-				if(graph[j]['spark-sub-graph-inv'].children[i].msgCount>40)
+				if(graph[j]['spark-sub-graph-inv'].children[i].msgCount>0)
 				data.push(array);
 			}
 		}

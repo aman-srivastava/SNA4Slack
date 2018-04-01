@@ -23,12 +23,7 @@ SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
 CHANNEL_NAME = "channelName"
 EDGE_WEIGHT_LABEL = "weight"
-CLOSENESS_CENTRALITY = "closeness_centrality"
 DEGREE_CENTRALITY = "degree_centrality"
-BETWEENNESS_CENTRALITY = "betweenness_centrality"
-GRAPH_DENSITY = "density"
-AVERAGE_CLUSTERING = "average_clustering"
-AVERAGE_CONNECTIVITY = "average_node_connectivity"
 USER_PROFILE_PIC = "senderAvatar"
 
 
@@ -71,7 +66,18 @@ class TreeGraph(object):
                 self.graph.node[node_id][USER_PROFILE_PIC] = row[
                     USER_PROFILE_PIC]
                 node_id += 1
+    def compute_degree_centrality(self):
+        if len(self.graph.nodes) == 1:
+        #this check is to ensure that zerodivision error is not thrown for single node
+            node_name = self.graph.nodes.keys()[0]
+            nx.set_node_attributes(self.graph, {node_name: 0},
+                                   DEGREE_CENTRALITY)
+            return
 
+        dc = nx.degree_centrality(self.graph)
+        nx.set_node_attributes(self.graph, dc, DEGREE_CENTRALITY)
+        logging.debug(
+            self.__class__.__name__ + ": Degree centrality computed.")
 
     def print_graph(self):
         print self.graph.nodes
@@ -92,8 +98,9 @@ def run():
     graph_gen = TreeGraph(team)
     print 'Graph done'
     graph_gen.print_graph()
+    graph_gen.compute_degree_centrality()
+    print 'Compute centrality'
     print graph_gen.json()
 
     with open('treedata.json', 'w') as outfile:
         outfile.write(str(graph_gen.json()))
-

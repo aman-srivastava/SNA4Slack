@@ -6,10 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>Channel Name - SNA4SLACK</title>
+    <meta name="description" content="SNA4Slack - Social Network Analysis & Visualizationfor Slack Teams">
+    <meta name="keywords" content="sna4slack, network, analysis">
+    <meta name="author" content="Aman Srivastava">
+    <title id = "ChannelName">SNA4Slack | Channel</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../../app-assets/images/ico/apple-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../../app-assets/images/ico/apple-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../../app-assets/images/ico/apple-icon-120.png">
@@ -78,7 +78,6 @@
           <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
             <ul class="nav navbar-nav">
               <li class="nav-item hidden-sm-down"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5"></i></a></li>
-              <li class="nav-item nav-search"><a href="#" class="nav-link nav-link-search fullscreen-search-btn"><i class="ficon icon-search7"></i></a></li>
               <li class="nav-item hidden-sm-down"><a href="#" class="nav-link nav-link-expand"><i class="ficon icon-expand2"></i></a></li>
 
             </ul>
@@ -136,14 +135,14 @@
       <!-- main menu content-->
       <div class="main-menu-content">
         <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
-          <li class=" nav-item active"><a href="Dashboard.html"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span></a>
+          <li class=" nav-item"><a href="Dashboard.html" id="dashboardPageLink"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span></a>
           </li>
 		  <li class=" navigation-header"><span data-i18n="nav.category.layouts">METRICS</span><i data-toggle="tooltip" data-placement="right" data-original-title="Metrics" class="icon-ellipsis icon-ellipsis"></i>
-          <li class=" nav-item"><a href="Teams.html"><i class="icon-users"></i><span data-i18n="nav.teams.main" class="menu-title">Team</span></a>
+          <li class=" nav-item"><a href="Teams.html" id="TeamsPageLink"><i class="icon-users"></i><span data-i18n="nav.teams.main" class="menu-title">Team</span></a>
           </li>
-          <li class=" nav-item"><a href="Channels.html"><i class="icon-slack"></i><span data-i18n="nav.channels.main" class="menu-title">Channels</span></a>
+          <li class=" nav-item active"><a href="ChannelMain.html" id="ChannelsPageLink"><i class="icon-slack"></i><span data-i18n="nav.channels.main" class="menu-title">Channels</span></a>
           </li>
-          <li class=" nav-item"><a href="Members.html"><i class="icon-user"></i><span data-i18n="nav.members.main" class="menu-title">Members</span></a>
+          <li class=" nav-item"><a href="MembersMain.html" id="MembersPageLink"><i class="icon-user"></i><span data-i18n="nav.members.main" class="menu-title">Members</span></a>
           </li>
 		  <li class=" navigation-header"><span data-i18n="nav.category.layouts">Team Summary</span><i data-toggle="tooltip" data-placement="right" data-original-title="Team Summary" class="icon-ellipsis icon-ellipsis"></i>
         </ul>
@@ -156,26 +155,26 @@
           <div class="insights">
             <div class="col-xs-12">
               <p>Name:</p>
-              <p>Kubernetes</p>
+              <p id="teamNameSidebar"></p>
             </div>
             <div class="col-xs-12">
               <p>URL:</p>
-              <p>kubernetes.slackarchive.io</p>
+              <a href="#" id="teamURLLink" target="_blank"><p id="teamURLTag"></p></a>
             </div>
 			<div class="col-xs-12">
-              <p>Channel Count:</p>
-              <p>201</p>
-            </div>
-            <div class="col-xs-12">
               <p>Member Count:</p>
-              <p>1,200</p>
+              <p  id="memberCount"></p>
             </div>
 			<div class="col-xs-12">
               <p>Conversation Count:</p>
-              <p>22,807</p>
+              <p  id="conversationCount"></p>
+            </div>
+			<div class="col-xs-12">
+              <p>Channel Count:</p>
+              <p id="channelCount"></p>
             </div>
           </div>
-          <div class="actions"><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Settings"><span aria-hidden="true" class="icon-cog3"></span></a><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Lock"><span aria-hidden="true" class="icon-lock4"></span></a><a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Logout"><span aria-hidden="true" class="icon-power3"></span></a></div>
+          <div class="actions"><a href="" class="footer-toggle" data-placement="top" data-toggle="tooltip" data-original-title="Hide"><span aria-hidden="true" class="icon-toggle2"></span></a><a href="search-page.html" data-placement="top" data-toggle="tooltip" data-original-title="Change Team"><span aria-hidden="true" class="icon-list"></span></a><a href="search-page.html" data-placement="top" data-toggle="tooltip" data-original-title="Logout"><span aria-hidden="true" class="icon-power3"></span></a></div>
         </div>
       </div>
       <!-- main menu footer-->
@@ -187,31 +186,23 @@
         <div class="content-header row">
 
         </div>
+
         <div class="content-body"><!-- Description -->
+          <div class="row">
+              <h4 id="HeaderChannelIndividual"></h4>
+              <hr/>
+
+          </div>
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="card">
-						<div class="card-header">
-							<h4 class="card-title">Team Name | Channel Name</h4>
-							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-							<div class="heading-elements">
-								<ul class="list-inline mb-0">
-									<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-									<li><a data-action="reload"><i class="icon-reload"></i></a></li>
-									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-									<li><a data-action="close"><i class="icon-cross2"></i></a></li>
-								</ul>
-							</div>
-						</div>
 
-				</div>
 			</div>
       <div class="row">
           <div class="col-xs-12">
-              <div class="card bg-gradient-x-pink">
+              <div class="card bg-info card-outline-black">
                   <div class="card-body">
                       <div class="row">
-                          <div class="col-lg-6 col-sm-12 border-right-pink border-right-lighten-3">
+                          <div class="col-lg-6 col-sm-12 border-right-black border-right-lighten-3">
                               <div class="card-block text-xs-center">
                                   <h1 class="display-4 white" id = "TotalMessagesPerChannel"></h1>
                                   <span class="white">Messages</span>
@@ -223,18 +214,7 @@
                                   <span class="white">Members</span>
                               </div>
                           </div>
-                          <!-- <div class="col-lg-3 col-sm-12 border-right-pink border-right-lighten-3">
-                              <div class="card-block text-xs-center">
-                                  <h1 class="display-4 white"><i class="icon-bulb font-large-2"></i> 61</h1>
-                                  <span class="white">URLs</span>
-                              </div>
-                          </div>
-                          <div class="col-lg-3 col-sm-12">
-                              <div class="card-block text-xs-center">
-                                  <h1 class="display-4 white"><i class="icon-bulb font-large-2"></i> 687</h1>
-                                  <span class="white">Emoticons</span>
-                              </div>
-                          </div> -->
+
                       </div>
                   </div>
               </div>
@@ -244,9 +224,9 @@
       <!-- Table head options start -->
 <div class="row">
     <div class="col-xs-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Channel Info</h4>
+        <div class="card card-inverse box-shadow-0 card-outline-danger bg-white">
+            <div class="card-header card-head-inverse bg-danger">
+                <h4 class="card-title">Channel Message Table</h4>
                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                 <div class="heading-elements">
                     <ul class="list-inline mb-0">
@@ -262,8 +242,8 @@
                     <p>User Message table per channel</p>
                 </div>
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead class="thead-inverse">
+                    <table class="table table-bordered mb-0">
+                        <thead>
                             <tr>
                                 <th>Username</th>
                                 <th>Messages</th>
@@ -271,34 +251,40 @@
                             </tr>
                         </thead>
                         <tbody id = "Message-Per-Member-per-Channel">
-                            <!-- <tr>
-                                <td>Mark</td>
-                                <td>333</td>
 
-                            </tr>
-                            <tr>
-                                <td>Otto</td>
-                                <td>589</td>
-
-                            </tr>
-                            <tr>
-                                <td>Fiedel</td>
-                                <td>289</td>
-
-                            </tr> -->
                         </tbody>
                     </table>
 
                     </div>
                 </div>
 
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card card-inverse box-shadow-0 card-outline-success bg-white">
+                <div class="card-header card-head-inverse bg-success">
+                    <h4 class="card-title">Channel Mention Table</h4>
+                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                            <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                            <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                            <li><a data-action="close"><i class="icon-cross2"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="card-body collapse in">
                     <div class="card-block card-dashboard">
                         <p>User Mention Table per channel</p>
                     </div>
                     <div class="table-responsive">
                         <table class="table">
-                            <thead class="thead-inverse">
+                            <thead>
                                 <tr>
                                     <th>Username</th>
                                     <th>Mentions</th>
@@ -326,15 +312,20 @@
 
                         </div>
                     </div>
+
+
+                </div>
             </div>
         </div>
-    </div>
 </div>
+
+
+
 
 <!-- Table head options end -->
       <div class="row">
-          <div class="col-xl-4 col-lg-6 col-md-12">
-              <div class="card">
+          <div class="col-xl-6 col-lg-6 col-md-12">
+              <div class="card card-outline-danger bg-white">
                   <div class="card-body">
                       <div class="card-block text-xs-center">
                           <div class="card-header mb-2">
@@ -357,8 +348,8 @@
                   </div>
               </div>
           </div>
-          <div class="col-xl-4 col-lg-12 col-md-12">
-              <div class="card">
+          <div class="col-xl-6 col-lg-12 col-md-12">
+              <div class="card card-outline-success bg-white">
                   <div class="card-body">
                       <div class="card-block">
                           <div class="media">
@@ -374,7 +365,7 @@
                       </div>
                   </div>
               </div>
-              <div class="card">
+              <div class="card card-outline-deep-orange bg-white">
                   <div class="card-body">
                       <div class="card-block">
                           <div class="media">
@@ -386,11 +377,11 @@
                                   <i class="icon-banknote deep-orange font-large-2 float-xs-right"></i>
                               </div>
                           </div>
-                          <progress class="progress progress-sm progress-deep-orange mt-1 mb-0" value="35" max="100"></progress>
+                          <progress class="progress progress-sm progress-deep-orange mt-1 mb-0" value="15" max="100"></progress>
                       </div>
                   </div>
               </div>
-              <div class="card">
+              <div class="card card-outline-info bg-white">
                   <div class="card-body">
                       <div class="card-block">
                           <div class="media">
@@ -414,10 +405,8 @@
       </div>
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
-
-
     <footer class="footer footer-static footer-light navbar-border">
-      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">SNA4SLACK Group 3 </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
+      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2018 <a href="search-page.html" target="_blank" class="text-bold-800 grey darken-2">SNA4Slack </a>, All rights reserved. </span><a href="https://sway.com/FMHnrhMih9tsSB2F" target="_blank"><span class="float-md-right d-xs-block d-md-inline-block">Meet the Team</span></p>
     </footer>
 
     <!-- BEGIN VENDOR JS-->
