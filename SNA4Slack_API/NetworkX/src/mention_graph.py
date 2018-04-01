@@ -30,6 +30,7 @@ AVERAGE_CONNECTIVITY = "average_connectivity"
 USER_PROFILE_PIC = "senderAvatar"
 CHANNEL_NAME = "channelName"
 MENTION_COUNT = "mention_count"
+BEST_FRIEND = "best_friend"
 
 
 # Initializing logger
@@ -139,6 +140,22 @@ class MentionGraph(object):
         except Exception as e:
             self.graph.graph[AVERAGE_CLUSTERING] = 0
 
+    def compute_friends(self):
+        self.friend_lists = {}
+        for ed in self.graph.edges:
+            print str(ed) + " " + str(
+                self.graph[ed[0]][ed[1]][EDGE_WEIGHT_LABEL])
+            if ed[0] in self.friend_lists.keys():
+                weight = self.graph[ed[0]][ed[1]][EDGE_WEIGHT_LABEL]
+                if weight > self.friend_lists[ed[0]][1]:
+                    self.friend_lists[ed[0]] = (ed[1], weight)
+            else:
+                self.friend_lists[ed[0]] = (ed[1], weight)
+        for item in self.friend_lists.items():
+            self.graph.node[item[0]][BEST_FRIEND] = item[1][0]
+
+
+
     def json(self):
         return json_graph.node_link_data(self.graph)
 
@@ -158,11 +175,15 @@ def run():
     graph_gen.compute_avg_connectivity()
     print 'Compute connectivity'
     # graph_gen.compute_avg_clustering()
-    print 'Compute clustering'
+    # print 'Compute clustering'
 
     # graph_gen.print_graph()
-    print graph_gen.json()
+    #print graph_gen.json()
+
+    graph_gen.compute_friends()
     # with open('data.json', 'w') as outfile:
     # json.dumps(graph_gen.json(), outfile)
     #   outfile.write(graph_gen.json())
     graph_gen.draw_graph()
+
+run()
