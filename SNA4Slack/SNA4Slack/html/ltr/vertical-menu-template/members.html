@@ -347,11 +347,35 @@
               <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                   <div class="heading-elements">
                 <ul class="list-inline mb-0">
+                  <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#messagePerMemberPerChannel"><i class="icon-info black"></i> Help</button>
                   <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
                   <li><a data-action="reload"><i class="icon-reload"></i></a></li>
                   <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
                   <li><a data-action="close"><i class="icon-cross2"></i></a></li>
                 </ul>
+              </div>
+            </div>
+            <div class="modal fade text-xs-left" id="messagePerMemberPerChannel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header card-head-inverse bg-info">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Messages Per Channel Per Member</h4>
+                </div>
+                <div class="modal-body">
+                <h5><i class="icon-arrow-right-c"></i> About</h5>
+                <p>This component shows the number of messages per member for each channel.</p>
+                <hr>
+                <div class="alert alert-success" role="alert">
+                  <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+                </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+                </div>
+              </div>
               </div>
             </div>
             <div class="card-body collapse in">
@@ -385,9 +409,37 @@
             <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
             <div class="heading-elements">
               <ul class="list-inline mb-0">
+                <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#messagePerMemberPerChannelPie"><i class="icon-info black"></i> Help</button>
                 <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
                 <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
               </ul>
+            </div>
+          </div>
+
+          <div class="modal fade text-xs-left" id="messagePerMemberPerChannelPie" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header card-head-inverse bg-success">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Messages per Member per Channel</h4>
+              </div>
+              <div class="modal-body">
+              <h5><i class="icon-arrow-right-c"></i> About</h5>
+              <p>This Pie Chart shows the percentage/sectional distribution of the number of messages per member per channel.</p>
+              <hr>
+              <h5><i class="icon-lightbulb-o"></i> How to use this chsrt?</h5>
+              <p>1. Use the mouse-pointer to hover over any part of the pie chart.</p>
+              <p>2. The selected part will be highlighted in a different color.</p><hr>
+              <div class="alert alert-success" role="alert">
+                <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+              </div>
+              </div>
+              <div class="modal-footer">
+              <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+              </div>
+            </div>
             </div>
           </div>
 
