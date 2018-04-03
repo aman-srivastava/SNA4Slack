@@ -230,12 +230,36 @@
                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                 <div class="heading-elements">
                     <ul class="list-inline mb-0">
+                      <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#channelMessageTable"><i class="icon-info black"></i> Help</button>
                         <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
                         <li><a data-action="reload"><i class="icon-reload"></i></a></li>
                         <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
                         <li><a data-action="close"><i class="icon-cross2"></i></a></li>
                     </ul>
                 </div>
+            </div>
+            <div class="modal fade text-xs-left" id="channelMessageTable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header card-head-inverse bg-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Channel Message Table</h4>
+                </div>
+                <div class="modal-body">
+                <h5><i class="icon-arrow-right-c"></i> About</h5>
+                <p>This table shows the number of messages for each user in this channel.</p>
+                <hr>
+                <div class="alert alert-success" role="alert">
+                  <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+                </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              </div>
             </div>
             <div class="card-body collapse in">
                 <div class="card-block card-dashboard">
@@ -271,12 +295,37 @@
                     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
+                          <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#channelMentionTable"><i class="icon-info black"></i> Help</button>
                             <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
                             <li><a data-action="reload"><i class="icon-reload"></i></a></li>
                             <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
                             <li><a data-action="close"><i class="icon-cross2"></i></a></li>
                         </ul>
                     </div>
+                </div>
+
+                <div class="modal fade text-xs-left" id="channelMentionTable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header card-head-inverse bg-success">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Channel Mention Table</h4>
+                    </div>
+                    <div class="modal-body">
+                    <h5><i class="icon-arrow-right-c"></i> About</h5>
+                    <p>This table shows the number of mentions for each user in this channel.</p>
+                    <hr>
+                    <div class="alert alert-success" role="alert">
+                      <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  </div>
                 </div>
                 <div class="card-body collapse in">
                     <div class="card-block card-dashboard">
@@ -327,7 +376,32 @@
           <div class="col-xl-6 col-lg-6 col-md-12">
               <div class="card card-outline-danger bg-white">
                   <div class="card-body">
+                    <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#messageStats"><i class="icon-info black"></i> Help</button>
                       <div class="card-block text-xs-center">
+                        <div class="modal fade text-xs-left" id="messageStats" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header card-head-inverse bg-danger">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Message Stats</h4>
+                            </div>
+                            <div class="modal-body">
+                            <h5><i class="icon-arrow-right-c"></i> About</h5>
+                            <p>This table shows the total number of messages for the channel.<br/>Max Messages is the Maximum Number of messages by a user in the channel.<br/>
+                              Least Messages is the Least Number of messages by a user in the channel. </p>
+                            <hr>
+                            <div class="alert alert-success" role="alert">
+                              <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
                           <div class="card-header mb-2">
                               <span class="success darken-1">Total Messages</span>
                               <h3 class="font-large-2 grey darken-1 text-bold-200" id = "TotalMessagesPerChannelSplit"></h3>
@@ -350,7 +424,31 @@
           </div>
           <div class="col-xl-6 col-lg-12 col-md-12">
               <div class="card card-outline-success bg-white">
+                <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#mostActiveMember"><i class="icon-info black"></i> Help</button>
                   <div class="card-body">
+                    <div class="modal fade text-xs-left" id="mostActiveMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header card-head-inverse bg-success">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Most Active Member</h4>
+                        </div>
+                        <div class="modal-body">
+                        <h5><i class="icon-arrow-right-c"></i> About</h5>
+                        <p>This component shows the most active member of the channel, in terms of the number of messages.</p>
+                        <hr>
+                        <div class="alert alert-success" role="alert">
+                          <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
                       <div class="card-block">
                           <div class="media">
                               <div class="media-body text-xs-left">
@@ -367,7 +465,31 @@
               </div>
               <div class="card card-outline-deep-orange bg-white">
                   <div class="card-body">
+                    <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#leastActiveMember"><i class="icon-info black"></i> Help</button>
                       <div class="card-block">
+                        <div class="modal fade text-xs-left" id="leastActiveMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header card-head-inverse bg-deep-orange">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Least Active Member</h4>
+                            </div>
+                            <div class="modal-body">
+                            <h5><i class="icon-arrow-right-c"></i> About</h5>
+                            <p>This component shows the least active member of the channel, in terms of the number of messages.</p>
+                            <hr>
+                            <div class="alert alert-success" role="alert">
+                              <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
                           <div class="media">
                               <div class="media-body text-xs-left">
                                   <h3 class="deep-orange" id="LeastActiveMember"></h3>
@@ -383,7 +505,31 @@
               </div>
               <div class="card card-outline-info bg-white">
                   <div class="card-body">
+                    <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#mostMentions"><i class="icon-info black"></i> Help</button>
                       <div class="card-block">
+                        <div class="modal fade text-xs-left" id="mostMentions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header card-head-inverse bg-info">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Most mentions</h4>
+                            </div>
+                            <div class="modal-body">
+                            <h5><i class="icon-arrow-right-c"></i> About</h5>
+                            <p>This component shows the member with the most number of mentions for this channel.</p>
+                            <hr>
+                            <div class="alert alert-success" role="alert">
+                              <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
                           <div class="media">
                               <div class="media-body text-xs-left">
                                   <h3 class="info">snarang2</h3>
