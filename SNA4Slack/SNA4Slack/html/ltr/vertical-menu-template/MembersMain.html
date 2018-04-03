@@ -201,9 +201,37 @@
                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                 <div class="heading-elements">
                   <ul class="list-inline mb-0">
+                    <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#individualMemberView"><i class="icon-info black"></i> Help</button>
                     <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
                     <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
                   </ul>
+                </div>
+              </div>
+
+              <div class="modal fade text-xs-left" id="individualMemberView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header card-head-inverse bg-danger">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Individual Member View</h4>
+                  </div>
+                  <div class="modal-body">
+                  <h5><i class="icon-arrow-right-c"></i> About</h5>
+                  <p>This component redirects to a new page, which consists of individual metrics for each member.</p>
+                  <hr>
+                  <h5><i class="icon-lightbulb-o"></i> How to use this component?</h5>
+                  <p>1. Click anywhere on the input field.</p>
+                  <p>2. Select the member for which you want to see the metrics.</p><hr>
+                  <div class="alert alert-success" role="alert">
+                    <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+                  </div>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
                 </div>
               </div>
 
@@ -298,7 +326,7 @@
           <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
           <div class="heading-elements">
             <ul class="list-inline mb-0">
-
+              <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#memberMessageBarGraph"><i class="icon-info black"></i> Help</button>
               <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
               <li><a data-action="reload"><i class="icon-reload"></i></a></li>
               <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
@@ -306,6 +334,34 @@
             </ul>
           </div>
         </div>
+
+        <div class="modal fade text-xs-left" id="memberMessageBarGraph" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header card-head-inverse bg-danger">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Member Message Bar Graph</h4>
+            </div>
+            <div class="modal-body">
+            <h5><i class="icon-arrow-right-c"></i> About</h5>
+            <p>This graph shows the total number of messages for each member in the team.</p>
+            <hr>
+            <h5><i class="icon-lightbulb-o"></i> How to use this graph?</h5>
+            <p>1. Hover over any bar in the graph.</p>
+            <p>2. You will be able to see the member name and the total number of messages for that member.</p><hr>
+            <div class="alert alert-success" role="alert">
+              <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+            </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          </div>
+        </div>
+
         <div class="card-body collapse in">
           <div class="card-block">
 
@@ -324,7 +380,7 @@
           <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
           <div class="heading-elements">
             <ul class="list-inline mb-0">
-
+              <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#mostActiveHourGraph"><i class="icon-info black"></i> Help</button>
               <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
               <li><a data-action="reload"><i class="icon-reload"></i></a></li>
               <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
@@ -332,6 +388,34 @@
             </ul>
           </div>
         </div>
+
+        <div class="modal fade text-xs-left" id="mostActiveHourGraph" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header card-head-inverse bg-success">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Most Active Hour Bar Graph</h4>
+            </div>
+            <div class="modal-body">
+            <h5><i class="icon-arrow-right-c"></i> About</h5>
+            <p>This graph shows the most active hour of the team, in terms of the total number of messages per hour.</p>
+            <hr>
+            <h5><i class="icon-lightbulb-o"></i> How to use this graph?</h5>
+            <p>1. Hover over any bar in the graph.</p>
+            <p>2. You will be able to see the hour and the total number of messages for that hour.</p><hr>
+            <div class="alert alert-success" role="alert">
+              <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+            </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          </div>
+        </div>
+
         <div class="card-body collapse in">
           <div class="card-block">
 
@@ -351,6 +435,7 @@
                           <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                           <div class="heading-elements">
                               <ul class="list-inline mb-0">
+                                <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#memberFirstMessage"><i class="icon-info black"></i> Help</button>
                                   <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
                                   <li><a data-action="reload"><i class="icon-reload"></i></a></li>
                                   <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
@@ -358,6 +443,31 @@
                               </ul>
                           </div>
                       </div>
+
+                      <div class="modal fade text-xs-left" id="memberFirstMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header card-head-inverse bg-primary">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                          <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Member First Message Table</h4>
+                          </div>
+                          <div class="modal-body">
+                          <h5><i class="icon-arrow-right-c"></i> About</h5>
+                          <p>This table shows the time stamp of the first message for each member of the team.</p>
+                          <hr>
+                          <div class="alert alert-success" role="alert">
+                            <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+                          </div>
+                          </div>
+                          <div class="modal-footer">
+                          <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+
                       <div class="card-body collapse in">
                           <div class="card-block card-dashboard">
                               <p>Table to display basic information for all members of the team.</p>
@@ -393,6 +503,7 @@
                   <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                   <div class="heading-elements">
                       <ul class="list-inline mb-0">
+                          <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#memberLastActive"><i class="icon-info black"></i> Help</button>
                           <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
                           <li><a data-action="reload"><i class="icon-reload"></i></a></li>
                           <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
@@ -400,6 +511,31 @@
                       </ul>
                   </div>
               </div>
+
+              <div class="modal fade text-xs-left" id="memberLastActive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header card-head-inverse bg-danger">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Member Last Active Table</h4>
+                  </div>
+                  <div class="modal-body">
+                  <h5><i class="icon-arrow-right-c"></i> About</h5>
+                  <p>This table shows the time stamp of the last message for each member of the team.</p>
+                  <hr>
+                  <div class="alert alert-success" role="alert">
+                    <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+                  </div>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                </div>
+              </div>
+
               <div class="card-body collapse in">
                   <div class="card-block card-dashboard">
                       <p class="card-text">Table to display basic member info .</p>
@@ -445,6 +581,7 @@
           				<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                   		<div class="heading-elements">
           					<ul class="list-inline mb-0">
+                      <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-backdrop="false" data-target="#messagesPerYear"><i class="icon-info black"></i> Help</button>
           						<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
           						<li><a data-action="reload"><i class="icon-reload"></i></a></li>
           						<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
@@ -452,6 +589,31 @@
           					</ul>
           				</div>
           			</div>
+
+                <div class="modal fade text-xs-left" id="messagesPerYear" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header card-head-inverse bg-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Member Last Active Table</h4>
+                    </div>
+                    <div class="modal-body">
+                    <h5><i class="icon-arrow-right-c"></i> About</h5>
+                    <p>This component shows the distribution of the messages for each year in which the slack team has existed.</p>
+                    <hr>
+                    <div class="alert alert-success" role="alert">
+                      <span class="text-bold-600">Thank you!</span> You successfully read this important  message.
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn grey btn-outline-success" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
           			<div class="card-body collapse in">
           				<div class="card-block">
           					<p>Count of total messages by all members per year.</p>
@@ -565,7 +727,7 @@
     <script src="../../../app-assets/js/scripts/pages/dashboard-project.min.js" type="text/javascript"></script>
 
     <script src="../../../assets/js/getMembersMainMetrics.js" type="text/javascript"></script>
-    
+
 
     <script src="../../../app-assets/js/scripts/popover/popover.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
