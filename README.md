@@ -1,6 +1,32 @@
 # SNA4Slack
 Social Network Analysis and Visualization for Slack Teams
 
+# Install application using Docker Image
+## Install the front end:
+
+*Pull the public image from dockerhub with command:
+```
+docker pull ishandikshit/sna4slack_frontend:poc
+```
+* Run the image:
+```
+docker run --name sna4slack -p 80:80 -d ishandikshit/sna4slack_frontend:poc
+```
+* Navigate to http://localhost/SNA4Slack/html/ltr/vertical-menu-template/search-page.html
+
+## Install the backend APIs 
+* Pull the public image from dockerhub with command:
+```
+docker pull ishandikshit/sna4slack_backend:v1
+```
+* Run the image:
+```
+docker run --name sna4slackAPI -p 4000:80 -d ishandikshit/sna4slack_backend:v1
+```
+* cURL to http://localhost:4000/ to make REST requests
+* Open http://localhost:4000/apidocs/#/ for Swagger UI of all APIs
+
+
 # Slack-Spyder Installation (Crawler)
 * Clone the repository
 ```
