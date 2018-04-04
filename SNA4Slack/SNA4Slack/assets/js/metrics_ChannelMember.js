@@ -62,8 +62,8 @@ $( document ).ready(function() {
     },
     "size": {
         "canvasHeight": 400,
-        "canvasWidth": 590,
-        "pieOuterRadius": "88%"
+        "canvasWidth": 470,
+        "pieOuterRadius": "70%"
     },
     "data": {
         "content": contents
@@ -95,6 +95,16 @@ $( document ).ready(function() {
         "truncation": {
             "enabled": true
         }
+    },
+    "misc": {
+  		"colors": {
+  			"segmentStroke": "#222222"
+  		},
+  		"gradient": {
+  			"enabled": true,
+  			"percentage": 0,
+  			"color": "#0AABD3"
+  		},
     },
     "effects": {
         "pullOutSegmentOnClick": {

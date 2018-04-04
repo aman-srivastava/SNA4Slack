@@ -45,11 +45,11 @@ $( document ).ready(function() {
 		"title": {
 			"text": "Channels",
 			"color": "#000000",
-			"fontSize": 50
+			"fontSize": 30
 		},
 		"subtitle": {
 			"text": "Total Messages",
-			"color": "#b80000"
+			"color": "black"
 		},
 		"location": "pie-center",
 		"titleSubtitlePadding": 3
@@ -62,8 +62,9 @@ $( document ).ready(function() {
 		"location": "bottom-left"
 	},
 	"size": {
-		"canvasWidth": 590,
-		"pieOuterRadius": "83%"
+		"canvasWidth": 470,
+		"canvasHeight": 400,
+		"pieOuterRadius": "70%"
 	},
 	"data": {
 		"sortOrder": "label-desc",
@@ -112,8 +113,8 @@ $( document ).ready(function() {
 		},
 		"gradient": {
 			"enabled": true,
-			"percentage": 47,
-			"color": "#a0123d"
+			"percentage": 0,
+			"color": "#d74338"
 		},
 		"pieCenterOffset": {
 			"x": 15,
