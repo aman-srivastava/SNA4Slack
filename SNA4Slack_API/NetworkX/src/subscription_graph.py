@@ -30,6 +30,7 @@ GRAPH_DENSITY = "density"
 AVERAGE_CLUSTERING = "average_clustering"
 AVERAGE_CONNECTIVITY = "average_node_connectivity"
 USER_PROFILE_PIC = "senderAvatar"
+BEST_FRIEND = "best_friend"
 
 
 # Initializing logger
@@ -134,6 +135,20 @@ class SubscriptionGraph(object):
             logging.debug(self.__class__.__name__ + ": Clustering computed.")
         except Exception as e:
             self.graph.graph[AVERAGE_CLUSTERING] = 0
+
+    def compute_friends(self):
+        self.friend_lists = {}
+        for ed in self.graph.edges:
+            print str(ed) + " " + str(
+                self.graph[ed[0]][ed[1]][EDGE_WEIGHT_LABEL])
+            if ed[0] in self.friend_lists.keys():
+                weight = self.graph[ed[0]][ed[1]][EDGE_WEIGHT_LABEL]
+                if weight > self.friend_lists[ed[0]][1]:
+                    self.friend_lists[ed[0]] = (ed[1], weight)
+            else:
+                self.friend_lists[ed[0]] = (ed[1], weight)
+        for item in self.friend_lists.items():
+            self.graph.node[item[0]][BEST_FRIEND] = item[1][0]
 
     def json(self):
         return json_graph.node_link_data(self.graph)
