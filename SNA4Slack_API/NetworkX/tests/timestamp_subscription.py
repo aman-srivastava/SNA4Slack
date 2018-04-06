@@ -46,11 +46,11 @@ class subscriptionGraph(object):
                 self.graph[val][self.graph.node][MESSAGE_TIMESTAMP] += 1;
                 
     def team_members(self):
-        self.user_list = {}
+        self.user_lists = {}
         for member in self.graph.members:
             ind = 0
-            self.graph[member[ind]][EDGE_WEIGHT_LABEL])
-            self.user_lists[member[ind] = (member[ind], weight)
+            self.graph([member[ind]][EDGE_WEIGHT_LABEL])
+            self.user_lists[member[ind]] = (member[ind], weight)
         for entry in self.user_lists.items():
             self.graph.node[entry[0]] = entry[0]
     
@@ -67,7 +67,7 @@ class subscriptionGraph(object):
                               EDGE_WEIGHT_LABEL] += 1
                       else:
                           self.graph.add_edge(row[SENDER_COLUMN], user,
-                                              weight=1
+                                              weight=1)
             tsvalues = SlackArchive.objects.filter(timeStamp=self.timeStamp)
             for row in instances:
                 self.graph.add_node(row[SENDER_COLUMN])
