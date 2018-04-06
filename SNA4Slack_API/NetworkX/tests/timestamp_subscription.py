@@ -44,6 +44,15 @@ class subscriptionGraph(object):
         for val in tsvalues:
             if self.graph.has_node(val):
                 self.graph[val][self.graph.node][MESSAGE_TIMESTAMP] += 1;
+                
+    def team_members(self):
+        self.user_list = {}
+        for member in self.graph.members:
+            ind = 0
+            self.graph[member[ind]][EDGE_WEIGHT_LABEL])
+            self.user_lists[member[ind] = (member[ind], weight)
+        for entry in self.user_lists.items():
+            self.graph.node[entry[0]] = entry[0]
     
     def build_user_nodes(self):
         try:
@@ -81,9 +90,10 @@ class subscriptionGraph(object):
 
 
 def run():
-    graph_gen = subscriptionGraph("single_node",
+    graph_gen = subscriptionGraph("star_graph",
                              directed=False)
     print("generated the graph")
+    graph_gen.team_members()
 
     graph_gen.print_graph()
     print graph_gen.json()
