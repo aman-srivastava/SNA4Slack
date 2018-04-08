@@ -40,61 +40,42 @@ $( document ).ready(function() {
     console.log(contents)
 
     var pie = new d3pie("pieChartChannelMember", {
-    "header": {
-        "title": {
-            "text": "Members Per Channel",
-            "fontSize": 22,
-            "font": "verdana"
-        },
-        "subtitle": {
-            "text": "Number of Members per Channel",
-            "color": "#999999",
-            "fontSize": 10,
-            "font": "verdana"
-        },
-        "titleSubtitlePadding": 12
-    },
-    "footer": {
-        "color": "#999999",
-        "fontSize": 11,
-        "font": "open sans",
-        "location": "bottom-center"
-    },
+    
     "size": {
         "canvasHeight": 400,
         "canvasWidth": 470,
-        "pieOuterRadius": "70%"
+        "pieOuterRadius": "80%"
     },
     "data": {
         "content": contents
 
     },
     "labels": {
-        "outer": {
-            "pieDistance": 32
-        },
-        "inner": {
-            "format": "value"
-        },
-        "mainLabel": {
-            "font": "verdana"
-        },
-        "percentage": {
-            "color": "#e1e1e1",
-            "font": "verdana",
-            "decimalPlaces": 0
-        },
-        "value": {
-            "color": "#e1e1e1",
-            "font": "verdana"
-        },
-        "lines": {
-            "enabled": true,
-            "color": "#cccccc"
-        },
-        "truncation": {
-            "enabled": true
-        }
+		"outer": {
+			"format": "label-percentage2"
+		},
+		"inner": {
+			"format": "value"
+		},
+		"mainLabel": {
+			"color": "#000000",
+			"fontSize": 12
+		},
+		"percentage": {
+			"color": "#999999",
+			"fontSize": 12,
+			"decimalPlaces": 1
+		},
+		"value": {
+			"color": "#e1e1e1",
+			"font": "verdana"
+		},
+		"lines": {
+			"enabled": true
+		},
+		"truncation": {
+			"enabled": true
+		}
     },
     "misc": {
   		"colors": {
