@@ -41,14 +41,37 @@ $( document ).ready(function() {
 		 url: "https://api.mlab.com/api/1/databases/sna4slack/collections/"+teamName+"?apiKey=dPpfbNvB6jRs-hvv-Veb1uVkXnX06Maa",
 		 type: 'GET',
          success: function (data) {
+			var friendData;
+			for(var j = 0 ; j<data.length ; j++){
+				if(data[j]['directed-mention-graph']!=null){
+					friendData = data[j]['directed-mention-graph'];
+				}
+			}
 			for(var j = 0 ; j<data.length ; j++){
 				if(data[j]['dataAnalytics']!=null){
 					data = data[j]['dataAnalytics'];
-				};
+				}
 			}
+			var mentionCount = 0;
+			document.getElementById("mMentions").innerHTML = mentionCount;
+			for(var j = 0 ; j<friendData.nodes.length ; j++){
+				console.log(friendData.nodes[j].id);
+				if(friendData.nodes[j].id===memberName)
+				{
+					document.getElementById("memberAvatar").src = friendData.nodes[j].senderAvatar;
+					if(friendData.nodes[j].mention_count.length==0)
+						document.getElementById("mMentions").innerHTML = mentionCount;
+					else{
+						document.getElementById("mMentions").innerHTML = Object.values(friendData.nodes[j].mention_count).reduce(function(a, b) { return a + b; }, 0);
+					}
+				}
+				
+			}
+			document.getElementById("memberNameHeader").innerHTML = "@"+memberName;
+
       //var memberName = 'carsten'
 			console.log(data);
-
+			console.log(friendData);
 			document.getElementById("teamNameSidebar").innerHTML = teamName;
 			document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
 			document.getElementById("teamURLLink").href = "http://"+teamName+".slackarchive.io";
@@ -88,6 +111,7 @@ $( document ).ready(function() {
 
 			document.getElementById("NumberOfChannels").innerHTML = memberChannels.length;
       console.log('Number of channels part of: '+memberChannels.length)
+			document.getElementById("mChannels").innerHTML = memberChannels.length;
 
       console.log('---------------------------------------')
 
@@ -117,6 +141,7 @@ $( document ).ready(function() {
 
 			document.getElementById("TotalMessagesByMember").innerHTML = totalMessagesByMember;
       console.log('Total Messages by Member: '+totalMessagesByMember)
+			document.getElementById("mMessages").innerHTML = totalMessagesByMember;
 
       console.log('---------------------------------------')
 
