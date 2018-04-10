@@ -23,7 +23,7 @@ class TestClass(object):
                 self.graph_builder.graph.nodes[node]["degree_centrality"],
                 5) == \
                    round(TEST_DATA["degree_centrality"][node], 5)
-'''
+
     def test_betweeness_centrality(self):
         self.graph_builder.compute_betweenness_centrality()
         for node in TEST_DATA["betweenness_centrality"].keys():
@@ -54,4 +54,4 @@ class TestClass(object):
         self.graph_builder.compute_density()
         assert round(self.graph_builder.graph.graph[
                          "density"], 5) == \
-               round(TEST_DATA["density"], 5)'''
+               round(TEST_DATA["density"], 5)

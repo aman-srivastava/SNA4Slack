@@ -29,7 +29,7 @@ $( document ).ready(function() {
 				};
 			}
 
-			console.log(data);
+			//console.log(data);
 
 			document.getElementById("teamNameSidebar").innerHTML = teamName;
 			document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
@@ -74,8 +74,8 @@ $( document ).ready(function() {
 			var z = window.location.href
 
 			var a = z.replace("ChannelMain", "channels");
-			console.log(this.selectedIndex)
-			console.log(this.options[this.selectedIndex].value)
+			//console.log(this.selectedIndex)
+			//console.log(this.options[this.selectedIndex].value)
 			a = a + "!channelName="+this.options[this.selectedIndex].value
 			// console.log(a)
 			// console.log(this.options[this.selectedIndex].value)
@@ -102,20 +102,20 @@ $( document ).ready(function() {
       }
       for(var i in channelsDateMap) {
         if (channelsDateMap.hasOwnProperty(i)) {
-          console.log('Channel is: ' + i + ' --- ' +'First Message is on ' + channelsDateMap[i]);
+          //console.log('Channel is: ' + i + ' --- ' +'First Message is on ' + channelsDateMap[i]);
 					var row = table.insertRow(0);
 					var cell1 = row.insertCell(0);
 					var cell2 = row.insertCell(1);
 					cell1.innerHTML = i;
 					cell2.innerHTML = channelsDateMap[i];
-					cell2.className = "tag tag-danger";
+					//cell2.className = "tag tag-danger"; //Edit @Aman
         }
       }
 
 
 
 
-      console.log('------------------------------------------')
+      //console.log('------------------------------------------')
 
     var channelsMessagesMap = {}
 		var table2 = document.getElementById("Channel-Message-Table")
@@ -125,13 +125,13 @@ $( document ).ready(function() {
     }
     for(var i in channelsMessagesMap) {
       if (channelsMessagesMap.hasOwnProperty(i)) {
-        console.log('Channel is: ' + i + ' --- ' +'Total Messages are ' + channelsMessagesMap[i]);
+        //console.log('Channel is: ' + i + ' --- ' +'Total Messages are ' + channelsMessagesMap[i]);
 				var row = table2.insertRow(0);
 				var cell1 = row.insertCell(0);
 				var cell2 = row.insertCell(1);
 				cell1.innerHTML = i;
 				cell2.innerHTML = channelsMessagesMap[i];
-				cell2.className = "tag tag-success";
+				//cell2.className = "tag tag-success"; //Edit @Aman
       }
 
     }
@@ -176,7 +176,7 @@ $( document ).ready(function() {
     // console.log('Total channels: ' +data.messageCount_channel.length)
 
 
-	console.log('------------------------------------------')
+	//console.log('------------------------------------------')
 
     var channelMemberMap = {}
     for( var i = 0; i<data.memberCount_channel.length; i++){
@@ -187,13 +187,13 @@ $( document ).ready(function() {
 
     for(var i in channelMemberMap) {
       if (channelMemberMap.hasOwnProperty(i)) {
-        console.log('Channel is: ' + i + ' --- ' +'Total Members are ' + channelMemberMap[i]);
+        //console.log('Channel is: ' + i + ' --- ' +'Total Members are ' + channelMemberMap[i]);
 				var row = table3.insertRow(0);
 				var cell1 = row.insertCell(0);
 				var cell2 = row.insertCell(1);
 				cell1.innerHTML = i;
 				cell2.innerHTML = channelMemberMap[i];
-				cell2.className = "tag tag-success";
+				//cell2.className = "tag tag-success"; //Edit @Aman
       }
 
     }
@@ -204,7 +204,7 @@ $( document ).ready(function() {
 			channelArray.push(data.memberCount_channel[i].channelName)
 		}
 
-		console.log(channelArray)
+		//console.log(channelArray)
 
 
 		var channelMembersListMap = {}
@@ -217,7 +217,7 @@ $( document ).ready(function() {
 			var z = []
 			for(var i=0 ;i<data.messageCount_channel_sender.length; i++){
 				if(channelArray[j] == data.messageCount_channel_sender[i].channelName)
-					channelMembersListMap[channelArray[j]] = z.push(data.messageCount_channel_sender[i].messageSender)
+					channelMembersListMap[channelArray[j]] = z.push(" "+data.messageCount_channel_sender[i].messageSender)
 			}
 			channelMembersListMap[channelArray[j]] = z
 		}
@@ -225,7 +225,7 @@ $( document ).ready(function() {
 		var table4 = document.getElementById("Channel-Memberlist-Table")
 		for(var i in channelMembersListMap) {
       if (channelMembersListMap.hasOwnProperty(i)) {
-        console.log('Channel is: ' + i + ' --- ' +'List of Members are ' + channelMembersListMap[i]);
+        //console.log('Channel is: ' + i + ' --- ' +'List of Members are ' + channelMembersListMap[i]);
 				var row = table4.insertRow(0);
 				var cell1 = row.insertCell(0);
 				var cell2 = row.insertCell(1);
@@ -270,7 +270,7 @@ $( document ).ready(function() {
 					teamSuperstars[data[i].target]=teamSuperstars[data[i].target]+parseInt(data[i].weight);
 				}
 			}
-			console.log(teamSuperstars);
+			//console.log(teamSuperstars);
 			var items = Object.keys(teamSuperstars).map(function(key) {
 				return [key, teamSuperstars[key]];
 			});

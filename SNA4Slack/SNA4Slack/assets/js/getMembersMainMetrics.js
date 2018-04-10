@@ -253,9 +253,10 @@ $( document ).ready(function() {
 			var labels = [];
 			var values = [];
 			for(var i = 0 ; i<data.messageCount_sender.length ; i++){
-
+				if(data.messageCount_sender[i].msgCount>100){
 				labels.push(data.messageCount_sender[i].messageSender);
-				values.push(data.messageCount_sender[i].msgCount)
+				values.push(data.messageCount_sender[i].msgCount);
+				}
 			}
 
 			// Chart Data
@@ -312,7 +313,8 @@ $( document ).ready(function() {
 							drawTicks: false,
 						},
 						scaleLabel: {
-							display: true
+							display: true,
+							labelString: 'Hour of Day (Timezone: Mountain Standard Time UTC -07:00)'
 						}
 					}],
 					yAxes: [{

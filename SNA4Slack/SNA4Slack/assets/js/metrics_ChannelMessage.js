@@ -41,33 +41,13 @@ $( document ).ready(function() {
     }
 
     var pie = new d3pie("pieChartChannelMessage", {
-	"header": {
-		"title": {
-			"text": "Channels",
-			"color": "#000000",
-			"fontSize": 30
-		},
-		"subtitle": {
-			"text": "Total Messages",
-			"color": "black"
-		},
-		"location": "pie-center",
-		"titleSubtitlePadding": 3
-	},
-	"footer": {
-		"text": "Channel-Message Pie Chart",
-		"color": "#e81414",
-		"fontSize": 10,
-		"font": "open sans",
-		"location": "bottom-left"
-	},
+	
 	"size": {
 		"canvasWidth": 470,
 		"canvasHeight": 400,
-		"pieOuterRadius": "70%"
+		"pieOuterRadius": "80%"
 	},
 	"data": {
-		"sortOrder": "label-desc",
 		"content": contents
 	},
 	"labels": {
@@ -75,16 +55,16 @@ $( document ).ready(function() {
 			"format": "label-percentage2"
 		},
 		"inner": {
-			"format": "none"
+			"format": "value"
 		},
 		"mainLabel": {
 			"color": "#e41111",
-			"fontSize": 11
+			"fontSize": 12
 		},
 		"percentage": {
 			"color": "#999999",
-			"fontSize": 11,
-			"decimalPlaces": 5
+			"fontSize": 12,
+			"decimalPlaces": 1
 		},
 		"value": {
 			"color": "#e1e1e1",
@@ -116,10 +96,6 @@ $( document ).ready(function() {
 			"percentage": 0,
 			"color": "#d74338"
 		},
-		"pieCenterOffset": {
-			"x": 15,
-			"y": 15
-		}
 	},
 	"callbacks": {}
 });
