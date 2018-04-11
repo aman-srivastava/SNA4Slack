@@ -99,6 +99,7 @@ def run():
     print 'Graph done'
     graph_gen.print_graph()
     graph_gen.compute_degree_centrality()
+	graph.gen.test_member_addition()
     print 'Compute centrality'
     print graph_gen.json()
 
