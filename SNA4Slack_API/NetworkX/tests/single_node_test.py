@@ -3,18 +3,21 @@ import sys
 
 sys.path.append('../src')
 
-from graph_generator import GraphGenerator
+
 from single_node_data import TEST_DATA
 
+from tree_graph import TreeGraph
 
 class TestClass(object):
-    graph_builder = GraphGenerator(TEST_DATA["filename"])
+    graph_builder = TreeGraph(TEST_DATA["filename"], False)
 
     def test_node_count(self):
         assert len(self.graph_builder.graph.nodes) == TEST_DATA["node_count"]
 
     def test_edge_count(self):
         assert len(self.graph_builder.graph.edges) == TEST_DATA["edge_count"]
+        
+    
 
     def test_degree_centrality(self):
         self.graph_builder.compute_degree_centrality()
@@ -36,17 +39,9 @@ class TestClass(object):
                        "closeness_centrality"] == \
                    TEST_DATA["closeness_centrality"][node]
 
-    def test_average_clustering(self):
-        self.graph_builder.compute_avg_clustering()
-        assert round(self.graph_builder.graph.graph[
-                         "average_clustering"], 5) == \
-               round(TEST_DATA["average_clustering"], 5)
-
-    def test_average_connectivity(self):
-        self.graph_builder.compute_avg_connectivity()
-        assert round(self.graph_builder.graph.graph[
-                         "average_connectivity"], 5) == \
-               round(TEST_DATA["average_connectivity"], 5)
+    def test_member_addition(self):
+        for sample in TEST_DATA["user_node"].values():
+            assert self.graph_builder.graph.nodes[node] == sample
 
     def test_for_density(self):
         self.graph_builder.compute_density()
