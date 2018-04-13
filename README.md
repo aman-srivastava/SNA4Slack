@@ -5,8 +5,13 @@ Social Network Analysis and Visualization for Slack Teams
 ## Install the front end:
 
 *Pull the public image from dockerhub with command:
+For Beta image: 
 ```
 docker pull ishandikshit/sna4slack_frontend:poc
+```
+For Live version image:
+```
+docker pull ishandikshit/sna4slack_frontend:v1
 ```
 * Run the image:
 ```
