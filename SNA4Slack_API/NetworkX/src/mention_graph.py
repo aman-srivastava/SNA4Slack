@@ -144,18 +144,21 @@ class MentionGraph(object):
             self.graph.graph[AVERAGE_CLUSTERING] = 0
 
     def compute_friends(self):
-        self.friend_lists = {}
-        for ed in self.graph.edges:
-            print str(ed) + " " + str(
-                self.graph[ed[0]][ed[1]][EDGE_WEIGHT_LABEL])
-            if ed[0] in self.friend_lists.keys():
-                weight = self.graph[ed[0]][ed[1]][EDGE_WEIGHT_LABEL]
-                if weight > self.friend_lists[ed[0]][1]:
-                    self.friend_lists[ed[0]] = (ed[1], weight)
-            else:
-                self.friend_lists[ed[0]] = (ed[1], weight)
-        for item in self.friend_lists.items():
-            self.graph.node[item[0]][BEST_FRIEND] = item[1][0]
+        for node in self.graph.nodes:
+            top_five = []
+            for neigh in self.graph.neighbors(node):
+                if len(top_five) < 5:
+                    top_five = sorted(top_five + [neigh],
+                                          key=lambda x:
+                                          self.graph[node][x][EDGE_WEIGHT_LABEL])
+                elif self.graph[node][neigh][EDGE_WEIGHT_LABEL] > \
+                        self.graph[node][top_five[4]][EDGE_WEIGHT_LABEL]:
+                    top_five = sorted(top_five[:4] + [neigh],
+                                      key=lambda x:
+                                      self.graph[node][x][EDGE_WEIGHT_LABEL])
+            self.graph.nodes[node]["top_friends"] = top_five
+
+
 
 
 
@@ -177,6 +180,8 @@ class MentionGraph(object):
         print 'Compute connectivity'
         self.compute_avg_clustering()
         print 'Compute clustering'
+        self.compute_friends()
+        print 'Compute best friends'
         if self.directed == True:
             documentType = "directed-mention-graph"
             data = '{"documentType": "directed-mention-graph", "directed-mention-graph":' + \
@@ -190,7 +195,7 @@ class MentionGraph(object):
 
 
 def run():
-    graph_gen = MentionGraph("openaddresses",
+    graph_gen = MentionGraph("bitcoinclassic",
                              directed=True)
     print 'Graph done'
     graph_gen.compute_closeness_centrality()
@@ -207,12 +212,13 @@ def run():
     # print 'Compute clustering'
 
     # graph_gen.print_graph()
-    #print graph_gen.json()
 
     graph_gen.compute_friends()
     # with open('data.json', 'w') as outfile:
     # json.dumps(graph_gen.json(), outfile)
     #   outfile.write(graph_gen.json())
+    print graph_gen.json()
     graph_gen.draw_graph()
 
 run()
+
