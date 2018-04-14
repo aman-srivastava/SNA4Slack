@@ -54,6 +54,8 @@ $( document ).ready(function() {
 			}
 			var mentionCount = 0;
 			document.getElementById("mMentions").innerHTML = mentionCount;
+
+
 			for(var j = 0 ; j<friendData.nodes.length ; j++){
 				console.log(friendData.nodes[j].id);
 				if(friendData.nodes[j].id===memberName)
@@ -61,13 +63,34 @@ $( document ).ready(function() {
 					document.getElementById("memberAvatar").src = friendData.nodes[j].senderAvatar;
 					if(friendData.nodes[j].mention_count.length==0)
 						document.getElementById("mMentions").innerHTML = mentionCount;
+
 					else{
 						document.getElementById("mMentions").innerHTML = Object.values(friendData.nodes[j].mention_count).reduce(function(a, b) { return a + b; }, 0);
+            document.getElementById("mmMentions").innerHTML = Object.values(friendData.nodes[j].mention_count).reduce(function(a, b) { return a + b; }, 0);
+
 					}
 				}
-				
+
 			}
 			document.getElementById("memberNameHeader").innerHTML = "@"+memberName;
+
+
+
+      for(var j = 0 ; j<friendData.nodes.length ; j++){
+				console.log(friendData.nodes[j].id);
+				if(friendData.nodes[j].id===memberName)
+				{
+					if(friendData.nodes[j].top_friends[0])
+						document.getElementById("bf1").innerHTML = friendData.nodes[j].top_friends[0];
+            if(friendData.nodes[j].top_friends[1])
+            document.getElementById("bf2").innerHTML = friendData.nodes[j].top_friends[1];
+            if(friendData.nodes[j].top_friends[2])
+            document.getElementById("bf3").innerHTML = friendData.nodes[j].top_friends[2];
+				}
+
+			}
+
+
 
       //var memberName = 'carsten'
 			console.log(data);
