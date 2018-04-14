@@ -25,7 +25,7 @@ $( document ).ready(function() {
 					data = data[j]['dataAnalytics'];
 				};
 			}
-			
+
 			//console.log(data);
 			var noOfMessages = 0
 			var noOfChannels = []
@@ -33,15 +33,15 @@ $( document ).ready(function() {
 			for(var i = 0 ; i<data.messageCount_channel.length ; i++){
 				noOfMessages += parseInt(data.messageCount_channel[i].msgCount);
 			}
-			
+
 			/*
 			for(var i = 0 ; i<data.messageCount_sender.length ; i++){
 				if (noOfMembers.indexOf(data.messageCount_sender[i].messageSender) === -1){
 				noOfMembers.push(data.messageCount_sender[i].messageSender);
-				}				
+				}
 			}
 			*/
-			
+
 			document.getElementById("conversationCount").innerHTML = noOfMessages;
 			document.getElementById("memberCount").innerHTML = data.messageCount_sender.length;
 			document.getElementById("channelCount").innerHTML = data['messageCount_channel'].length;
@@ -51,10 +51,10 @@ $( document ).ready(function() {
       }
 	});
 });
-	
-	
+
+
 var optArray = []; //place holder for search names
-  
+
 var w = window.innerWidth,
     h = window.innerHeight;
 var focus_node = null,
@@ -62,7 +62,7 @@ var focus_node = null,
 var text_center = false;
 var highlight_color = "#373A3C";
 var highlight_trans = 0.1;
-  
+
 var size = d3.scale.linear()
   .range([20,120]);
 var thickness = d3.scale.linear()
@@ -102,8 +102,8 @@ svg.append('defs').append('marker')
             .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
             .attr('fill', '#FFFFFF')
             .attr('stroke','#FFFFFF');
-		
-		
+
+
 var totalDiscussions = 0,
     totalReplies = 0,
     totalConnections = 0,
@@ -114,7 +114,7 @@ $( document ).ready(function() {
 					teamName = window.location.href.substring(window.location.href.indexOf("?")+10);
 				}
 	d3.json("https://api.mlab.com/api/1/databases/sna4slack/collections/"+teamName+"?apiKey=dPpfbNvB6jRs-hvv-Veb1uVkXnX06Maa", function(error, graph) {
-	
+
 	for(var j = 0 ; j<graph.length ; j++){
 		//console.log(data[j]);
 		if(graph[j]['directed-mention-graph']!=null){
@@ -137,7 +137,7 @@ $( document ).ready(function() {
         value: e.weight
     });
 });
-  
+
   graph.links.forEach(function(d) {
 		linkedByIndex[d.source + "," + d.target] = true;
     });
@@ -152,11 +152,11 @@ $( document ).ready(function() {
 		}
 	return false;
 	}
-	
+
   //set size domain based on input value
   size.domain([1, d3.max(graph.nodes, function(d) { return +29; })]);
   thickness.domain([1, d3.max(graph.links, function(d) { return +d.weight; })]);
-  
+
   // collect all the node names for search auto-complete
   for (var i = 0; i < graph.nodes.length; i++) {
     optArray.push(graph.nodes[i].id);
@@ -165,22 +165,22 @@ $( document ).ready(function() {
   // assign number of total discussions
   totalDiscussions = graph.totalDiscussions;
   totalComments = graph.totalComments;
-  
+
   // calculate total replies
   graph.links.forEach(function(d){totalReplies+=d['weight']});
-  
+
   // calculate total people
   totalConnections = graph.nodes.length;
-  
+
   updateReport();
-  
+
   // align nodes along a diagonal line to minimize number of iterations
   var n = graph.nodes.length;
-	
+
   graph.nodes.forEach(function(d, i) {
   		d.x = d.y = w / n * i;
 		});
-  
+
   force
     .nodes(graph.nodes)
     .links(edges)
@@ -214,7 +214,7 @@ $( document ).ready(function() {
       .attr("width", function(d){return size(d.degree_centrality*1000)})
       .attr("height", function(d){return size(d.degree_centrality*1000)})
   		.attr("clip-path", function(d){return "url(#clipCircle_" + d.id +")"});
-  
+
   var repliesArc = node.append("path")
   		.attr("class", "replyPath")
     	.style("fill", default_replies_color)
@@ -224,7 +224,7 @@ $( document ).ready(function() {
             		.startAngle(Math.PI)
     						.endAngle(calculateRepliesAngle)
            );
-  
+
   var commentsArc = node.append("path")
   		.attr("class", "commentPath")
   		.style("fill", default_comments_color)
@@ -234,7 +234,7 @@ $( document ).ready(function() {
         .startAngle(calculateCommentsAngleStart)
         .endAngle(calculateCommentsAngleEnd)
        );
-  
+
   var text = g.selectAll(".text")
     .data(graph.nodes)
     .enter().append("text")
@@ -244,7 +244,7 @@ $( document ).ready(function() {
 	if (text_center)
 	 	text.text(function(d) { return d.id; })
 			.style("text-anchor", "middle");
-	else 
+	else
 		text.attr("dx", function(d) {return (size(d.degree_centrality*1000)/2||nominal_base_node_size);})
     	.text(function(d) { return '\u2002'+d.id; });
   function updateReport(d){
@@ -254,11 +254,11 @@ $( document ).ready(function() {
       d3.select("#measures1").text('Degree: '+d.degree_centrality.toString().substring(0, 6)+' | Betweenness: '+d.betweenness_centrality.toString().substring(0, 6)+' | Closeness: '+d.closeness_centrality.toString().substring(0, 6));
     }
   }
-  
-  
+
+
   //set events
 	node
-    .on("mouseover", function(d){set_highlight(d);})	
+    .on("mouseover", function(d){set_highlight(d);})
     .on("mousedown", function(d) {
           d3.event.stopPropagation(); //so user can move the node around
           focus_node = d;
@@ -266,7 +266,7 @@ $( document ).ready(function() {
           if (highlight_node === null) set_highlight(d)
 			})
     .on("mouseout", function(d) {exit_highlight();})
-		.on("mouseup",  
+		.on("mouseup",
 			function() {//console.log("mouseUp: ", focus_node, highlight_node);
 				if (focus_node!==null)
       {
@@ -281,44 +281,44 @@ $( document ).ready(function() {
           link.style("opacity", 1);
         }
       }
-	
+
 			if (highlight_node === null) exit_highlight();
 		});
-	 
+
 	// when user has mouse down on one of the circles
-  function set_focus(d){	
-		    
+  function set_focus(d){
+
     if (highlight_trans <1){
-	
+
       updateReport(d);
 			commentsArc.style("opacity", function(o) {
         return isConnected(d, o) ? 1 : highlight_trans;
       });
-      
+
       repliesArc.style("opacity", function(o) {
         return isConnected(d, o) ? 1 : highlight_trans;
       });
-      
+
       image.style("opacity", function(o) {
                 return isConnected(d, o) ? 1 : 2 * highlight_trans;
             });
-      
+
 			text.style("opacity", function(o) {
                 return isConnected(d, o) ? 1 : highlight_trans;
             });
-			
+
       link.style("opacity", function(o) {
         return o.source == d || o.target == d ? 1 : highlight_trans;
       });
-      
-      
+
+
 			}
 	}
 	function set_highlight(d)
     {
-      
+
       svg.style("cursor","pointer");
-      
+
       updateReport(d);
       if (focus_node!==null) d = focus_node;
       highlight_node = d;
@@ -331,15 +331,15 @@ $( document ).ready(function() {
                 });
       }
     }
- 	
+
  	function exit_highlight(){
 		updateReport();
     highlight_node = null;
-		
+
     if (focus_node===null)
 			{
 				svg.style("cursor","move");
-				
+
         if (highlight_color!="white")
 					{
 	  				text.style("font-weight", "normal");
@@ -347,30 +347,30 @@ $( document ).ready(function() {
  					}
 			}
 	}
- 
-  
-    
+
+
+
   zoom.on("zoom", function() {
 		g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 	});
-	
-  
+
+
   svg.call(zoom);
-  
+
   resize();
-  
+
   d3.select(window).on("resize", resize);
-	  
+
   force.on("tick", function() {
-  	
+
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
     text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-  
+
     link.attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
       .attr("x2", function(d) { return d.target.x; })
       .attr("y2", function(d) { return d.target.y; });
-		
+
     node.attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; });
 	});
@@ -378,14 +378,14 @@ $( document ).ready(function() {
 
 	var min = d3.min(graph.links, function(d) {return d.weight; });
 	var max = d3.max(graph.links, function(d) {return d.weight; })/2;
-	var value = d3.min(graph.links, function(d) {return d.weight; });    
-	
+	var value = d3.min(graph.links, function(d) {return d.weight; });
+
 	$(function() {
 
             $( "#slider1" ).slider({
                min: min,
                max: max,
-			   slide: function(event, ui) {updateLinks(ui.value);}			   
+			   slide: function(event, ui) {updateLinks(ui.value);}
          })
     });
 	var threshold = 0;
@@ -393,46 +393,46 @@ $( document ).ready(function() {
 	function updateLinks(value){document.getElementById("threshold1").innerHTML="Edge Weight: "+value;
 		threshold = value;
 		  svg.selectAll(".link")
-		   .style("stroke-width", function(d) { 
-			 return d.value>=threshold ? thickness(d.value*1.5):0; 
+		   .style("stroke-width", function(d) {
+			 return d.value>=threshold ? thickness(d.value*1.5):0;
 		  })
-		  .attr('marker-end',function(d) { 
+		  .attr('marker-end',function(d) {
 			 if (toggleArrows){return d.value>=threshold ? 'url(#arrowhead)':null; }
 			 else {return null;}
 		  });
-		} 
-		
-		
-	$('#showDirections1').click( function(e) { 
+		}
+
+
+	$('#showDirections1').click( function(e) {
 	toggleArrows = true;
 		svg.selectAll(".link")
-		  .attr('marker-end',function(d) { 
-					return d.value>=threshold ? 'url(#arrowhead)':null; 
+		  .attr('marker-end',function(d) {
+					return d.value>=threshold ? 'url(#arrowhead)':null;
 				});
 		document.getElementById("toggleDirections1").innerHTML="Directed";		} );
-	
-	$('#hideDirections1').click( function(e) { 
+
+	$('#hideDirections1').click( function(e) {
 	toggleArrows = false;
 		svg.selectAll(".link")
-		  .attr('marker-end',function(d) { 
-					return null; 
+		  .attr('marker-end',function(d) {
+					return null;
 				});
 	document.getElementById("toggleDirections1").innerHTML="Undirected"				} );
-			
-			
-  
+
+
+
   function resize() {
-    
+
     var width = document.getElementById("graph1").style.width, height = window.innerHeight-330;
-    
+
     svg.attr("width", width).attr("height", height);
     force.size([force.size()[0]+(width-w)/zoom.scale(),force.size()[1]+(height-h)/zoom.scale()]).resume();
-    
+
     w = width;
-    
+
     h = height;
   }
-  
+
 
 });
 
@@ -441,40 +441,40 @@ $( document ).ready(function() {
     var fraction = d.degree_centrality*1000/29;
     return 360;
   }
-  
+
   function calculateCommentsAngleStart(d){
     return calculateRepliesAngle(d);
   }
-  
+
   function calculateCommentsAngleEnd(d){
     var fraction = d.degree_centrality*1000/29;
     return 0;
   }
- 
+
   // update for resizing nodes
   d3.select("#circlesize")
   	.on("change", function(d) {
          var sizedBy = d3.select(this).property("weight");
   				resizeNodes(sizedBy);
   		});
-  
-	function resizeNodes(parameter){ 
-  
+
+	function resizeNodes(parameter){
+
     // add circle clip
     nodes = d3.selectAll(".node");
     //set size domain based on input value
   	size.domain([1, d3.max(nodes.data(), function(d) { console.log(d);return +d[parameter]; })]);
-    
-    nodes.selectAll("circle")      
+
+    nodes.selectAll("circle")
       .attr("r", function(d){return size(d[parameter])/2});
-    
+
     nodes.selectAll("Image")
     		.attr("xlink:href", function(d){return d.senderAvatar + "?width=" + parseInt(2 * size(d[parameter])) + "&height=" + parseInt(2 * size(d[parameter])) + "&crop=1%3A1"})
         .attr("x", function(d){return -size(d[parameter])/2})
         .attr("y", function(d){return -size(d[parameter])/2})
         .attr("width", function(d){return size(d[parameter])})
         .attr("height", function(d){return size(d[parameter])});
-    
+
     nodes.selectAll(".replyPath")
       .attr("d", d3.svg.arc()
         .innerRadius(function(d){return size(d[parameter])/2})
@@ -488,15 +488,15 @@ $( document ).ready(function() {
           .startAngle(calculateCommentsAngleStart)
           .endAngle(calculateCommentsAngleEnd)
          );
-  
+
   	d3.selectAll(".text")
     	.attr("dx", function(d){return size(d[parameter])/2;});
-    
+
     force.start();
   }
-  
-  
-  
+
+
+
 // assign optArray to search box
 // Search box is modified from this post > http://www.coppelia.io/2014/07/an-a-to-z-of-extra-features-for-the-d3-force-layout/
 $(function () {
@@ -507,18 +507,18 @@ $(function () {
 function searchNode1() {
     //find the node
     var selectedVal = document.getElementById('search1').value;
-    
+
   		svg.selectAll(".node")
         .filter(function (d) { return d.id != selectedVal;})
       		.style("opacity", highlight_trans/2)
       		.transition()
         	.duration(5000)
         	.style("opacity", 1);
-      
+
       svg.selectAll(".link, .text, .replyPath, .commentPath")
         .style("opacity", highlight_trans/2)
         .transition()
         .duration(5000)
         .style("opacity", 1);
     }
-function isNumber(n) { return !isNaN(parseFloat(n)) && isFinite(n);}	
+function isNumber(n) { return !isNaN(parseFloat(n)) && isFinite(n);}
