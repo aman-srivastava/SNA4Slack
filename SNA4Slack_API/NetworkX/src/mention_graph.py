@@ -220,5 +220,4 @@ def run():
     print graph_gen.json()
     graph_gen.draw_graph()
 
-run()
 
