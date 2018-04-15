@@ -66,6 +66,16 @@ class TreeGraph(object):
                 self.graph.node[node_id][USER_PROFILE_PIC] = row[
                     USER_PROFILE_PIC]
                 node_id += 1
+    
+    def team_members(self):
+        self.user_list = {}
+        for member in self.graph.channelName.members:
+            ind = 0
+            self.graph[member[ind]][EDGE_WEIGHT_LABEL])
+            self.user_lists[member[ind] = (member[ind], weight)
+        for entry in self.user_lists.items():
+            self.graph.node[entry[0]] = entry[0]
+
     def compute_degree_centrality(self):
         if len(self.graph.nodes) == 1:
         #this check is to ensure that zerodivision error is not thrown for single node
@@ -94,12 +104,12 @@ class TreeGraph(object):
 
 
 def run():
-    team = "buffercommunity"
+    team = "bitcoinhivemind"
     graph_gen = TreeGraph(team)
     print 'Graph done'
+    graph_gen.team_members()
     graph_gen.print_graph()
     graph_gen.compute_degree_centrality()
-	graph.gen.test_member_addition()
     print 'Compute centrality'
     print graph_gen.json()
 
