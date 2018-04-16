@@ -43,6 +43,10 @@ class TestClass(object):
          assert round(self.graph_builder.graph.graph["density"], 5) == \
                 round(TEST_DATA["density"], 5)
     
+    def test_member_addition(self):
+        for sample in TEST_DATA["user_node"].values():
+            assert self.graph_builder.graph.nodes[node] == sample
+            
     def test_for_average_clustering(self):
         self.graph_builder.compute_avg_clustering()
         assert round(self.graph_builder.graph.graph["average_clustering"], 5) == \

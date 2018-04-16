@@ -90,7 +90,7 @@ class subscriptionGraph(object):
 
 
 def run():
-    graph_gen = subscriptionGraph("padget_florentine",
+    graph_gen = subscriptionGraph("unconnected_triplet",
                              directed=False)
     print("generated the graph")
     graph_gen.team_members()
