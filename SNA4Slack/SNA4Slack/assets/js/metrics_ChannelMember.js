@@ -40,7 +40,7 @@ $( document ).ready(function() {
     console.log(contents)
 
     var pie = new d3pie("pieChartChannelMember", {
-    
+
     "size": {
         "canvasHeight": 400,
         "canvasWidth": 470,
