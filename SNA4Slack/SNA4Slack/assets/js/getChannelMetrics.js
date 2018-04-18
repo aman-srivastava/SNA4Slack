@@ -40,11 +40,47 @@ $( document ).ready(function() {
 		 url: "https://api.mlab.com/api/1/databases/sna4slack/collections/"+teamName+"?apiKey=dPpfbNvB6jRs-hvv-Veb1uVkXnX06Maa",
 		 type: 'GET',
          success: function (data) {
-			for(var j = 0 ; j<data.length ; j++){
-				if(data[j]['dataAnalytics']!=null){
-					data = data[j]['dataAnalytics'];
-				};
-			}
+					 var newData;
+		 			for(var j = 0 ; j<data.length ; j++){
+		 				if(data[j]['directed-mention-graph']!=null){
+		 					newData = data[j]['directed-mention-graph'];
+		 				}
+		 			}
+		 			for(var j = 0 ; j<data.length ; j++){
+		 				if(data[j]['dataAnalytics']!=null){
+		 					data = data[j]['dataAnalytics'];
+		 				}
+		 			}
+
+
+					var userMentionPerChannelMap = {}
+		      for (var i = 0; i<newData.nodes.length; i++) {
+						console.log(newData.nodes[i].mention_count)
+						var channelArray = Object.keys(newData.nodes[i].mention_count);
+
+						for (var j=0; j<channelArray.length; j++){
+			        if(channelName == channelArray[j]){
+			          userMentionPerChannelMap[newData.nodes[i].id] = newData.nodes[i].mention_count[channelName]
+			        }
+			      }
+				}
+
+					var table = document.getElementById("Mentions-Per-Member-per-Channel")
+		      for(var i in userMentionPerChannelMap) {
+		        if (userMentionPerChannelMap.hasOwnProperty(i)) {
+		          console.log('User is: ' + i + ' --- ' +'Number of Mentions are ' + userMentionPerChannelMap[i]);
+							var row = table.insertRow(0);
+							var cell1 = row.insertCell(0);
+							var cell2 = row.insertCell(1);
+							cell1.innerHTML = i;
+							cell2.innerHTML = userMentionPerChannelMap[i];
+							// cell2.className = "tag tag-danger";
+		        }
+
+		      }
+			console.log("Graph Object -------> : "+newData);
+
+
       //var channelName = 'random'
 			console.log(data);
 			console.log(channelName)
