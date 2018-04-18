@@ -4,9 +4,9 @@ services:
   frontend:
     build: ./SNA4Slack
     container_name: sna4slack_frontend
-    command: npm run start
+    command: /usr/bin/nginx
     ports:
-      - '4000:80'
+      - '40:80'
     volumes:
      - ./SNA4Slack:/sna4slack
     environment:
