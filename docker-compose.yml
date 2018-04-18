@@ -2,7 +2,7 @@ version: '2'
 services:
 
   frontend:
-    build: ./SNA4Slack
+    build: ./SNA4Slack/SNA4Slack
     container_name: sna4slack_frontend
     command: /usr/bin/nginx
     ports:
