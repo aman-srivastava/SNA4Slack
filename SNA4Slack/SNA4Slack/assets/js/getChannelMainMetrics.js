@@ -1,23 +1,21 @@
-var team;
-if(window.location.href.includes("?teamName")){
-		team = window.location.href.substring(window.location.href.indexOf("?")+10);
-		document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+team;
-		document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+team;
-		document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+team;
-		document.getElementById("MembersPageLink").href = "MembersMain.html?teamName="+team;
-	}
+// var team;
+// if(window.location.href.includes("?teamName")){
+// 		team = window.location.href.substring(window.location.href.indexOf("?")+10);
+// 		document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+team;
+// 		document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+team;
+// 		document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+team;
+// 		document.getElementById("MembersPageLink").href = "MembersMain.html?teamName="+team;
+// 	}
 
 $( document ).ready(function() {
 	var teamName;
 	currentURL = window.location.href
 	if(window.location.href.includes("?teamName")){
-					// console.log(window.location.href)
-					// var splitURL = window.location.href.split("?")
-					// console.log(splitURL)
-					// t = splitURL[1].substring(splitURL[1].indexOf("t")+9)
-					// console.log(t)
-					// teamName = t
 					teamName = window.location.href.substring(window.location.href.indexOf("?")+10);
+					document.getElementById("dashboardPageLink").href = "Dashboard.html?teamName="+teamName;
+					document.getElementById("TeamsPageLink").href = "Teams.html?teamName="+teamName;
+					document.getElementById("ChannelsPageLink").href = "ChannelMain.html?teamName="+teamName;
+					document.getElementById("MembersPageLink").href = "MembersMain.html?teamName="+teamName;
 				}
 	$.ajax({
 		 url: "https://api.mlab.com/api/1/databases/sna4slack/collections/"+teamName+"?apiKey=dPpfbNvB6jRs-hvv-Veb1uVkXnX06Maa",
@@ -59,28 +57,11 @@ $( document ).ready(function() {
 			$("#basicSelect").change(SelectChannelFunction);
 
 			function SelectChannelFunction(){
-// 				<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-//     <option value="">Select...</option>
-//     <option value="http://google.com">Google</option>
-//     <option value="http://yahoo.com">Yahoo</option>
-// </select>
-		// var x = document.getElementById("basicSelect").value;
-		// console.log('You selected: '+ x)
-
-			 console.log('insideselectchannelfunction')
-			// console.log(currentURL)
 			var z = window.location.href
 
 			var a = z.replace("ChannelMain", "channels");
-			//console.log(this.selectedIndex)
-			//console.log(this.options[this.selectedIndex].value)
 			a = a + "!channelName="+this.options[this.selectedIndex].value
-			// console.log(a)
-			// console.log(this.options[this.selectedIndex].value)
-			 // window.location.href = currentURL + "!channelName="+ this.options[this.selectedIndex].value
-			// console.log(window.location.href)
 			window.location.href = a
-			//console.log(z)
 
 			}
 
@@ -90,29 +71,19 @@ $( document ).ready(function() {
       var channelsDateMap = {}
 			var table = document.getElementById("Channel-Date-Table")
 
-			//document.getElementById("Channel-Date-Table")
-
-
       for(var i = 0 ; i<data.firstMessage.length ; i++){
-        //console.log(data[i].firstMessage[i])
 				var strSliced = data.firstMessage[i].messageTime.slice(0, 10)
         channelsDateMap[data.firstMessage[i].channelName] = strSliced
       }
       for(var i in channelsDateMap) {
         if (channelsDateMap.hasOwnProperty(i)) {
-          //console.log('Channel is: ' + i + ' --- ' +'First Message is on ' + channelsDateMap[i]);
 					var row = table.insertRow(0);
 					var cell1 = row.insertCell(0);
 					var cell2 = row.insertCell(1);
 					cell1.innerHTML = i;
 					cell2.innerHTML = channelsDateMap[i];
-					//cell2.className = "tag tag-danger"; //Edit @Aman
         }
       }
-
-
-
-
       //console.log('------------------------------------------')
 
     var channelsMessagesMap = {}
@@ -123,14 +94,12 @@ $( document ).ready(function() {
     }
     for(var i in channelsMessagesMap) {
       if (channelsMessagesMap.hasOwnProperty(i)) {
-        //console.log('Channel is: ' + i + ' --- ' +'Total Messages are ' + channelsMessagesMap[i]);
-				var row = table2.insertRow(0);
+  			var row = table2.insertRow(0);
 				var cell1 = row.insertCell(0);
 				var cell2 = row.insertCell(1);
 				cell1.innerHTML = i;
 				cell2.innerHTML = channelsMessagesMap[i];
-				//cell2.className = "tag tag-success"; //Edit @Aman
-      }
+	    }
 
     }
 
@@ -166,14 +135,6 @@ $( document ).ready(function() {
 		document.getElementById("TotalEmoticons").innerHTML = sumEmoticons;
 		document.getElementById("TotalURLs").innerHTML = sumURL;
 
-    // console.log('Message Array: '+messageArray);
-    // console.log('Total Messages: '+sumMessages);
-    // console.log('Average Messages: '+sumMessages/3)
-    // console.log('Max Messages: '+maxMessages)
-    // console.log('Least Messages: '+minMessages)
-    // console.log('Total channels: ' +data.messageCount_channel.length)
-
-
 	//console.log('------------------------------------------')
 
     var channelMemberMap = {}
@@ -185,13 +146,11 @@ $( document ).ready(function() {
 
     for(var i in channelMemberMap) {
       if (channelMemberMap.hasOwnProperty(i)) {
-        //console.log('Channel is: ' + i + ' --- ' +'Total Members are ' + channelMemberMap[i]);
 				var row = table3.insertRow(0);
 				var cell1 = row.insertCell(0);
 				var cell2 = row.insertCell(1);
 				cell1.innerHTML = i;
 				cell2.innerHTML = channelMemberMap[i];
-				//cell2.className = "tag tag-success"; //Edit @Aman
       }
 
     }
@@ -201,9 +160,6 @@ $( document ).ready(function() {
 		for(var i = 0; i<data.memberCount_channel.length; i++){
 			channelArray.push(data.memberCount_channel[i].channelName)
 		}
-
-		//console.log(channelArray)
-
 
 		var channelMembersListMap = {}
 
@@ -223,7 +179,6 @@ $( document ).ready(function() {
 		var table4 = document.getElementById("Channel-Memberlist-Table")
 		for(var i in channelMembersListMap) {
       if (channelMembersListMap.hasOwnProperty(i)) {
-        //console.log('Channel is: ' + i + ' --- ' +'List of Members are ' + channelMembersListMap[i]);
 				var row = table4.insertRow(0);
 				var cell1 = row.insertCell(0);
 				var cell2 = row.insertCell(1);
@@ -250,13 +205,11 @@ $( document ).ready(function() {
 		 type: 'GET',
          success: function (data) {
 			for(var j = 0 ; j<data.length ; j++){
-				//console.log(data[j]);
 				if(data[j]['directed-mention-graph']!=null){
 					nodes = data[j]['directed-mention-graph'].nodes;
 					data = data[j]['directed-mention-graph'].links;
 				};
 			}
-			//console.log(data);
 			var noOfMentions = 0;
 			var teamSuperstars = {};
 			for(var i = 0 ; i<data.length ; i++){
@@ -279,9 +232,6 @@ $( document ).ready(function() {
 			var max = parseInt(items[0][1]);
 			var min = parseInt(items[items.length-1][1]);
 			items = items.slice(0, 6);
-
-			//document.getElementById("noOfMentions").innerHTML = noOfMentions;
-
 
 			document.getElementById("superstar1username").innerHTML = items[0][0];
 			document.getElementById("superstar1avatar").src = nodes[nodes.map(function(x) {return x.id; }).indexOf(items[0][0])].senderAvatar;
