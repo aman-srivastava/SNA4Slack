@@ -29,8 +29,6 @@ $( document ).ready(function() {
 				};
 			}
 
-			//console.log(data);
-
 			document.getElementById("teamNameSidebar").innerHTML = teamName;
 			document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
 			document.getElementById("teamURLLink").href = "http://"+teamName+".slackarchive.io";
