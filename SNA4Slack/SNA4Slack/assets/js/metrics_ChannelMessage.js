@@ -18,12 +18,7 @@ $( document ).ready(function() {
 					data = data[j]['dataAnalytics'];
 				};
 			}
-
-			console.log(data);
-
-
-
-      console.log('------------------------------------------')
+//      console.log('------------------------------------------')
 
     var contents = []
     var channelsMessagesMap = {}
@@ -33,7 +28,6 @@ $( document ).ready(function() {
     }
     for(var i in channelsMessagesMap) {
       if (channelsMessagesMap.hasOwnProperty(i)) {
-        console.log('Channel is: ' + i + ' --- ' +'Total Messages are ' + channelsMessagesMap[i]);
         contents.push({"label": i, "value": channelsMessagesMap[i], "color": "#dd8d11"})
 
       }
@@ -41,7 +35,7 @@ $( document ).ready(function() {
     }
 
     var pie = new d3pie("pieChartChannelMessage", {
-	
+
 	"size": {
 		"canvasWidth": 470,
 		"canvasHeight": 400,

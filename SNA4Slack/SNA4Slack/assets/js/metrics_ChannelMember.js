@@ -18,9 +18,7 @@ $( document ).ready(function() {
                     data = data[j]['dataAnalytics'];
                 };
             }
-
-
-    console.log('------------------------------------------')
+    // console.log('------------------------------------------')
 
     var contents = []
     var channelMemberMap = {}
@@ -30,14 +28,12 @@ $( document ).ready(function() {
 
     for(var i in channelMemberMap) {
       if (channelMemberMap.hasOwnProperty(i)) {
-        console.log('Channel is: ' + i + ' --- ' +'Total Members are ' + channelMemberMap[i]);
 
         contents.push({"label": i, "value": channelMemberMap[i], "color": "#7e3838"})
       }
 
     }
 
-    console.log(contents)
 
     var pie = new d3pie("pieChartChannelMember", {
 
@@ -96,8 +92,6 @@ $( document ).ready(function() {
     },
     "callbacks": {}
 });
-
-
             },
 
     });
