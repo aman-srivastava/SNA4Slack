@@ -1,10 +1,13 @@
 # SNA4Slack
 Social Network Analysis and Visualization for Slack Teams
 
+* For any Infrastructure issues/changes, submit a request at:
+```https://docs.google.com/spreadsheets/d/1XTPtCFGlhUDkLeMu0U_h4tPwMXAdcMkpnwTkn3bDI1U/edit#gid=0```
+
 # Install application using Docker Image
 ## Install the front end:
 
-*Pull the public image from dockerhub with command:
+* Pull the public image from dockerhub with command:
 For Beta image: 
 ```
 docker pull ishandikshit/sna4slack_frontend:poc
