@@ -17,7 +17,7 @@ from cassandra.cqlengine.management import sync_table
 from cassandra.cqlengine.models import Model
 from cassandra.cqlengine import columns, connection
 from objects.slack_archive import SlackArchive
-from Helpers.mongoHelper import MongoHelper
+#from Helpers.mongoHelper import MongoHelper
 
 SENDER_COLUMN = "messageSender"
 MESSAGE_COLUMN = "messageBody"
@@ -32,7 +32,6 @@ USER_PROFILE_PIC = "senderAvatar"
 CHANNEL_NAME = "channelName"
 MENTION_COUNT = "mention_count"
 BEST_FRIEND = "best_friend"
-
 
 # Initializing logger
 # logging.basicConfig(filename='../logs/graph_generator_logs.log', level=logging.DEBUG)
@@ -219,5 +218,7 @@ def run():
     #   outfile.write(graph_gen.json())
     print graph_gen.json()
     graph_gen.draw_graph()
+
+run()
 
 

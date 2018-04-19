@@ -99,6 +99,21 @@ class TreeGraph(object):
         nx.draw(self.graph, with_labels=True)  # default spring_layout
         # plt.show()
 
+    def compute_friends(self):
+        for node in self.graph.nodes:
+            top_five = []
+            for neigh in self.graph.neighbors(node):
+                if len(top_five) < 5:
+                    top_five = sorted(top_five + [neigh],
+                                          key=lambda x:
+                                          self.graph[node][x][EDGE_WEIGHT_LABEL])
+                elif self.graph[node][neigh][EDGE_WEIGHT_LABEL] > \
+                        self.graph[node][top_five[4]][EDGE_WEIGHT_LABEL]:
+                    top_five = sorted(top_five[:4] + [neigh],
+                                      key=lambda x:
+                                      self.graph[node][x][EDGE_WEIGHT_LABEL])
+            self.graph.nodes[node]["top_friends"] = top_five
+
     def json(self):
         return json_graph.tree_data(self.graph, root=self.team_name)
 
