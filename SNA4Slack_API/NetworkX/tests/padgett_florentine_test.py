@@ -3,19 +3,25 @@ import sys
 
 sys.path.append('../src')
 
-from Tree_graph import TreeGraph
+from Subscription_graph import SubscriptionGraph
 from padgett_florentine_business_data import TEST_DATA
 
 
 class TestClass(object):
-    graph_builder = TreeGraph(TEST_DATA["filename"], False)
+    graph_builder = SubscriptionGraph(TEST_DATA["filename"], False)
 
     def test_node_count(self):
         assert len(self.graph_builder.graph.nodes) == TEST_DATA["node_count"]
 
     def test_edge_count(self):
         assert len(self.graph_builder.graph.edges) == TEST_DATA["edge_count"]
-
+    
+    def compute_avg_clustering(self):
+        ac = nx.average_clustering(self.graph)
+        self.graph.graph[AVERAGE_CLUSTERING] = ac
+        logging.debug(self.__class__.__name__ + ": Clustering computed.")
+    
+    '''
     def test_degree_centrality(self):
         self.graph_builder.compute_degree_centrality()
         for node in TEST_DATA["degree_centrality"].keys():
@@ -24,7 +30,7 @@ class TestClass(object):
                 5) == \
                    round(TEST_DATA["degree_centrality"][node], 5)
 
-    ''' 
+     
     def test_betweeness_centrality(self):
         self.graph_builder.compute_betweenness_centrality()
         for node in TEST_DATA["betweenness_centrality"].keys():
@@ -38,14 +44,15 @@ class TestClass(object):
             assert round(self.graph_builder.graph.nodes[node][
                              "closeness_centrality"], 5) == \
                    round(TEST_DATA["closeness_centrality"][node], 5)
-
+    '''
+    
     def test_average_clustering(self):
         self.graph_builder.compute_avg_clustering()
         assert round(self.graph_builder.graph.graph[
                          "average_clustering"], 5) == \
                round(TEST_DATA["average_clustering"], 5)
 
-    def test_average_connectivity(self):
+    '''def test_average_connectivity(self):
         self.graph_builder.compute_avg_connectivity()
         assert round(self.graph_builder.graph.graph[
                          "average_connectivity"], 5) == \
