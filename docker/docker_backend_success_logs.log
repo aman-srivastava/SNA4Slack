@@ -1,0 +1,140 @@
+ishans-air:SNA4Slack_API ishandikshit$ docker build -t ishandikshit/sna4slack_backend .
+Sending build context to Docker daemon  5.645MB
+Step 1/9 : FROM python:2.7-slim
+ ---> 55d87c387a8c
+Step 2/9 : ENV APP_HOME ./SNA4Slack_API
+ ---> Using cache
+ ---> cb3a93490b5a
+Step 3/9 : WORKDIR $APP_HOME
+ ---> Using cache
+ ---> 62fda819f906
+Step 4/9 : ADD . $APP_HOME
+ ---> bb11d9efbf61
+Step 5/9 : RUN pip install --upgrade pip
+ ---> Running in 7a7c6497e0db
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/0f/74/ecd13431bcc456ed390b44c8a6e917c1820365cbebcb6a8974d1cd045ab4/pip-10.0.1-py2.py3-none-any.whl (1.3MB)
+Installing collected packages: pip
+  Found existing installation: pip 9.0.2
+    Uninstalling pip-9.0.2:
+      Successfully uninstalled pip-9.0.2
+Successfully installed pip-10.0.1
+ ---> 1a0ffefdb38f
+Removing intermediate container 7a7c6497e0db
+Step 6/9 : RUN pip install -r $APP_HOME/requirements.txt
+ ---> Running in 0676ea1c12d5
+Collecting gunicorn (from -r ./SNA4Slack_API/requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/64/32/becbd4089a4c06f0f9f538a76e9fe0b19a08f010bcb47dcdbfbc640cdf7d/gunicorn-19.7.1-py2.py3-none-any.whl (111kB)
+Collecting cassandra-driver (from -r ./SNA4Slack_API/requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/4b/10/a464029e6bcfcde7ba9db5b0b8a25b28b2f09d3e270b68ce04a96f2b1876/cassandra-driver-3.14.0.tar.gz (227kB)
+Collecting Flask (from -r ./SNA4Slack_API/requirements.txt (line 3))
+  Downloading https://files.pythonhosted.org/packages/77/32/e3597cb19ffffe724ad4bf0beca4153419918e7fa4ba6a34b04ee4da3371/Flask-0.12.2-py2.py3-none-any.whl (83kB)
+Collecting flask_cassandra (from -r ./SNA4Slack_API/requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/32/58/5db63631ba2fe8b3fd31794f29b939eda4f21ceeaaa6e8cd64dd623da847/Flask-Cassandra-0.14.tar.gz
+Collecting flasgger (from -r ./SNA4Slack_API/requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/45/d8/20a094aebebf7b85df4fed93a511a278d7bcd42443e6792833dfa2bf6e39/flasgger-0.8.1-py2.py3-none-any.whl (5.7MB)
+Collecting flask_restful (from -r ./SNA4Slack_API/requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/47/08/89cf8594735392cd71752f7cf159fa63765eac3e11b0da4324cdfeaea137/Flask_RESTful-0.3.6-py2.py3-none-any.whl
+Collecting selenium (from -r ./SNA4Slack_API/requirements.txt (line 7))
+  Downloading https://files.pythonhosted.org/packages/5e/1f/6c2204b9ae14eddab615c5e2ee4956c65ed533e0a9986c23eabd801ae849/selenium-3.11.0-py2.py3-none-any.whl (943kB)
+Collecting pyvirtualdisplay (from -r ./SNA4Slack_API/requirements.txt (line 8))
+  Downloading https://files.pythonhosted.org/packages/39/37/f285403a09cc261c56b6574baace1bdcf4b8c7428c8a7239cbba137bc0eb/PyVirtualDisplay-0.2.1.tar.gz
+Collecting networkx (from -r ./SNA4Slack_API/requirements.txt (line 9))
+  Downloading https://files.pythonhosted.org/packages/11/42/f951cc6838a4dff6ce57211c4d7f8444809ccbe2134179950301e5c4c83c/networkx-2.1.zip (1.6MB)
+Collecting dateutils (from -r ./SNA4Slack_API/requirements.txt (line 10))
+  Downloading https://files.pythonhosted.org/packages/5b/11/246237ce2a1dd87ffebef0e430033f877b31dd208b281914d4fd3c531ee7/dateutils-0.6.6.tar.gz
+Collecting pymongo (from -r ./SNA4Slack_API/requirements.txt (line 11))
+  Downloading https://files.pythonhosted.org/packages/db/5a/77060da2196471c8c47eeed6526029bd35cb2f10b1e4fc0e5e5234ca1aa0/pymongo-3.6.1-cp27-cp27mu-manylinux1_x86_64.whl (381kB)
+Collecting findspark (from -r ./SNA4Slack_API/requirements.txt (line 12))
+  Downloading https://files.pythonhosted.org/packages/18/b7/49fb67fd4245a521403c43f94a4338e62e5b7b132f9170c41ca36533c2e3/findspark-1.2.0-py2.py3-none-any.whl
+Collecting pyspark==2.1.2 (from -r ./SNA4Slack_API/requirements.txt (line 13))
+  Downloading https://files.pythonhosted.org/packages/65/d7/2a3b0de1178478fc00201b083d50b3d2d1affe4eac92dad3408219c5c607/pyspark-2.1.2.tar.gz (181.3MB)
+Collecting six>=1.9 (from cassandra-driver->-r ./SNA4Slack_API/requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/67/4b/141a581104b1f6397bfa78ac9d43d8ad29a7ca43ea90a2d863fe3056e86a/six-1.11.0-py2.py3-none-any.whl
+Collecting futures (from cassandra-driver->-r ./SNA4Slack_API/requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/2d/99/b2c4e9d5a30f6471e410a146232b4118e697fa3ffc06d6a65efde84debd0/futures-3.2.0-py2-none-any.whl
+Collecting itsdangerous>=0.21 (from Flask->-r ./SNA4Slack_API/requirements.txt (line 3))
+  Downloading https://files.pythonhosted.org/packages/dc/b4/a60bcdba945c00f6d608d8975131ab3f25b22f2bcfe1dab221165194b2d4/itsdangerous-0.24.tar.gz (46kB)
+Collecting Jinja2>=2.4 (from Flask->-r ./SNA4Slack_API/requirements.txt (line 3))
+  Downloading https://files.pythonhosted.org/packages/7f/ff/ae64bacdfc95f27a016a7bed8e8686763ba4d277a78ca76f32659220a731/Jinja2-2.10-py2.py3-none-any.whl (126kB)
+Collecting Werkzeug>=0.7 (from Flask->-r ./SNA4Slack_API/requirements.txt (line 3))
+  Downloading https://files.pythonhosted.org/packages/20/c4/12e3e56473e52375aa29c4764e70d1b8f3efa6682bef8d0aae04fe335243/Werkzeug-0.14.1-py2.py3-none-any.whl (322kB)
+Collecting click>=2.0 (from Flask->-r ./SNA4Slack_API/requirements.txt (line 3))
+  Downloading https://files.pythonhosted.org/packages/34/c1/8806f99713ddb993c5366c362b2f908f18269f8d792aff1abfd700775a77/click-6.7-py2.py3-none-any.whl (71kB)
+Collecting PyYAML>=3.0 (from flasgger->-r ./SNA4Slack_API/requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/4a/85/db5a2df477072b2902b0eb892feb37d88ac635d36245a72a6a69b23b383a/PyYAML-3.12.tar.gz (253kB)
+Collecting jsonschema>=2.5.1 (from flasgger->-r ./SNA4Slack_API/requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/77/de/47e35a97b2b05c2fadbec67d44cfcdcd09b8086951b331d82de90d2912da/jsonschema-2.6.0-py2.py3-none-any.whl
+Collecting mistune (from flasgger->-r ./SNA4Slack_API/requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/c8/8c/87f4d359438ba0321a2ae91936030110bfcc62fef752656321a72b8c1af9/mistune-0.8.3-py2.py3-none-any.whl
+Collecting pytz (from flask_restful->-r ./SNA4Slack_API/requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/dc/83/15f7833b70d3e067ca91467ca245bae0f6fe56ddc7451aa0dc5606b120f2/pytz-2018.4-py2.py3-none-any.whl (510kB)
+Collecting aniso8601>=0.82 (from flask_restful->-r ./SNA4Slack_API/requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/ba/8c/4cd25b3facc5f443cb083f4582483e8c8e7901380c71c44aff6eeda4dc54/aniso8601-3.0.0-py2.py3-none-any.whl
+Collecting EasyProcess (from pyvirtualdisplay->-r ./SNA4Slack_API/requirements.txt (line 8))
+  Downloading https://files.pythonhosted.org/packages/0d/f1/d2de7591e7dfc164d286fa16f051e6c0cf3141825586c3b04ae7cda7ac0f/EasyProcess-0.2.3.tar.gz
+Collecting decorator>=4.1.0 (from networkx->-r ./SNA4Slack_API/requirements.txt (line 9))
+  Downloading https://files.pythonhosted.org/packages/bc/bb/a24838832ba35baf52f32ab1a49b906b5f82fb7c76b2f6a7e35e140bac30/decorator-4.3.0-py2.py3-none-any.whl
+Collecting argparse (from dateutils->-r ./SNA4Slack_API/requirements.txt (line 10))
+  Downloading https://files.pythonhosted.org/packages/f2/94/3af39d34be01a24a6e65433d19e107099374224905f1e0cc6bbe1fd22a2f/argparse-1.4.0-py2.py3-none-any.whl
+Collecting python-dateutil (from dateutils->-r ./SNA4Slack_API/requirements.txt (line 10))
+  Downloading https://files.pythonhosted.org/packages/0c/57/19f3a65bcf6d5be570ee8c35a5398496e10a0ddcbc95393b2d17f86aaaf8/python_dateutil-2.7.2-py2.py3-none-any.whl (212kB)
+Collecting py4j==0.10.4 (from pyspark==2.1.2->-r ./SNA4Slack_API/requirements.txt (line 13))
+  Downloading https://files.pythonhosted.org/packages/93/a7/0e1719e8ad34d194aae72dc07a37e65fd3895db7c797a67a828333cd6067/py4j-0.10.4-py2.py3-none-any.whl (186kB)
+Collecting MarkupSafe>=0.23 (from Jinja2>=2.4->Flask->-r ./SNA4Slack_API/requirements.txt (line 3))
+  Downloading https://files.pythonhosted.org/packages/4d/de/32d741db316d8fdb7680822dd37001ef7a448255de9699ab4bfcbdf4172b/MarkupSafe-1.0.tar.gz
+Collecting functools32; python_version == "2.7" (from jsonschema>=2.5.1->flasgger->-r ./SNA4Slack_API/requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/c5/60/6ac26ad05857c601308d8fb9e87fa36d0ebf889423f47c3502ef034365db/functools32-3.2.3-2.tar.gz
+Building wheels for collected packages: cassandra-driver, flask-cassandra, pyvirtualdisplay, networkx, dateutils, pyspark, itsdangerous, PyYAML, EasyProcess, MarkupSafe, functools32
+  Running setup.py bdist_wheel for cassandra-driver: started
+  Running setup.py bdist_wheel for cassandra-driver: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/89/63/d7/842625cf745faa83f2144aac738e01098c47922429b61c97c3
+  Running setup.py bdist_wheel for flask-cassandra: started
+  Running setup.py bdist_wheel for flask-cassandra: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/39/d6/1f/5b3a56c315b12b15d18668a6ea0f682c4ae6f852dbd017bc7b
+  Running setup.py bdist_wheel for pyvirtualdisplay: started
+  Running setup.py bdist_wheel for pyvirtualdisplay: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/d1/8c/16/1c64227974ae29c687e4cc30fd691d5c0fd40f54446dde99da
+  Running setup.py bdist_wheel for networkx: started
+  Running setup.py bdist_wheel for networkx: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/44/c0/34/6f98693a554301bdb405f8d65d95bbcd3e50180cbfdd98a94e
+  Running setup.py bdist_wheel for dateutils: started
+  Running setup.py bdist_wheel for dateutils: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/59/7f/14/021981e24cc37ca796f08be16f554c0de9b4922a1c41a2ba05
+  Running setup.py bdist_wheel for pyspark: started
+  Running setup.py bdist_wheel for pyspark: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/ab/f0/1c/4dcd7bcd5caef4d9b5c20371923f0242a39f3cca9f5356101d
+  Running setup.py bdist_wheel for itsdangerous: started
+  Running setup.py bdist_wheel for itsdangerous: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/2c/4a/61/5599631c1554768c6290b08c02c72d7317910374ca602ff1e5
+  Running setup.py bdist_wheel for PyYAML: started
+  Running setup.py bdist_wheel for PyYAML: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/03/05/65/bdc14f2c6e09e82ae3e0f13d021e1b6b2481437ea2f207df3f
+  Running setup.py bdist_wheel for EasyProcess: started
+  Running setup.py bdist_wheel for EasyProcess: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/b4/c6/e3/c163b04029d8fccfd54b809802640c1af587a01be8d7a04e1a
+  Running setup.py bdist_wheel for MarkupSafe: started
+  Running setup.py bdist_wheel for MarkupSafe: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/33/56/20/ebe49a5c612fffe1c5a632146b16596f9e64676768661e4e46
+  Running setup.py bdist_wheel for functools32: started
+  Running setup.py bdist_wheel for functools32: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/b5/18/32/77a1030457155606ba5e3ec3a8a57132b1a04b1c4f765177b2
+Successfully built cassandra-driver flask-cassandra pyvirtualdisplay networkx dateutils pyspark itsdangerous PyYAML EasyProcess MarkupSafe functools32
+Installing collected packages: gunicorn, six, futures, cassandra-driver, itsdangerous, MarkupSafe, Jinja2, Werkzeug, click, Flask, flask-cassandra, PyYAML, functools32, jsonschema, mistune, flasgger, pytz, aniso8601, flask-restful, selenium, EasyProcess, pyvirtualdisplay, decorator, networkx, argparse, python-dateutil, dateutils, pymongo, findspark, py4j, pyspark
+Successfully installed EasyProcess-0.2.3 Flask-0.12.2 Jinja2-2.10 MarkupSafe-1.0 PyYAML-3.12 Werkzeug-0.14.1 aniso8601-3.0.0 argparse-1.4.0 cassandra-driver-3.14.0 click-6.7 dateutils-0.6.6 decorator-4.3.0 findspark-1.2.0 flasgger-0.8.1 flask-cassandra-0.14 flask-restful-0.3.6 functools32-3.2.3.post2 futures-3.2.0 gunicorn-19.7.1 itsdangerous-0.24 jsonschema-2.6.0 mistune-0.8.3 networkx-2.1 py4j-0.10.4 pymongo-3.6.1 pyspark-2.1.2 python-dateutil-2.7.2 pytz-2018.4 pyvirtualdisplay-0.2.1 selenium-3.11.0 six-1.11.0
+ ---> 595fab9500af
+Removing intermediate container 0676ea1c12d5
+Step 7/9 : EXPOSE 4000
+ ---> Running in 4400d991ca1d
+ ---> 7e153f1ada77
+Removing intermediate container 4400d991ca1d
+Step 8/9 : ENV NAME sna4slack
+ ---> Running in ed6c82cea102
+ ---> e297b859423d
+Removing intermediate container ed6c82cea102
+Step 9/9 : CMD python ./SNA4Slack_API/main.py
+ ---> Running in f0f041f590a9
+ ---> df28d3af63d6
+Removing intermediate container f0f041f590a9
+Successfully built df28d3af63d6
+Successfully tagged ishandikshit/sna4slack_backend:latest
