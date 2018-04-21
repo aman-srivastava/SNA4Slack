@@ -10,4 +10,4 @@ networkx
 dateutils
 pymongo
 findspark
-pyspark
+pyspark==2.1.2
