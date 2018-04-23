@@ -119,7 +119,7 @@ class TreeGraph(object):
 
 
 def run():
-    team = "bitcoinhivemind"
+    team = "zippergolbal"
     graph_gen = TreeGraph(team)
     print 'Graph done'
     graph_gen.team_members()
