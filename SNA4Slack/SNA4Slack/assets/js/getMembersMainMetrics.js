@@ -22,8 +22,6 @@ $( document ).ready(function() {
 				};
 			}
 
-			console.log(data);
-
 			document.getElementById("teamNameSidebar").innerHTML = teamName;
 			document.getElementById("teamURLTag").innerHTML = teamName+".slackarchive.io";
 			document.getElementById("teamURLLink").href = "http://"+teamName+".slackarchive.io";
@@ -42,12 +40,9 @@ $( document ).ready(function() {
 
 			function SelectMemberFunction(){
 
-			 console.log('insideselectchannelfunction')
 			var z = window.location.href
 
 			var a = z.replace("MembersMain", "members");
-			console.log(this.selectedIndex)
-			console.log(this.options[this.selectedIndex].value)
 			a = a + "!memberName="+this.options[this.selectedIndex].value
 			window.location.href = a
 
@@ -63,7 +58,6 @@ $( document ).ready(function() {
       }
 
       var uniqueUsers = [... new Set(users)]
-      console.log('UniqueUsers: '+uniqueUsers)
 
       var userFirstMessageStampMap = {}
       var userLastActiveStampMap = {}
@@ -74,7 +68,6 @@ $( document ).ready(function() {
       }
       for(var i in userFirstMessageStampMap) {
         if (userFirstMessageStampMap.hasOwnProperty(i)) {
-          console.log('User is: ' + i + ' --- ' +'FirstMessage Time Stamp is ' + userFirstMessageStampMap[i]);
 					var row = table2.insertRow(0);
 					var cell1 = row.insertCell(0);
 					var cell2 = row.insertCell(1);
@@ -84,7 +77,6 @@ $( document ).ready(function() {
 
       }
 
-      console.log('---------------------------------------------------------------')
 
 			var table = document.getElementById("Member-LastActive-Table")
       for(var i = 0 ; i<data.memberActivity.length ; i++){
@@ -92,7 +84,6 @@ $( document ).ready(function() {
       }
       for(var i in userLastActiveStampMap) {
         if (userLastActiveStampMap.hasOwnProperty(i)) {
-          console.log('User is: ' + i + ' --- ' +'Last Active Time Stamp is ' + userLastActiveStampMap[i]);
 					var row = table.insertRow(0);
 					var cell1 = row.insertCell(0);
 					var cell2 = row.insertCell(1);
@@ -103,7 +94,7 @@ $( document ).ready(function() {
 
       }
 
-      console.log('---------------------------------------------------------------')
+      // console.log('---------------------------------------------------------------')
 
       var yearsArray = []
       for(var i = 0 ; i<data.messageCount_yearlyDist.length ; i++){
@@ -111,9 +102,8 @@ $( document ).ready(function() {
       }
 
       var uniqueYears = [... new Set(yearsArray)]
-      console.log('UniqueYears: '+uniqueYears)
 
-      console.log('---------------------------------------------------------------')
+      // console.log('---------------------------------------------------------------')
 
       var yearMessageMap = {}
       for(var i = 0; i<uniqueYears.length; i++){
@@ -133,8 +123,7 @@ $( document ).ready(function() {
 			var temp = 0
       for (var key in yearMessageMap) {
         if (yearMessageMap.hasOwnProperty(key)) {
-          console.log('Year: '+key + " -> Messages " + yearMessageMap[key]);
-					var newButton = document.createElement("button")
+  				var newButton = document.createElement("button")
 
 					newButton.setAttribute("type", "button")
 					newButton.setAttribute("class", "btn btn-info")
@@ -142,13 +131,7 @@ $( document ).ready(function() {
 					newButton.setAttribute("data-content","Total Number of Messages: 4563")
 					newButton.setAttribute("data-original-title", "Number of Messages")
 					newButton.setAttribute("data-placement","bottom")
-					//newButton.style.padding = "50px 10px 20px 30px"
-					//newButton.setAttribute("onClick","myFunction()")
 					newButton.style.border = "solid #000"
-
-					// function myFunction(){
-					// 	alert(temp)
-					// }
 
 					newButton.innerHTML = key + "-->" + yearMessageMap[key];
 					popoverDiv.appendChild(newButton);
@@ -159,7 +142,7 @@ $( document ).ready(function() {
 
 
 
-      console.log('---------------------------------------------------------------')
+      // console.log('---------------------------------------------------------------')
 
       var totalMessages = 0
       for(var i = 0; i<data.messageCount_sender.length; i++){
@@ -169,7 +152,6 @@ $( document ).ready(function() {
 			document.getElementById("conversationCount").innerHTML = totalMessages;
 
 			document.getElementById("TotalMessages").innerHTML = totalMessages;
-      console.log('Total Messages: '+totalMessages)
 
       var totalMembers = 0
       for(var i = 0; i<data.memberCount_channel.length; i++){
@@ -179,7 +161,6 @@ $( document ).ready(function() {
 			document.getElementById("memberCount").innerHTML = data.messageCount_sender.length;
 
 			document.getElementById("TotalMembers").innerHTML = data.messageCount_sender.length;
-      console.log('Total Members: '+totalMembers)
 
       var totalEmoticons = 0
       for(var i = 0; i<data.emojiCount.length; i++){
@@ -187,7 +168,6 @@ $( document ).ready(function() {
       }
 
 			document.getElementById("TotalEmoticons").innerHTML = totalEmoticons;
-      console.log('Total Emoticons: '+totalEmoticons)
 
 
       var totalURLs = 0
@@ -196,9 +176,8 @@ $( document ).ready(function() {
       }
 
 			document.getElementById("TotalURLs").innerHTML = totalURLs;
-      console.log('Total URLs: '+totalURLs)
 
-      console.log('---------------------------------------------------------------')
+      // console.log('---------------------------------------------------------------')
 
 
 			var ctx = $("#column-chart");
