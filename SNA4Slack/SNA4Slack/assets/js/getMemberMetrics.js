@@ -162,8 +162,7 @@ $( document ).ready(function() {
         }
       }
 
-			document.getElementById("TotalMessagesByMember").innerHTML = totalMessagesByMember;
-      console.log('Total Messages by Member: '+totalMessagesByMember)
+			console.log('Total Messages by Member: '+totalMessagesByMember)
 			document.getElementById("mMessages").innerHTML = totalMessagesByMember;
 
       console.log('---------------------------------------')

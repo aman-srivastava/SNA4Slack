@@ -15,7 +15,7 @@ $( document ).ready(function() {
 	});
 });
 $('#search').click( function(e) {
-	e.preventDefault(); 
+	e.preventDefault();
 	console.log();
 	if(document.getElementById('teamNames').value!=="")
 	{document.location.href = "Dashboard.html?teamName="+document.getElementById('teamNames').value.replace(".slackarchive.io",""); return false;}
