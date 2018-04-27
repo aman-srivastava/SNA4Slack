@@ -87,14 +87,37 @@ class subscriptionGraph(object):
 
     def json(self):
         return json_graph.node_link_data(self.graph)
+        
+    def compute_betweenness_centrality(self):
+        bc = nx.algorithms.centrality.betweenness_centrality(self.graph)
+        nx.set_node_attributes(self.graph, bc, BETWEENNESS_CENTRALITY)
+        logging.debug(
+            self.__class__.__name__ + ": Betweeness centrality computed.")
+
+    def compute_degree_centrality(self):
+        # NetworkX throws ZeroDivisionError if there is only one node
+        if len(self.graph.nodes) == 1:
+            node_name = self.graph.nodes.keys()[0]
+            nx.set_node_attributes(self.graph, {node_name: 0},
+                                   DEGREE_CENTRALITY)
+            return
+        dc = nx.degree_centrality(self.graph)
+        nx.set_node_attributes(self.graph, dc, DEGREE_CENTRALITY)
+        logging.debug(
+            self.__class__.__name__ + ": Degree centrality computed.")
 
 
 def run():
-    graph_gen = subscriptionGraph("unconnected_triplet",
+    selected_team = "openaddresses"
+    graph_gen = subscriptionGraph(selected_team,
                              directed=False)
     print("generated the graph")
-    graph_gen.team_members()
-
+    
+    graph_gen.compute_betweenness_centrality()
+    print 'Compute betweenness'
+    graph_gen.compute_degree_centrality()
+    print 'Compute centrality'
+    
     graph_gen.print_graph()
     print graph_gen.json()
     with open('data.json', 'w') as outfile:
