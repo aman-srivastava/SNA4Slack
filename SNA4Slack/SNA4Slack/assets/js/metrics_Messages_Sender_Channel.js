@@ -8,16 +8,11 @@ $( document ).ready(function() {
   var teamName;
 	var memberName;
 	if(window.location.href.includes("?teamName")){
-							console.log(window.location.href)
 					var splitURL = window.location.href.split("!")
-					console.log('URL 0 IS: '+ splitURL[0])
-					console.log('URL 1 IS: '+ splitURL[1])
 
 							teamName = splitURL[0].substring(splitURL[0].indexOf("?")+10);
-							console.log(teamName)
 							memberName = splitURL[1].substring(splitURL[1].indexOf("m")+11)
-							console.log(memberName)
-        }
+	      }
 
   $.ajax({
      url: "https://api.mlab.com/api/1/databases/sna4slack/collections/"+teamName+"?apiKey=dPpfbNvB6jRs-hvv-Veb1uVkXnX06Maa",
@@ -28,14 +23,6 @@ $( document ).ready(function() {
           data = data[j]['dataAnalytics'];
         };
       }
-      //var memberName = 'carsten'
-      console.log(data);
-
-
-      console.log('Member Name: '+memberName)
-
-      console.log('---------------------------------------')
-
 
       var memberChannelMessageMap = {}
       for (var i=0; i<data.messageCount_channel_sender.length; i++){
@@ -48,7 +35,6 @@ $( document ).ready(function() {
 
       for(var i in memberChannelMessageMap) {
         if (memberChannelMessageMap.hasOwnProperty(i)) {
-          console.log('Channel is: ' + i + ' --- ' +'Number of Messages are ' + memberChannelMessageMap[i]);
 
           contents.push({"label": i, "value": memberChannelMessageMap[i], "color":"#14e4b4"})
 
@@ -56,7 +42,6 @@ $( document ).ready(function() {
 
       }
 
-      console.log(contents)
 
       var pie = new d3pie("pieChart", {
   "header": {
